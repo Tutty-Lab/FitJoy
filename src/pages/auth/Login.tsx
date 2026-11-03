@@ -1,18 +1,13 @@
 import { useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import AuthTabs from './AuthTabs'
 import { loadProfile, saveProfile } from '../../lib/profile'
 import sprout from '../../assets/auth/sprout-login.png'
 import icHeart from '../../assets/auth/l-heart.svg'
-import icFlame from '../../assets/auth/l-flame.svg'
-import icMail from '../../assets/auth/l-mail.svg'
 import icClear from '../../assets/auth/l-clear.svg'
-import icLock from '../../assets/auth/l-lock.svg'
 import icEye from '../../assets/auth/eye.svg'
 import icCheck from '../../assets/auth/l-check.svg'
 import icArrow from '../../assets/auth/arrow.svg'
-import icGoogle from '../../assets/auth/google.svg'
-import icApple from '../../assets/auth/apple.svg'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -37,7 +32,6 @@ export default function Login() {
           <div className="flex min-w-0 flex-1 flex-col items-start gap-1 pt-1 pr-2">
             <span className="rounded-full bg-[rgba(78,222,163,0.3)] px-2 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#005236]">Joy Sprout • Vibe Buddy</span>
             <h1 className="pt-0.5 text-2xl leading-8 font-bold tracking-[-0.6px]">Start your healthy journey!</h1>
-            <p className="line-clamp-2 text-sm leading-5 text-[#3c4a42]">Train with 22 structured workout routines and build an energetic daily habit.</p>
           </div>
           <div className="float relative size-24 shrink-0 overflow-hidden rounded-2xl bg-white p-1.5 shadow-md">
             <img src={sprout} alt="Joy Sprout mascot" className="size-full rounded-[48px] object-cover" />
@@ -46,14 +40,6 @@ export default function Login() {
             </span>
           </div>
         </div>
-        <div className="relative flex items-center justify-between rounded-full bg-white/80 px-3 pt-1 pb-1.5 shadow-sm backdrop-blur-[4px]">
-          <span className="flex items-center gap-2 text-xs leading-4 font-bold tracking-[0.48px] text-[#3c4a42]">
-            <span className="size-2 rounded-full bg-brand" />Daily Energy Pool
-          </span>
-          <span className="flex items-center gap-1 text-xs leading-4 font-bold tracking-[0.48px] text-[#006c49]">
-            <img src={icFlame} alt="" style={{ width: 10.667, height: 12.667 }} />+150 XP waiting
-          </span>
-        </div>
       </section>
 
       <div className="mb-4">
@@ -61,10 +47,7 @@ export default function Login() {
       </div>
 
       <form onSubmit={submit} className="flex flex-col gap-4 rounded-[32px] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(207,218,242,0.4),0_8px_10px_-6px_rgba(207,218,242,0.4)]">
-        <label className="flex flex-col gap-1.5">
-          <span className="flex items-center gap-1.5 text-sm leading-[18px] font-semibold">
-            <img src={icMail} alt="" style={{ width: 15, height: 12 }} />Account Email
-          </span>
+        <div className="flex flex-col gap-1.5">
           <span className="relative">
             <input
               type="email"
@@ -72,7 +55,7 @@ export default function Login() {
               autoComplete="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="you@example.com"
+              placeholder="Email" aria-label="Email"
               className="h-[52px] w-full rounded-2xl bg-[#f0f3ff] pr-12 pl-4 text-base outline-none focus:ring-2 focus:ring-brand"
             />
             {email && (
@@ -81,21 +64,17 @@ export default function Login() {
               </button>
             )}
           </span>
-        </label>
+        </div>
 
         <div className="flex flex-col gap-1.5">
-          <div className="flex items-center justify-between">
-            <label htmlFor="pw" className="flex items-center gap-1.5 text-sm leading-[18px] font-semibold">
-              <img src={icLock} alt="" style={{ width: 12, height: 15.75 }} />Password
-            </label>
-            <button type="button" className="text-xs leading-4 font-bold tracking-[0.48px] text-[#006c49]">Forgot password?</button>
-          </div>
           <span className="relative">
             <input
               id="pw"
               type={showPw ? 'text' : 'password'}
               required
               autoComplete="current-password"
+              placeholder="Password"
+              aria-label="Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
               className="h-[52px] w-full rounded-2xl bg-[#f0f3ff] pr-12 pl-4 text-base tracking-[0.8px] outline-none focus:ring-2 focus:ring-brand"
@@ -122,24 +101,6 @@ export default function Login() {
           <img src={icArrow} alt="" className="size-[13.333px]" />
         </button>
 
-        <div className="flex items-center gap-3 py-1">
-          <span className="h-px flex-1 bg-[#dee8ff]" />
-          <span className="text-xs leading-4 font-bold tracking-[0.48px] text-[#6c7a71]">Or continue with</span>
-          <span className="h-px flex-1 bg-[#dee8ff]" />
-        </div>
-
-        <div className="flex gap-2">
-          <button type="button" className="flex h-12 flex-1 items-center justify-center gap-2 rounded-2xl bg-[#f0f3ff] text-sm leading-[18px] font-semibold">
-            <img src={icGoogle} alt="" className="size-4" />Google
-          </button>
-          <button type="button" className="flex h-12 flex-1 items-center justify-center gap-2 rounded-2xl bg-[#f0f3ff] text-sm leading-[18px] font-semibold">
-            <img src={icApple} alt="" className="size-4" />Apple ID
-          </button>
-        </div>
-
-        <p className="pt-2 text-center text-sm leading-5 text-[#3c4a42]">
-          Don't have an account? <Link to="/signup" className="font-semibold text-[#006c49]">Sign up for free</Link>
-        </p>
       </form>
     </div>
   )

@@ -15,6 +15,7 @@ import HealthProfile from './pages/HealthProfile'
 import Results from './pages/Results'
 import Celebration from './pages/workouts/Celebration'
 import { loadProfile } from './lib/profile'
+import { useReminderScheduler } from './lib/reminders'
 
 function RequireAuth({ onboarded }: { onboarded?: boolean }) {
   const p = loadProfile()
@@ -25,6 +26,7 @@ function RequireAuth({ onboarded }: { onboarded?: boolean }) {
 
 export default function App() {
   const { pathname } = useLocation()
+  useReminderScheduler()
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [pathname])

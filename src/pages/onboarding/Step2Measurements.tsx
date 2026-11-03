@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import OnboardingShell, { PrimaryCta } from './OnboardingShell'
 import { loadProfile, logMeasurement, saveProfile } from '../../lib/profile'
 import companion from '../../assets/onboarding/companion.png'
-import tipBulb from '../../assets/onboarding/tip-bulb.png'
 import icHeight from '../../assets/onboarding/m-height.svg'
 import icScale from '../../assets/onboarding/m-scale.svg'
 import icRuler from '../../assets/onboarding/m-ruler.svg'
@@ -13,7 +12,6 @@ import icPlus2 from '../../assets/onboarding/plus-white2.svg'
 import icMinusSm from '../../assets/onboarding/minus-sm.svg'
 import icPlusSmWhite from '../../assets/onboarding/plus-sm-white.svg'
 import icPlusSm from '../../assets/onboarding/plus-sm.svg'
-import icTip from '../../assets/onboarding/tip.svg'
 import icTrophy from '../../assets/onboarding/trophy-sm.svg'
 import icLeaf from '../../assets/onboarding/leaf-sm.svg'
 import icArrow from '../../assets/auth/arrow.svg'
@@ -58,7 +56,6 @@ function SmallStepper({ label, sub, unit, value, onChange, primary }: { label: s
     <div className="flex min-w-0 flex-1 flex-col justify-between rounded-2xl bg-[#f0f3ff] p-3">
       <div className="flex flex-col gap-1 pb-2">
         <span className="truncate text-sm leading-[17.5px] font-semibold">{label}</span>
-        <span className="text-xs leading-4 font-bold tracking-[0.48px] text-[#3c4a42]">{sub}</span>
       </div>
       <div className="flex items-center justify-between rounded-[48px] bg-white p-1 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
         <button aria-label={`Decrease ${label}`} onClick={() => onChange(+(value - 0.5).toFixed(1))} className="flex size-8 items-center justify-center rounded-[32px] bg-[#e7eeff]">
@@ -127,18 +124,6 @@ export default function Step2Measurements() {
           <SmallStepper label="Hip circumference" sub="Largest hip line" unit="cm" value={hip} onChange={setHip} />
         </div>
       </section>
-
-      <div className="flex items-center gap-3 rounded-2xl bg-[#f0f3ff] p-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
-        <div className="size-14 shrink-0 overflow-hidden rounded-2xl bg-[#ffdcc5] shadow-sm">
-          <img src={tipBulb} alt="" className="size-full rounded-[48px] object-cover" />
-        </div>
-        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-          <span className="flex items-center gap-1 text-sm leading-[18px] font-bold text-[#944a00]">
-            <img src={icTip} alt="" style={{ width: 10, height: 13.333 }} />Accurate Measurement Tip
-          </span>
-          <p className="text-sm leading-[19.25px] text-[#3c4a42]">Use a soft tape close to the skin without pulling tight. Measure at the same time of day for the most accurate tracking!</p>
-        </div>
-      </div>
 
       <div className="flex flex-col gap-3 pt-2">
         <PrimaryCta onClick={next} icon={icArrow}>Save Baseline &amp; Continue</PrimaryCta>

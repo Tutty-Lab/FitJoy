@@ -85,7 +85,6 @@ export default function Results() {
           })}
         </div>
         {error && <p className="text-sm text-[#ba1a1a]">{error}</p>}
-        <p className="text-xs leading-4 text-[#6c7a71]">Photos stay on this device only. Tap a photo to replace it.</p>
       </section>
 
       <section className="flex flex-col gap-3">

@@ -91,7 +91,6 @@ export default function Step1Goals() {
                   <span className="text-sm leading-[17.5px] font-bold">{g.title}</span>
                   {g.top && <span className="rounded-full bg-brand px-2 py-0.5 text-[10px] leading-[15px] font-bold tracking-[0.5px] text-white uppercase">Top pick</span>}
                 </span>
-                <span className="block text-[13px] leading-[17.88px] text-[#3c4a42]">{g.desc}</span>
               </span>
               <span className={`flex size-7 shrink-0 items-center justify-center rounded-full ${on ? 'bg-brand' : 'bg-[#e7eeff]'}`}>
                 {on ? <img src={icCheck} alt="" style={{ width: 13.425, height: 10.238 }} /> : <img src={icRadio} alt="" className="size-[13.333px]" />}
@@ -117,7 +116,6 @@ export default function Step1Goals() {
                   <img src={l.icon} alt="" style={{ width: l.w, height: l.h }} />
                 </span>
                 <span className={`text-[13px] leading-[16.25px] ${on ? 'font-bold' : 'font-semibold'}`}>{l.title}</span>
-                <span className="pt-[3px] text-[11px] leading-[13.75px] text-[#3c4a42]">{l.sub}</span>
               </button>
             )
           })}

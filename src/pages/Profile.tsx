@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Switch } from '../components/shared'
 import { loadProfile, saveProfile, signOut } from '../lib/profile'
+import { applyTheme } from '../lib/theme'
 import { useCompleted } from '../lib/progress'
 import avatar from '../assets/profile/avatar.png'
 import sWorkouts from '../assets/profile/s-workouts.svg'
@@ -24,14 +25,13 @@ import chevron from '../assets/profile/chevron.svg'
 
 const Chevron = () => <img src={chevron} alt="" style={{ width: 6.167, height: 10 }} />
 
-function Row({ icon, iconBg, title, sub, right, to, onClick }: { icon: ReactNode; iconBg: string; title: string; sub: string; right?: ReactNode; to?: string; onClick?: () => void }) {
+function Row({ icon, iconBg, title, right, to, onClick }: { icon: ReactNode; iconBg: string; title: string; right?: ReactNode; to?: string; onClick?: () => void }) {
   const body = (
     <>
       <span className="flex min-w-0 items-center gap-4">
         <span className={`flex size-10 shrink-0 items-center justify-center rounded-full ${iconBg}`}>{icon}</span>
         <span className="min-w-0 text-left">
           <span className="block truncate text-base leading-6 font-semibold">{title}</span>
-          <span className="block truncate text-sm leading-5 text-[#6c7a71]">{sub}</span>
         </span>
       </span>
       {right ?? <Chevron />}
@@ -57,7 +57,6 @@ export default function Profile() {
   const [p, setP] = useState(() => loadProfile())
   const { completed, streak, mins, kcal, xp, level } = useCompleted()
   const done = completed
-  const activeReminders = (p?.reminders ?? [true, true, true]).filter(Boolean).length
 
   const toggle = (key: 'pushAlerts' | 'chime' | 'darkMode', fallback: boolean) => {
     const next = !(p?.[key] ?? fallback)
@@ -65,6 +64,7 @@ export default function Profile() {
       Notification.requestPermission().catch(() => {})
     }
     setP(saveProfile({ [key]: next }))
+    if (key === 'darkMode') applyTheme(next)
   }
 
   function backup() {
@@ -79,6 +79,7 @@ export default function Profile() {
 
   function logout() {
     signOut()
+    applyTheme(false)
     navigate('/login', { replace: true })
   }
 
@@ -99,9 +100,6 @@ export default function Profile() {
           <h2 className="pb-1 text-2xl leading-8 font-bold tracking-[-0.6px]">{p?.name || 'FitJoy friend'}</h2>
           <span className="mb-2 flex items-center gap-1 rounded-full bg-[#dee8ff] px-4 py-1.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#3c4a42]">
             <img src={iTrophy} alt="" style={{ width: 7.5, height: 15 }} />Level {level} • Active Warrior • {xp} XP
-          </span>
-          <span className="flex items-center gap-1 rounded-full bg-[#ffdcc5] px-4 py-1 text-sm leading-[18px] font-semibold text-[#301400]">
-            <img src={iFlame} alt="" style={{ width: 12, height: 13.5 }} />{streak}-Day Streak
           </span>
         </div>
       </section>
@@ -124,49 +122,45 @@ export default function Profile() {
 
       <div className="flex flex-col gap-4">
         <Group title="Account & Health">
-          <Row to="/profile/health" icon={<img src={iHealth} alt="" className="size-[13.333px]" />} iconBg="bg-[rgba(111,251,190,0.3)]" title="Personal Health Profile" sub="Weight, height & biometrics" />
+          <Row to="/profile/health" icon={<img src={iHealth} alt="" className="size-[13.333px]" />} iconBg="bg-[rgba(111,251,190,0.3)]" title="Personal Health Profile" />
           <Row
             to="/onboarding/1"
             icon={<img src={iGoal} alt="" style={{ width: 12.5, height: 14.167 }} />}
             iconBg="bg-[rgba(111,251,190,0.3)]"
             title="Daily Goals"
-            sub="15 mins / day routine"
             right={<span className="flex items-center gap-1"><span className="rounded-full bg-[#6ffbbe] px-2 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#002113]">Active</span><Chevron /></span>}
           />
         </Group>
 
         <Group title="Notifications & PWA">
-          <Row to="/reminders" icon={<img src={iClock} alt="" className="size-[16.667px]" />} iconBg="bg-[rgba(233,221,255,0.3)]" title="Reminder Times" sub={`${activeReminders} reminders set daily`} />
+          <Row to="/reminders" icon={<img src={iClock} alt="" className="size-[16.667px]" />} iconBg="bg-[rgba(233,221,255,0.3)]" title="Reminder Times" />
           <Row
             icon={<img src={iPhone} alt="" style={{ width: 12.5, height: 18.333 }} />}
             iconBg="bg-[rgba(233,221,255,0.3)]"
             title="Lock Screen Notifications"
-            sub="Instant push alerts"
             right={<Switch label="Lock screen notifications" on={p?.pushAlerts ?? true} onChange={() => toggle('pushAlerts', true)} />}
           />
           <Row
             icon={<img src={iSound} alt="" style={{ width: 15, height: 14.583 }} />}
             iconBg="bg-[rgba(233,221,255,0.3)]"
             title="Chime Sound"
-            sub="Play joyful workout chime"
             right={<Switch label="Chime sound" on={p?.chime ?? true} onChange={() => toggle('chime', true)} />}
           />
         </Group>
 
         <Group title="Preferences">
-          <Row icon={<img src={iLang} alt="" style={{ width: 18.417, height: 16.667 }} />} iconBg="bg-[rgba(255,220,197,0.4)]" title="Language" sub="English (US)" />
+          <Row icon={<img src={iLang} alt="" style={{ width: 18.417, height: 16.667 }} />} iconBg="bg-[rgba(255,220,197,0.4)]" title="Language" />
           <Row
             icon={<img src={iMoon} alt="" className="size-[15px]" />}
             iconBg="bg-[#d8e3fb]"
             title="Dark Mode"
-            sub={p?.darkMode ? 'Currently On' : 'Currently Off'}
             right={<Switch label="Dark mode" on={p?.darkMode ?? false} onChange={() => toggle('darkMode', false)} />}
           />
         </Group>
 
         <Group title="Support & Data">
-          <Row onClick={backup} icon={<img src={iBackup} alt="" style={{ width: 16.667, height: 13.333 }} />} iconBg="bg-[#e7eeff]" title="Backup Health Data" sub="Download a copy of your data" />
-          <Row icon={<img src={iInfo} alt="" className="size-[16.667px]" />} iconBg="bg-[#e7eeff]" title="About FitJoy PWA" sub="v0.1.0 (MVP)" />
+          <Row onClick={backup} icon={<img src={iBackup} alt="" style={{ width: 16.667, height: 13.333 }} />} iconBg="bg-[#e7eeff]" title="Backup Health Data" />
+          <Row icon={<img src={iInfo} alt="" className="size-[16.667px]" />} iconBg="bg-[#e7eeff]" title="About FitJoy PWA" />
         </Group>
       </div>
 

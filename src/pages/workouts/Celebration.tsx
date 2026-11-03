@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { workouts } from '../../data/workouts'
 import { useCompleted } from '../../lib/progress'
 import { loadProfile } from '../../lib/profile'
-import { playChime } from '../Reminders'
+import { playChime } from '../../lib/reminders'
 import mascot from '../../assets/home/mascot.png'
 
 const colors = ['#10b981', '#fbbf24', '#8455ef', '#ef8933', '#6ffbbe', '#f472b6']

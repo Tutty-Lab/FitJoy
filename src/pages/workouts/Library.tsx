@@ -57,7 +57,6 @@ export default function Library() {
             <img src={icLevel} alt="" style={{ width: 5.833, height: 11.667 }} />Level 2 • Active Athlete
           </span>
           <h1 className="text-2xl leading-8 font-extrabold tracking-[-0.6px]">22-Day Workout Plan</h1>
-          <p className="pt-1 text-sm leading-5 text-[#3c4a42]">Structured journey unlocking day by day! 🏆</p>
         </div>
         <img src={heroMascot} alt="" className="float size-28 shrink-0 object-contain" />
       </section>
@@ -84,19 +83,6 @@ export default function Library() {
         ))}
       </div>
 
-      <div className="-mx-4 -mt-1 flex gap-2 overflow-x-auto px-4">
-        {categories.map(c => (
-          <button
-            key={c}
-            onClick={() => setCat(v => (v === c ? null : c))}
-            aria-pressed={cat === c}
-            className={`shrink-0 rounded-full px-3 py-1 text-xs leading-4 font-bold tracking-[0.48px] ${cat === c ? 'bg-[#006c49] text-white' : `bg-[#e7eeff] ${categoryColor[c]}`}`}
-          >
-            # {c}
-          </button>
-        ))}
-      </div>
-
       <section className="flex flex-col gap-2 rounded-[32px] bg-white p-4 shadow-md">
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-2 text-[20px] leading-7 font-bold">
@@ -110,12 +96,6 @@ export default function Library() {
         <div className="flex items-center justify-between">
           <span className="text-sm leading-5 font-semibold text-[#3c4a42]">Completed {done}/22 sessions</span>
           <span className="text-xs leading-4 font-bold tracking-[0.48px] text-[#6c7a71]">Phase {done < 11 ? 1 : 2}</span>
-        </div>
-        <div className="flex items-center gap-2 rounded-[48px] bg-[#ffdcc5] p-3">
-          <img src={icBolt} alt="" style={{ width: 15.896, height: 18.25 }} />
-          <p className="text-sm leading-[19.25px] font-bold text-[#301400]">
-            {done >= 22 ? 'Amazing! You finished the whole 22-day program! 🎉' : `Keep going! Only ${phaseEnd - done} sessions left to complete Phase ${done < 11 ? 1 : 2}!`}
-          </p>
         </div>
       </section>
 
@@ -145,7 +125,6 @@ export default function Library() {
                     <span className="flex items-center gap-1"><img src={icClock} alt="" className="size-[13.333px]" />{w.mins} mins</span>
                     <span className="flex items-center gap-1"><img src={icFlame} alt="" style={{ width: 10.667, height: 12.667 }} />~{w.kcal} kcal</span>
                   </div>
-                  <span className="block pt-1 text-xs leading-4 font-bold tracking-[0.48px] text-[#006c49]">{w.category}</span>
                 </div>
               </Link>
               <button
@@ -179,7 +158,7 @@ export default function Library() {
                 </span>
                 <span className={`block truncate text-lg leading-[26px] font-bold ${locked ? 'text-[#3c4a42]' : ''}`}>{w.title}</span>
                 <span className={`block truncate text-sm leading-5 ${locked ? 'text-[#6c7a71]' : 'text-[#3c4a42]'}`}>
-                  {locked ? `${w.mins} mins • Unlocks after Day ${w.day - 1}` : `${w.mins} mins • ~${w.kcal} kcal • ${w.category}`}
+                  {locked ? `${w.mins} mins` : `${w.mins} mins • ~${w.kcal} kcal • ${w.category}`}
                 </span>
               </span>
             </span>

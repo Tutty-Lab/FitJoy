@@ -15,9 +15,6 @@ import icMins from '../assets/home/c4.svg'
 import icStreak from '../assets/home/c5.svg'
 import icXp from '../assets/home/c6.svg'
 import icPlay from '../assets/home/c7.svg'
-import icClock from '../assets/home/c8.svg'
-import icKcal from '../assets/home/c9.svg'
-import icVideo from '../assets/home/c10.svg'
 import icArrow from '../assets/home/c11.svg'
 import icBell from '../assets/home/c12.svg'
 import icMorning from '../assets/home/c13.svg'
@@ -31,11 +28,7 @@ import icCheck from '../assets/home/c20.svg'
 import icCurrent from '../assets/home/c21.svg'
 import icLock from '../assets/home/c22.svg'
 import icGoal from '../assets/home/c23.svg'
-import icTrophy from '../assets/home/c24.svg'
-import scWorkouts from '../assets/home/c25.svg'
 import scBeforeAfter from '../assets/home/c26.svg'
-import scReminders from '../assets/home/c27.svg'
-import scProfile from '../assets/home/c28.svg'
 
 const card = 'w-full rounded-3xl border border-mint bg-white p-[17px] drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'
 
@@ -96,12 +89,6 @@ const greeting = () => {
   return h < 12 ? ['Good morning', '☀️'] : h < 18 ? ['Good afternoon', '🌤️'] : ['Good evening', '🌙']
 }
 
-const shortcuts = [
-  { to: '/workouts', label: 'Workouts', icon: <Icon src={scWorkouts} w={16.667} />, bg: 'bg-[rgba(236,253,245,0.7)]', dot: 'bg-brand' },
-  { to: '/results', label: 'Before & After', icon: <Icon src={scBeforeAfter} w={16.667} h={15} />, bg: 'bg-[rgba(250,245,255,0.7)]', dot: 'bg-purple-500' },
-  { to: '/reminders', label: 'Reminders', icon: <Icon src={scReminders} w={17.75} h={16.375} />, bg: 'bg-[rgba(255,251,235,0.7)]', dot: 'bg-amber-500' },
-  { to: '/profile', label: 'Profile', icon: <Icon src={scProfile} w={15} />, bg: 'bg-[rgba(240,253,250,0.7)]', dot: 'bg-teal-500' },
-]
 
 export default function Home() {
   const [showBanner, setShowBanner] = useState(true)
@@ -124,11 +111,6 @@ export default function Home() {
   const toggle = (i: number) => setP(saveProfile({ reminders: enabled.map((v, j) => (j === i ? !v : v)) }))
 
   const milestone = [5, 10, 15, 20, 22].find(m => m > done) ?? 22
-  const badges = [
-    { title: [`${streak}-Day`, 'Streak'], emoji: '🔥', on: streak >= 1, grad: 'linear-gradient(45deg,#fbbf24,#fcd34d)', box: 'border-[rgba(253,230,138,0.8)] bg-gradient-to-b from-amber-50 to-orange-50', foot: streak >= 1 ? 'Unlocked ✓' : 'Start today' },
-    { title: ['Steadfast', 'Warrior'], emoji: '🛡️', on: done > 0, grad: 'linear-gradient(45deg,#10b981,#2dd4bf)', box: 'border-[rgba(167,243,208,0.8)] bg-gradient-to-b from-emerald-50 to-teal-50', foot: `${done}/22 done` },
-    { title: ['Mystery', 'Reward'], emoji: '🎁', on: false, grad: '', box: 'border-dashed border-amber-300 bg-slate-50', foot: `Unlocks at ${milestone}` },
-  ]
 
   // Journey strip: everything before yesterday's day collapses into one chip.
   const prevDone = completed.filter(d => d < current - 1)
@@ -153,7 +135,7 @@ export default function Home() {
 
       {/* Hero */}
       <section
-        className="relative w-full overflow-hidden rounded-3xl border border-[rgba(167,243,208,0.6)] p-[17px] shadow-[0_10px_25px_rgba(16,185,129,0.12)]"
+        className="hero-card relative w-full overflow-hidden rounded-3xl border border-[rgba(167,243,208,0.6)] p-[17px] shadow-[0_10px_25px_rgba(16,185,129,0.12)]"
         style={{ backgroundImage: 'linear-gradient(135deg, rgba(209,250,229,0.9) 0%, #fff 50%, #fffbeb 100%)' }}
       >
         <div className="absolute -top-10 -right-8 size-36 rounded-full bg-[rgba(110,231,183,0.3)] blur-[40px]" />
@@ -173,10 +155,6 @@ export default function Home() {
 
           <div className="flex items-center gap-2">
             <div className="min-w-0 flex-1">
-              <span className="mb-1 inline-flex items-center gap-1.5 rounded-full border border-[rgba(16,185,129,0.25)] bg-[rgba(16,185,129,0.15)] px-[11px] py-[3px]">
-                <span className="size-2 rounded-full bg-brand" />
-                <span className="text-[11px] leading-6 font-bold tracking-[0.275px] text-brand-ink uppercase">{streak >= 3 ? 'High energy' : doneToday ? 'Recharging' : 'Ready to go'}</span>
-              </span>
               <h2 className="text-[22px] leading-[30.25px] font-black tracking-[-0.55px]">{hello}, {name}! {sun}</h2>
               <div className="flex flex-col gap-1 pt-1">
                 <div className="flex items-center justify-between">
@@ -204,7 +182,6 @@ export default function Home() {
                 <span className="text-2xl leading-8 font-black text-brand-deep"><CountingNumber number={done} /></span>
                 <span className="text-base leading-6 font-bold text-slate-500">/ 22 workouts</span>
               </div>
-              <div className="pt-0.5 text-xs leading-4 font-medium text-slate-600">{done === 0 ? 'Your journey starts today!' : `${done} / 22 workouts completed!`}</div>
             </div>
             <div className="relative size-16 shrink-0">
               <ProgressRing pct={pct} />
@@ -248,15 +225,9 @@ export default function Home() {
             </span>
           </div>
           <div className="absolute right-3 bottom-2.5 left-3 flex flex-col items-start gap-[5px]">
-            <span className="rounded-full bg-[rgba(5,150,105,0.9)] px-2 text-[11px] leading-[18px] font-bold tracking-[0.55px] text-white uppercase backdrop-blur-[4px]">{next.category}</span>
             <h3 className="text-base leading-6 font-black text-white drop-shadow">Workout {next.day}: {next.title}</h3>
           </div>
         </Link>
-        <div className="flex items-center justify-between px-1 text-xs leading-4 font-semibold text-slate-600">
-          <span className="flex items-center gap-1"><Icon src={icClock} w={14.167} />{next.mins} mins</span>
-          <span className="flex items-center gap-1"><Icon src={icKcal} w={11.333} h={13.458} />~{next.kcal} kcal</span>
-          <span className="flex items-center gap-1"><Icon src={icVideo} w={14.167} h={11.333} />HD Video</span>
-        </div>
         <PressButton asChild>
         <Link
           to={`/workouts/${next.day}`}
@@ -289,7 +260,6 @@ export default function Home() {
                   <span className={`flex size-9 shrink-0 items-center justify-center rounded-full ${s.iconBg}`}>{s.icon}</span>
                   <div>
                     <div className="text-[13px] leading-6 font-bold text-slate-900">{s.label}: {times[i]}</div>
-                    <div className={`max-w-[130px] text-xs leading-4 ${st.sub}`}>{s.name}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -308,7 +278,7 @@ export default function Home() {
           icon={<Icon src={icJourney} w={15} />}
           iconBg="bg-purple-100"
           title="22-Day Challenge Journey"
-          right={<Link to="/workouts" className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs leading-4 font-bold text-brand-deep">Journey</Link>}
+          right={null}
         />
         <div className="-mx-1 overflow-x-auto px-1">
           <div className="flex h-20 w-max items-center gap-2.5">
@@ -361,52 +331,18 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Achievements */}
-      <section className={`flex flex-col gap-3 ${card}`}>
-        <SectionHeader
-          icon={<Icon src={icTrophy} w={8.333} h={16.667} />}
-          iconBg="bg-amber-100"
-          title="Achievements"
-          right={<Link to="/profile" className="text-xs leading-4 font-bold text-brand-dark">View all</Link>}
-        />
-        <div className="flex gap-2">
-          {badges.map(b => (
-            <div key={b.title[1]} className={`flex flex-1 flex-col items-center rounded-2xl border p-[11px] drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)] ${b.box} ${b.grad && !b.on ? 'grayscale' : ''}`}>
-              <span
-                className={`mb-1.5 flex size-12 items-center justify-center rounded-2xl text-2xl leading-8 ${b.grad ? 'shadow-md' : 'bg-amber-100 shadow-inner'}`}
-                style={b.grad ? { backgroundImage: b.grad } : undefined}
-              >
-                {b.emoji}
-              </span>
-              <span className="text-center text-xs leading-4 font-black text-slate-800">{b.title[0]}<br />{b.title[1]}</span>
-              <span className="pt-1">
-                {b.grad ? (
-                  <span className="rounded-full bg-[rgba(209,250,229,0.9)] px-1.5 text-[10px] leading-6 font-bold text-brand-deep">{b.foot}</span>
-                ) : (
-                  <span className="text-[10px] leading-6 font-semibold text-amber-700">{b.foot}</span>
-                )}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Shortcuts */}
-      <section className={`flex flex-col gap-2.5 ${card}`}>
-        <div className="flex items-center justify-between">
-          <h3 className="text-sm leading-5 font-bold text-slate-800">Quick Shortcuts</h3>
-          <span className="text-xs leading-4 text-slate-400">Utilities</span>
-        </div>
-        <div className="flex items-start gap-2">
-          {shortcuts.map(s => (
-            <Link key={s.label} to={s.to} className={`flex flex-1 flex-col items-center self-stretch rounded-2xl p-2 ${s.bg}`}>
-              <span className={`mb-1 flex size-10 items-center justify-center rounded-full drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)] ${s.dot}`}>{s.icon}</span>
-              <span className="text-center text-[11px] leading-6 font-bold text-slate-700">{s.label}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* Before & After shortcut */}
+      <Link to="/results" className={`flex items-center justify-between gap-3 ${card}`}>
+        <span className="flex items-center gap-3">
+          <span className="flex size-11 items-center justify-center rounded-full bg-purple-500 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
+            <Icon src={scBeforeAfter} w={16.667} h={15} />
+          </span>
+          <span>
+            <span className="block text-base leading-6 font-black text-slate-900">Before &amp; After</span>
+          </span>
+        </span>
+        <span className="text-lg leading-none font-bold text-purple-500">›</span>
+      </Link>
     </div>
   )
 }
