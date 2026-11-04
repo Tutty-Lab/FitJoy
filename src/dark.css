@@ -1,49 +1,87 @@
 /*
  * Dark theme. Screens use the Figma palette as hard-coded utility classes, so instead of
  * re-theming every component this remaps those exact classes when <html class="dark"> is set.
+ *
+ * Palette: one deep green-black base, two lifted surfaces, translucent brand tints for chips.
  */
 html.dark {
   color-scheme: dark;
-  --color-canvas: #0e1512;
-  --color-ink: #e6eee9;
+  --d-bg: #0a0f0d;
+  --d-surface: #121a16;
+  --d-raised: #19231e;
+  --d-line: rgb(255 255 255 / 0.07);
+  --d-text: #ecf3ef;
+  --d-muted: #a3b3aa;
+  --d-faint: #6f8077;
+  --d-green: #5ee3a6;
+  --d-violet: #c4b1ff;
+  --d-orange: #ffb877;
+  --color-canvas: var(--d-bg);
+  --color-ink: var(--d-text);
 }
-html.dark body {
-  background: #0e1512;
-  color: #e6eee9;
-}
+html.dark body { background: var(--d-bg); color: var(--d-text); }
 
-/* Surfaces */
-.dark :is(.bg-white, .bg-\[\#f9f9ff\], .bg-canvas) { background-color: #16201c; }
-.dark :is(.bg-\[\#f0f3ff\], .bg-slate-50, .bg-slate-100) { background-color: #1d2a25; }
-.dark :is(.bg-\[\#e7eeff\], .bg-\[\#dee8ff\], .bg-\[\#d8e3fb\], .bg-slate-200, .bg-\[\#cfdaf2\]) { background-color: #26352f; }
-.dark :is(.bg-white\/95, .bg-white\/90, .bg-white\/80) { background-color: rgb(22 32 28 / 0.88); }
-.dark :is(.bg-white\/60, .bg-white\/40, .bg-white\/35, .bg-white\/30) { background-color: rgb(40 56 49 / 0.45); }
-.dark :is(.bg-\[rgba\(249\,249\,255\,0\.8\)\], .bg-\[rgba\(244\,251\,247\,0\.9\)\]) { background-color: rgb(14 21 18 / 0.85); }
+/* Surfaces: cards sit one step above the page, inputs/pills one step above cards */
+.dark :is(.bg-white, .bg-canvas) { background-color: var(--d-surface); }
+.dark :is(.bg-\[\#f9f9ff\]) { background-color: var(--d-bg); }
+.dark :is(.bg-\[\#f0f3ff\], .bg-\[\#e7eeff\], .bg-\[\#dee8ff\], .bg-\[\#d8e3fb\], .bg-\[\#cfdaf2\], .bg-slate-50, .bg-slate-100, .bg-slate-200) { background-color: var(--d-raised); }
+.dark :is(.bg-white\/95, .bg-white\/90, .bg-white\/80) { background-color: rgb(18 26 22 / 0.9); }
+.dark :is(.bg-\[rgba\(249\,249\,255\,0\.8\)\], .bg-\[rgba\(244\,251\,247\,0\.9\)\]) { background-color: rgb(10 15 13 / 0.8); }
+.dark :is(.bg-white\/60, .bg-white\/40) { background-color: rgb(255 255 255 / 0.08); }
+.dark :is(.bg-white\/35, .bg-white\/30) { background-color: rgb(18 26 22 / 0.55); }
 
-/* Tinted chips and icon circles: keep the hue, drop the brightness */
-.dark :is(.bg-\[\#e9ddff\], .bg-\[rgba\(233\,221\,255\,0\.3\)\], .bg-\[rgba\(233\,221\,255\,0\.4\)\], .bg-\[rgba\(233\,221\,255\,0\.5\)\], .bg-purple-100, .bg-indigo-100, .bg-\[rgba\(238\,242\,255\,0\.5\)\]) { background-color: #2c2547; }
-.dark :is(.bg-\[\#ffdcc5\], .bg-\[rgba\(255\,220\,197\,0\.4\)\], .bg-\[rgba\(255\,220\,197\,0\.6\)\]) { background-color: #3b2a1e; }
-.dark :is(.bg-amber-100, .bg-amber-200, .bg-\[rgba\(254\,243\,199\,0\.8\)\], .bg-\[rgba\(254\,243\,199\,0\.9\)\], .bg-\[rgba\(255\,251\,235\,0\.7\)\], .bg-\[rgba\(253\,230\,138\,0\.7\)\]) { background-color: #3a3016; }
-.dark :is(.bg-mint, .bg-emerald-50, .bg-\[rgba\(111\,251\,190\,0\.2\)\], .bg-\[rgba\(111\,251\,190\,0\.25\)\], .bg-\[rgba\(111\,251\,190\,0\.3\)\], .bg-\[rgba\(111\,251\,190\,0\.4\)\], .bg-\[rgba\(209\,250\,229\,0\.8\)\], .bg-\[rgba\(0\,108\,73\,0\.1\)\], .bg-\[rgba\(78\,222\,163\,0\.3\)\]) { background-color: #173a2d; }
+/* Tints: same hue as light mode, as low-alpha washes so they glow instead of looking muddy */
+.dark :is(.bg-mint, .bg-emerald-50, .bg-\[rgba\(111\,251\,190\,0\.2\)\], .bg-\[rgba\(111\,251\,190\,0\.25\)\], .bg-\[rgba\(111\,251\,190\,0\.3\)\], .bg-\[rgba\(111\,251\,190\,0\.4\)\], .bg-\[rgba\(209\,250\,229\,0\.8\)\], .bg-\[rgba\(0\,108\,73\,0\.1\)\], .bg-\[rgba\(78\,222\,163\,0\.3\)\]) { background-color: rgb(16 185 129 / 0.16); }
+.dark :is(.bg-\[\#e9ddff\], .bg-purple-100, .bg-indigo-100, .bg-\[rgba\(233\,221\,255\,0\.3\)\], .bg-\[rgba\(233\,221\,255\,0\.4\)\], .bg-\[rgba\(233\,221\,255\,0\.5\)\], .bg-\[rgba\(238\,242\,255\,0\.5\)\]) { background-color: rgb(139 92 246 / 0.18); }
+.dark :is(.bg-\[\#ffdcc5\], .bg-\[rgba\(255\,220\,197\,0\.4\)\], .bg-\[rgba\(255\,220\,197\,0\.6\)\]) { background-color: rgb(239 137 51 / 0.16); }
+.dark :is(.bg-amber-100, .bg-amber-200, .bg-\[rgba\(254\,243\,199\,0\.8\)\], .bg-\[rgba\(254\,243\,199\,0\.9\)\], .bg-\[rgba\(255\,251\,235\,0\.7\)\], .bg-\[rgba\(253\,230\,138\,0\.7\)\]) { background-color: rgb(245 158 11 / 0.15); }
+/* Solid icon dots (e.g. #6ffbbe) stay bright; just soften them a touch */
+.dark .bg-\[\#6ffbbe\] { background-color: #3fd89a; }
 
 /* Text */
-.dark :is(.text-ink, .text-slate-900, .text-slate-800, .text-\[\#111c2d\], .text-\[\#0f172a\]) { color: #e6eee9; }
-.dark :is(.text-\[\#3c4a42\], .text-slate-700, .text-slate-600) { color: #b7c6be; }
-.dark :is(.text-\[\#6c7a71\], .text-slate-500, .text-slate-400) { color: #8a9a91; }
-.dark :is(.text-\[\#006c49\], .text-brand-deep, .text-brand-ink, .text-\[\#005236\], .text-\[\#002113\], .text-\[\#064e3b\], .text-\[\#065f46\]) { color: #5fe0a6; }
-.dark :is(.text-\[\#23005c\], .text-\[\#6b38d4\], .text-indigo-800) { color: #c9b6ff; }
-.dark :is(.text-\[\#944a00\], .text-\[\#5c2c00\], .text-\[\#713700\], .text-\[\#301400\], .text-\[\#78350f\], .text-amber-700, .text-amber-800) { color: #f8c27a; }
+.dark :is(.text-ink, .text-slate-900, .text-slate-800, .text-\[\#111c2d\], .text-\[\#0f172a\]) { color: var(--d-text); }
+.dark :is(.text-\[\#3c4a42\], .text-slate-700, .text-slate-600) { color: var(--d-muted); }
+.dark :is(.text-\[\#6c7a71\], .text-slate-500, .text-slate-400) { color: var(--d-faint); }
+.dark :is(.text-\[\#006c49\], .text-brand-deep, .text-brand-ink, .text-\[\#005236\], .text-\[\#064e3b\], .text-\[\#065f46\]) { color: var(--d-green); }
+.dark :is(.text-\[\#23005c\], .text-\[\#6b38d4\], .text-indigo-800) { color: var(--d-violet); }
+.dark :is(.text-\[\#944a00\], .text-\[\#5c2c00\], .text-\[\#713700\], .text-\[\#301400\], .text-\[\#78350f\], .text-amber-700, .text-amber-800) { color: var(--d-orange); }
+/* Dark text that sits on a bright solid dot keeps its contrast */
+.dark .bg-\[\#6ffbbe\] .text-\[\#002113\], .dark .bg-\[\#6ffbbe\].text-\[\#002113\] { color: #002113; }
 
-/* Borders and dividers */
-.dark :is(.border-mint, .border-slate-200, .border-\[\#dee8ff\], .border-emerald-200, .border-indigo-100, .border-amber-200, .border-\[rgba\(167\,243\,208\,0\.6\)\], .border-\[rgba\(167\,243\,208\,0\.7\)\], .border-\[rgba\(167\,243\,208\,0\.8\)\], .border-\[rgba\(187\,202\,191\,0\.3\)\]) { border-color: #2a3a33; }
-.dark :is(.divide-\[\#f0f3ff\]) > :not(:last-child) { border-color: #2a3a33; }
-.dark :is(.border-white\/60, .border-white\/80) { border-color: rgb(255 255 255 / 0.12); }
+/* Borders, dividers, focus: every pastel border collapses to one hairline; accent borders are re-added below */
+.dark :is([class~='border'], [class~='border-2'], [class~='border-b'], [class~='border-t']) { border-color: var(--d-line); }
+.dark :is(.border-\[\#006c49\], .border-brand) { border-color: #10b981; }
+.dark :is(.border-amber-400, .border-amber-300) { border-color: rgb(245 158 11 / 0.6); }
+.dark :is(.border-mint, .border-slate-200, .border-\[\#dee8ff\], .border-emerald-200, .border-indigo-100, .border-amber-200, .border-\[rgba\(167\,243\,208\,0\.6\)\], .border-\[rgba\(167\,243\,208\,0\.7\)\], .border-\[rgba\(167\,243\,208\,0\.8\)\], .border-\[rgba\(187\,202\,191\,0\.3\)\], .border-white\/60, .border-white\/80) { border-color: var(--d-line); }
+.dark .divide-\[\#f0f3ff\] > :not(:last-child) { border-color: var(--d-line); }
+.dark .border-\[rgba\(110\,231\,183\,0\.8\)\] { border-color: rgb(16 185 129 / 0.35); }
 
-/* Soft pastel gradients used on hero cards */
-.dark :is(.from-\[\#d1fae5\], .from-\[\#e9ddff\], .from-mint, .from-amber-50, .from-emerald-50) { --tw-gradient-from: #1b2e27; }
-.dark :is(.to-\[\#d1fae5\], .to-\[\#fffbeb\], .to-amber-100, .to-orange-50, .to-teal-50, .via-white, .via-\[\#f0fdfa\], .via-\[\#f9f9ff\]) { --tw-gradient-to: #16201c; --tw-gradient-via: #16201c; }
-.dark .hero-card { background-image: linear-gradient(135deg, #18342a 0%, #16201c 55%, #2a2716 100%) !important; }
+/* Light-mode pastel shadows read as grey haze on dark; replace with a soft black lift */
+.dark :is(.shadow-sm, .shadow-md, .shadow-lg, .shadow-xl, [class*='shadow-\[0_20px_25px'], [class*='shadow-\[0_10px_25px'], [class*='shadow-\[0_10px_30px'], [class*='shadow-\[0_2px_12px'], [class*='shadow-\[0_1px_8px']) {
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 8px 24px rgb(0 0 0 / 0.35);
+}
+.dark [class*='drop-shadow-\[0_1px_1px'] { filter: none; }
+
+/* Hero / gradient cards: a quiet brand glow instead of pastel */
+.dark .hero-card { background-image: radial-gradient(120% 90% at 0% 0%, rgb(16 185 129 / 0.22), transparent 60%), radial-gradient(90% 80% at 100% 100%, rgb(245 158 11 / 0.12), transparent 60%) !important; background-color: var(--d-surface); }
+.dark :is(.from-\[\#d1fae5\], .from-\[\#e9ddff\], .from-mint, .from-amber-50, .from-emerald-50) { --tw-gradient-from: var(--d-surface); }
+.dark :is(.to-\[\#d1fae5\], .to-\[\#fffbeb\], .to-amber-100, .to-orange-50, .to-teal-50, .via-white, .via-\[\#f0fdfa\], .via-\[\#f9f9ff\]) { --tw-gradient-to: var(--d-surface); --tw-gradient-via: var(--d-surface); }
+/* Decorative blurred blobs are too loud on dark */
+.dark :is([class~='blur-\[40px\]'], [class~='blur-\[24px\]']) { opacity: 0.25; }
+
+/* Floating glass tab bar */
+.dark nav [aria-hidden] { opacity: 0.08; }
+.dark nav .bg-white\/35 { background-color: rgb(18 26 22 / 0.6); }
+.dark nav .bg-white\/60 { background-color: rgb(16 185 129 / 0.18); border-color: rgb(94 227 166 / 0.3); box-shadow: none; }
+.dark nav img { filter: brightness(0) invert(0.85); }
+.dark nav [aria-current='page'] img { filter: none; }
+
+
+/* UI icons are dark-tinted SVGs drawn for light backgrounds; lift them so they read on dark tints */
+.dark :is(main, header) img[src^='data:image/svg'] { filter: brightness(1.75) saturate(1.1); }
+/* Back arrows and other near-black glyphs need a real flip */
+.dark header button img[src^='data:image/svg'] { filter: invert(0.9); }
 
 /* Inputs */
-.dark :is(input, textarea, select) { color: #e6eee9; }
-.dark input::placeholder { color: #6f7f76; }
+.dark :is(input, textarea, select) { color: var(--d-text); color-scheme: dark; }
+.dark input::placeholder { color: var(--d-faint); }

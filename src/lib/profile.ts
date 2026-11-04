@@ -1,4 +1,6 @@
-// Local-only persistence until there is a backend.
+import { pushProfile } from '../services/remote'
+
+// Local cache of the user's profile; mirrored to Supabase when it is configured (services/remote.ts).
 export type Profile = {
   name: string
   email: string
@@ -19,6 +21,7 @@ export type Profile = {
   reminderTimes?: string[]
   history?: Measurement[]
   photos?: { before?: string; after?: string }
+  role?: 'user' | 'admin'
 }
 
 export type Measurement = { date: string; weight: number; waist: number; hip: number }
@@ -48,6 +51,7 @@ export function saveProfile(patch: Partial<Profile>): Profile {
   } catch {
     // storage unavailable: keep going in-memory
   }
+  pushProfile(next)
   return next
 }
 

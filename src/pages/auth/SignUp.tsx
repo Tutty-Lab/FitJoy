@@ -1,11 +1,9 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import AuthTabs from './AuthTabs'
-import { saveProfile } from '../../lib/profile'
+import { signUp } from '../../services/auth'
 import sprout from '../../assets/auth/sprout-signup.png'
 import icLeaf from '../../assets/auth/s-leaf.svg'
-import icBolt from '../../assets/auth/s-bolt.svg'
-import icLotus from '../../assets/auth/s-lotus.svg'
 import icChev from '../../assets/auth/s-chev.svg'
 import icUser from '../../assets/auth/s-user.svg'
 import icOk from '../../assets/auth/s-ok.svg'
@@ -17,8 +15,6 @@ import icEye from '../../assets/auth/eye.svg'
 import icShield from '../../assets/auth/s-shield.svg'
 import icMatch from '../../assets/auth/s-match.svg'
 import icArrow from '../../assets/auth/arrow.svg'
-import icGoogle from '../../assets/auth/google-signup.svg'
-import icApple from '../../assets/auth/apple-signup.svg'
 
 function strength(pw: string) {
   let s = 0
@@ -29,14 +25,10 @@ function strength(pw: string) {
   return s
 }
 
-function Field({ label, aside, icon, children, trailing }: { label: string; aside?: ReactNode; icon: ReactNode; children: ReactNode; trailing?: ReactNode }) {
+function Field({ icon, children, trailing }: { label: string; aside?: ReactNode; icon: ReactNode; children: ReactNode; trailing?: ReactNode }) {
   return (
     <label className="flex flex-col gap-1">
-      <span className="flex items-center justify-between px-1">
-        <span className="text-xs leading-4 font-bold tracking-[0.48px] text-[#3c4a42]">{label}</span>
-        {aside}
-      </span>
-      <span className="flex h-[52px] items-center rounded-full bg-white px-4 focus-within:ring-2 focus-within:ring-brand">
+      <span className="flex h-[52px] items-center rounded-2xl bg-[#f0f3ff] px-4 focus-within:ring-2 focus-within:ring-brand">
         {icon}
         {children}
         {trailing}
@@ -62,10 +54,18 @@ export default function SignUp() {
   const match = pw2.length > 0 && pw === pw2
   const canSubmit = name.trim() && emailOk && s >= 3 && match && agree
 
-  function submit(e: FormEvent) {
+  const [error, setError] = useState('')
+  const [notice, setNotice] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  async function submit(e: FormEvent) {
     e.preventDefault()
-    if (!canSubmit) return
-    saveProfile({ name: name.trim(), email, onboarded: false })
+    if (!canSubmit || busy) return
+    setBusy(true)
+    setError('')
+    const res = await signUp(name.trim(), email, pw)
+    setBusy(false)
+    if (!res.ok) return setError(res.error)
     navigate('/onboarding/1')
   }
 
@@ -82,7 +82,6 @@ export default function SignUp() {
               <img src={icLeaf} alt="" style={{ width: 11.362, height: 11.35 }} />Joy Sprout • Vibe Buddy
             </span>
             <h1 className="pt-1 text-2xl leading-8 font-bold tracking-[-0.6px]">Create your account!</h1>
-            <p className="mt-1 text-sm leading-[19.25px] text-[#3c4a42]">Unlock your personalized 22-day journey &amp; earn your first 200 XP badge!</p>
           </div>
           <div className="relative flex size-24 shrink-0 items-center justify-center">
             <div className="size-20 overflow-hidden rounded-2xl bg-[#dee8ff] p-1 shadow-inner">
@@ -91,21 +90,13 @@ export default function SignUp() {
             <span className="absolute -right-1 -bottom-1 rounded-full bg-[#ef8933] px-1.5 py-0.5 text-[10px] leading-6 text-[#5c2c00]">LVL 1</span>
           </div>
         </div>
-        <div className="relative flex flex-col items-start gap-1 pt-1">
-          <span className="flex items-center gap-1 rounded-full bg-[#e9ddff] px-2.5 py-1 text-xs leading-4 font-bold tracking-[0.48px] text-[#23005c]">
-            <img src={icBolt} alt="" style={{ width: 9.333, height: 11.667 }} />+200 Welcome XP
-          </span>
-          <span className="flex items-center gap-1 rounded-full bg-[#e7eeff] px-2.5 py-1 text-xs leading-4 font-bold tracking-[0.48px] text-[#3c4a42]">
-            <img src={icLotus} alt="" className="size-[11.667px]" />Beginner Friendly
-          </span>
-        </div>
       </section>
 
       <div className="pt-4">
         <AuthTabs active="signup" />
       </div>
 
-      <form onSubmit={submit} className="flex flex-col gap-4 pt-4">
+      <form onSubmit={submit} className="mt-4 flex flex-col gap-4 rounded-[32px] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(207,218,242,0.4),0_8px_10px_-6px_rgba(207,218,242,0.4)]">
         <Field
           label="Full Name"
           aside={name.trim() && (
@@ -116,7 +107,7 @@ export default function SignUp() {
           icon={<img src={icUser} alt="" style={{ width: 21.333, height: 13.333 }} />}
           trailing={name.trim() ? okMark : null}
         >
-          <input className={input} value={name} onChange={e => setName(e.target.value)} autoComplete="name" required />
+          <input className={input} value={name} onChange={e => setName(e.target.value)} autoComplete="name" required placeholder="Full name" aria-label="Full name" />
         </Field>
 
         <Field
@@ -124,7 +115,7 @@ export default function SignUp() {
           icon={<img src={icAt} alt="" style={{ width: 24.667, height: 16.667 }} />}
           trailing={emailOk ? <img src={icVerified} alt="" style={{ width: 18.333, height: 17.5 }} /> : null}
         >
-          <input className={input} type="email" value={email} onChange={e => setEmail(e.target.value)} autoComplete="email" required />
+          <input className={input} type="email" value={email} onChange={e => setEmail(e.target.value)} autoComplete="email" required placeholder="Email" aria-label="Email" />
         </Field>
 
         <div className="flex flex-col gap-1">
@@ -137,7 +128,7 @@ export default function SignUp() {
               </button>
             }
           >
-            <input className={`${input} font-mono tracking-[1.6px]`} type={show ? 'text' : 'password'} value={pw} onChange={e => setPw(e.target.value)} autoComplete="new-password" required />
+            <input className={`${input} font-mono tracking-[1.6px]`} type={show ? 'text' : 'password'} value={pw} onChange={e => setPw(e.target.value)} autoComplete="new-password" required placeholder="Password" aria-label="Password" />
           </Field>
           {pw && (
             <div className="flex flex-col gap-1 px-2 pt-1">
@@ -170,7 +161,7 @@ export default function SignUp() {
               </>
             }
           >
-            <input className={`${input} font-mono tracking-[1.6px]`} type={show2 ? 'text' : 'password'} value={pw2} onChange={e => setPw2(e.target.value)} autoComplete="new-password" required />
+            <input className={`${input} font-mono tracking-[1.6px]`} type={show2 ? 'text' : 'password'} value={pw2} onChange={e => setPw2(e.target.value)} autoComplete="new-password" required placeholder="Confirm password" aria-label="Confirm password" />
           </Field>
           {pw2 && (
             <span className={`flex items-center gap-1 px-2 text-[11px] leading-6 ${match ? 'text-[#006c49]' : 'text-red-600'}`}>
@@ -185,32 +176,17 @@ export default function SignUp() {
           <span>I agree to the <a href="#" className="text-[#006c49] underline">Terms of Service</a> &amp; <a href="#" className="text-[#006c49] underline">Privacy Policy</a></span>
         </label>
 
+        {error && <p role="alert" className="text-sm text-[#ba1a1a]">{error}</p>}
+        {notice && <p role="status" className="text-sm font-semibold text-[#006c49]">{notice}</p>}
         <button
           type="submit"
-          disabled={!canSubmit}
+          disabled={!canSubmit || busy}
           className="mt-1 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand to-teal-500 px-6 py-4 text-base leading-5 font-bold tracking-[0.16px] text-white drop-shadow-[0_6px_0_#005236] transition active:translate-y-1 active:drop-shadow-[0_2px_0_#005236] disabled:opacity-50"
         >
           Start 22-Day Journey
           <img src={icArrow} alt="" className="size-[13.333px]" />
         </button>
       </form>
-
-      <div className="flex items-center gap-3 py-3">
-        <span className="h-px flex-1 bg-[#dee8ff]" />
-        <span className="text-xs leading-4 font-bold tracking-[0.48px] text-[#6c7a71]">Or sign up with</span>
-        <span className="h-px flex-1 bg-[#dee8ff]" />
-      </div>
-      <div className="flex gap-2">
-        <button type="button" className="flex flex-1 items-center justify-center gap-2 rounded-full bg-white px-4 py-3 text-sm leading-[18px] font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
-          <img src={icGoogle} alt="" className="size-5" />Google
-        </button>
-        <button type="button" className="flex flex-1 items-center justify-center gap-2 rounded-full bg-white px-4 py-3 text-sm leading-[18px] font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
-          <img src={icApple} alt="" className="size-5" />Apple
-        </button>
-      </div>
-      <p className="pt-6 text-center text-sm leading-5 text-[#3c4a42]">
-        Already have an account? <Link to="/login" className="text-[#006c49]">Sign In</Link>
-      </p>
     </div>
   )
 }

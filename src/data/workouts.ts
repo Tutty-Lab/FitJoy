@@ -12,6 +12,8 @@ export type Workout = {
   moves: number
   blurb: string
   steps: Step[]
+  // Replace with each day's real workout video when available.
+  video: string
 }
 
 const steps: Record<Category, Step[]> = {
@@ -66,7 +68,7 @@ const plan: [string, Category, number, number, Workout['intensity']][] = [
   ['Victory Flow: Full Body', 'Fat Burn', 22, 170, 'Moderate'],
 ]
 
-export const workouts: Workout[] = plan.map(([title, category, mins, kcal, intensity], i) => ({
+export const baseWorkouts: Workout[] = plan.map(([title, category, mins, kcal, intensity], i) => ({
   day: i + 1,
   title,
   mins,
@@ -83,7 +85,20 @@ export const workouts: Workout[] = plan.map(([title, category, mins, kcal, inten
           ? 'Fun, rhythmic intervals that light up your metabolism without overwhelming your joints.'
           : 'Build a strong, stable centre with controlled core moves and short cardio bursts.',
   steps: steps[category],
+  video: '/videos/workout-sample.mp4',
 }))
+
+// Admin edits are stored as per-day overrides and layered over the seed data at load.
+export const CATALOG_KEY = 'fitjoy.catalog'
+function readOverrides(): Record<number, Partial<Workout>> {
+  try {
+    return JSON.parse(localStorage.getItem(CATALOG_KEY) ?? '{}')
+  } catch {
+    return {}
+  }
+}
+const overrides = readOverrides()
+export const workouts: Workout[] = baseWorkouts.map(w => ({ ...w, ...overrides[w.day] }))
 
 export const categoryColor: Record<Category, string> = {
   'Warm-up': 'text-[#006c49]',

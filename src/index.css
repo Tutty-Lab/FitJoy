@@ -59,7 +59,7 @@
 
 /* Tactile press feedback; uses `scale` so it never fights translate-based 3D buttons */
 button, a {
-  transition: scale 0.15s ease, translate 0.15s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  transition: scale 0.15s ease, translate 0.15s ease, opacity 0.2s ease;
 }
 button:not(:disabled):not([data-press]):active, a:not([data-press]):active {
   scale: 0.97;

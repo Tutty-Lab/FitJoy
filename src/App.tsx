@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import AppLayout from './components/AppLayout'
 import Home from './pages/Home'
@@ -17,6 +17,8 @@ import Celebration from './pages/workouts/Celebration'
 import { loadProfile } from './lib/profile'
 import { useReminderScheduler } from './lib/reminders'
 
+const AdminApp = lazy(() => import('./admin/AdminApp'))
+
 function RequireAuth({ onboarded }: { onboarded?: boolean }) {
   const p = loadProfile()
   if (!p?.email) return <Navigate to="/login" replace />
@@ -33,6 +35,7 @@ export default function App() {
 
   return (
     <Routes>
+      <Route path="/admin/*" element={<Suspense fallback={null}><AdminApp /></Suspense>} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route element={<RequireAuth />}>

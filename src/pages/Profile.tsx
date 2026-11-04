@@ -1,7 +1,8 @@
 import { useState, type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Switch } from '../components/shared'
-import { loadProfile, saveProfile, signOut } from '../lib/profile'
+import { loadProfile, saveProfile } from '../lib/profile'
+import { signOutEverywhere } from '../services/auth'
 import { applyTheme } from '../lib/theme'
 import { useCompleted } from '../lib/progress'
 import avatar from '../assets/profile/avatar.png'
@@ -77,8 +78,8 @@ export default function Profile() {
     URL.revokeObjectURL(url)
   }
 
-  function logout() {
-    signOut()
+  async function logout() {
+    await signOutEverywhere()
     applyTheme(false)
     navigate('/login', { replace: true })
   }

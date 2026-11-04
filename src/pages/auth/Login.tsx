@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthTabs from './AuthTabs'
-import { loadProfile, saveProfile } from '../../lib/profile'
+import { loadProfile } from '../../lib/profile'
+import { signIn } from '../../services/auth'
 import sprout from '../../assets/auth/sprout-login.png'
 import icHeart from '../../assets/auth/l-heart.svg'
 import icClear from '../../assets/auth/l-clear.svg'
@@ -16,11 +17,17 @@ export default function Login() {
   const [showPw, setShowPw] = useState(false)
   const [remember, setRemember] = useState(true)
 
-  function submit(e: FormEvent) {
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  async function submit(e: FormEvent) {
     e.preventDefault()
-    const existing = loadProfile()
-    const p = saveProfile({ email, name: existing?.name || email.split('@')[0] })
-    navigate(p.onboarded ? '/' : '/onboarding/1')
+    setBusy(true)
+    setError('')
+    const res = await signIn(email, password)
+    setBusy(false)
+    if (!res.ok) return setError(res.error)
+    navigate(loadProfile()?.onboarded ? '/' : '/onboarding/1')
   }
 
   return (
@@ -93,8 +100,10 @@ export default function Login() {
           <span className="text-sm leading-[18px] font-semibold text-[#3c4a42]">Remember me</span>
         </label>
 
+        {error && <p role="alert" className="text-sm text-[#ba1a1a]">{error}</p>}
         <button
           type="submit"
+          disabled={busy}
           className="mt-1 flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-base leading-5 font-bold tracking-[0.16px] text-white shadow-[0_10px_15px_-3px_rgba(16,185,129,0.3),0_4px_6px_-4px_rgba(16,185,129,0.3)] active:scale-[0.98]"
         >
           Log In to FitJoy

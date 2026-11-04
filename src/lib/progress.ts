@@ -1,7 +1,8 @@
 import { useSyncExternalStore } from 'react'
 import { workouts } from '../data/workouts'
+import { pushCompletion } from '../services/remote'
 
-// Completed workout days and the dates they were done, persisted locally until there is a backend.
+// Completed workout days and the dates they were done, cached locally and mirrored to Supabase when configured.
 const KEY = 'fitjoy.completed'
 const DATES_KEY = 'fitjoy.activeDates'
 const listeners = new Set<() => void>()
@@ -31,6 +32,13 @@ export function completeDay(day: number) {
   } catch {
     // storage unavailable: keep in-memory
   }
+  pushCompletion(day, date)
+  listeners.forEach(l => l())
+}
+
+// Re-reads the cache after a sign-in pulled this user's history from the server.
+export function reloadProgress() {
+  cache = { completed: read<number>(KEY), dates: read<string>(DATES_KEY) }
   listeners.forEach(l => l())
 }
 
