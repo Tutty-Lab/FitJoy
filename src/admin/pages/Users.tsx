@@ -24,7 +24,7 @@ export default function Users() {
     <div className="flex flex-col gap-5">
       <div>
         <h1 className="text-2xl font-black">Users</h1>
-        <p className="text-sm text-[#6c7a71]">{rows.length} of {all.length} members</p>
+        <p className="text-sm text-[#6f7472]">{rows.length} of {all.length} members</p>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -49,7 +49,7 @@ export default function Users() {
 
       <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white">
         <table className="w-full min-w-[720px] text-sm">
-          <thead className="text-left text-xs font-bold tracking-[0.48px] text-[#6c7a71] uppercase">
+          <thead className="text-left text-xs font-bold tracking-[0.48px] text-[#6f7472] uppercase">
             <tr>
               <th className="px-4 py-3">Member</th>
               <th className="px-4 py-3">Goal</th>
@@ -63,8 +63,8 @@ export default function Users() {
             {rows.map(m => (
               <tr key={m.id} className="border-t border-slate-100">
                 <td className="px-4 py-3">
-                  <div className="font-semibold">{m.name} {!m.demo && <span className="ml-1 rounded-full bg-mint px-2 py-0.5 text-[10px] font-bold text-[#006c49]">This device</span>}</div>
-                  <div className="text-[#6c7a71]">{m.email}</div>
+                  <div className="font-semibold">{m.name} {!m.demo && <span className="ml-1 rounded-full bg-mint px-2 py-0.5 text-[10px] font-bold text-[#13707e]">This device</span>}</div>
+                  <div className="text-[#6f7472]">{m.email}</div>
                 </td>
                 <td className="px-4 py-3">{GOAL_LABEL[m.goal]}</td>
                 <td className="px-4 py-3">
@@ -81,7 +81,7 @@ export default function Users() {
               </tr>
             ))}
             {rows.length === 0 && (
-              <tr><td colSpan={6} className="px-4 py-10 text-center text-[#6c7a71]">No members match these filters.</td></tr>
+              <tr><td colSpan={6} className="px-4 py-10 text-center text-[#6f7472]">No members match these filters.</td></tr>
             )}
           </tbody>
         </table>

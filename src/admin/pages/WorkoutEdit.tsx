@@ -10,7 +10,7 @@ const field = 'h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text
 function Label({ text, children }: { text: string; children: ReactNode }) {
   return (
     <label className="flex flex-col gap-1">
-      <span className="text-xs font-bold tracking-[0.48px] text-[#6c7a71] uppercase">{text}</span>
+      <span className="text-xs font-bold tracking-[0.48px] text-[#6f7472] uppercase">{text}</span>
       {children}
     </label>
   )
@@ -46,7 +46,7 @@ export default function WorkoutEdit() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <Link to="/admin/workouts" className="text-sm font-semibold text-[#006c49]">← Workouts</Link>
+          <Link to="/admin/workouts" className="text-sm font-semibold text-[#13707e]">← Workouts</Link>
           <h1 className="text-2xl font-black">Day {day}: {w.title}</h1>
         </div>
         <div className="flex gap-2">
@@ -56,7 +56,7 @@ export default function WorkoutEdit() {
                 await resetWorkout(day)
                 navigate(0)
               }}
-              className="h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold text-[#3c4a42]"
+              className="h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold text-[#3f4a4b]"
             >
               Reset to default
             </button>
@@ -91,11 +91,11 @@ export default function WorkoutEdit() {
       <section className="flex flex-col gap-3 rounded-3xl border border-slate-200 bg-white p-5">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-bold">Steps</h2>
-          <button onClick={() => set('steps', [...w.steps, { name: 'New step', mins: 2, note: '' }])} className="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-[#006c49]">+ Add step</button>
+          <button onClick={() => set('steps', [...w.steps, { name: 'New step', mins: 2, note: '' }])} className="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-[#13707e]">+ Add step</button>
         </div>
         {w.steps.map((s, i) => (
           <div key={i} className="grid items-end gap-2 md:grid-cols-[2rem_1fr_6rem_1fr_auto]">
-            <span className="pb-2.5 text-sm font-bold text-[#6c7a71]">{i + 1}</span>
+            <span className="pb-2.5 text-sm font-bold text-[#6f7472]">{i + 1}</span>
             <Label text="Name"><input className={field} value={s.name} onChange={e => setStep(i, { name: e.target.value })} /></Label>
             <Label text="Mins"><input type="number" min={1} className={field} value={s.mins} onChange={e => setStep(i, { mins: Number(e.target.value) })} /></Label>
             <Label text="Note"><input className={field} value={s.note} onChange={e => setStep(i, { note: e.target.value })} /></Label>

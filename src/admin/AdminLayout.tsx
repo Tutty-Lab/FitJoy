@@ -11,13 +11,13 @@ const nav = [
 export default function AdminLayout() {
   const navigate = useNavigate()
   return (
-    <div className="flex min-h-dvh bg-[#f9f9ff] text-ink">
+    <div className="flex min-h-dvh bg-[#fbf8f3] text-ink">
       <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 flex-col border-r border-slate-200 bg-white p-4 md:flex">
         <div className="mb-6 flex items-center gap-2 px-2">
           <img src={mascot} alt="" className="size-9" />
           <div>
-            <div className="text-lg leading-5 font-black text-[#006c49]">FitJoy</div>
-            <div className="text-xs leading-4 font-bold text-[#6c7a71]">Admin console</div>
+            <div className="text-lg leading-5 font-black text-[#13707e]">FitJoy</div>
+            <div className="text-xs leading-4 font-bold text-[#6f7472]">Admin console</div>
           </div>
         </div>
         <nav className="flex flex-col gap-1">
@@ -26,7 +26,7 @@ export default function AdminLayout() {
               key={n.to}
               to={n.to}
               end={n.end}
-              className={({ isActive }) => `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold ${isActive ? 'bg-mint text-[#006c49]' : 'text-[#3c4a42] hover:bg-slate-100'}`}
+              className={({ isActive }) => `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold ${isActive ? 'bg-mint text-[#13707e]' : 'text-[#3f4a4b] hover:bg-slate-100'}`}
             >
               <span aria-hidden className="w-4 text-center">{n.icon}</span>
               {n.label}
@@ -34,7 +34,7 @@ export default function AdminLayout() {
           ))}
         </nav>
         <div className="mt-auto flex flex-col gap-1">
-          <NavLink to="/" className="rounded-xl px-3 py-2.5 text-sm font-semibold text-[#3c4a42] hover:bg-slate-100">← Open user app</NavLink>
+          <NavLink to="/" className="rounded-xl px-3 py-2.5 text-sm font-semibold text-[#3f4a4b] hover:bg-slate-100">← Open user app</NavLink>
           <button
             onClick={async () => {
               await adminSignOut()
@@ -50,9 +50,9 @@ export default function AdminLayout() {
       <div className="min-w-0 flex-1">
         {/* Compact top nav for narrow screens */}
         <header className="flex items-center gap-2 overflow-x-auto border-b border-slate-200 bg-white px-4 py-3 md:hidden">
-          <span className="mr-2 text-base font-black text-[#006c49]">FitJoy Admin</span>
+          <span className="mr-2 text-base font-black text-[#13707e]">FitJoy Admin</span>
           {nav.map(n => (
-            <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => `shrink-0 rounded-full px-3 py-1.5 text-sm font-semibold ${isActive ? 'bg-mint text-[#006c49]' : 'text-[#3c4a42]'}`}>
+            <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => `shrink-0 rounded-full px-3 py-1.5 text-sm font-semibold ${isActive ? 'bg-mint text-[#13707e]' : 'text-[#3f4a4b]'}`}>
               {n.label}
             </NavLink>
           ))}

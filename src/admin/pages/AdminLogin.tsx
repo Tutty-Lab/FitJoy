@@ -4,7 +4,7 @@ import { adminSignIn, isAdmin } from '../../services/adminApi'
 import { apiEnabled } from '../../lib/api'
 import mascot from '../../assets/home/mascot.png'
 
-const field = 'h-12 rounded-2xl bg-[#f0f3ff] px-4 text-base outline-none focus:ring-2 focus:ring-brand'
+const field = 'h-12 rounded-2xl bg-[#f3f6f5] px-4 text-base outline-none focus:ring-2 focus:ring-brand'
 
 export default function AdminLogin() {
   const navigate = useNavigate()
@@ -24,13 +24,13 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-[#f9f9ff] p-4">
-      <form onSubmit={submit} className="flex w-full max-w-sm flex-col gap-4 rounded-[32px] bg-white p-8 shadow-[0_20px_25px_-5px_rgba(207,218,242,0.4)]">
+    <div className="flex min-h-dvh items-center justify-center bg-[#fbf8f3] p-4">
+      <form onSubmit={submit} className="flex w-full max-w-sm flex-col gap-4 rounded-[32px] bg-white p-8 shadow-[0_20px_25px_-5px_rgba(200,220,218,0.4)]">
         <div className="flex items-center gap-3">
           <img src={mascot} alt="" className="size-12" />
           <div>
             <h1 className="text-xl leading-7 font-black">FitJoy Admin</h1>
-            <p className="text-sm text-[#6c7a71]">Sign in to manage the program</p>
+            <p className="text-sm text-[#6f7472]">Sign in to manage the program</p>
           </div>
         </div>
         {apiEnabled && (

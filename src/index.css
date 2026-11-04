@@ -6,12 +6,31 @@
 
 @theme {
   --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
-  --color-brand: #10b981;
-  --color-brand-dark: #059669;
-  --color-brand-deep: #047857;
-  --color-brand-ink: #065f46;
-  --color-mint: #d1fae5;
-  --color-canvas: #f4fbf7;
+  --color-brand: #1a8a99;
+  --color-brand-dark: #178391;
+  --color-brand-deep: #13707e;
+  --color-brand-ink: #0e5560;
+  --color-mint: #e3f2f1;
+  --color-cream: #fbf8f3;
+  --color-paper: #ffffff;
+  --color-line: #e3ebea;
+  --color-teal-soft: #dce7e6;
+  --color-rust: #ee7a3f;
+  --color-rust-soft: #f6e3d6;
+  --color-gold: #f2b544;
+  --color-muted-ink: #6f7472;
+  --color-emerald-50: #eef7f6;
+  --color-emerald-100: #e3f2f1;
+  --color-emerald-200: #cfe7e5;
+  --color-emerald-300: #9fd3cf;
+  --color-emerald-400: #f2b544;
+  --color-emerald-500: #1a8a99;
+  --color-emerald-600: #178391;
+  --color-emerald-700: #13707e;
+  --color-emerald-800: #0e5560;
+  --color-emerald-900: #0b4a54;
+  --color-teal-500: #ee7a3f;
+  --color-canvas: #fbf8f3;
   --color-ink: #111c2d;
 }
 
@@ -37,8 +56,8 @@
   to { scale: 1 1; }
 }
 @keyframes fj-pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.45); }
-  100% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(19, 112, 126, 0.45); }
+  100% { box-shadow: 0 0 0 14px rgba(19, 112, 126, 0); }
 }
 
 /* Children of .stagger slide up one after another when a screen opens */
@@ -133,7 +152,7 @@ body {
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #10b981;
+  --primary: #1a8a99;
   --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -144,7 +163,7 @@ body {
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: #10b981;
+  --ring: #1a8a99;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);

@@ -102,7 +102,7 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPl
           className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-black/10 to-transparent"
         >
           <span className="pulse-ring flex size-16 items-center justify-center rounded-full bg-brand">
-            <span className="flex size-14 items-center justify-center rounded-full bg-[#6ffbbe] pr-2.5 pl-3.5 shadow-inner">
+            <span className="flex size-14 items-center justify-center rounded-full bg-[#ffe3d3] pr-2.5 pl-3.5 shadow-inner">
               <img src={icPlay} alt="" style={{ width: 14.667, height: 18.667 }} />
             </span>
           </span>
@@ -126,8 +126,8 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPl
           onChange={e => {
             if (video.current) video.current.currentTime = Number(e.target.value)
           }}
-          className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/30 accent-[#10b981]"
-          style={{ background: `linear-gradient(to right, #10b981 ${duration ? (time / duration) * 100 : 0}%, rgb(255 255 255 / 0.3) 0)` }}
+          className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/30 accent-[#1a8a99]"
+          style={{ background: `linear-gradient(to right, #1a8a99 ${duration ? (time / duration) * 100 : 0}%, rgb(255 255 255 / 0.3) 0)` }}
         />
         <div className="flex items-center justify-between">
           <button onClick={() => setMuted(m => !m)} aria-label={muted ? 'Unmute' : 'Mute'} className={`flex items-center gap-2 text-xs leading-4 font-bold tracking-[0.48px] text-white ${muted ? 'opacity-50' : ''}`}>

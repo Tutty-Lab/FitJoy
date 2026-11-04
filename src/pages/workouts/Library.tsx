@@ -50,61 +50,27 @@ export default function Library() {
   ]
 
   return (
-    <div className="stagger flex flex-col gap-4 bg-[#f9f9ff] px-4 pt-2 pb-6">
-      <section className="flex items-center justify-between overflow-hidden rounded-[32px] bg-[#dee8ff] p-4 shadow-md">
-        <div className="max-w-[233px]">
-          <span className="mb-1 inline-flex items-center gap-1 rounded-full border border-[rgba(187,202,191,0.3)] bg-white px-[11px] py-[3px] text-xs leading-[15px] font-semibold tracking-[0.48px] text-[#006c49]">
-            <img src={icLevel} alt="" style={{ width: 5.833, height: 11.667 }} />Level 2 • Active Athlete
-          </span>
-          <h1 className="text-2xl leading-8 font-extrabold tracking-[-0.6px]">22-Day Workout Plan</h1>
-        </div>
-        <img src={heroMascot} alt="" className="float size-28 shrink-0 object-contain" />
-      </section>
-
-      <label className="relative block">
-        <img src={icSearch} alt="" className="absolute top-1/2 left-4 size-[16.5px] -translate-y-1/2" />
-        <input
-          value={q}
-          onChange={e => setQ(e.target.value)}
-          placeholder="Search exercises, muscle groups..."
-          className="h-12 w-full rounded-full bg-white pr-4 pl-12 text-base shadow-sm outline-none placeholder:text-[#6c7a71] focus:ring-2 focus:ring-brand"
-        />
-      </label>
-
-      <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
-        {pills.map(([k, label]) => (
-          <button
-            key={k}
-            onClick={() => setStatus(k)}
-            className={`shrink-0 rounded-full px-4 py-2 text-sm leading-[18px] ${status === k ? 'bg-[#006c49] font-bold text-white shadow-md' : 'bg-white font-semibold text-[#3c4a42] drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'}`}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-
+    <div className="stagger flex flex-col gap-4 bg-[#fbf8f3] px-4 pt-2 pb-6">
       <section className="flex flex-col gap-2 rounded-[32px] bg-white p-4 shadow-md">
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-2 text-[20px] leading-7 font-bold">
-            <img src={icProgress} alt="" className="size-5" />Training Progress
+            <img src={icProgress} alt="" className="size-5" />Progress
           </h2>
-          <span className="rounded-full bg-[#006c49] px-3 py-1 text-base leading-5 font-bold tracking-[0.16px] text-white">{pct}%</span>
+          <span className="rounded-full bg-[#13707e] px-3 py-1 text-base leading-5 font-bold tracking-[0.16px] text-white">{pct}%</span>
         </div>
-        <div className="h-3.5 overflow-hidden rounded-full bg-[#e7eeff] p-0.5 shadow-inner">
-          <div className="bar-grow h-full rounded-full bg-brand shadow-[0_0_8px_rgba(16,185,129,0.5)] transition-all" style={{ width: `${Math.max(pct, 2)}%` }} />
+        <div className="h-3.5 overflow-hidden rounded-full bg-[#f3f6f5] p-0.5 shadow-inner">
+          <div className="bar-grow h-full rounded-full bg-brand shadow-[0_0_8px_rgba(19,112,126,0.5)] transition-all" style={{ width: `${Math.max(pct, 2)}%` }} />
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-sm leading-5 font-semibold text-[#3c4a42]">Completed {done}/22 sessions</span>
-          <span className="text-xs leading-4 font-bold tracking-[0.48px] text-[#6c7a71]">Phase {done < 11 ? 1 : 2}</span>
+          <span className="text-sm leading-5 font-semibold text-[#3f4a4b]">{done} of 22 lessons completed</span>
         </div>
       </section>
 
       <div className="flex items-center justify-between pt-1">
-        <h3 className="text-[20px] leading-7 font-bold">Workout Journey</h3>
-        <span className="text-xs leading-4 font-bold tracking-[0.48px] text-[#006c49]">Auto-unlocked</span>
+        <h3 className="text-[20px] leading-7 font-bold">Your lessons</h3>
       </div>
 
-      {list.length === 0 && <p className="py-6 text-center text-sm text-[#6c7a71]">No workouts match your filters.</p>}
+      {list.length === 0 && <p className="py-6 text-center text-sm text-[#6f7472]">No lessons.</p>}
 
       {list.map(w => {
         const s = statusOf(w.day)
@@ -115,23 +81,22 @@ export default function Library() {
                 <span className="flex items-center gap-1 rounded-full bg-[#ef8933] px-3 py-1 text-xs leading-4 font-bold tracking-[0.3px] text-white">
                   <img src={icSpin} alt="" className="size-[11.667px]" />In Progress
                 </span>
-                <span className="text-base leading-5 font-bold tracking-[0.16px] text-[#6b38d4]">Day {w.day}</span>
+                <span className="text-base leading-5 font-bold tracking-[0.16px] text-[#d9652c]">Day {w.day}</span>
               </div>
               <Link to={`/workouts/${w.day}`} className="flex items-center gap-2">
-                <img src={thumb} alt="" className="size-20 shrink-0 bg-[#e7eeff] object-cover shadow-inner" />
+                <img src={thumb} alt="" className="size-20 shrink-0 bg-[#f3f6f5] object-cover shadow-inner" />
                 <div className="min-w-0">
                   <h4 className="truncate text-[20px] leading-7 font-bold">{w.title}</h4>
-                  <div className="flex items-center gap-3 pt-1 text-sm leading-5 text-[#3c4a42]">
-                    <span className="flex items-center gap-1"><img src={icClock} alt="" className="size-[13.333px]" />{w.mins} mins</span>
-                    <span className="flex items-center gap-1"><img src={icFlame} alt="" style={{ width: 10.667, height: 12.667 }} />~{w.kcal} kcal</span>
-                  </div>
+                  <div className="flex items-center gap-3 pt-1 text-sm leading-5 text-[#3f4a4b]">
+                    <span className="flex items-center gap-1"><img src={icClock} alt="" className="size-[13.333px]" />{w.mins} min</span>
+                                      </div>
                 </div>
               </Link>
               <button
                 onClick={() => navigate(`/workouts/${w.day}`)}
-                className="mt-2 flex h-14 items-center justify-center gap-2 rounded-full bg-[#006c49] text-base leading-5 font-bold tracking-[0.16px] text-white shadow-lg active:scale-[0.98]"
+                className="mt-2 flex h-14 items-center justify-center gap-2 rounded-full bg-[#13707e] text-base leading-5 font-bold tracking-[0.16px] text-white shadow-lg active:scale-[0.98]"
               >
-                Start Workout Now
+                Start lesson
                 <img src={icPlay} alt="" className="size-[18.333px]" />
               </button>
             </section>
@@ -143,39 +108,39 @@ export default function Library() {
             to={locked ? '#' : `/workouts/${w.day}`}
             onClick={e => locked && e.preventDefault()}
             aria-disabled={locked}
-            className={`flex items-center justify-between gap-2 rounded-[32px] p-4 ${locked ? 'bg-[#d8e3fb] opacity-75 shadow-inner' : 'bg-[#f0f3ff] opacity-95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'}`}
+            className={`flex items-center justify-between gap-2 rounded-[32px] p-4 ${locked ? 'bg-[#e7efee] opacity-75 shadow-inner' : 'bg-[#f3f6f5] opacity-95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'}`}
           >
             <span className="flex min-w-0 items-center gap-2">
-              <span className={`flex size-12 shrink-0 items-center justify-center rounded-full ${locked ? 'bg-[#bbcabf]' : 'bg-brand'}`}>
+              <span className={`flex size-12 shrink-0 items-center justify-center rounded-full ${locked ? 'bg-[#c3d0ce]' : 'bg-brand'}`}>
                 {locked ? <img src={icLock} alt="" style={{ width: 14.667, height: 19.25 }} /> : <img src={icCheck} alt="" style={{ width: 16.3, height: 12.025 }} />}
               </span>
               <span className="min-w-0">
                 <span className="flex items-center gap-2">
-                  <span className="text-xs leading-4 font-bold tracking-[0.48px] text-[#6c7a71]">Day {pad(w.day)}</span>
-                  <span className={`rounded-full px-2.5 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] ${locked ? 'bg-[#cfdaf2] text-[#3c4a42]' : 'bg-[rgba(0,108,73,0.1)] text-[#006c49]'}`}>
+                  <span className="text-xs leading-4 font-bold tracking-[0.48px] text-[#6f7472]">Day {pad(w.day)}</span>
+                  <span className={`rounded-full px-2.5 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] ${locked ? 'bg-[#cfdaf2] text-[#3f4a4b]' : 'bg-[rgba(19,112,126,0.1)] text-[#13707e]'}`}>
                     {locked ? 'Locked' : 'Completed'}
                   </span>
                 </span>
-                <span className={`block truncate text-lg leading-[26px] font-bold ${locked ? 'text-[#3c4a42]' : ''}`}>{w.title}</span>
-                <span className={`block truncate text-sm leading-5 ${locked ? 'text-[#6c7a71]' : 'text-[#3c4a42]'}`}>
-                  {locked ? `${w.mins} mins` : `${w.mins} mins • ~${w.kcal} kcal • ${w.category}`}
+                <span className={`block truncate text-lg leading-[26px] font-bold ${locked ? 'text-[#3f4a4b]' : ''}`}>{w.title}</span>
+                <span className={`block truncate text-sm leading-5 ${locked ? 'text-[#6f7472]' : 'text-[#3f4a4b]'}`}>
+                  {`${w.mins} min`}
                 </span>
               </span>
             </span>
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#e7eeff]">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#f3f6f5]">
               {locked ? <img src={icLockClock} alt="" style={{ width: 14.25, height: 16.5 }} /> : <img src={icReplay} alt="Replay" style={{ width: 15, height: 17.5 }} />}
             </span>
           </Link>
         )
       })}
 
-      <div className="flex gap-2 rounded-[32px] bg-[#e7eeff] p-4">
-        <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-[#8455ef]">
+      <div className="flex gap-2 rounded-[32px] bg-[#f3f6f5] p-4">
+        <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-[#ee7a3f]">
           <img src={icInfo} alt="" className="size-[15px]" />
         </span>
         <div>
           <h5 className="text-[20px] leading-7 font-bold">22-Day Program Guidelines</h5>
-          <p className="pt-1 text-sm leading-[22.75px] text-[#3c4a42]">
+          <p className="pt-1 text-sm leading-[22.75px] text-[#3f4a4b]">
             To maximize muscle recovery and prevent injuries, upcoming workouts automatically unlock as soon as you finish today's scheduled session. Stay consistent every day!
           </p>
         </div>

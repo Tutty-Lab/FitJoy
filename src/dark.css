@@ -23,8 +23,8 @@ html.dark body { background: var(--d-bg); color: var(--d-text); }
 
 /* Surfaces: cards sit one step above the page, inputs/pills one step above cards */
 .dark :is(.bg-white, .bg-canvas) { background-color: var(--d-surface); }
-.dark :is(.bg-\[\#f9f9ff\]) { background-color: var(--d-bg); }
-.dark :is(.bg-\[\#f0f3ff\], .bg-\[\#e7eeff\], .bg-\[\#dee8ff\], .bg-\[\#d8e3fb\], .bg-\[\#cfdaf2\], .bg-slate-50, .bg-slate-100, .bg-slate-200) { background-color: var(--d-raised); }
+.dark :is(.bg-\[\#fbf8f3\]) { background-color: var(--d-bg); }
+.dark :is(.bg-\[\#f3f6f5\], .bg-\[\#f3f6f5\], .bg-\[\#e7efee\], .bg-\[\#e7efee\], .bg-\[\#cfdaf2\], .bg-slate-50, .bg-slate-100, .bg-slate-200) { background-color: var(--d-raised); }
 .dark :is(.bg-white\/95, .bg-white\/90, .bg-white\/80) { background-color: rgb(18 26 22 / 0.9); }
 .dark :is(.bg-\[rgba\(249\,249\,255\,0\.8\)\], .bg-\[rgba\(244\,251\,247\,0\.9\)\]) { background-color: rgb(10 15 13 / 0.8); }
 .dark :is(.bg-white\/60, .bg-white\/40) { background-color: rgb(255 255 255 / 0.08); }
@@ -32,28 +32,28 @@ html.dark body { background: var(--d-bg); color: var(--d-text); }
 
 /* Tints: same hue as light mode, as low-alpha washes so they glow instead of looking muddy */
 .dark :is(.bg-mint, .bg-emerald-50, .bg-\[rgba\(111\,251\,190\,0\.2\)\], .bg-\[rgba\(111\,251\,190\,0\.25\)\], .bg-\[rgba\(111\,251\,190\,0\.3\)\], .bg-\[rgba\(111\,251\,190\,0\.4\)\], .bg-\[rgba\(209\,250\,229\,0\.8\)\], .bg-\[rgba\(0\,108\,73\,0\.1\)\], .bg-\[rgba\(78\,222\,163\,0\.3\)\]) { background-color: rgb(16 185 129 / 0.16); }
-.dark :is(.bg-\[\#e9ddff\], .bg-purple-100, .bg-indigo-100, .bg-\[rgba\(233\,221\,255\,0\.3\)\], .bg-\[rgba\(233\,221\,255\,0\.4\)\], .bg-\[rgba\(233\,221\,255\,0\.5\)\], .bg-\[rgba\(238\,242\,255\,0\.5\)\]) { background-color: rgb(139 92 246 / 0.18); }
+.dark :is(.bg-\[\#ffece1\], .bg-purple-100, .bg-indigo-100, .bg-\[rgba\(233\,221\,255\,0\.3\)\], .bg-\[rgba\(233\,221\,255\,0\.4\)\], .bg-\[rgba\(233\,221\,255\,0\.5\)\], .bg-\[rgba\(238\,242\,255\,0\.5\)\]) { background-color: rgb(139 92 246 / 0.18); }
 .dark :is(.bg-\[\#ffdcc5\], .bg-\[rgba\(255\,220\,197\,0\.4\)\], .bg-\[rgba\(255\,220\,197\,0\.6\)\]) { background-color: rgb(239 137 51 / 0.16); }
 .dark :is(.bg-amber-100, .bg-amber-200, .bg-\[rgba\(254\,243\,199\,0\.8\)\], .bg-\[rgba\(254\,243\,199\,0\.9\)\], .bg-\[rgba\(255\,251\,235\,0\.7\)\], .bg-\[rgba\(253\,230\,138\,0\.7\)\]) { background-color: rgb(245 158 11 / 0.15); }
-/* Solid icon dots (e.g. #6ffbbe) stay bright; just soften them a touch */
-.dark .bg-\[\#6ffbbe\] { background-color: #3fd89a; }
+/* Solid icon dots (e.g. #ffe3d3) stay bright; just soften them a touch */
+.dark .bg-\[\#ffe3d3\] { background-color: #3fd89a; }
 
 /* Text */
 .dark :is(.text-ink, .text-slate-900, .text-slate-800, .text-\[\#111c2d\], .text-\[\#0f172a\]) { color: var(--d-text); }
-.dark :is(.text-\[\#3c4a42\], .text-slate-700, .text-slate-600) { color: var(--d-muted); }
-.dark :is(.text-\[\#6c7a71\], .text-slate-500, .text-slate-400) { color: var(--d-faint); }
-.dark :is(.text-\[\#006c49\], .text-brand-deep, .text-brand-ink, .text-\[\#005236\], .text-\[\#064e3b\], .text-\[\#065f46\]) { color: var(--d-green); }
-.dark :is(.text-\[\#23005c\], .text-\[\#6b38d4\], .text-indigo-800) { color: var(--d-violet); }
+.dark :is(.text-\[\#3f4a4b\], .text-slate-700, .text-slate-600) { color: var(--d-muted); }
+.dark :is(.text-\[\#6f7472\], .text-slate-500, .text-slate-400) { color: var(--d-faint); }
+.dark :is(.text-\[\#13707e\], .text-brand-deep, .text-brand-ink, .text-\[\#0b4a54\], .text-\[\#0e5560\], .text-\[\#0e5560\]) { color: var(--d-green); }
+.dark :is(.text-\[\#7a3412\], .text-\[\#d9652c\], .text-indigo-800) { color: var(--d-violet); }
 .dark :is(.text-\[\#944a00\], .text-\[\#5c2c00\], .text-\[\#713700\], .text-\[\#301400\], .text-\[\#78350f\], .text-amber-700, .text-amber-800) { color: var(--d-orange); }
 /* Dark text that sits on a bright solid dot keeps its contrast */
-.dark .bg-\[\#6ffbbe\] .text-\[\#002113\], .dark .bg-\[\#6ffbbe\].text-\[\#002113\] { color: #002113; }
+.dark .bg-\[\#ffe3d3\] .text-\[\#0b4a54\], .dark .bg-\[\#ffe3d3\].text-\[\#0b4a54\] { color: #0b4a54; }
 
 /* Borders, dividers, focus: every pastel border collapses to one hairline; accent borders are re-added below */
 .dark :is([class~='border'], [class~='border-2'], [class~='border-b'], [class~='border-t']) { border-color: var(--d-line); }
-.dark :is(.border-\[\#006c49\], .border-brand) { border-color: #10b981; }
+.dark :is(.border-\[\#13707e\], .border-brand) { border-color: #1a8a99; }
 .dark :is(.border-amber-400, .border-amber-300) { border-color: rgb(245 158 11 / 0.6); }
-.dark :is(.border-mint, .border-slate-200, .border-\[\#dee8ff\], .border-emerald-200, .border-indigo-100, .border-amber-200, .border-\[rgba\(167\,243\,208\,0\.6\)\], .border-\[rgba\(167\,243\,208\,0\.7\)\], .border-\[rgba\(167\,243\,208\,0\.8\)\], .border-\[rgba\(187\,202\,191\,0\.3\)\], .border-white\/60, .border-white\/80) { border-color: var(--d-line); }
-.dark .divide-\[\#f0f3ff\] > :not(:last-child) { border-color: var(--d-line); }
+.dark :is(.border-mint, .border-slate-200, .border-\[\#e7efee\], .border-emerald-200, .border-indigo-100, .border-amber-200, .border-\[rgba\(167\,243\,208\,0\.6\)\], .border-\[rgba\(167\,243\,208\,0\.7\)\], .border-\[rgba\(167\,243\,208\,0\.8\)\], .border-\[rgba\(187\,202\,191\,0\.3\)\], .border-white\/60, .border-white\/80) { border-color: var(--d-line); }
+.dark .divide-\[\#f3f6f5\] > :not(:last-child) { border-color: var(--d-line); }
 .dark .border-\[rgba\(110\,231\,183\,0\.8\)\] { border-color: rgb(16 185 129 / 0.35); }
 
 /* Light-mode pastel shadows read as grey haze on dark; replace with a soft black lift */
@@ -64,8 +64,8 @@ html.dark body { background: var(--d-bg); color: var(--d-text); }
 
 /* Hero / gradient cards: a quiet brand glow instead of pastel */
 .dark .hero-card { background-image: radial-gradient(120% 90% at 0% 0%, rgb(16 185 129 / 0.22), transparent 60%), radial-gradient(90% 80% at 100% 100%, rgb(245 158 11 / 0.12), transparent 60%) !important; background-color: var(--d-surface); }
-.dark :is(.from-\[\#d1fae5\], .from-\[\#e9ddff\], .from-mint, .from-amber-50, .from-emerald-50) { --tw-gradient-from: var(--d-surface); }
-.dark :is(.to-\[\#d1fae5\], .to-\[\#fffbeb\], .to-amber-100, .to-orange-50, .to-teal-50, .via-white, .via-\[\#f0fdfa\], .via-\[\#f9f9ff\]) { --tw-gradient-to: var(--d-surface); --tw-gradient-via: var(--d-surface); }
+.dark :is(.from-\[\#e3f2f1\], .from-\[\#ffece1\], .from-mint, .from-amber-50, .from-emerald-50) { --tw-gradient-from: var(--d-surface); }
+.dark :is(.to-\[\#e3f2f1\], .to-\[\#fffbeb\], .to-amber-100, .to-orange-50, .to-teal-50, .via-white, .via-\[\#f0fdfa\], .via-\[\#fbf8f3\]) { --tw-gradient-to: var(--d-surface); --tw-gradient-via: var(--d-surface); }
 /* Decorative blurred blobs are too loud on dark */
 .dark :is([class~='blur-\[40px\]'], [class~='blur-\[24px\]']) { opacity: 0.25; }
 

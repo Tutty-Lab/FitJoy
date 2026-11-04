@@ -21,7 +21,7 @@ import icLock from '../../assets/workouts/d-lock.svg'
 import icPrev from '../../assets/workouts/d-prev.svg'
 import icNext from '../../assets/workouts/d-next.svg'
 
-const stepColors = ['bg-[#6ffbbe] text-[#002113]', 'bg-[#e9ddff] text-[#23005c]', 'bg-[#ffdcc5] text-[#301400]', 'bg-[#d8e3fb] text-ink']
+const stepColors = ['bg-[#ffe3d3] text-[#0b4a54]', 'bg-[#ffece1] text-[#7a3412]', 'bg-[#ffdcc5] text-[#301400]', 'bg-[#e7efee] text-ink']
 
 export default function WorkoutDetail() {
   const navigate = useNavigate()
@@ -55,16 +55,16 @@ export default function WorkoutDetail() {
   }
 
   return (
-    <div className="mx-auto min-h-dvh max-w-[440px] bg-[#f9f9ff]">
-      <header className="sticky top-0 z-20 bg-[rgba(249,249,255,0.8)] pt-[env(safe-area-inset-top)] shadow-[0_1px_8px_rgba(0,0,0,0.04)] backdrop-blur-[24px]">
+    <div className="mx-auto min-h-dvh max-w-[440px] bg-[#fbf8f3]">
+      <header className="sticky top-0 z-20 bg-[rgba(251,248,243,0.8)] pt-[env(safe-area-inset-top)] shadow-[0_1px_8px_rgba(0,0,0,0.04)] backdrop-blur-[24px]">
         <div className="flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-1">
             <button aria-label="Go back" onClick={() => navigate('/workouts')} className="flex size-11 items-center justify-center rounded-full">
               <img src={icBack} alt="" className="size-4" />
             </button>
-            <h1 className="text-[20px] leading-7 font-bold">Workout Details</h1>
+            <h1 className="text-[20px] leading-7 font-bold">Lesson</h1>
           </div>
-          <Link to="/profile" aria-label="Profile" className="flex size-8 items-center justify-center rounded-full bg-[#006c49]">
+          <Link to="/profile" aria-label="Profile" className="flex size-8 items-center justify-center rounded-full bg-[#13707e]">
             <img src={icUser} alt="" className="size-3" />
           </Link>
         </div>
@@ -85,32 +85,18 @@ export default function WorkoutDetail() {
 
         <div className="flex flex-col gap-1">
           <h2 className="pt-1.5 text-2xl leading-8 font-bold tracking-[-0.24px]">Day {w.day}: {w.title}</h2>
-          <p className="text-sm leading-5 text-[#3c4a42]">{w.blurb}</p>
+          <p className="text-sm leading-5 text-[#3f4a4b]">{w.blurb}</p>
         </div>
 
-        <div className="flex gap-2">
-          {[
-            { icon: icTimer, w: 15, h: 17.5, v: String(w.mins), l: 'mins', c: '' },
-            { icon: icFlame, w: 13.333, h: 15, v: `~${w.kcal}`, l: 'kcal', c: 'text-[#944a00]' },
-            { icon: icSpeed, w: 16.647, h: 13.333, v: w.intensity, l: 'Intensity', c: 'text-[#006c49]' },
-            { icon: icList, w: 15, h: 13.333, v: String(w.moves), l: 'moves', c: 'text-[#6b38d4]' },
-          ].map(p => (
-            <div key={p.l} className="flex flex-1 flex-col items-center justify-center rounded-[32px] bg-white p-2.5 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
-              <img src={p.icon} alt="" className="mb-0.5" style={{ width: p.w, height: p.h }} />
-              <span className={`text-base leading-4 font-extrabold tracking-[0.16px] ${p.c}`}>{p.v}</span>
-              <span className="pt-0.5 text-[10px] leading-[15px] text-[#3c4a42]">{p.l}</span>
-            </div>
-          ))}
-        </div>
 
         <div className="flex gap-3 rounded-[32px] bg-white p-4 shadow-md">
           <div className="relative size-12 shrink-0 self-start">
-            <span className="flex size-12 items-center justify-center rounded-full bg-[#6ffbbe] text-2xl shadow-inner">🌱</span>
+            <span className="flex size-12 items-center justify-center rounded-full bg-[#ffe3d3] text-2xl shadow-inner">🌱</span>
             <span className="absolute -right-1 -bottom-1 flex size-5 items-center justify-center rounded-full bg-[#ef8933] text-[10px]">✨</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-sm leading-[18px] font-semibold text-[#006c49]">
-              Joy Sprout <span className="text-xs font-bold tracking-[0.48px] text-[#3c4a42]">• FitJoy Coach</span>
+            <span className="text-sm leading-[18px] font-semibold text-[#13707e]">
+              Joy Sprout <span className="text-xs font-bold tracking-[0.48px] text-[#3f4a4b]">• FitJoy Coach</span>
             </span>
             <p className="text-sm leading-[22.75px]">“Coach Tip: Maintain a steady breath and never overstrain. With every exhale, let tension melt away. You're doing amazing! 🌱✨”</p>
           </div>
@@ -119,18 +105,17 @@ export default function WorkoutDetail() {
         <section className="flex flex-col gap-3 pt-2">
           <div className="flex items-center justify-between">
             <h3 className="text-[20px] leading-7 font-bold">Step-by-Step Routine</h3>
-            <span className="rounded-full bg-[rgba(111,251,190,0.4)] px-2.5 py-1 text-xs leading-4 font-bold tracking-[0.48px] text-[#006c49]">{w.steps.length} Curated Steps</span>
           </div>
           {w.steps.map((s, i) => (
             <div key={s.name} className="flex items-center gap-3.5 rounded-[32px] bg-white p-3.5 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
               <span className={`flex size-10 shrink-0 items-center justify-center rounded-full text-base leading-5 font-bold ${stepColors[i % 4]}`}>{i + 1}</span>
               <div className="min-w-0 flex-1">
                 <h4 className="text-sm leading-[18px] font-semibold">{s.name}</h4>
-                <span className="flex items-center gap-1 text-sm leading-5 text-[#3c4a42]">
+                <span className="flex items-center gap-1 text-sm leading-5 text-[#3f4a4b]">
                   <img src={icClock} alt="" style={{ width: 10.5, height: 12.25 }} />{s.mins} mins • {s.note}
                 </span>
               </div>
-              <button aria-label={`Play step ${i + 1}`} onClick={start} className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#dee8ff]">
+              <button aria-label={`Play step ${i + 1}`} onClick={start} className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#e7efee]">
                 <img src={icPlayCircle} alt="" className="size-[16.667px]" />
               </button>
             </div>
@@ -141,7 +126,7 @@ export default function WorkoutDetail() {
           <button
             onClick={finish}
             disabled={!finished && !isDone}
-            className="rounded-full bg-brand px-6 py-4 text-base leading-5 font-bold tracking-[0.16px] text-[#00422b] shadow-[0_10px_15px_-3px_rgba(16,185,129,0.3)] disabled:opacity-60"
+            className="rounded-full bg-brand px-6 py-4 text-base leading-5 font-bold tracking-[0.16px] text-[#00422b] shadow-[0_10px_15px_-3px_rgba(19,112,126,0.3)] disabled:opacity-60"
           >
             {finished ? `Complete Day ${w.day} ✓` : `Keep going… ${Math.round(watched * 100)}% watched`}
           </button>
@@ -152,7 +137,7 @@ export default function WorkoutDetail() {
             aria-label="Previous workout"
             disabled={w.day === 1}
             onClick={() => navigate(`/workouts/${w.day - 1}`)}
-            className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#dee8ff] disabled:opacity-40"
+            className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#e7efee] disabled:opacity-40"
           >
             <img src={icPrev} alt="" style={{ width: 5.55, height: 9 }} />
           </button>
@@ -166,7 +151,7 @@ export default function WorkoutDetail() {
             aria-label="Next workout"
             disabled={w.day === 22 || statusOf(w.day + 1) === 'locked'}
             onClick={() => navigate(`/workouts/${w.day + 1}`)}
-            className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#dee8ff] disabled:opacity-40"
+            className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#e7efee] disabled:opacity-40"
           >
             <img src={icNext} alt="" style={{ width: 5.55, height: 9 }} />
           </button>
@@ -201,9 +186,9 @@ export default function WorkoutDetail() {
                         setPicker(false)
                         navigate(`/workouts/${x.day}`)
                       }}
-                      className={`flex items-center gap-3 rounded-2xl px-3 py-2.5 text-left disabled:opacity-45 ${cur ? 'bg-[rgba(111,251,190,0.3)] ring-2 ring-[#006c49]' : 'bg-[#f0f3ff]'}`}
+                      className={`flex items-center gap-3 rounded-2xl px-3 py-2.5 text-left disabled:opacity-45 ${cur ? 'bg-[rgba(255,227,211,0.3)] ring-2 ring-[#13707e]' : 'bg-[#f3f6f5]'}`}
                     >
-                      <span className="w-12 shrink-0 text-xs leading-4 font-bold text-[#6c7a71]">Day {x.day}</span>
+                      <span className="w-12 shrink-0 text-xs leading-4 font-bold text-[#6f7472]">Day {x.day}</span>
                       <span className="min-w-0 flex-1 truncate text-sm leading-5 font-semibold">{x.title}</span>
                       {locked ? <img src={icLock} alt="" style={{ width: 10.667, height: 14 }} /> : st === 'completed' ? <img src={icDone} alt="" className="size-[13.333px]" /> : <img src={icCurrent} alt="" className="size-[15px]" />}
                     </button>

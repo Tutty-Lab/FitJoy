@@ -101,10 +101,10 @@ const overrides = readOverrides()
 export const workouts: Workout[] = baseWorkouts.map(w => ({ ...w, ...overrides[w.day] }))
 
 export const categoryColor: Record<Category, string> = {
-  'Warm-up': 'text-[#006c49]',
-  'Core & Cardio': 'text-[#6b38d4]',
+  'Warm-up': 'text-[#13707e]',
+  'Core & Cardio': 'text-[#d9652c]',
   'Fat Burn': 'text-[#944a00]',
-  Recovery: 'text-[#3c4a42]',
+  Recovery: 'text-[#3f4a4b]',
 }
 
 export const pad = (n: number) => String(n).padStart(2, '0')

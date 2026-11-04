@@ -22,6 +22,8 @@ export type Profile = {
   history?: Measurement[]
   photos?: { before?: string; after?: string }
   role?: 'user' | 'admin'
+  checks?: { start?: import('./checks').Check; end?: import('./checks').Check }
+  daily?: Record<string, boolean[]>
 }
 
 export type Measurement = { date: string; weight: number; waist: number; hip: number }

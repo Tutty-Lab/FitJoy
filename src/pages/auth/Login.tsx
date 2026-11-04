@@ -27,17 +27,17 @@ export default function Login() {
     const res = await signIn(email, password)
     setBusy(false)
     if (!res.ok) return setError(res.error)
-    navigate(loadProfile()?.onboarded ? '/' : '/onboarding/1')
+    navigate(loadProfile()?.checks?.start ? '/' : '/check/start')
   }
 
   return (
-    <div className="stagger mx-auto min-h-dvh max-w-[440px] bg-[#f9f9ff] px-4 pt-[calc(env(safe-area-inset-top)+64px)] pb-9">
-      <section className="relative mb-4 flex flex-col gap-2 overflow-hidden rounded-[32px] bg-[#f0f3ff] p-4 shadow-sm">
-        <div className="absolute -top-8 -right-8 size-36 rounded-full bg-[#6ffbbe] opacity-40 blur-[40px]" />
-        <div className="absolute -bottom-6 -left-6 size-32 rounded-full bg-[#e9ddff] opacity-30 blur-[24px]" />
+    <div className="stagger mx-auto min-h-dvh max-w-[440px] bg-[#fbf8f3] px-4 pt-[calc(env(safe-area-inset-top)+64px)] pb-9">
+      <section className="relative mb-4 flex flex-col gap-2 overflow-hidden rounded-[32px] bg-[#f3f6f5] p-4 shadow-sm">
+        <div className="absolute -top-8 -right-8 size-36 rounded-full bg-[#ffe3d3] opacity-40 blur-[40px]" />
+        <div className="absolute -bottom-6 -left-6 size-32 rounded-full bg-[#ffece1] opacity-30 blur-[24px]" />
         <div className="relative flex items-center gap-2">
           <div className="flex min-w-0 flex-1 flex-col items-start gap-1 pt-1 pr-2">
-            <span className="rounded-full bg-[rgba(78,222,163,0.3)] px-2 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#005236]">Joy Sprout • Vibe Buddy</span>
+            <span className="rounded-full bg-[rgba(238,122,63,0.3)] px-2 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#0b4a54]">Joy Sprout • Vibe Buddy</span>
             <h1 className="pt-0.5 text-2xl leading-8 font-bold tracking-[-0.6px]">Start your healthy journey!</h1>
           </div>
           <div className="float relative size-24 shrink-0 overflow-hidden rounded-2xl bg-white p-1.5 shadow-md">
@@ -53,7 +53,7 @@ export default function Login() {
         <AuthTabs active="signin" />
       </div>
 
-      <form onSubmit={submit} className="flex flex-col gap-4 rounded-[32px] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(207,218,242,0.4),0_8px_10px_-6px_rgba(207,218,242,0.4)]">
+      <form onSubmit={submit} className="flex flex-col gap-4 rounded-[32px] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(200,220,218,0.4),0_8px_10px_-6px_rgba(200,220,218,0.4)]">
         <div className="flex flex-col gap-1.5">
           <span className="relative">
             <input
@@ -63,7 +63,7 @@ export default function Login() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="Email" aria-label="Email"
-              className="h-[52px] w-full rounded-2xl bg-[#f0f3ff] pr-12 pl-4 text-base outline-none focus:ring-2 focus:ring-brand"
+              className="h-[52px] w-full rounded-2xl bg-[#f3f6f5] pr-12 pl-4 text-base outline-none focus:ring-2 focus:ring-brand"
             />
             {email && (
               <button type="button" aria-label="Clear email" onClick={() => setEmail('')} className="absolute top-1/2 right-3.5 -translate-y-1/2 p-1">
@@ -84,7 +84,7 @@ export default function Login() {
               aria-label="Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="h-[52px] w-full rounded-2xl bg-[#f0f3ff] pr-12 pl-4 text-base tracking-[0.8px] outline-none focus:ring-2 focus:ring-brand"
+              className="h-[52px] w-full rounded-2xl bg-[#f3f6f5] pr-12 pl-4 text-base tracking-[0.8px] outline-none focus:ring-2 focus:ring-brand"
             />
             <button type="button" aria-label={showPw ? 'Hide password' : 'Show password'} onClick={() => setShowPw(v => !v)} className="absolute top-1/2 right-3.5 -translate-y-1/2 p-1">
               <img src={icEye} alt="" style={{ width: 18.333, height: 12.5 }} />
@@ -94,17 +94,17 @@ export default function Login() {
 
         <label className="flex cursor-pointer items-center gap-2.5 pt-1">
           <input type="checkbox" checked={remember} onChange={e => setRemember(e.target.checked)} className="sr-only" />
-          <span className={`flex size-6 items-center justify-center rounded-full shadow-inner ${remember ? 'bg-brand' : 'border-2 border-[#dee8ff] bg-white'}`}>
+          <span className={`flex size-6 items-center justify-center rounded-full shadow-inner ${remember ? 'bg-brand' : 'border-2 border-[#e7efee] bg-white'}`}>
             {remember && <img src={icCheck} alt="" style={{ width: 10.867, height: 8.017 }} />}
           </span>
-          <span className="text-sm leading-[18px] font-semibold text-[#3c4a42]">Remember me</span>
+          <span className="text-sm leading-[18px] font-semibold text-[#3f4a4b]">Remember me</span>
         </label>
 
         {error && <p role="alert" className="text-sm text-[#ba1a1a]">{error}</p>}
         <button
           type="submit"
           disabled={busy}
-          className="mt-1 flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-base leading-5 font-bold tracking-[0.16px] text-white shadow-[0_10px_15px_-3px_rgba(16,185,129,0.3),0_4px_6px_-4px_rgba(16,185,129,0.3)] active:scale-[0.98]"
+          className="mt-1 flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-base leading-5 font-bold tracking-[0.16px] text-white shadow-[0_10px_15px_-3px_rgba(19,112,126,0.3),0_4px_6px_-4px_rgba(19,112,126,0.3)] active:scale-[0.98]"
         >
           Log In to FitJoy
           <img src={icArrow} alt="" className="size-[13.333px]" />
