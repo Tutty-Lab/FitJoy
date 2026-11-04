@@ -14,6 +14,7 @@ import Reminders from './pages/Reminders'
 import HealthProfile from './pages/HealthProfile'
 import Results from './pages/Results'
 import Celebration from './pages/workouts/Celebration'
+import Privacy from './pages/Privacy'
 import { loadProfile } from './lib/profile'
 import { useReminderScheduler } from './lib/reminders'
 
@@ -38,6 +39,7 @@ export default function App() {
       <Route path="/admin/*" element={<Suspense fallback={null}><AdminApp /></Suspense>} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/privacy" element={<Privacy />} />
       <Route element={<RequireAuth />}>
         <Route path="/onboarding/1" element={<Step1Goals />} />
         <Route path="/onboarding/2" element={<Step2Measurements />} />

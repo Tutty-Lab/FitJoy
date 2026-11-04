@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Switch } from '../components/shared'
 import { loadProfile, saveProfile } from '../lib/profile'
-import { signOutEverywhere } from '../services/auth'
+import { deleteAccount, signOutEverywhere } from '../services/auth'
 import { applyTheme } from '../lib/theme'
 import { useCompleted } from '../lib/progress'
 import avatar from '../assets/profile/avatar.png'
@@ -84,6 +84,14 @@ export default function Profile() {
     navigate('/login', { replace: true })
   }
 
+  async function removeAccount() {
+    if (!window.confirm('Delete your FitJoy account and all progress? This cannot be undone.')) return
+    const r = await deleteAccount()
+    if (!r.ok) return window.alert(r.error)
+    applyTheme(false)
+    navigate('/signup', { replace: true })
+  }
+
   return (
     <div className="stagger flex flex-col gap-6 bg-[#f9f9ff] px-4 pt-2 pb-6">
       <section className="relative overflow-hidden rounded-[48px] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(216,227,251,0.4),0_8px_10px_-6px_rgba(216,227,251,0.4)]">
@@ -161,13 +169,16 @@ export default function Profile() {
 
         <Group title="Support & Data">
           <Row onClick={backup} icon={<img src={iBackup} alt="" style={{ width: 16.667, height: 13.333 }} />} iconBg="bg-[#e7eeff]" title="Backup Health Data" />
-          <Row icon={<img src={iInfo} alt="" className="size-[16.667px]" />} iconBg="bg-[#e7eeff]" title="About FitJoy PWA" />
+          <Row to="/privacy" icon={<img src={iInfo} alt="" className="size-[16.667px]" />} iconBg="bg-[#e7eeff]" title="Privacy Policy" />
         </Group>
       </div>
 
-      <div className="flex justify-center pt-2 pb-4">
+      <div className="flex flex-col items-center gap-1 pt-2 pb-4">
         <button onClick={logout} className="flex items-center gap-1 rounded-full px-6 py-2.5 text-sm leading-[18px] font-bold text-[#ba1a1a]">
           <img src={iLogout} alt="" className="size-[15px]" />Log Out
+        </button>
+        <button onClick={removeAccount} className="rounded-full px-6 py-2 text-xs leading-4 font-medium text-[#6c7a71] underline">
+          Delete account
         </button>
       </div>
     </div>

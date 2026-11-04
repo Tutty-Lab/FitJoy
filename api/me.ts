@@ -14,6 +14,10 @@ export default route(
       const { name, data } = body<{ name: string; data: object }>(req)
       await sql`update users set name = ${name ?? ''}, data = ${JSON.stringify(data ?? {})}::jsonb, updated_at = now() where id = ${s!.sub}`
     },
+    // Permanent account deletion (App Store guideline 5.1.1(v)); progress rows cascade.
+    async DELETE(_req, _res, s) {
+      await sql`delete from users where id = ${s!.sub}`
+    },
   },
   { auth: 'user' },
 )

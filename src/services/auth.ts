@@ -1,4 +1,4 @@
-import { api, apiEnabled, setToken } from '../lib/api'
+import { api, apiEnabled, getToken, setToken } from '../lib/api'
 import { saveProfile } from '../lib/profile'
 import { reloadProgress } from '../lib/progress'
 import { cacheUser, clearLocalUser, pullUser } from './remote'
@@ -38,6 +38,20 @@ export async function signUp(name: string, email: string, password: string): Pro
     cacheUser(r.user)
     reloadProgress()
     saveProfile({ name, email, onboarded: false })
+    return { ok: true }
+  } catch (e) {
+    return { ok: false, error: message(e) }
+  }
+}
+
+// Permanently deletes the account on the server (when signed in there), then this device's copy.
+export async function deleteAccount(): Promise<AuthResult> {
+  try {
+    if (apiEnabled && getToken()) await api('me', { method: 'DELETE' })
+    setToken(null)
+    clearLocalUser()
+    localStorage.removeItem('fitjoy.firedReminders')
+    reloadProgress()
     return { ok: true }
   } catch (e) {
     return { ok: false, error: message(e) }
