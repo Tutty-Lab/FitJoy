@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
-  appId: 'com.fitjoy.app',
+  appId: 'com.tuttylab.fitjoy',
   appName: 'FitJoy',
   webDir: 'dist',
 }

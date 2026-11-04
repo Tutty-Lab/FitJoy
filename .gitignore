@@ -8,3 +8,5 @@ android
 .env.local
 
 .vercel
+.env*.local
+*.local.txt

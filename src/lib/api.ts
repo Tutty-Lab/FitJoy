@@ -2,6 +2,9 @@
 // Set VITE_BACKEND=neon to use it; otherwise the app runs on the local (localStorage) adapter.
 export const apiEnabled = import.meta.env.VITE_BACKEND === 'neon'
 
+// Native builds (Capacitor) have no /api of their own, so they call the deployed API.
+const BASE = import.meta.env.VITE_API_URL ?? ''
+
 const TOKEN_KEY = 'fitjoy.token'
 
 export const getToken = () => localStorage.getItem(TOKEN_KEY)
@@ -15,7 +18,7 @@ export class ApiError extends Error {
 
 export async function api<T = unknown>(path: string, init: { method?: string; body?: unknown } = {}): Promise<T> {
   const token = getToken()
-  const res = await fetch(`/api/${path}`, {
+  const res = await fetch(`${BASE}/api/${path}`, {
     method: init.method ?? 'GET',
     headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) },
     body: init.body === undefined ? undefined : JSON.stringify(init.body),

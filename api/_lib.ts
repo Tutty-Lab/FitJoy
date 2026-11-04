@@ -42,11 +42,22 @@ export function readSession(req: VercelRequest): Session | null {
   return s.exp > Date.now() ? s : null
 }
 
+const NATIVE_ORIGINS = ['capacitor://localhost', 'http://localhost', 'https://localhost']
+
 type Handler = (req: VercelRequest, res: VercelResponse, session: Session | null) => Promise<unknown>
 
 // Wraps a handler with method routing, auth and uniform JSON errors.
 export function route(handlers: Partial<Record<string, Handler>>, opts: { auth?: 'user' | 'admin' } = {}) {
   return async (req: VercelRequest, res: VercelResponse) => {
+    // The iOS app (Capacitor WebView) calls the API cross-origin. Auth is a bearer token, not cookies.
+    const origin = req.headers.origin ?? ''
+    if (NATIVE_ORIGINS.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin)
+      res.setHeader('Vary', 'Origin')
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    }
+    if (req.method === 'OPTIONS') return res.status(204).end()
     const h = handlers[req.method ?? 'GET']
     if (!h) return res.status(405).json({ error: 'Method not allowed' })
     const session = readSession(req)
