@@ -73,7 +73,6 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <div className="min-w-0 flex-1">
               <h2 className="text-[22px] leading-[30.25px] font-black tracking-[-0.55px]">{hello}, {name}! {sun}</h2>
-              <p className="pt-1 text-xs leading-4 font-bold text-brand-ink">Clearer. Calmer. You.</p>
             </div>
             <div className="relative size-24 shrink-0">
               <img src={mascot} alt="Mascot" className="float relative size-24 object-contain" />
@@ -109,12 +108,6 @@ export default function Home() {
 
       {/* 3×1 minute */}
       <section className={`flex flex-col gap-3 ${card}`}>
-        <SectionHeader
-          icon={<Icon src={icBell} w={16.667} h={16.708} />}
-          iconBg="bg-mint"
-          title="3×1 minute a day"
-          right={null}
-        />
         <div className="flex flex-col gap-2">
           {slots.map((s, i) => (
             <button
@@ -137,16 +130,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Compare shortcut */}
-      <Link to="/compare" className={`flex items-center justify-between gap-3 ${card}`}>
-        <span className="flex items-center gap-3">
-          <span className="flex size-11 items-center justify-center rounded-full bg-purple-500 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
-            <Icon src={scBeforeAfter} w={16.667} h={15} />
-          </span>
-          <span className="block text-base leading-6 font-black text-slate-900">My balance check</span>
-        </span>
-        <span className="text-lg leading-none font-bold text-purple-500">›</span>
-      </Link>
     </div>
   )
 }
