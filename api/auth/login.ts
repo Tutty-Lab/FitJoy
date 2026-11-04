@@ -1,4 +1,4 @@
-import { body, issueToken, route, sql, verifyPassword } from '../_lib'
+import { body, issueToken, route, sql, verifyPassword } from '../_lib.js'
 
 export default route({
   async POST(req, res) {

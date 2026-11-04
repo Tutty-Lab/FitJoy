@@ -1,4 +1,4 @@
-import { route, sql } from '../_lib'
+import { route, sql } from '../_lib.js'
 
 // Every member with progress counts, for the admin console.
 export default route(

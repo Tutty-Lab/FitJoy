@@ -1,4 +1,4 @@
-import { body, route, sql } from './_lib'
+import { body, route, sql } from './_lib.js'
 
 export default route(
   {

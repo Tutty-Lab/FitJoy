@@ -1,4 +1,4 @@
-import { body, readSession, route, sql } from './_lib'
+import { body, readSession, route, sql } from './_lib.js'
 
 // GET is public (the app needs the catalog before sign-in); writes are admin-only.
 export default route({

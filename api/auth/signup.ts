@@ -1,4 +1,4 @@
-import { body, hashPassword, issueToken, route, sql } from '../_lib'
+import { body, hashPassword, issueToken, route, sql } from '../_lib.js'
 
 export default route({
   async POST(req, res) {

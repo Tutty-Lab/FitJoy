@@ -1,4 +1,4 @@
-import { body, route, sql } from './_lib'
+import { body, route, sql } from './_lib.js'
 
 // The signed-in user's profile and progress.
 export default route(
