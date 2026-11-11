@@ -8,7 +8,7 @@ export function devApi(): Plugin {
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         const url = new URL(req.url ?? '/', 'http://localhost')
-        const routes = ['auth/login', 'auth/signup', 'me', 'catalog', 'completions', 'admin/members', 'admin/licenses', 'admin/organizations', 'admin/audit', 'admin/video-upload', 'redeem']
+        const routes = ['auth/login', 'auth/signup', 'me', 'catalog', 'completions', 'admin/members', 'admin/licenses', 'admin/organizations', 'admin/audit', 'admin/video-upload', 'invites', 'redeem']
         const route = url.pathname.replace(/^\/api\//, '')
         if (!url.pathname.startsWith('/api/')) return next()
         if (!routes.includes(route)) { res.statusCode = 404; res.end(); return }

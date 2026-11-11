@@ -2,6 +2,7 @@ import { useState, type FormEvent, type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthTabs from './AuthTabs'
 import { signUp } from '../../services/auth'
+import { api } from '../../lib/api'
 import sprout from '../../assets/auth/sprout-signup.png'
 import icLeaf from '../../assets/auth/s-leaf.svg'
 import { ArrowRight, ChevronRight } from 'lucide-react'
@@ -54,6 +55,8 @@ export default function SignUp() {
     const res = await signUp(name.trim(), username, pw)
     setBusy(false)
     if (!res.ok) return setError(res.error)
+    const invite = new URLSearchParams(location.search).get('invite')
+    if (invite) { try { await api('redeem', { method: 'POST', body: { code: invite } }) } catch (e) { return setError(e instanceof Error ? e.message : 'Could not redeem invitation') } }
     navigate('/check/start')
   }
 

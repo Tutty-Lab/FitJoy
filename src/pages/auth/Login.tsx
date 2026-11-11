@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import AuthTabs from './AuthTabs'
 import { loadProfile } from '../../lib/profile'
 import { signIn } from '../../services/auth'
+import { api } from '../../lib/api'
 import sprout from '../../assets/auth/sprout-login.png'
 import icHeart from '../../assets/auth/l-heart.svg'
 import icClear from '../../assets/auth/l-clear.svg'
@@ -27,6 +28,8 @@ export default function Login() {
     const res = await signIn(username, password)
     setBusy(false)
     if (!res.ok) return setError(res.error)
+    const invite = new URLSearchParams(location.search).get('invite')
+    if (invite) { try { await api('redeem', { method: 'POST', body: { code: invite } }) } catch (e) { return setError(e instanceof Error ? e.message : 'Could not redeem invitation') } }
     const profile = loadProfile()
     navigate(profile?.role === 'admin' ? '/admin' : profile?.checks?.start ? '/' : '/check/start', { replace: true })
   }

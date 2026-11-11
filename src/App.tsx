@@ -14,6 +14,7 @@ import Reminders from './pages/Reminders'
 import Privacy from './pages/Privacy'
 import Activate from './pages/Activate'
 import { apiEnabled } from './lib/api'
+import JoinOrganization from './pages/JoinOrganization'
 import { loadProfile } from './lib/profile'
 import { useReminderScheduler } from './lib/reminders'
 
@@ -39,6 +40,7 @@ export default function App() {
       <Route path="/admin/*" element={<Suspense fallback={null}><AdminApp /></Suspense>} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/join/:orgId/:code" element={<JoinOrganization />} />
       <Route path="/privacy" element={<Privacy />} />
       <Route element={<RequireAuth />}>
         <Route path="/activate" element={<Activate />} />
