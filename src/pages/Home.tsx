@@ -5,7 +5,6 @@ import { loadProfile } from '../lib/profile'
 import { programDay, todayKey, toggleDaily } from '../lib/checks'
 import icBell from '../assets/home/c12.svg'
 import icMorning from '../assets/home/c13.svg'
-import icDone from '../assets/home/c14.svg'
 import icNoon from '../assets/home/c15.svg'
 import icNight from '../assets/home/c17.svg'
 import scBeforeAfter from '../assets/home/c26.svg'
@@ -112,6 +111,7 @@ export default function Home() {
           {slots.map((s, i) => (
             <button
               key={s.label}
+              aria-pressed={today[i]}
               onClick={() => setP(toggleDaily(i))}
               className={`flex items-center justify-between rounded-2xl border p-[11px] ${today[i] ? 'border-emerald-200 bg-emerald-50' : 'border-[rgba(226,232,240,0.8)] bg-white'}`}
             >
@@ -122,7 +122,7 @@ export default function Home() {
               <span className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[#6f7472]">1 min</span>
                 <span className={`flex size-7 items-center justify-center rounded-full border-2 ${today[i] ? 'border-brand-deep bg-brand-deep' : 'border-slate-300'}`}>
-                  {today[i] && <Icon src={icDone} w={11} h={8} />}
+                  {today[i] && <svg aria-hidden="true" viewBox="0 0 16 12" className="size-3.5 text-white"><path d="m2 6 4 4 8-8" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
                 </span>
               </span>
             </button>

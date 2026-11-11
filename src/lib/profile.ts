@@ -4,6 +4,8 @@ import { pushProfile } from '../services/remote'
 export type Profile = {
   name: string
   email: string
+  username?: string
+  access?: {active:boolean; source?:string; valid_until?:string|null; organization?:string|null}
   goal?: string
   activity?: string
   focus?: string[]

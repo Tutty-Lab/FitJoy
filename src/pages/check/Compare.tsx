@@ -24,7 +24,6 @@ export default function Compare() {
         </div>
       </div>
       {!start && <Link to="/check/start" className="flex h-14 items-center justify-center rounded-full bg-brand-deep font-bold text-white">Start check</Link>}
-      {start && !end && <p className="text-center text-sm text-[#6f7472]">After 22 days you take the check again – then both results appear here side by side.</p>}
       <SectionTitle>My results</SectionTitle>
       {tasks.map((t, i) => {
         const a = start?.entries[t.id] ?? emptyEntry()

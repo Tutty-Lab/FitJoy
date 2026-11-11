@@ -7,7 +7,6 @@ import icLeaf from '../../assets/auth/s-leaf.svg'
 import icChev from '../../assets/auth/s-chev.svg'
 import icUser from '../../assets/auth/s-user.svg'
 import icOk from '../../assets/auth/s-ok.svg'
-import icAt from '../../assets/auth/s-at.svg'
 import icVerified from '../../assets/auth/s-verified.svg'
 import icLock from '../../assets/auth/s-lock.svg'
 import icLockReset from '../../assets/auth/s-lockreset.svg'
@@ -33,16 +32,16 @@ const input = 'min-w-0 flex-1 bg-transparent px-3 py-2 text-base leading-6 outli
 export default function SignUp() {
   const navigate = useNavigate()
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [pw, setPw] = useState('')
   const [pw2, setPw2] = useState('')
   const [show, setShow] = useState(false)
   const [show2, setShow2] = useState(false)
   const [agree, setAgree] = useState(false)
 
-  const emailOk = /^\S+@\S+\.\S+$/.test(email)
+  const usernameOk = /^[a-zA-Z0-9._-]{3,30}$/.test(username.trim())
   const match = pw2.length > 0 && pw === pw2
-  const canSubmit = name.trim() && emailOk && pw.length > 0 && match && agree
+  const canSubmit = name.trim() && usernameOk && pw.length > 0 && match && agree
 
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
@@ -53,7 +52,7 @@ export default function SignUp() {
     if (!canSubmit || busy) return
     setBusy(true)
     setError('')
-    const res = await signUp(name.trim(), email, pw)
+    const res = await signUp(name.trim(), username, pw)
     setBusy(false)
     if (!res.ok) return setError(res.error)
     navigate('/check/start')
@@ -101,11 +100,11 @@ export default function SignUp() {
         </Field>
 
         <Field
-          label="Email Address"
-          icon={<img src={icAt} alt="" style={{ width: 24.667, height: 16.667 }} />}
-          trailing={emailOk ? <img src={icVerified} alt="" style={{ width: 18.333, height: 17.5 }} /> : null}
+          label="Username"
+          icon={<img src={icUser} alt="" style={{ width: 24.667, height: 16.667 }} />}
+          trailing={usernameOk ? <img src={icVerified} alt="" style={{ width: 18.333, height: 17.5 }} /> : null}
         >
-          <input className={input} type="email" value={email} onChange={e => setEmail(e.target.value)} autoComplete="email" required placeholder="Email" aria-label="Email" />
+          <input className={input} type="text" value={username} onChange={e => setUsername(e.target.value)} autoComplete="username" autoCapitalize="none" spellCheck={false} minLength={3} maxLength={30} pattern="[a-zA-Z0-9._\-]{3,30}" title="3-30 letters, numbers, dots, underscores or hyphens" required placeholder="Username" aria-label="Username" />
         </Field>
 
         <div className="flex flex-col gap-1">

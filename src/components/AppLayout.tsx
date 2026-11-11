@@ -26,7 +26,7 @@ export default function AppLayout() {
         <div className="relative flex h-[68px] items-center justify-around overflow-hidden rounded-[34px] border border-white/60 bg-white/35 px-1.5 shadow-[0_10px_30px_rgba(19,112,126,0.18),inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-1px_0_rgba(255,255,255,0.35)] backdrop-blur-[22px] backdrop-saturate-[1.8]">
           <span aria-hidden className="pointer-events-none absolute inset-x-6 top-0 h-1/2 rounded-b-full bg-gradient-to-b from-white/60 to-transparent" />
           {tabs.map(t => (
-            <NavLink key={t.to} to={t.to} end className="relative z-10 flex h-14 flex-1 flex-col items-center justify-center">
+            <NavLink key={t.to} to={t.to} end aria-label={t.label} className="relative z-10 flex h-14 flex-1 flex-col items-center justify-center">
               {({ isActive }) => (
                 <>
                   {isActive && (
@@ -44,7 +44,7 @@ export default function AppLayout() {
                     className="relative"
                     style={{ width: t.w, height: t.h }}
                   />
-                  <span className={`relative pt-1 text-[11px] leading-4 ${isActive ? 'font-black text-brand-deep' : 'font-semibold text-slate-600'}`}>
+                  <span className={isActive ? 'sr-only' : 'relative pt-1 text-[11px] leading-4 font-semibold text-slate-600'}>
                     {t.label}
                   </span>
                 </>

@@ -12,6 +12,8 @@ import Celebration from './pages/workouts/Celebration'
 import Profile from './pages/Profile'
 import Reminders from './pages/Reminders'
 import Privacy from './pages/Privacy'
+import Activate from './pages/Activate'
+import { apiEnabled } from './lib/api'
 import { loadProfile } from './lib/profile'
 import { useReminderScheduler } from './lib/reminders'
 
@@ -19,8 +21,9 @@ const AdminApp = lazy(() => import('./admin/AdminApp'))
 
 function RequireAuth({ onboarded }: { onboarded?: boolean }) {
   const p = loadProfile()
-  if (!p?.email) return <Navigate to="/login" replace />
-  if (onboarded && !p.checks?.start) return <Navigate to="/check/start" replace />
+  if (!p?.email && !p?.username) return <Navigate to="/login" replace />
+  if (apiEnabled && p.role !== 'admin' && !p.access?.active && !['/activate','/profile'].includes(window.location.pathname)) return <Navigate to="/activate" replace />
+  if (onboarded && window.location.pathname !== '/profile' && !p.checks?.start) return <Navigate to="/check/start" replace />
   return <Outlet />
 }
 
@@ -38,6 +41,7 @@ export default function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/privacy" element={<Privacy />} />
       <Route element={<RequireAuth />}>
+        <Route path="/activate" element={<Activate />} />
         <Route path="/check/:phase" element={<BalanceCheck />} />
       </Route>
       <Route element={<RequireAuth onboarded />}>

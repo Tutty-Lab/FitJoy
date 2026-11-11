@@ -12,7 +12,7 @@ import icArrow from '../../assets/auth/arrow.svg'
 
 export default function Login() {
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPw, setShowPw] = useState(false)
   const [remember, setRemember] = useState(true)
@@ -24,10 +24,11 @@ export default function Login() {
     e.preventDefault()
     setBusy(true)
     setError('')
-    const res = await signIn(email, password)
+    const res = await signIn(username, password)
     setBusy(false)
     if (!res.ok) return setError(res.error)
-    navigate(loadProfile()?.checks?.start ? '/' : '/check/start')
+    const profile = loadProfile()
+    navigate(profile?.role === 'admin' ? '/admin' : profile?.checks?.start ? '/' : '/check/start', { replace: true })
   }
 
   return (
@@ -57,16 +58,18 @@ export default function Login() {
         <div className="flex flex-col gap-1.5">
           <span className="relative">
             <input
-              type="email"
+              type="text"
               required
-              autoComplete="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="Email" aria-label="Email"
+              autoComplete="username"
+              autoCapitalize="none"
+              spellCheck={false}
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              placeholder="Username" aria-label="Username"
               className="h-[52px] w-full rounded-2xl bg-[#f3f6f5] pr-12 pl-4 text-base outline-none focus:ring-2 focus:ring-brand"
             />
-            {email && (
-              <button type="button" aria-label="Clear email" onClick={() => setEmail('')} className="absolute top-1/2 right-3.5 -translate-y-1/2 p-1">
+            {username && (
+              <button type="button" aria-label="Clear username" onClick={() => setUsername('')} className="absolute top-1/2 right-3.5 -translate-y-1/2 p-1">
                 <img src={icClear} alt="" className="size-[15px]" />
               </button>
             )}

@@ -16,7 +16,7 @@ export default function Privacy() {
     <SubPage title="Privacy Policy" back="/profile">
       <p className="text-xs text-[#6f7472]">Last updated: 5 November 2026 · Tutty Lab</p>
       <Block title="What we collect">
-        Your name, email and a hashed password for your account. The goals, body measurements, reminder times and
+        Your name, username (or email for existing accounts) and a hashed password for your account. The goals, body measurements, reminder times and
         workout progress you enter, so they sync between your devices. Before/after photos stay on your device and are
         never uploaded.
       </Block>

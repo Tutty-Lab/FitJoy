@@ -1,25 +1,29 @@
 import { api, apiEnabled, getToken, setToken } from '../lib/api'
 import { saveProfile } from '../lib/profile'
 import { reloadProgress } from '../lib/progress'
+import { applyTheme } from '../lib/theme'
 import { cacheUser, clearLocalUser, pullUser } from './remote'
 
-// Auth service. With the API: real email/password accounts stored in Neon. Without it: the local
-// MVP behaviour (any email signs in on this device).
+// Username/password accounts in Neon; legacy emails still work for sign-in.
 
 export type AuthResult = { ok: true } | { ok: false; error: string }
 type AuthResponse = { token: string; user: Parameters<typeof cacheUser>[0] }
 
 const message = (e: unknown) => (e instanceof Error ? e.message : 'Something went wrong')
 
-export async function signIn(email: string, password: string): Promise<AuthResult> {
+export async function signIn(username: string, password: string): Promise<AuthResult> {
   if (!apiEnabled) {
-    saveProfile({ email, name: email.split('@')[0] })
+    saveProfile({ username, email: '', name: username })
     return { ok: true }
   }
   try {
-    const r = await api<AuthResponse>('auth/login', { method: 'POST', body: { email, password } })
+    const r = await api<AuthResponse>('auth/login', { method: 'POST', body: { username, password } })
     setToken(r.token)
-    await pullUser()
+    if (!await pullUser()) {
+      setToken(null)
+      return { ok: false, error: 'Could not load your account. Please try again.' }
+    }
+    applyTheme()
     reloadProgress()
     return { ok: true }
   } catch (e) {
@@ -27,17 +31,17 @@ export async function signIn(email: string, password: string): Promise<AuthResul
   }
 }
 
-export async function signUp(name: string, email: string, password: string): Promise<AuthResult> {
+export async function signUp(name: string, username: string, password: string): Promise<AuthResult> {
   if (!apiEnabled) {
-    saveProfile({ name, email, onboarded: false })
+    saveProfile({ name, username: username.trim().toLowerCase(), email: '', onboarded: false })
     return { ok: true }
   }
   try {
-    const r = await api<AuthResponse>('auth/signup', { method: 'POST', body: { name, email, password } })
+    const r = await api<AuthResponse>('auth/signup', { method: 'POST', body: { name, username, password } })
     setToken(r.token)
     cacheUser(r.user)
     reloadProgress()
-    saveProfile({ name, email, onboarded: false })
+    saveProfile({ name, username: username.trim().toLowerCase(), email: '', onboarded: false })
     return { ok: true }
   } catch (e) {
     return { ok: false, error: message(e) }

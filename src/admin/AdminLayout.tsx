@@ -3,6 +3,7 @@ import { adminSignOut } from '../services/adminApi'
 import mascot from '../assets/home/mascot.png'
 
 const nav = [
+  { to: '/admin/licenses', label: 'Invitations', icon: '◇' },
   { to: '/admin', label: 'Dashboard', icon: '▦', end: true },
   { to: '/admin/users', label: 'Users', icon: '◉' },
   { to: '/admin/workouts', label: 'Workouts', icon: '▶' },
@@ -38,7 +39,7 @@ export default function AdminLayout() {
           <button
             onClick={async () => {
               await adminSignOut()
-              navigate('/admin/login', { replace: true })
+              navigate('/login', { replace: true })
             }}
             className="rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-[#ba1a1a] hover:bg-slate-100"
           >

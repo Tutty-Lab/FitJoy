@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react'
+import { LogOut, Trash2 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Switch } from '../components/shared'
 import { loadProfile, saveProfile } from '../lib/profile'
@@ -10,14 +11,12 @@ import sMins from '../assets/profile/s-mins.svg'
 import sKcal from '../assets/profile/s-kcal.svg'
 import iHealth from '../assets/profile/i-health.svg'
 import iGoal from '../assets/profile/i-goal.svg'
-import iClock from '../assets/profile/i-clock.svg'
 import iPhone from '../assets/profile/i-phone.svg'
 import iSound from '../assets/profile/i-sound.svg'
 import iLang from '../assets/profile/i-lang.svg'
 import iMoon from '../assets/profile/i-moon.svg'
 import iBackup from '../assets/profile/i-backup.svg'
 import iInfo from '../assets/profile/i-info.svg'
-import iLogout from '../assets/profile/i-logout.svg'
 import iTrophy from '../assets/profile/i-trophy.svg'
 import iFlame from '../assets/profile/i-flame.svg'
 import iStar from '../assets/profile/i-star.svg'
@@ -114,12 +113,10 @@ export default function Profile() {
             icon={<img src={iGoal} alt="" style={{ width: 12.5, height: 14.167 }} />}
             iconBg="bg-[rgba(255,227,211,0.3)]"
             title="Balance Check"
-            right={<span className="flex items-center gap-1"><span className="rounded-full bg-[#ffe3d3] px-2 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#0b4a54]">Active</span><Chevron /></span>}
           />
         </Group>
 
         <Group title="Notifications & PWA">
-          <Row to="/reminders" icon={<img src={iClock} alt="" className="size-[16.667px]" />} iconBg="bg-[rgba(255,236,225,0.3)]" title="Reminder Times" />
           <Row
             icon={<img src={iPhone} alt="" style={{ width: 12.5, height: 18.333 }} />}
             iconBg="bg-[rgba(255,236,225,0.3)]"
@@ -150,14 +147,20 @@ export default function Profile() {
         </Group>
       </div>
 
-      <div className="flex flex-col items-center gap-1 pt-2 pb-4">
-        <button onClick={logout} className="flex items-center gap-1 rounded-full px-6 py-2.5 text-sm leading-[18px] font-bold text-[#ba1a1a]">
-          <img src={iLogout} alt="" className="size-[15px]" />Log Out
-        </button>
-        <button onClick={removeAccount} className="rounded-full px-6 py-2 text-xs leading-4 font-medium text-[#6f7472] underline">
-          Delete account
-        </button>
-      </div>
+      <Group title="Account">
+        <Row
+          onClick={logout}
+          icon={<LogOut aria-hidden="true" className="size-4 text-[#ba1a1a] dark:text-red-300" />}
+          iconBg="bg-red-50 dark:bg-red-950/40"
+          title="Log Out"
+        />
+        <Row
+          onClick={removeAccount}
+          icon={<Trash2 aria-hidden="true" className="size-4 text-[#ba1a1a] dark:text-red-300" />}
+          iconBg="bg-red-50 dark:bg-red-950/40"
+          title="Delete account"
+        />
+      </Group>
     </div>
   )
 }

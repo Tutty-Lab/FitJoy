@@ -34,6 +34,12 @@
   --color-ink: #111c2d;
 }
 
+/* Reserve the scrollbar lane even on short pages so centered layouts stay put. */
+html {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
 /* Horizontal scrollers stay swipeable but hide their scrollbar */
 .overflow-x-auto {
   scrollbar-width: none;

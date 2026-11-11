@@ -60,9 +60,13 @@ export function route(handlers: Partial<Record<string, Handler>>, opts: { auth?:
     if (req.method === 'OPTIONS') return res.status(204).end()
     const h = handlers[req.method ?? 'GET']
     if (!h) return res.status(405).json({ error: 'Method not allowed' })
-    const session = readSession(req)
+    let session: Session | null
+    try { session = readSession(req) } catch { session = null }
     if (opts.auth && !session) return res.status(401).json({ error: 'Sign in required' })
-    if (opts.auth === 'admin' && session?.role !== 'admin') return res.status(403).json({ error: 'Admins only' })
+    if (opts.auth === 'admin') {
+      const [actor] = await sql`select role from users where id=${session!.sub}`
+      if (actor?.role !== 'admin') return res.status(403).json({ error: 'Admins only' })
+    }
     try {
       const out = await h(req, res, session)
       if (!res.headersSent) res.status(200).json(out ?? { ok: true })

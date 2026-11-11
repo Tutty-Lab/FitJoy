@@ -6,15 +6,15 @@
  */
 html.dark {
   color-scheme: dark;
-  --d-bg: #0a0f0d;
-  --d-surface: #121a16;
-  --d-raised: #19231e;
+  --d-bg: #10191e;
+  --d-surface: #19262d;
+  --d-raised: #22333c;
   --d-line: rgb(255 255 255 / 0.07);
-  --d-text: #ecf3ef;
-  --d-muted: #a3b3aa;
-  --d-faint: #6f8077;
-  --d-green: #5ee3a6;
-  --d-violet: #c4b1ff;
+  --d-text: #edf4f6;
+  --d-muted: #b6c7cf;
+  --d-faint: #9bb0bc;
+  --d-green: #80d4dc;
+  --d-violet: #ffb18b;
   --d-orange: #ffb877;
   --color-canvas: var(--d-bg);
   --color-ink: var(--d-text);
@@ -22,21 +22,21 @@ html.dark {
 html.dark body { background: var(--d-bg); color: var(--d-text); }
 
 /* Surfaces: cards sit one step above the page, inputs/pills one step above cards */
-.dark :is(.bg-white, .bg-canvas) { background-color: var(--d-surface); }
+.dark .bg-white { background-color: var(--d-surface); }
 .dark :is(.bg-\[\#fbf8f3\]) { background-color: var(--d-bg); }
 .dark :is(.bg-\[\#f3f6f5\], .bg-\[\#f3f6f5\], .bg-\[\#e7efee\], .bg-\[\#e7efee\], .bg-\[\#cfdaf2\], .bg-slate-50, .bg-slate-100, .bg-slate-200) { background-color: var(--d-raised); }
-.dark :is(.bg-white\/95, .bg-white\/90, .bg-white\/80) { background-color: rgb(18 26 22 / 0.9); }
-.dark :is(.bg-\[rgba\(249\,249\,255\,0\.8\)\], .bg-\[rgba\(244\,251\,247\,0\.9\)\]) { background-color: rgb(10 15 13 / 0.8); }
+.dark :is(.bg-white\/95, .bg-white\/90, .bg-white\/80) { background-color: rgb(25 38 45 / 0.9); }
+.dark :is(.bg-\[rgba\(249\,249\,255\,0\.8\)\], .bg-\[rgba\(244\,251\,247\,0\.9\)\]) { background-color: rgb(16 25 30 / 0.8); }
 .dark :is(.bg-white\/60, .bg-white\/40) { background-color: rgb(255 255 255 / 0.08); }
-.dark :is(.bg-white\/35, .bg-white\/30) { background-color: rgb(18 26 22 / 0.55); }
+.dark :is(.bg-white\/35, .bg-white\/30) { background-color: rgb(25 38 45 / 0.55); }
 
 /* Tints: same hue as light mode, as low-alpha washes so they glow instead of looking muddy */
-.dark :is(.bg-mint, .bg-emerald-50, .bg-\[rgba\(111\,251\,190\,0\.2\)\], .bg-\[rgba\(111\,251\,190\,0\.25\)\], .bg-\[rgba\(111\,251\,190\,0\.3\)\], .bg-\[rgba\(111\,251\,190\,0\.4\)\], .bg-\[rgba\(209\,250\,229\,0\.8\)\], .bg-\[rgba\(0\,108\,73\,0\.1\)\], .bg-\[rgba\(78\,222\,163\,0\.3\)\]) { background-color: rgb(16 185 129 / 0.16); }
-.dark :is(.bg-\[\#ffece1\], .bg-purple-100, .bg-indigo-100, .bg-\[rgba\(233\,221\,255\,0\.3\)\], .bg-\[rgba\(233\,221\,255\,0\.4\)\], .bg-\[rgba\(233\,221\,255\,0\.5\)\], .bg-\[rgba\(238\,242\,255\,0\.5\)\]) { background-color: rgb(139 92 246 / 0.18); }
+.dark :is(.bg-mint, .bg-emerald-50, .bg-\[rgba\(111\,251\,190\,0\.2\)\], .bg-\[rgba\(111\,251\,190\,0\.25\)\], .bg-\[rgba\(111\,251\,190\,0\.3\)\], .bg-\[rgba\(111\,251\,190\,0\.4\)\], .bg-\[rgba\(209\,250\,229\,0\.8\)\], .bg-\[rgba\(0\,108\,73\,0\.1\)\], .bg-\[rgba\(78\,222\,163\,0\.3\)\]) { background-color: rgb(67 183 196 / 0.16); }
+.dark :is(.bg-\[\#ffece1\], .bg-purple-100, .bg-indigo-100, .bg-\[rgba\(233\,221\,255\,0\.3\)\], .bg-\[rgba\(233\,221\,255\,0\.4\)\], .bg-\[rgba\(233\,221\,255\,0\.5\)\], .bg-\[rgba\(238\,242\,255\,0\.5\)\]) { background-color: rgb(238 122 63 / 0.18); }
 .dark :is(.bg-\[\#ffdcc5\], .bg-\[rgba\(255\,220\,197\,0\.4\)\], .bg-\[rgba\(255\,220\,197\,0\.6\)\]) { background-color: rgb(239 137 51 / 0.16); }
 .dark :is(.bg-amber-100, .bg-amber-200, .bg-\[rgba\(254\,243\,199\,0\.8\)\], .bg-\[rgba\(254\,243\,199\,0\.9\)\], .bg-\[rgba\(255\,251\,235\,0\.7\)\], .bg-\[rgba\(253\,230\,138\,0\.7\)\]) { background-color: rgb(245 158 11 / 0.15); }
 /* Solid icon dots (e.g. #ffe3d3) stay bright; just soften them a touch */
-.dark .bg-\[\#ffe3d3\] { background-color: #3fd89a; }
+.dark .bg-\[\#ffe3d3\] { background-color: #b5e4e8; }
 
 /* Text */
 .dark :is(.text-ink, .text-slate-900, .text-slate-800, .text-\[\#111c2d\], .text-\[\#0f172a\]) { color: var(--d-text); }
@@ -54,7 +54,7 @@ html.dark body { background: var(--d-bg); color: var(--d-text); }
 .dark :is(.border-amber-400, .border-amber-300) { border-color: rgb(245 158 11 / 0.6); }
 .dark :is(.border-mint, .border-slate-200, .border-\[\#e7efee\], .border-emerald-200, .border-indigo-100, .border-amber-200, .border-\[rgba\(167\,243\,208\,0\.6\)\], .border-\[rgba\(167\,243\,208\,0\.7\)\], .border-\[rgba\(167\,243\,208\,0\.8\)\], .border-\[rgba\(187\,202\,191\,0\.3\)\], .border-white\/60, .border-white\/80) { border-color: var(--d-line); }
 .dark .divide-\[\#f3f6f5\] > :not(:last-child) { border-color: var(--d-line); }
-.dark .border-\[rgba\(110\,231\,183\,0\.8\)\] { border-color: rgb(16 185 129 / 0.35); }
+.dark .border-\[rgba\(110\,231\,183\,0\.8\)\] { border-color: rgb(67 183 196 / 0.35); }
 
 /* Light-mode pastel shadows read as grey haze on dark; replace with a soft black lift */
 .dark :is(.shadow-sm, .shadow-md, .shadow-lg, .shadow-xl, [class*='shadow-\[0_20px_25px'], [class*='shadow-\[0_10px_25px'], [class*='shadow-\[0_10px_30px'], [class*='shadow-\[0_2px_12px'], [class*='shadow-\[0_1px_8px']) {
@@ -63,7 +63,7 @@ html.dark body { background: var(--d-bg); color: var(--d-text); }
 .dark [class*='drop-shadow-\[0_1px_1px'] { filter: none; }
 
 /* Hero / gradient cards: a quiet brand glow instead of pastel */
-.dark .hero-card { background-image: radial-gradient(120% 90% at 0% 0%, rgb(16 185 129 / 0.22), transparent 60%), radial-gradient(90% 80% at 100% 100%, rgb(245 158 11 / 0.12), transparent 60%) !important; background-color: var(--d-surface); }
+.dark .hero-card { background-image: radial-gradient(120% 90% at 0% 0%, rgb(67 183 196 / 0.22), transparent 60%), radial-gradient(90% 80% at 100% 100%, rgb(245 158 11 / 0.12), transparent 60%) !important; background-color: var(--d-surface); }
 .dark :is(.from-\[\#e3f2f1\], .from-\[\#ffece1\], .from-mint, .from-amber-50, .from-emerald-50) { --tw-gradient-from: var(--d-surface); }
 .dark :is(.to-\[\#e3f2f1\], .to-\[\#fffbeb\], .to-amber-100, .to-orange-50, .to-teal-50, .via-white, .via-\[\#f0fdfa\], .via-\[\#fbf8f3\]) { --tw-gradient-to: var(--d-surface); --tw-gradient-via: var(--d-surface); }
 /* Decorative blurred blobs are too loud on dark */
@@ -71,8 +71,8 @@ html.dark body { background: var(--d-bg); color: var(--d-text); }
 
 /* Floating glass tab bar */
 .dark nav [aria-hidden] { opacity: 0.08; }
-.dark nav .bg-white\/35 { background-color: rgb(18 26 22 / 0.6); }
-.dark nav .bg-white\/60 { background-color: rgb(16 185 129 / 0.18); border-color: rgb(94 227 166 / 0.3); box-shadow: none; }
+.dark nav .bg-white\/35 { background-color: rgb(25 38 45 / 0.6); }
+.dark nav .bg-white\/60 { background-color: rgb(67 183 196 / 0.18); border-color: rgb(128 212 220 / 0.3); box-shadow: none; }
 .dark nav img { filter: brightness(0) invert(0.85); }
 .dark nav [aria-current='page'] img { filter: none; }
 
@@ -85,3 +85,33 @@ html.dark body { background: var(--d-bg); color: var(--d-text); }
 /* Inputs */
 .dark :is(input, textarea, select) { color: var(--d-text); color-scheme: dark; }
 .dark input::placeholder { color: var(--d-faint); }
+
+/* Page canvas must stay consistent below short pages and behind the glass bar. */
+.dark .bg-canvas { background-color: var(--d-bg); }
+html.dark {
+  --background: var(--d-bg);
+  --foreground: var(--d-text);
+  --card: var(--d-surface);
+  --card-foreground: var(--d-text);
+  --popover: var(--d-surface);
+  --popover-foreground: var(--d-text);
+  --primary: #218896;
+  --primary-foreground: #fff;
+  --secondary: var(--d-raised);
+  --secondary-foreground: var(--d-text);
+  --muted: var(--d-raised);
+  --muted-foreground: var(--d-muted);
+  --accent: var(--d-raised);
+  --accent-foreground: var(--d-text);
+  --border: var(--d-line);
+  --input: #354a56;
+  --ring: #80d4dc;
+}
+.dark .subpage-header,
+.dark header[class*='251,248,243'] { background-color: rgb(16 25 30 / 0.9); }
+.dark :is(.text-\[\#151c27\], .text-\[\#111C2D\]) { color: var(--d-text); }
+.dark [data-slot='switch-thumb'] { background-color: #fff; }
+.dark [data-slot='switch'][data-unchecked] { background-color: #405660; }
+.dark nav [aria-current='page'] img { filter: brightness(0) saturate(100%) invert(85%) sepia(13%) saturate(1039%) hue-rotate(137deg); }
+.dark :is(.bg-\[\#c3d0ce\], .bg-\[\#e3f2f1\]) { background-color: var(--d-raised); }
+.dark img[src*='chevron'], .dark header img[src*='back'] { filter: brightness(0) invert(0.9); }

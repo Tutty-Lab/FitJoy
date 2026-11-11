@@ -6,7 +6,7 @@ import { api, apiEnabled, getToken, setToken } from '../lib/api'
 
 const KEYS = { profile: 'fitjoy.profile', completed: 'fitjoy.completed', dates: 'fitjoy.activeDates', catalog: 'fitjoy.catalog' }
 
-type ServerUser = { email: string; name: string; role: 'user' | 'admin'; data: Record<string, unknown> }
+type ServerUser = { access?: import('../lib/profile').Profile['access']; username?: string | null; email: string | null; name: string; role: 'user' | 'admin'; data: Record<string, unknown> }
 
 const signedIn = () => apiEnabled && !!getToken()
 
@@ -29,7 +29,7 @@ export async function pushCompletion(day: number, date: string) {
 // Writes a signed-in user's server state into the local cache.
 export function cacheUser(user: ServerUser, completed: number[] = [], dates: string[] = []) {
   const local = JSON.parse(localStorage.getItem(KEYS.profile) ?? '{}')
-  localStorage.setItem(KEYS.profile, JSON.stringify({ ...user.data, photos: local.photos, name: user.name, email: user.email, role: user.role }))
+  localStorage.setItem(KEYS.profile, JSON.stringify({ ...user.data, photos: local.photos, name: user.name, username: user.username ?? '', email: user.email ?? '', role: user.role, access: user.access }))
   localStorage.setItem(KEYS.completed, JSON.stringify(completed))
   localStorage.setItem(KEYS.dates, JSON.stringify(dates))
 }

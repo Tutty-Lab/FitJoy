@@ -31,7 +31,7 @@ export default function Users() {
         <input
           value={q}
           onChange={e => setQ(e.target.value)}
-          placeholder="Search name or email"
+          placeholder="Search name, username or email"
           aria-label="Search members"
           className="h-10 min-w-56 flex-1 rounded-full border border-slate-200 bg-white px-4 text-sm outline-none focus:ring-2 focus:ring-brand"
         />

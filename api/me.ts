@@ -1,14 +1,15 @@
+import { accessFor } from './_access.js'
 import { body, route, sql } from './_lib.js'
 
 // The signed-in user's profile and progress.
 export default route(
   {
     async GET(_req, res, s) {
-      const [user] = await sql`select email, name, role, data from users where id = ${s!.sub}`
+      const [user] = await sql`select username, email, name, role, data from users where id = ${s!.sub}`
       if (!user) return res.status(404).json({ error: 'Account not found' })
       const completed = await sql`select day from completions where user_id = ${s!.sub} order by day`
       const dates = await sql`select to_char(date, 'YYYY-MM-DD') as date from activity_days where user_id = ${s!.sub}`
-      return { user, completed: completed.map(r => r.day), dates: dates.map(r => r.date) }
+      return { user: {...user, access: await accessFor(s!.sub)}, completed: completed.map(r => r.day), dates: dates.map(r => r.date) }
     },
     async PUT(req, _res, s) {
       const { name, data } = body<{ name: string; data: object }>(req)

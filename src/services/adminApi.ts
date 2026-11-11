@@ -1,6 +1,6 @@
 import { loadProfile } from '../lib/profile'
 import { api, apiEnabled, setToken } from '../lib/api'
-import { signIn } from './auth'
+import { signIn, signOutEverywhere } from './auth'
 
 // Admin data service. With the API: real members. Without it: the device user plus generated
 // demo members, so the console has realistic numbers before a backend exists.
@@ -68,7 +68,7 @@ const demoMembers: Member[] = (() => {
 
 function deviceMember(): Member | null {
   const p = loadProfile()
-  if (!p?.email) return null
+  if (!p?.email && !p?.username) return null
   let completed: number[] = []
   let dates: string[] = []
   try {
@@ -80,8 +80,8 @@ function deviceMember(): Member | null {
   const sorted = [...dates].sort()
   return {
     id: 'device',
-    name: p.name || p.email,
-    email: p.email,
+    name: p.name || p.username || p.email,
+    email: p.username || p.email,
     goal: (p.goal as Member['goal']) ?? 'fat',
     joined: p.history?.[0]?.date ?? sorted[0] ?? iso(new Date()),
     lastActive: sorted[sorted.length - 1] ?? iso(new Date()),
@@ -155,7 +155,8 @@ export async function adminSignIn(passcodeOrEmail: string, password = ''): Promi
   return null
 }
 
-export const isAdmin = () => sessionStorage.getItem(SESSION_KEY) === '1' && (!apiEnabled || loadProfile()?.role === 'admin')
+export const isAdmin = () => apiEnabled ? loadProfile()?.role === 'admin' : sessionStorage.getItem(SESSION_KEY) === '1'
 export const adminSignOut = async () => {
+  await signOutEverywhere()
   sessionStorage.removeItem(SESSION_KEY)
 }

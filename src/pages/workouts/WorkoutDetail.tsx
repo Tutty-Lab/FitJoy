@@ -7,12 +7,6 @@ import { completeDay, useCompleted } from '../../lib/progress'
 import videoThumb from '../../assets/workouts/video-thumb.png'
 import icBack from '../../assets/onboarding/back.svg'
 import icUser from '../../assets/onboarding/user-sm.svg'
-import icTimer from '../../assets/workouts/d-timer.svg'
-import icFlame from '../../assets/workouts/d-flame.svg'
-import icSpeed from '../../assets/workouts/d-speed.svg'
-import icList from '../../assets/workouts/d-list.svg'
-import icClock from '../../assets/workouts/d-clock.svg'
-import icPlayCircle from '../../assets/workouts/d-playcircle.svg'
 import icCoach from '../../assets/workouts/d-coach.svg'
 import icSwitch from '../../assets/workouts/d-switch.svg'
 import icDone from '../../assets/workouts/d-done.svg'
@@ -21,7 +15,6 @@ import icLock from '../../assets/workouts/d-lock.svg'
 import icPrev from '../../assets/workouts/d-prev.svg'
 import icNext from '../../assets/workouts/d-next.svg'
 
-const stepColors = ['bg-[#ffe3d3] text-[#0b4a54]', 'bg-[#ffece1] text-[#7a3412]', 'bg-[#ffdcc5] text-[#301400]', 'bg-[#e7efee] text-ink']
 
 export default function WorkoutDetail() {
   const navigate = useNavigate()
@@ -44,10 +37,6 @@ export default function WorkoutDetail() {
   const isDone = completed.includes(w.day)
   // Watching 90% of the video counts as finishing the workout.
   const finished = watched >= 0.9
-
-  function start() {
-    player.current?.play()
-  }
 
   function finish() {
     completeDay(w!.day)
@@ -102,31 +91,11 @@ export default function WorkoutDetail() {
           </div>
         </div>
 
-        <section className="flex flex-col gap-3 pt-2">
-          <div className="flex items-center justify-between">
-            <h3 className="text-[20px] leading-7 font-bold">Step-by-Step Routine</h3>
-          </div>
-          {w.steps.map((s, i) => (
-            <div key={s.name} className="flex items-center gap-3.5 rounded-[32px] bg-white p-3.5 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
-              <span className={`flex size-10 shrink-0 items-center justify-center rounded-full text-base leading-5 font-bold ${stepColors[i % 4]}`}>{i + 1}</span>
-              <div className="min-w-0 flex-1">
-                <h4 className="text-sm leading-[18px] font-semibold">{s.name}</h4>
-                <span className="flex items-center gap-1 text-sm leading-5 text-[#3f4a4b]">
-                  <img src={icClock} alt="" style={{ width: 10.5, height: 12.25 }} />{s.mins} mins • {s.note}
-                </span>
-              </div>
-              <button aria-label={`Play step ${i + 1}`} onClick={start} className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#e7efee]">
-                <img src={icPlayCircle} alt="" className="size-[16.667px]" />
-              </button>
-            </div>
-          ))}
-        </section>
-
         {watched > 0 && (
           <button
             onClick={finish}
             disabled={!finished && !isDone}
-            className="rounded-full bg-brand px-6 py-4 text-base leading-5 font-bold tracking-[0.16px] text-[#00422b] shadow-[0_10px_15px_-3px_rgba(19,112,126,0.3)] disabled:opacity-60"
+            className="rounded-full bg-brand px-6 py-4 text-base leading-5 font-bold tracking-[0.16px] text-white shadow-[0_10px_15px_-3px_rgba(19,112,126,0.3)] disabled:opacity-60"
           >
             {finished ? `Complete Day ${w.day} ✓` : `Keep going… ${Math.round(watched * 100)}% watched`}
           </button>
