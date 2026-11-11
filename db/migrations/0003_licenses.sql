@@ -48,6 +48,7 @@ begin
  if exists(select 1 from entitlements where user_id=p_user and organization_id is not null and organization_id<>batch.organization_id) then return 'different_organization'; end if;
  insert into entitlements(user_id,organization_id,source,valid_until) values(p_user,batch.organization_id,'organization',batch.valid_until)
  on conflict(user_id) do update set organization_id=excluded.organization_id,source=excluded.source,valid_until=excluded.valid_until;
+ insert into organization_members(organization_id,user_id) values(batch.organization_id,p_user) on conflict do nothing;
  update invitation_codes set redeemed_by=p_user,redeemed_at=now() where id=invitation.id;
  return 'redeemed';
 end $$;
