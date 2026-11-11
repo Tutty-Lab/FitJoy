@@ -4,7 +4,7 @@ import AuthTabs from './AuthTabs'
 import { signUp } from '../../services/auth'
 import sprout from '../../assets/auth/sprout-signup.png'
 import icLeaf from '../../assets/auth/s-leaf.svg'
-import icChev from '../../assets/auth/s-chev.svg'
+import { ArrowRight, ChevronRight } from 'lucide-react'
 import icUser from '../../assets/auth/s-user.svg'
 import icOk from '../../assets/auth/s-ok.svg'
 import icVerified from '../../assets/auth/s-verified.svg'
@@ -13,7 +13,6 @@ import icLockReset from '../../assets/auth/s-lockreset.svg'
 import icEye from '../../assets/auth/eye.svg'
 import icShield from '../../assets/auth/s-shield.svg'
 import icMatch from '../../assets/auth/s-match.svg'
-import icArrow from '../../assets/auth/arrow.svg'
 
 function Field({ icon, children, trailing }: { label: string; aside?: ReactNode; icon: ReactNode; children: ReactNode; trailing?: ReactNode }) {
   return (
@@ -90,7 +89,7 @@ export default function SignUp() {
           label="Full Name"
           aside={name.trim() && (
             <span className="flex items-center gap-0.5 text-[11px] leading-4 font-medium tracking-[0.48px] text-[#13707e]">
-              <img src={icChev} alt="" style={{ width: 6.378, height: 10.833 }} />Profile ready
+              <ChevronRight aria-hidden="true" className="size-3" />Profile ready
             </span>
           )}
           icon={<img src={icUser} alt="" style={{ width: 21.333, height: 13.333 }} />}
@@ -157,7 +156,7 @@ export default function SignUp() {
           className="mt-1 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand to-teal-500 px-6 py-4 text-base leading-5 font-bold tracking-[0.16px] text-white drop-shadow-[0_6px_0_#0b4a54] transition active:translate-y-1 active:drop-shadow-[0_2px_0_#0b4a54] disabled:opacity-50"
         >
           Start 22-Day Journey
-          <img src={icArrow} alt="" className="size-[13.333px]" />
+          <ArrowRight aria-hidden="true" className="size-4" />
         </button>
       </form>
     </div>

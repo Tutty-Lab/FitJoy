@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import icPlay from '../assets/workouts/d-play.svg'
+import { Play } from 'lucide-react'
 import icVolume from '../assets/workouts/d-volume.svg'
 import icFull from '../assets/workouts/d-full.svg'
 
@@ -103,7 +103,7 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPl
         >
           <span className="pulse-ring flex size-16 items-center justify-center rounded-full bg-brand">
             <span className="flex size-14 items-center justify-center rounded-full bg-[#ffe3d3] pr-2.5 pl-3.5 shadow-inner">
-              <img src={icPlay} alt="" style={{ width: 14.667, height: 18.667 }} />
+              <Play aria-hidden="true" className="size-4 fill-current" />
             </span>
           </span>
         </button>

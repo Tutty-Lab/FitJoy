@@ -1,10 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { Play } from 'lucide-react'
 import { workouts, pad } from '../../data/workouts'
 import { useCompleted } from '../../lib/progress'
 import thumb from '../../assets/workouts/thumb-active.png'
 import icProgress from '../../assets/workouts/l-progress.svg'
 import icClock from '../../assets/workouts/l-clock.svg'
-import icPlay from '../../assets/workouts/l-play.svg'
 import icCheck from '../../assets/workouts/l-check.svg'
 import icReplay from '../../assets/workouts/l-replay.svg'
 import icLock from '../../assets/workouts/l-lock.svg'
@@ -58,7 +58,7 @@ export default function Library() {
                 className="mt-2 flex h-14 items-center justify-center gap-2 rounded-full bg-[#13707e] text-base leading-5 font-bold tracking-[0.16px] text-white shadow-lg active:scale-[0.98]"
               >
                 Start lesson
-                <img src={icPlay} alt="" className="size-[18.333px]" />
+                <Play aria-hidden="true" className="size-[18px] fill-current" />
               </button>
             </section>
           )

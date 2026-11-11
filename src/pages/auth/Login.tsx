@@ -8,7 +8,7 @@ import icHeart from '../../assets/auth/l-heart.svg'
 import icClear from '../../assets/auth/l-clear.svg'
 import icEye from '../../assets/auth/eye.svg'
 import icCheck from '../../assets/auth/l-check.svg'
-import icArrow from '../../assets/auth/arrow.svg'
+import { ArrowRight } from 'lucide-react'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -110,7 +110,7 @@ export default function Login() {
           className="mt-1 flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-base leading-5 font-bold tracking-[0.16px] text-white shadow-[0_10px_15px_-3px_rgba(19,112,126,0.3),0_4px_6px_-4px_rgba(19,112,126,0.3)] active:scale-[0.98]"
         >
           Log In to FitJoy
-          <img src={icArrow} alt="" className="size-[13.333px]" />
+          <ArrowRight aria-hidden="true" className="size-4" />
         </button>
 
       </form>

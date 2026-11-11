@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { ChevronLeft, ChevronRight, List, Play } from 'lucide-react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { workouts } from '../../data/workouts'
@@ -8,12 +9,9 @@ import videoThumb from '../../assets/workouts/video-thumb.png'
 import icBack from '../../assets/onboarding/back.svg'
 import icUser from '../../assets/onboarding/user-sm.svg'
 import icCoach from '../../assets/workouts/d-coach.svg'
-import icSwitch from '../../assets/workouts/d-switch.svg'
 import icDone from '../../assets/workouts/d-done.svg'
 import icCurrent from '../../assets/workouts/d-current.svg'
 import icLock from '../../assets/workouts/d-lock.svg'
-import icPrev from '../../assets/workouts/d-prev.svg'
-import icNext from '../../assets/workouts/d-next.svg'
 
 
 export default function WorkoutDetail() {
@@ -108,13 +106,13 @@ export default function WorkoutDetail() {
             onClick={() => navigate(`/workouts/${w.day - 1}`)}
             className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#e7efee] disabled:opacity-40"
           >
-            <img src={icPrev} alt="" style={{ width: 5.55, height: 9 }} />
+            <ChevronLeft aria-hidden="true" className="size-4" />
           </button>
           <button
             onClick={() => setPicker(true)}
             className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-white text-sm leading-[18px] font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]"
           >
-            <img src={icSwitch} alt="" style={{ width: 15, height: 10.5 }} />Day {w.day} / 22 · View all
+            <List aria-hidden="true" className="size-4" />Day {w.day} / 22 · View all
           </button>
           <button
             aria-label="Next workout"
@@ -122,7 +120,7 @@ export default function WorkoutDetail() {
             onClick={() => navigate(`/workouts/${w.day + 1}`)}
             className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#e7efee] disabled:opacity-40"
           >
-            <img src={icNext} alt="" style={{ width: 5.55, height: 9 }} />
+            <ChevronRight aria-hidden="true" className="size-4" />
           </button>
         </div>
       </main>

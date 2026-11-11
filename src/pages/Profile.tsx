@@ -20,9 +20,9 @@ import iInfo from '../assets/profile/i-info.svg'
 import iTrophy from '../assets/profile/i-trophy.svg'
 import iFlame from '../assets/profile/i-flame.svg'
 import iStar from '../assets/profile/i-star.svg'
-import chevron from '../assets/profile/chevron.svg'
+import { ChevronRight } from 'lucide-react'
 
-const Chevron = () => <img src={chevron} alt="" style={{ width: 6.167, height: 10 }} />
+const Chevron = () => <ChevronRight aria-hidden="true" className="size-4 text-slate-400" />
 
 function Row({ icon, iconBg, title, right, to, onClick }: { icon: ReactNode; iconBg: string; title: string; right?: ReactNode; to?: string; onClick?: () => void }) {
   const body = (
