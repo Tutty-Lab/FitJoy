@@ -1,0 +1,19 @@
+import { body, route, sql } from '../_lib.js'
+export default route({
+ async GET() {
+  return sql`select o.id,o.name,o.created_at,
+   count(distinct e.user_id)::int as active_members,
+   coalesce(sum(b.seats),0)::int as seats_purchased,
+   coalesce(sum((select count(*) from invitation_codes c where c.batch_id=b.id and c.redeemed_at is not null)),0)::int as seats_redeemed
+   from organizations o left join entitlements e on e.organization_id=o.id and (e.valid_until is null or e.valid_until>now())
+   left join license_batches b on b.organization_id=o.id group by o.id order by o.created_at desc`
+ },
+ async PATCH(req,res,session) {
+  const {id,name}=body<{id?:string;name?:string}>(req)
+  if(!id||!/^[0-9a-f-]{36}$/i.test(id)||typeof name!=='string'||!name.trim()||name.length>120) return res.status(400).json({error:'Invalid organization name'})
+  const [org]=await sql`update organizations set name=${name.trim()} where id=${id}::uuid returning id,name`
+  if(!org) return res.status(404).json({error:'Organization not found'})
+  await sql`insert into audit_events(actor_id,organization_id,action,entity_type,entity_id,metadata) values(${session!.sub},${id}::uuid,'organization.updated','organization',${id}::uuid,${JSON.stringify({name:org.name})}::jsonb)`
+  return {organization:org}
+ }
+},{auth:'admin'})

@@ -4,6 +4,8 @@ import mascot from '../assets/home/mascot.png'
 
 const nav = [
   { to: '/admin/licenses', label: 'Invitations', icon: '◇' },
+  { to: '/admin/organizations', label: 'Organizations', icon: '◎' },
+  { to: '/admin/audit', label: 'Audit log', icon: '≡' },
   { to: '/admin', label: 'Dashboard', icon: '▦', end: true },
   { to: '/admin/users', label: 'Users', icon: '◉' },
   { to: '/admin/workouts', label: 'Workouts', icon: '▶' },

@@ -10,12 +10,13 @@ export default route({
    from license_batches b join organizations o on o.id=b.organization_id order by b.created_at desc`
   return {organizations,batches}
  },
- async POST(req,res) {
+ async POST(req,res,session) {
   const input=body<{name?:string;organizationId?:string;seats?:number;validUntil?:string}>(req)
   if(input.name!==undefined) {
    if(typeof input.name!=='string'||!input.name.trim()||input.name.length>120) return res.status(400).json({error:'Enter an organization name (up to 120 characters)'})
    const [organization]=await sql`insert into organizations(name) values(${input.name.trim()}) returning id,name`
-   return {organization}
+  await sql`insert into audit_events(actor_id,organization_id,action,entity_type,entity_id) values(${session?.sub},${organization.id},'organization.created','organization',${organization.id})`
+  return {organization}
   }
   if(typeof input.organizationId!=='string'||!/^[0-9a-f-]{36}$/i.test(input.organizationId)||!Number.isInteger(input.seats)||input.seats!<1||input.seats!>1000||!input.validUntil||!Number.isFinite(Date.parse(input.validUntil))||Date.parse(input.validUntil)<=Date.now()) return res.status(400).json({error:'Choose organization, 1–1000 seats and a future expiry date'})
   const codes=Array.from({length:input.seats!},()=>randomBytes(12).toString('hex').toUpperCase().match(/.{4}/g)!.join('-'))
@@ -25,12 +26,15 @@ export default route({
   ), codes as (
    insert into invitation_codes(batch_id,code_hash,redeem_before) select batch.id,h,batch.valid_until from batch cross join unnest(${hashes}::text[]) as h returning id
   ) select batch.*,(select count(*) from codes) as issued from batch`
+  await sql`insert into audit_events(actor_id,organization_id,action,entity_type,entity_id,metadata) values(${session?.sub},${input.organizationId}::uuid,'licenses.issued','license_batch',${batch.id},${JSON.stringify({seats:input.seats})}::jsonb)`
   return {batch,codes}
  },
- async DELETE(req,res) {
+ async DELETE(req,res,session) {
   const id=String(req.query.batchId??'')
   if(!/^[0-9a-f-]{36}$/i.test(id)) return res.status(400).json({error:'Invalid batch'})
   const revoked=await sql`update invitation_codes set revoked_at=now() where batch_id=${id}::uuid and redeemed_at is null and revoked_at is null returning id`
+  const [batch]=await sql`select organization_id from license_batches where id=${id}::uuid`
+  await sql`insert into audit_events(actor_id,organization_id,action,entity_type,entity_id,metadata) values(${session?.sub},${batch?.organization_id},'licenses.revoked','license_batch',${id}::uuid,${JSON.stringify({count:revoked.length})}::jsonb)`
   return {revoked:revoked.length}
  }
 },{auth:'admin'})
