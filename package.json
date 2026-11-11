@@ -14,6 +14,7 @@
     "@capacitor/core": "^7.2.0",
     "@capacitor/ios": "^7.6.10",
     "@neondatabase/serverless": "^1.0.0",
+    "@vercel/blob": "^2.9.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.2",
     "lucide-react": "^1.67.0",

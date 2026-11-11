@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import type { Category, Step, Workout } from '../../data/workouts'
 import { getWorkout, isEdited, resetWorkout, saveWorkout } from '../../services/catalog'
+import { api } from '../../lib/api'
 
 const categories: Category[] = ['Warm-up', 'Core & Cardio', 'Fat Burn', 'Recovery']
 const intensities: Workout['intensity'][] = ['Gentle', 'Moderate', 'Intense']
@@ -23,6 +24,7 @@ export default function WorkoutEdit() {
   const [w, setW] = useState<Workout | undefined>(original)
   const [saved, setSaved] = useState(false)
   const [saveError, setSaveError] = useState('')
+  const [uploading, setUploading] = useState(false)
   if (!w || !original) return <Navigate to="/admin/workouts" replace />
 
   const set = <K extends keyof Workout>(k: K, v: Workout[K]) => {
@@ -40,6 +42,16 @@ export default function WorkoutEdit() {
     } catch (e) {
       setSaveError(e instanceof Error ? e.message : 'Save failed')
     }
+  }
+
+  async function uploadVideo(file: File) {
+    if (file.size > 100 * 1024 * 1024) return setSaveError('Video must be smaller than 100 MB')
+    setUploading(true); setSaveError('')
+    try {
+      const data = await new Promise<string>((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result)); reader.onerror = () => reject(new Error('Could not read video')); reader.readAsDataURL(file) })
+      const result = await api<{ url: string }>('admin/video-upload', { method: 'POST', body: { day, filename: file.name, contentType: file.type, data } })
+      set('video', result.url)
+    } catch (e) { setSaveError(e instanceof Error ? e.message : 'Upload failed') } finally { setUploading(false) }
   }
 
   return (
@@ -80,7 +92,14 @@ export default function WorkoutEdit() {
             {intensities.map(c => <option key={c}>{c}</option>)}
           </select>
         </Label>
-        <Label text="Video URL"><input className={field} value={w.video} onChange={e => set('video', e.target.value)} placeholder="https://…/workout.mp4" /></Label>
+        <div className="flex flex-col gap-2">
+          <Label text="Video URL"><input className={field} value={w.video} onChange={e => set('video', e.target.value)} placeholder="https://…/workout.mp4" /></Label>
+          <label className="flex cursor-pointer items-center justify-center rounded-xl border border-dashed border-slate-300 px-3 py-2 text-sm font-semibold text-[#13707e] hover:bg-mint">
+            {uploading ? 'Uploading…' : 'Upload video to storage'}
+            <input type="file" accept="video/mp4,video/webm,video/quicktime" disabled={uploading} onChange={e => { const file = e.target.files?.[0]; if (file) void uploadVideo(file); e.currentTarget.value = '' }} className="sr-only" />
+          </label>
+          <p className="text-[11px] text-slate-500">MP4/WebM/QuickTime, max 100 MB. Save changes after upload.</p>
+        </div>
         <div className="md:col-span-2">
           <Label text="Description">
             <textarea rows={3} className={`${field} h-auto py-2`} value={w.blurb} onChange={e => set('blurb', e.target.value)} />
