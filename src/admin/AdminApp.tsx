@@ -8,6 +8,7 @@ import Workouts from './pages/Workouts'
 import WorkoutEdit from './pages/WorkoutEdit'
 import Organizations from './pages/Organizations'
 import Audit from './pages/Audit'
+import OrganizationDetail from './pages/OrganizationDetail'
 
 function RequireAdmin() {
   return isAdmin() ? <Outlet /> : <Navigate to="/login" replace />
@@ -23,6 +24,7 @@ export default function AdminApp() {
           <Route index element={<Dashboard />} />
           <Route path="licenses" element={<Licenses />} />
           <Route path="organizations" element={<Organizations />} />
+          <Route path="organizations/:id" element={<OrganizationDetail />} />
           <Route path="audit" element={<Audit />} />
           <Route path="users" element={<Users />} />
           <Route path="workouts" element={<Workouts />} />
