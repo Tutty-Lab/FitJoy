@@ -13,14 +13,12 @@ export default function Activate() {
   finally {setBusy(false)}
  }
  return <main className="mx-auto flex min-h-dvh max-w-[440px] flex-col gap-5 bg-canvas px-5 py-16">
- <h1 className="text-2xl font-bold">Activate your program</h1>
- <p className="text-sm text-slate-600">Enter the invitation code provided by your organization. Your access follows your account on every device.</p>
+ <h1 className="text-2xl font-bold">Enter invitation code</h1>
  <form onSubmit={submit} className="flex flex-col gap-4 rounded-[32px] bg-white p-6 shadow-sm">
  <label className="text-sm font-semibold">Invitation code<input aria-label="Invitation code" value={code} onChange={e=>setCode(e.target.value)} autoCapitalize="characters" autoComplete="off" spellCheck={false} required maxLength={100} className="mt-2 w-full rounded-xl bg-canvas p-3 font-mono" /></label>
  {error&&<p role="alert" className="text-sm text-red-600">{error}</p>}
  <button disabled={busy||!code.trim()} className="rounded-full bg-brand-deep p-3 font-bold text-white disabled:opacity-50">{busy?'Activating…':'Activate'}</button>
  </form>
  <p className="text-sm text-slate-600">No code? Ask your organization for an invitation.</p>
- <Link to="/profile" className="text-sm font-semibold text-brand-deep">Account settings</Link>
  </main>
 }
