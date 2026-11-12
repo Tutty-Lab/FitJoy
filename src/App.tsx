@@ -47,7 +47,9 @@ export default function App() {
         <Route path="/check/:phase" element={<BalanceCheck />} />
       </Route>
       <Route element={<RequireAuth onboarded />}>
-        <Route path="/workouts/:day" element={<WorkoutDetail />} />
+        <Route element={<AppLayout />}>
+          <Route path="/workouts/:day" element={<WorkoutDetail />} />
+        </Route>
         <Route path="/celebrate/:day" element={<Celebration />} />
         <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />

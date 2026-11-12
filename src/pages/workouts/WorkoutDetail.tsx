@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, List, Play } from 'lucide-react'
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { workouts } from '../../data/workouts'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { completeDay, useCompleted } from '../../lib/progress'
 import videoThumb from '../../assets/workouts/video-thumb.png'
 import icBack from '../../assets/onboarding/back.svg'
-import icUser from '../../assets/onboarding/user-sm.svg'
 import icCoach from '../../assets/workouts/d-coach.svg'
 import icDone from '../../assets/workouts/d-done.svg'
 import icCurrent from '../../assets/workouts/d-current.svg'
@@ -51,9 +50,7 @@ export default function WorkoutDetail() {
             </button>
             <h1 className="text-[20px] leading-7 font-bold">Lesson</h1>
           </div>
-          <Link to="/profile" aria-label="Profile" className="flex size-8 items-center justify-center rounded-full bg-[#13707e]">
-            <img src={icUser} alt="" className="size-3" />
-          </Link>
+          <span className="size-8" aria-hidden="true" />
         </div>
       </header>
 
