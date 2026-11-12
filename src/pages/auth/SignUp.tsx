@@ -39,7 +39,7 @@ export default function SignUp() {
   const [show2, setShow2] = useState(false)
   const [agree, setAgree] = useState(false)
 
-  const usernameOk = /^[a-zA-Z0-9._-]{3,30}$/.test(username.trim())
+  const usernameOk = username.trim().length > 0 && username.trim().length <= 64
   const match = pw2.length > 0 && pw === pw2
   const canSubmit = name.trim() && usernameOk && pw.length > 0 && match && agree
 
@@ -106,7 +106,7 @@ export default function SignUp() {
           icon={<img src={icUser} alt="" style={{ width: 24.667, height: 16.667 }} />}
           trailing={usernameOk ? <img src={icVerified} alt="" style={{ width: 18.333, height: 17.5 }} /> : null}
         >
-          <input className={input} type="text" value={username} onChange={e => setUsername(e.target.value)} autoComplete="username" autoCapitalize="none" spellCheck={false} minLength={3} maxLength={30} pattern="[a-zA-Z0-9._\-]{3,30}" title="3-30 letters, numbers, dots, underscores or hyphens" required placeholder="Username" aria-label="Username" />
+          <input className={input} type="text" value={username} onChange={e => setUsername(e.target.value)} autoComplete="username" autoCapitalize="none" spellCheck={false} maxLength={64} required placeholder="Username" aria-label="Username" />
         </Field>
 
         <div className="flex flex-col gap-1">
