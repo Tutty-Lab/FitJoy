@@ -5,7 +5,7 @@ import { emptyEntry, saveCheck, todayKey, type Entry, type Phase } from '../../l
 import { loadProfile } from '../../lib/profile'
 import mascot from '../../assets/home/mascot.png'
 
-const card = 'rounded-[32px] bg-white p-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'
+const card = 'rounded-3xl bg-white p-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'
 const btnPrimary = 'flex h-14 w-full items-center justify-center rounded-full bg-brand-deep px-6 text-base font-bold text-white shadow-md disabled:opacity-50'
 
 const DRAFT = (p: Phase) => `fitjoy.checkDraft.${p}`
@@ -43,17 +43,16 @@ export default function BalanceCheck() {
 
   return (
     <div className="mx-auto min-h-dvh max-w-[440px] bg-cream px-4 pt-[calc(env(safe-area-inset-top)+16px)] pb-10">
-      <header className="flex flex-col items-center gap-2 pb-2 text-center">
-        <span className="rounded-full bg-mint px-3 py-1 text-xs leading-4 font-bold tracking-[0.48px] text-brand-deep">The Balance Code</span>
-        <h1 className="text-[26px] leading-8 font-extrabold tracking-[-0.6px]">My balance check</h1>
-        <p className="text-sm font-semibold text-rust">{isStart ? 'Day 1 · Your starting point' : 'After 22 days · Your comparison'}</p>
+      <header className="pb-2 text-center">
+        <h1 className="text-[26px] leading-8 font-extrabold tracking-[-0.6px]">Balance check</h1>
+        <p className="mt-1 text-sm font-semibold text-rust">{isStart ? 'Day 1' : 'Day 22'}</p>
       </header>
 
       <section className={`${card} mt-5 flex gap-3`}>
         <img src={mascot} alt="" className="size-16 shrink-0 object-contain" />
         <div className="text-[15px] leading-6 text-ink">
-          <p>Take your time: use level ground with enough space around you. Hold on to a wall or a sturdy chair if needed. Drink a glass of water.</p>
-          <p className="mt-2 font-bold">Barefoot. Only note what you can do comfortably. You don’t “have to” do anything.</p>
+          <p>Use level ground. Hold a wall or chair if needed. Stop whenever you feel unsafe.</p>
+          <p className="mt-2 font-bold">Barefoot. Record only what feels comfortable.</p>
         </div>
       </section>
 
@@ -71,7 +70,7 @@ export default function BalanceCheck() {
               </div>
 
               <label className="mt-3 flex items-center justify-between gap-3 border-t border-[#f3f6f5] pt-3">
-                <span className="text-sm font-semibold">My result</span>
+                <span className="text-sm font-semibold">Result</span>
                 <span className="flex items-center gap-2">
                   <input inputMode="decimal" value={e.value} onChange={ev => update(t.id, { value: ev.target.value })} placeholder="–" className="h-10 w-20 rounded-full bg-[#f3f6f5] text-center text-lg font-bold text-brand-deep outline-none focus:ring-2 focus:ring-brand" />
                   <span className="w-14 text-sm text-[#6f7472]">{t.unit}</span>
@@ -79,7 +78,7 @@ export default function BalanceCheck() {
               </label>
 
               <div className="mt-3">
-                <p className="text-sm font-semibold">How safe it felt <span className="font-normal text-[#6f7472]">(1 low point – 10 fantastic)</span></p>
+                <p className="text-sm font-semibold">Safety <span className="font-normal text-[#6f7472]">(1–10)</span></p>
                 <div className="mt-2 grid grid-cols-10 gap-1">
                   {Array.from({ length: 10 }, (_, n) => n + 1).map(n => (
                     <button key={n} type="button" onClick={() => update(t.id, { safety: e.safety === n ? null : n })} className={`h-9 rounded-full text-sm font-semibold ${e.safety === n ? 'bg-brand-deep text-white' : 'bg-[#f3f6f5] text-[#3f4a4b]'}`}>{n}</button>
@@ -88,7 +87,7 @@ export default function BalanceCheck() {
               </div>
 
               <div className="mt-3">
-                <p className="text-sm font-semibold">I noticed</p>
+                <p className="text-sm font-semibold">Notes</p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {observations.map(o => {
                     const on = e.notes.includes(o)
