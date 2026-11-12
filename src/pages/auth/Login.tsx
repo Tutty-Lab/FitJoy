@@ -31,7 +31,7 @@ export default function Login() {
     const invite = new URLSearchParams(location.search).get('invite')
     if (invite) { try { await api('redeem', { method: 'POST', body: { code: invite } }) } catch (e) { return setError(e instanceof Error ? e.message : 'Could not redeem invitation') } }
     const profile = loadProfile()
-    navigate(profile?.role === 'admin' ? '/admin' : profile?.checks?.start ? '/' : '/check/start', { replace: true })
+    navigate(profile?.role === 'admin' ? '/admin' : username.trim().toLowerCase() === 'demo' ? '/compare' : profile?.checks?.start ? '/' : '/check/start', { replace: true })
   }
 
   return (

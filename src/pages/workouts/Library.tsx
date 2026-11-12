@@ -3,7 +3,6 @@ import { Play } from 'lucide-react'
 import { workouts, pad } from '../../data/workouts'
 import { useCompleted } from '../../lib/progress'
 import thumb from '../../assets/workouts/thumb-active.png'
-import icProgress from '../../assets/workouts/l-progress.svg'
 import icClock from '../../assets/workouts/l-clock.svg'
 import icCheck from '../../assets/workouts/l-check.svg'
 import icReplay from '../../assets/workouts/l-replay.svg'
@@ -11,29 +10,12 @@ import icLock from '../../assets/workouts/l-lock.svg'
 
 export default function Library() {
   const navigate = useNavigate()
-  const { completed, statusOf } = useCompleted()
-  const done = completed.length
-  const pct = Math.round((done / 22) * 100)
+  const { statusOf } = useCompleted()
   const rank = { current: 0, completed: 1, locked: 2 }
   const list = [...workouts].sort((a, b) => rank[statusOf(a.day)] - rank[statusOf(b.day)] || (statusOf(a.day) === 'completed' ? b.day - a.day : a.day - b.day))
 
   return (
     <div className="stagger flex flex-col gap-4 bg-[#fbf8f3] px-4 pt-2 pb-6">
-      <section className="flex flex-col gap-2 rounded-[32px] bg-white p-4 shadow-md">
-        <div className="flex items-center justify-between">
-          <h2 className="flex items-center gap-2 text-[20px] leading-7 font-bold">
-            <img src={icProgress} alt="" className="size-5" />Progress
-          </h2>
-          <span className="rounded-full bg-[#13707e] px-3 py-1 text-base leading-5 font-bold tracking-[0.16px] text-white">{pct}%</span>
-        </div>
-        <div className="h-3.5 overflow-hidden rounded-full bg-[#f3f6f5] p-0.5 shadow-inner">
-          <div className="bar-grow h-full rounded-full bg-brand shadow-[0_0_8px_rgba(19,112,126,0.5)] transition-all" style={{ width: `${Math.max(pct, 2)}%` }} />
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-sm leading-5 font-semibold text-[#3f4a4b]">{done} of 22 lessons completed</span>
-        </div>
-      </section>
-
       {list.length === 0 && <p className="py-6 text-center text-sm text-[#6f7472]">No lessons.</p>}
 
       {list.map(w => {
