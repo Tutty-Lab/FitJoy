@@ -38,7 +38,8 @@ export default function BalanceCheck() {
   function finish() {
     saveCheck(phase, { date: todayKey(), entries })
     localStorage.removeItem(DRAFT(phase))
-    navigate(isStart ? '/' : '/results', { replace: true })
+    // Completing either check returns the user to the single home flow.
+    navigate('/', { replace: true })
   }
 
   return (
@@ -104,7 +105,7 @@ export default function BalanceCheck() {
       </ol>
 
       <div className="mt-6 flex flex-col gap-2">
-        <button onClick={finish} className={btnPrimary}>{isStart ? 'Save check & start' : 'Save check & compare'}</button>
+        <button onClick={finish} className={btnPrimary}>{isStart ? 'Save check & start' : 'Save check'}</button>
         {!first && <button onClick={() => navigate(-1)} className="h-11 text-sm text-[#6f7472]">Continue later</button>}
       </div>
     </div>
