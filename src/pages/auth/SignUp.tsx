@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import AuthTabs from './AuthTabs'
 import { signUp } from '../../services/auth'
 import { api } from '../../lib/api'
-import sprout from '../../assets/auth/sprout-signup.png'
+import sprout from '../../assets/home/mascot.png'
 import icLeaf from '../../assets/auth/s-leaf.svg'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import icUser from '../../assets/auth/s-user.svg'
@@ -78,7 +78,6 @@ export default function SignUp() {
             <div className="size-20 overflow-hidden rounded-2xl bg-[#e7efee] p-1 shadow-inner">
               <img src={sprout} alt="Joy Sprout mascot" className="size-full rounded-[48px] object-cover" />
             </div>
-            <span className="absolute -right-1 -bottom-1 rounded-full bg-[#ef8933] px-1.5 py-0.5 text-[10px] leading-6 text-[#5c2c00]">LVL 1</span>
           </div>
         </div>
       </section>
