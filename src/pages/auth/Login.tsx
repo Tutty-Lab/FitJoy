@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
-import AuthTabs from './AuthTabs'
+import { Link, useNavigate } from 'react-router-dom'
 import { loadProfile } from '../../lib/profile'
 import { signIn } from '../../services/auth'
 import { api } from '../../lib/api'
@@ -52,10 +51,6 @@ export default function Login() {
         </div>
       </section>
 
-      <div className="mb-4">
-        <AuthTabs active="signin" />
-      </div>
-
       <form onSubmit={submit} className="flex flex-col gap-4 rounded-[32px] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(200,220,218,0.4),0_8px_10px_-6px_rgba(200,220,218,0.4)]">
         <div className="flex flex-col gap-1.5">
           <span className="relative">
@@ -97,13 +92,16 @@ export default function Login() {
           </span>
         </div>
 
-        <label className="flex cursor-pointer items-center gap-2.5 pt-1">
+        <div className="flex items-center justify-between pt-1">
+        <label className="flex cursor-pointer items-center gap-2.5">
           <input type="checkbox" checked={remember} onChange={e => setRemember(e.target.checked)} className="sr-only" />
           <span className={`flex size-6 items-center justify-center rounded-full shadow-inner ${remember ? 'bg-brand' : 'border-2 border-[#e7efee] bg-white'}`}>
             {remember && <img src={icCheck} alt="" style={{ width: 10.867, height: 8.017 }} />}
           </span>
           <span className="text-sm leading-[18px] font-semibold text-[#3f4a4b]">Remember me</span>
         </label>
+        <Link to="/signup" className="text-sm font-bold text-brand-deep">Sign Up</Link>
+        </div>
 
         {error && <p role="alert" className="text-sm text-[#ba1a1a]">{error}</p>}
         <button
