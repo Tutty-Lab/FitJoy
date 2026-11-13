@@ -35,9 +35,7 @@ export default function Workouts() {
                 <td className="px-4 py-3">{w.category}</td>
                 <td className="px-4 py-3 tabular-nums">{w.mins}</td>
                 <td className="px-4 py-3">{w.intensity}</td>
-                <td className="px-4 py-3 text-right">
-                  <Link to={`/admin/workouts/${w.day}`} className="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-[#13707e] hover:bg-mint">Edit</Link>
-                </td>
+                <td className="px-4 py-3 text-right" />
               </tr>
               {expanded === w.day && [
                 ['Mobility', w.title],
