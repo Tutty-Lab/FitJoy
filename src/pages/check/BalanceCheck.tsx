@@ -13,14 +13,8 @@ const DRAFT = (p: Phase) => `fitjoy.checkDraft.${p}`
 export default function BalanceCheck() {
   const { phase } = useParams() as { phase: Phase }
   const navigate = useNavigate()
-  const resetRequested = new URLSearchParams(window.location.search).get('reset') === '1'
   const [entries, setEntries] = useState<Record<string, Entry>>(() => {
     try {
-      if (phase === 'start' && resetRequested) {
-        const profile = loadProfile()
-        if (profile) localStorage.setItem('fitjoy.profile', JSON.stringify({ ...profile, checks: undefined, onboarded: false }))
-        localStorage.removeItem(DRAFT('start'))
-      }
       return JSON.parse(localStorage.getItem(DRAFT(phase)) ?? '{}')
     } catch {
       return {}
