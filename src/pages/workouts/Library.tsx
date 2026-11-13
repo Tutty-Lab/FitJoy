@@ -1,10 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Play } from 'lucide-react'
+import { Check, Play } from 'lucide-react'
 import { workouts, pad } from '../../data/workouts'
 import { useCompleted } from '../../lib/progress'
 import thumb from '../../assets/workouts/thumb-active.png'
 import icClock from '../../assets/workouts/l-clock.svg'
-import icCheck from '../../assets/workouts/l-check.svg'
 import icReplay from '../../assets/workouts/l-replay.svg'
 import icLock from '../../assets/workouts/l-lock.svg'
 
@@ -55,7 +54,7 @@ export default function Library() {
           >
             <span className="flex min-w-0 items-center gap-2">
               <span className={`flex size-12 shrink-0 items-center justify-center rounded-full ${locked ? 'bg-[#c3d0ce]' : 'bg-brand'}`}>
-                {locked ? <img src={icLock} alt="Locked" style={{ width: 14.667, height: 19.25 }} /> : <img src={icCheck} alt="" style={{ width: 16.3, height: 12.025 }} />}
+                {locked ? <img src={icLock} alt="Locked" style={{ width: 14.667, height: 19.25 }} /> : <Check aria-hidden="true" className="size-5 text-white" strokeWidth={3} />}
               </span>
               <span className="min-w-0">
                 <span className="flex items-center gap-2">
