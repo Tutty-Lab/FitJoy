@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Play } from 'lucide-react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { workouts } from '../../data/workouts'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { completeDay, useCompleted } from '../../lib/progress'
@@ -11,6 +11,8 @@ import icCoach from '../../assets/workouts/d-coach.svg'
 
 export default function WorkoutDetail() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const returnTo = (location.state as { from?: string } | null)?.from ?? '/'
   const day = Number(useParams().day)
   const lesson = new URLSearchParams(window.location.search).get('lesson') ?? '1'
   const w = workouts.find(x => x.day === day)
@@ -41,7 +43,7 @@ export default function WorkoutDetail() {
       <header className="sticky top-0 z-20 bg-[rgba(251,248,243,0.8)] pt-[env(safe-area-inset-top)] shadow-[0_1px_8px_rgba(0,0,0,0.04)] backdrop-blur-[24px]">
         <div className="flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-1">
-            <button aria-label="Go back" onClick={() => navigate('/')} className="flex size-11 items-center justify-center rounded-full">
+            <button aria-label="Go back" onClick={() => navigate(returnTo)} className="flex size-11 items-center justify-center rounded-full">
               <img src={icBack} alt="" className="size-4" />
             </button>
             <h1 className="text-[20px] leading-7 font-bold">Lesson</h1>
@@ -96,7 +98,7 @@ export default function WorkoutDetail() {
           <button
             type="button"
             disabled={lesson === '1'}
-            onClick={() => navigate(`/workouts/${w.day}?lesson=${Math.max(1, Number(lesson) - 1)}`)}
+            onClick={() => navigate(`/workouts/${w.day}?lesson=${Math.max(1, Number(lesson) - 1)}`, { state: { from: returnTo } })}
             className="h-11 flex-1 rounded-full bg-[#e7efee] text-sm font-bold text-brand-deep disabled:opacity-40"
           >
             Previous
@@ -105,7 +107,7 @@ export default function WorkoutDetail() {
           <button
             type="button"
             disabled={lesson === '3'}
-            onClick={() => navigate(`/workouts/${w.day}?lesson=${Math.min(3, Number(lesson) + 1)}`)}
+            onClick={() => navigate(`/workouts/${w.day}?lesson=${Math.min(3, Number(lesson) + 1)}`, { state: { from: returnTo } })}
             className="h-11 flex-1 rounded-full bg-brand-deep text-sm font-bold text-white disabled:opacity-40"
           >
             Next

@@ -24,7 +24,7 @@ export default function Library() {
               <div className="flex items-center justify-between">
                 <span className="text-base leading-5 font-bold tracking-[0.16px] text-[#d9652c]">Day {w.day}</span>
               </div>
-              <Link to={`/workouts/${w.day}`} className="flex items-center gap-2">
+              <Link to={`/workouts/${w.day}`} state={{ from: '/workouts' }} className="flex items-center gap-2">
                 <img src={thumb} alt="" className="size-20 shrink-0 rounded-2xl border border-line bg-[#f3f6f5] object-cover shadow-inner" />
                 <div className="min-w-0">
                   <h4 className="truncate text-[20px] leading-7 font-bold">{w.title}</h4>
@@ -47,6 +47,7 @@ export default function Library() {
           <Link
             key={w.day}
             to={locked ? '#' : `/workouts/${w.day}`}
+            state={{ from: '/workouts' }}
             onClick={e => locked && e.preventDefault()}
             aria-disabled={locked}
             className={`flex items-center justify-between gap-2 rounded-[32px] p-4 ${locked ? 'bg-[#e7efee] opacity-75 shadow-inner' : 'bg-[#f3f6f5] opacity-95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'}`}
