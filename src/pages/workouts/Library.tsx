@@ -10,8 +10,7 @@ import icLock from '../../assets/workouts/l-lock.svg'
 export default function Library() {
   const navigate = useNavigate()
   const { statusOf } = useCompleted()
-  const rank = { current: 0, completed: 1, locked: 2 }
-  const list = [...workouts].sort((a, b) => rank[statusOf(a.day)] - rank[statusOf(b.day)] || (statusOf(a.day) === 'completed' ? b.day - a.day : a.day - b.day))
+  const list = [...workouts].sort((a, b) => a.day - b.day)
 
   return (
     <div className="stagger flex flex-col gap-4 bg-[#fbf8f3] px-4 pt-2 pb-6">
