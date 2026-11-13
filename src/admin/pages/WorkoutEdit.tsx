@@ -20,6 +20,7 @@ function Label({ text, children }: { text: string; children: ReactNode }) {
 export default function WorkoutEdit() {
   const navigate = useNavigate()
   const day = Number(useParams().day)
+  const lesson = new URLSearchParams(window.location.search).get('lesson') ?? '1'
   const original = getWorkout(day)
   const [w, setW] = useState<Workout | undefined>(original)
   const [saved, setSaved] = useState(false)
@@ -59,7 +60,7 @@ export default function WorkoutEdit() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <Link to="/admin/workouts" className="text-sm font-semibold text-[#13707e]">← Workouts</Link>
-          <h1 className="text-2xl font-black">Day {day}: {w.title}</h1>
+          <h1 className="text-2xl font-black">Day {day} · Lesson {lesson}: {w.title}</h1>
         </div>
         <div className="flex gap-2">
           {isEdited(day) && (

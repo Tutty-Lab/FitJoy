@@ -44,7 +44,7 @@ export default function Workouts() {
                 ['Strength & balance', `${w.title} · Stability`],
                 ['Stretch & reset', `${w.title} · Recovery`],
               ].map(([label, title], i) => <tr key={`${w.day}-${i}`} className="bg-slate-50 text-xs">
-                <td className="px-4 py-2" /><td className="px-4 py-2 pl-8"><span className="font-semibold">Lesson {i + 1} · {title}</span><span className="ml-2 text-slate-500">{label}</span></td><td colSpan={4} />
+                <td className="px-4 py-2" /><td className="px-4 py-2 pl-8"><span className="font-semibold">Lesson {i + 1} · {title}</span><span className="ml-2 text-slate-500">{label}</span></td><td colSpan={3} /><td className="px-4 py-2 text-right"><Link onClick={e => e.stopPropagation()} to={`/admin/workouts/${w.day}?lesson=${i + 1}`} className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-semibold text-brand-deep">Edit</Link></td>
               </tr>)}
               </Fragment>
             )) }
