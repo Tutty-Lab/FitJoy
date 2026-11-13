@@ -22,11 +22,16 @@ export default function Workouts() {
             </tr>
           </thead>
           <tbody>
-            {list.map(w => (
-              <tr key={w.day} className="border-t border-slate-100">
-                <td className="px-4 py-3 font-bold tabular-nums">{w.day}</td>
+            {list.flatMap(w => [
+              { label: 'Mobility', title: w.title },
+              { label: 'Strength & balance', title: `${w.title} · Stability` },
+              { label: 'Stretch & reset', title: `${w.title} · Recovery` },
+            ].map((lesson, i) => (
+              <tr key={`${w.day}-${i}`} className="border-t border-slate-100">
+                <td className="px-4 py-3 font-bold tabular-nums">Day {w.day}<span className="block text-xs font-normal text-slate-500">Lesson {i + 1}</span></td>
                 <td className="px-4 py-3">
-                  <span className="font-semibold">{w.title}</span>
+                  <span className="font-semibold">{lesson.title}</span>
+                  <span className="ml-2 rounded-full bg-mint px-2 py-0.5 text-[10px] font-bold text-brand-deep">{lesson.label}</span>
                   {isEdited(w.day) && <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">Edited</span>}
                 </td>
                 <td className="px-4 py-3">{w.category}</td>
@@ -36,7 +41,7 @@ export default function Workouts() {
                   <Link to={`/admin/workouts/${w.day}`} className="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-[#13707e] hover:bg-mint">Edit</Link>
                 </td>
               </tr>
-            ))}
+            ))) }
           </tbody>
         </table>
       </div>
