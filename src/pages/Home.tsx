@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import mascot from '../assets/home/mascot.png'
+import lessonThumb from '../assets/workouts/thumb-active.png'
 import { loadProfile } from '../lib/profile'
 import { programDay } from '../lib/checks'
 import { useCompleted } from '../lib/progress'
@@ -92,7 +93,7 @@ export default function Home() {
       )}
 
       <Link to={`/workouts/${currentDay}`} className={`flex items-center gap-3 ${card}`}>
-        <div className="size-20 shrink-0 rounded-2xl bg-[#e7efee]" />
+        <img src={lessonThumb} alt="" className="size-20 shrink-0 rounded-2xl object-cover" />
         <div className="min-w-0 flex-1">
           <p className="text-xs font-bold uppercase tracking-wide text-rust">Today’s lesson · Day {currentDay}</p>
           <h3 className="truncate text-lg font-black">Continue your practice</h3>
