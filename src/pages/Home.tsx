@@ -115,6 +115,10 @@ export default function Home() {
             <span className="flex size-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-200" />
           </Link>
         ))}
+        <Link to="/workouts" className="flex items-center justify-between px-1 pt-1 text-sm font-bold text-brand-deep">
+          <span>All lessons</span>
+          <span aria-hidden="true">→</span>
+        </Link>
       </section>
 
     </div>
