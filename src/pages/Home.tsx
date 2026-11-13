@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import mascot from '../assets/home/mascot.png'
 import lessonThumb from '../assets/workouts/thumb-active.png'
+import { workouts } from '../data/workouts'
 import { loadProfile } from '../lib/profile'
 import { programDay } from '../lib/checks'
 import { useCompleted } from '../lib/progress'
@@ -43,6 +44,12 @@ export default function Home() {
   const day = programDay()
   const { completed } = useCompleted()
   const currentDay = Math.min(22, Math.max(1, completed.length + 1))
+  const currentWorkout = workouts.find(w => w.day === currentDay)
+  const dailyLessons = [
+    { label: 'Mobility flow', title: currentWorkout?.title ?? 'Daily mobility' },
+    { label: 'Strength & balance', title: 'Core stability practice' },
+    { label: 'Stretch & reset', title: 'Relaxing full-body stretch' },
+  ]
   const pct = (day / 22) * 100
   const [hello, sun] = greeting()
 
@@ -92,15 +99,23 @@ export default function Home() {
         </Link>
       )}
 
-      <Link to={`/workouts/${currentDay}`} className={`flex items-center gap-3 ${card}`}>
-        <img src={lessonThumb} alt="" className="size-20 shrink-0 rounded-2xl object-cover" />
-        <div className="min-w-0 flex-1">
-          <p className="text-xs font-bold uppercase tracking-wide text-rust">Today’s lesson · Day {currentDay}</p>
-          <h3 className="truncate text-lg font-black">Continue your practice</h3>
-          <p className="text-sm text-slate-500">Open lesson</p>
+      <section className="flex flex-col gap-3">
+        <div className="flex items-center justify-between px-1">
+          <h3 className="text-lg font-black">Today · Day {currentDay}</h3>
+          <span className="text-sm font-semibold text-slate-500">0/3 complete</span>
         </div>
-        <span className="rounded-full bg-brand-deep px-3 py-2 text-sm font-bold text-white">Start</span>
-      </Link>
+        {dailyLessons.map((lesson, index) => (
+          <Link key={lesson.label} to={`/workouts/${currentDay}`} className={`flex items-center gap-3 ${card}`}>
+            <img src={lessonThumb} alt="" className="size-16 shrink-0 rounded-2xl object-cover" />
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-bold uppercase tracking-wide text-rust">Lesson {index + 1} · {lesson.label}</p>
+              <h4 className="truncate text-base font-black">{lesson.title}</h4>
+              <p className="text-sm text-slate-500">10 min · Start</p>
+            </div>
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-200" />
+          </Link>
+        ))}
+      </section>
 
     </div>
   )
