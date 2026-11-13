@@ -105,7 +105,7 @@ export default function Home() {
           <span className="text-sm font-semibold text-slate-500">0/3 complete</span>
         </div>
         {dailyLessons.map((lesson, index) => (
-          <Link key={lesson.label} to={`/workouts/${currentDay}`} className={`flex items-center gap-3 ${card}`}>
+          <Link key={lesson.label} to={`/workouts/${currentDay}?lesson=${index + 1}`} className={`flex items-center gap-3 ${card}`}>
             <img src={lessonThumb} alt="" className="size-16 shrink-0 rounded-2xl object-cover" />
             <div className="min-w-0 flex-1">
               <p className="text-xs font-bold uppercase tracking-wide text-rust">Lesson {index + 1} · {lesson.label}</p>
