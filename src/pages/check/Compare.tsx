@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { tasks } from '../../data/balanceCheck'
 import { loadProfile } from '../../lib/profile'
 import { emptyEntry } from '../../lib/checks'
@@ -10,6 +10,7 @@ const fmt = (d?: string) => (d ? new Date(d).toLocaleDateString('en-GB') : '–'
 // Day-1 vs day-22 balance check, side by side.
 export default function Compare() {
   const { start, end } = loadProfile()?.checks ?? {}
+  if (!end) return <Navigate to="/" replace />
   return (
     <div className="stagger flex flex-col gap-4 px-4 pt-2 pb-6">
       <SectionTitle>My balance check</SectionTitle>

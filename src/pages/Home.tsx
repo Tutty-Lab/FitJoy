@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import mascot from '../assets/home/mascot.png'
 import { loadProfile } from '../lib/profile'
 import { programDay, todayKey, toggleDaily } from '../lib/checks'
+import { useCompleted } from '../lib/progress'
 import icBell from '../assets/home/c12.svg'
 import icMorning from '../assets/home/c13.svg'
 import icNoon from '../assets/home/c15.svg'
@@ -55,6 +56,7 @@ export default function Home() {
   const times = p?.reminderTimes ?? ['06:30', '12:15', '20:00']
   const name = p?.name || 'friend'
   const day = programDay()
+  const { completed } = useCompleted()
   const pct = (day / 22) * 100
   const today = p?.daily?.[todayKey()] ?? [false, false, false]
   const [hello, sun] = greeting()
@@ -95,7 +97,7 @@ export default function Home() {
         </div>
       </section>
 
-      {day >= 22 && !p?.checks?.end && (
+      {completed.length >= 22 && !p?.checks?.end && (
         <Link to="/check/end" className={`flex items-center justify-between gap-3 ${card}`}>
           <span>
             <span className="block text-base font-black text-slate-900">22 days done!</span>

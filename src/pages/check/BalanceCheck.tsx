@@ -20,9 +20,14 @@ export default function BalanceCheck() {
       return {}
     }
   })
+  const [page, setPage] = useState(0)
   if (phase !== 'start' && phase !== 'end') return <Navigate to="/" replace />
   const isStart = phase === 'start'
   const first = !loadProfile()?.checks?.start
+  const pageSize = 3
+  const pageCount = Math.ceil(tasks.length / pageSize)
+  const visibleTasks = tasks.slice(page * pageSize, (page + 1) * pageSize)
+  const lastPage = page === pageCount - 1
 
   const update = (id: string, patch: Partial<Entry>) =>
     setEntries(prev => {
@@ -58,7 +63,8 @@ export default function BalanceCheck() {
       </section>
 
       <ol className="mt-5 flex flex-col gap-4">
-        {tasks.map((t, i) => {
+        {visibleTasks.map((t, pageIndex) => {
+          const i = page * pageSize + pageIndex
           const e = entries[t.id] ?? emptyEntry()
           return (
             <li key={t.id} className={card}>
@@ -105,7 +111,12 @@ export default function BalanceCheck() {
       </ol>
 
       <div className="mt-6 flex flex-col gap-2">
-        <button onClick={finish} className={btnPrimary}>{isStart ? 'Save check & start' : 'Save check'}</button>
+        <div className="flex items-center justify-between px-1 text-sm font-semibold text-[#6f7472]">
+          <button type="button" disabled={page === 0} onClick={() => setPage(p => p - 1)} className="rounded-full px-3 py-2 disabled:opacity-30">Back</button>
+          <span>{page + 1} / {pageCount}</span>
+          {lastPage ? <span className="w-[58px]" /> : <button type="button" onClick={() => setPage(p => p + 1)} className="rounded-full px-3 py-2 text-brand-deep">Next</button>}
+        </div>
+        {lastPage && <button onClick={finish} className={btnPrimary}>{isStart ? 'Save check & start' : 'Save check'}</button>}
         {!first && <button onClick={() => navigate(-1)} className="h-11 text-sm text-[#6f7472]">Continue later</button>}
       </div>
     </div>
