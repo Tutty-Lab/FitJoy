@@ -17,7 +17,7 @@ export default function AppLayout() {
     <div className="mx-auto min-h-dvh max-w-[440px] bg-canvas">
       <div className="pt-[env(safe-area-inset-top)]" />
 
-      <main className="pb-28">
+      <main className="pt-3 pb-28">
         <Outlet />
       </main>
 

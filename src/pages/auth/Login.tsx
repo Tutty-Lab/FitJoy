@@ -9,7 +9,6 @@ import icHeart from '../../assets/auth/l-heart.svg'
 import icClear from '../../assets/auth/l-clear.svg'
 import icEye from '../../assets/auth/eye.svg'
 import icCheck from '../../assets/auth/l-check.svg'
-import { ArrowRight } from 'lucide-react'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -31,7 +30,7 @@ export default function Login() {
     const invite = new URLSearchParams(location.search).get('invite')
     if (invite) { try { await api('redeem', { method: 'POST', body: { code: invite } }) } catch (e) { return setError(e instanceof Error ? e.message : 'Could not redeem invitation') } }
     const profile = loadProfile()
-    navigate(profile?.role === 'admin' ? '/admin' : username.trim().toLowerCase() === 'demo' ? '/compare' : profile?.checks?.start ? '/' : '/check/start', { replace: true })
+    navigate(profile?.role === 'admin' ? '/admin' : profile?.checks?.start ? '/' : '/check/start', { replace: true })
   }
 
   return (
@@ -112,8 +111,8 @@ export default function Login() {
           disabled={busy}
           className="mt-1 flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-base leading-5 font-bold tracking-[0.16px] text-white shadow-[0_10px_15px_-3px_rgba(19,112,126,0.3),0_4px_6px_-4px_rgba(19,112,126,0.3)] active:scale-[0.98]"
         >
-          Log In to FitJoy
-          <ArrowRight aria-hidden="true" className="size-4" />
+          {busy && <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />}
+          {busy ? 'Logging in…' : 'Log In to FitJoy'}
         </button>
 
       </form>
