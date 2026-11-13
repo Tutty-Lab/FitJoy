@@ -115,6 +115,14 @@ export default function Home() {
             <span className="flex size-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-200" />
           </Link>
         ))}
+        <Link to="/workouts" className={`${card} flex items-center justify-between`}>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wide text-rust">22-day program</p>
+            <h3 className="text-base font-black">All days</h3>
+            <p className="text-sm text-slate-500">Review the full program</p>
+          </div>
+          <span className="rounded-full bg-[#e7efee] px-4 py-2 text-sm font-bold text-brand-deep">View all</span>
+        </Link>
       </section>
 
     </div>
