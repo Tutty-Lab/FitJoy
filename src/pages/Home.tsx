@@ -2,19 +2,10 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import mascot from '../assets/home/mascot.png'
 import { loadProfile } from '../lib/profile'
-import { programDay, todayKey, toggleDaily } from '../lib/checks'
+import { programDay } from '../lib/checks'
 import { useCompleted } from '../lib/progress'
-import icBell from '../assets/home/c12.svg'
-import icMorning from '../assets/home/c13.svg'
-import icNoon from '../assets/home/c15.svg'
-import icNight from '../assets/home/c17.svg'
-import scBeforeAfter from '../assets/home/c26.svg'
 
 const card = 'w-full rounded-3xl border border-mint bg-white p-[17px] drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'
-
-function Icon({ src, w, h = w }: { src: string; w: number; h?: number }) {
-  return <img src={src} alt="" style={{ width: w, height: h }} className="shrink-0" />
-}
 
 function SectionHeader({ icon, iconBg, title, right }: { icon: React.ReactNode; iconBg: string; title: string; right: React.ReactNode }) {
   return (
@@ -27,12 +18,6 @@ function SectionHeader({ icon, iconBg, title, right }: { icon: React.ReactNode; 
     </div>
   )
 }
-
-const slots = [
-  { label: 'Morning', icon: <Icon src={icMorning} w={16.667} h={13.333} />, iconBg: 'bg-amber-100' },
-  { label: 'Noon', icon: <Icon src={icNoon} w={18.333} />, iconBg: 'bg-[rgba(253,230,138,0.7)]' },
-  { label: 'Evening', icon: <Icon src={icNight} w={16.667} />, iconBg: 'bg-indigo-100' },
-]
 
 function ProgressRing({ pct }: { pct: number }) {
   const r = 26
@@ -52,13 +37,12 @@ const greeting = () => {
 
 
 export default function Home() {
-  const [p, setP] = useState(() => loadProfile())
-  const times = p?.reminderTimes ?? ['06:30', '12:15', '20:00']
+  const [p] = useState(() => loadProfile())
   const name = p?.name || 'friend'
   const day = programDay()
   const { completed } = useCompleted()
+  const currentDay = Math.min(22, Math.max(1, completed.length + 1))
   const pct = (day / 22) * 100
-  const today = p?.daily?.[todayKey()] ?? [false, false, false]
   const [hello, sun] = greeting()
 
   return (
@@ -107,30 +91,15 @@ export default function Home() {
         </Link>
       )}
 
-      {/* 3×1 minute */}
-      <section className={`flex flex-col gap-3 ${card}`}>
-        <div className="flex flex-col gap-2">
-          {slots.map((s, i) => (
-            <button
-              key={s.label}
-              aria-pressed={today[i]}
-              onClick={() => setP(toggleDaily(i))}
-              className={`flex items-center justify-between rounded-2xl border p-[11px] ${today[i] ? 'border-emerald-200 bg-emerald-50' : 'border-[rgba(226,232,240,0.8)] bg-white'}`}
-            >
-              <span className="flex items-center gap-2.5">
-                <span className={`flex size-9 shrink-0 items-center justify-center rounded-full ${s.iconBg}`}>{s.icon}</span>
-                <span className="text-[13px] leading-6 font-bold text-slate-900">{s.label}: {times[i]}</span>
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="text-xs font-bold text-[#6f7472]">1 min</span>
-                <span className={`flex size-7 items-center justify-center rounded-full border-2 ${today[i] ? 'border-brand-deep bg-brand-deep' : 'border-slate-300'}`}>
-                  {today[i] && <svg aria-hidden="true" viewBox="0 0 16 12" className="size-3.5 text-white"><path d="m2 6 4 4 8-8" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
-                </span>
-              </span>
-            </button>
-          ))}
+      <Link to={`/workouts/${currentDay}`} className={`flex items-center gap-3 ${card}`}>
+        <div className="size-20 shrink-0 rounded-2xl bg-[#e7efee]" />
+        <div className="min-w-0 flex-1">
+          <p className="text-xs font-bold uppercase tracking-wide text-rust">Today’s lesson · Day {currentDay}</p>
+          <h3 className="truncate text-lg font-black">Continue your practice</h3>
+          <p className="text-sm text-slate-500">Open lesson</p>
         </div>
-      </section>
+        <span className="rounded-full bg-brand-deep px-3 py-2 text-sm font-bold text-white">Start</span>
+      </Link>
 
     </div>
   )
