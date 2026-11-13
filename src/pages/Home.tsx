@@ -115,9 +115,13 @@ export default function Home() {
             <span className="flex size-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-200" />
           </Link>
         ))}
-        <Link to="/workouts" className="flex items-center justify-between px-1 pt-1 text-sm font-bold text-brand-deep">
-          <span>All lessons</span>
-          <span aria-hidden="true">→</span>
+        <Link to="/workouts" className="flex items-center justify-between rounded-3xl border border-mint bg-white p-4 shadow-sm">
+          <span>
+            <span className="block text-xs font-bold uppercase tracking-wide text-rust">Program</span>
+            <span className="block text-base font-black">All lessons</span>
+            <span className="block text-sm text-slate-500">22 days · 3 lessons per day</span>
+          </span>
+          <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-full bg-[#e7efee] text-lg font-bold text-brand-deep">→</span>
         </Link>
       </section>
 
