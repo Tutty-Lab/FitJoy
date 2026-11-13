@@ -110,7 +110,7 @@ export default function Home() {
             <div className="min-w-0 flex-1">
               <p className="text-xs font-bold uppercase tracking-wide text-rust">Lesson {index + 1} · {lesson.label}</p>
               <h4 className="truncate text-base font-black">{lesson.title}</h4>
-              <p className="text-sm text-slate-500">10 min · Start</p>
+              <p className="text-sm text-slate-500">10 min</p>
             </div>
             <span className="flex size-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-200" />
           </Link>
@@ -121,7 +121,6 @@ export default function Home() {
             <span className="block text-base font-black">All lessons</span>
             <span className="block text-sm text-slate-500">22 days · 3 lessons per day</span>
           </span>
-          <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-full bg-[#e7efee] text-lg font-bold text-brand-deep">→</span>
         </Link>
       </section>
 
