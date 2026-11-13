@@ -1,8 +1,10 @@
+import { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { isEdited, listWorkouts } from '../../services/catalog'
 
 export default function Workouts() {
   const list = listWorkouts()
+  const [expanded, setExpanded] = useState<number | null>(null)
   return (
     <div className="flex flex-col gap-5">
       <div>
@@ -22,16 +24,12 @@ export default function Workouts() {
             </tr>
           </thead>
           <tbody>
-            {list.flatMap(w => [
-              { label: 'Mobility', title: w.title },
-              { label: 'Strength & balance', title: `${w.title} · Stability` },
-              { label: 'Stretch & reset', title: `${w.title} · Recovery` },
-            ].map((lesson, i) => (
-              <tr key={`${w.day}-${i}`} className="border-t border-slate-100">
-                <td className="px-4 py-3 font-bold tabular-nums">Day {w.day}<span className="block text-xs font-normal text-slate-500">Lesson {i + 1}</span></td>
+            {list.map(w => (
+              <Fragment key={w.day}>
+              <tr key={w.day} className="border-t border-slate-100 cursor-pointer hover:bg-slate-50" onClick={() => setExpanded(expanded === w.day ? null : w.day)}>
+                <td className="px-4 py-3 font-bold tabular-nums">{expanded === w.day ? '▾' : '▸'} Day {w.day}</td>
                 <td className="px-4 py-3">
-                  <span className="font-semibold">{lesson.title}</span>
-                  <span className="ml-2 rounded-full bg-mint px-2 py-0.5 text-[10px] font-bold text-brand-deep">{lesson.label}</span>
+                  <span className="font-semibold">{w.title}</span>
                   {isEdited(w.day) && <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">Edited</span>}
                 </td>
                 <td className="px-4 py-3">{w.category}</td>
@@ -41,7 +39,15 @@ export default function Workouts() {
                   <Link to={`/admin/workouts/${w.day}`} className="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-[#13707e] hover:bg-mint">Edit</Link>
                 </td>
               </tr>
-            ))) }
+              {expanded === w.day && [
+                ['Mobility', w.title],
+                ['Strength & balance', `${w.title} · Stability`],
+                ['Stretch & reset', `${w.title} · Recovery`],
+              ].map(([label, title], i) => <tr key={`${w.day}-${i}`} className="bg-slate-50 text-xs">
+                <td className="px-4 py-2" /><td className="px-4 py-2 pl-8"><span className="font-semibold">Lesson {i + 1} · {title}</span><span className="ml-2 text-slate-500">{label}</span></td><td colSpan={4} />
+              </tr>)}
+              </Fragment>
+            )) }
           </tbody>
         </table>
       </div>

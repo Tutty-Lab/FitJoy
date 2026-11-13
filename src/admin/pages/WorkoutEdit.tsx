@@ -93,7 +93,6 @@ export default function WorkoutEdit() {
           </select>
         </Label>
         <div className="flex flex-col gap-2">
-          <Label text="Video URL"><input className={field} value={w.video} onChange={e => set('video', e.target.value)} placeholder="https://…/workout.mp4" /></Label>
           <label className="flex cursor-pointer items-center justify-center rounded-xl border border-dashed border-slate-300 px-3 py-2 text-sm font-semibold text-[#13707e] hover:bg-mint">
             {uploading ? 'Uploading…' : 'Upload video to storage'}
             <input type="file" accept="video/mp4,video/webm,video/quicktime" disabled={uploading} onChange={e => { const file = e.target.files?.[0]; if (file) void uploadVideo(file); e.currentTarget.value = '' }} className="sr-only" />
