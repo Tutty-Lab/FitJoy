@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { LogOut, Trash2 } from 'lucide-react'
+import { LogOut, RefreshCw, Trash2 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Switch } from '../components/shared'
 import { loadProfile, saveProfile } from '../lib/profile'
@@ -88,6 +88,13 @@ export default function Profile() {
     navigate('/signup', { replace: true })
   }
 
+  function redoBalanceCheck() {
+    localStorage.removeItem('fitjoy.checkDraft.start')
+    localStorage.removeItem('fitjoy.checkDraft.end')
+    setP(saveProfile({ checks: undefined, onboarded: false }))
+    navigate('/check/start', { replace: true })
+  }
+
   return (
     <div className="stagger flex flex-col gap-6 bg-[#fbf8f3] px-4 pt-2 pb-6">
       <section className="relative overflow-hidden rounded-[48px] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(200,220,218,0.4),0_8px_10px_-6px_rgba(200,220,218,0.4)]">
@@ -108,6 +115,12 @@ export default function Profile() {
 
       <div className="flex flex-col gap-4">
         <Group title="Balance">
+          <Row
+            onClick={redoBalanceCheck}
+            icon={<RefreshCw aria-hidden="true" className="size-4 text-brand-deep" />}
+            iconBg="bg-mint"
+            title="Redo balance check"
+          />
           <Row
             to="/compare"
             icon={<img src={iGoal} alt="" style={{ width: 12.5, height: 14.167 }} />}
