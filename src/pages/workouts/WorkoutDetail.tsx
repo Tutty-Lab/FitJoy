@@ -92,7 +92,25 @@ export default function WorkoutDetail() {
           </button>
         )}
 
-        <p className="text-center text-sm font-semibold text-[#6f7472]">Day {w.day} · Lesson {lesson} of 3</p>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            disabled={lesson === '1'}
+            onClick={() => navigate(`/workouts/${w.day}?lesson=${Math.max(1, Number(lesson) - 1)}`)}
+            className="h-11 flex-1 rounded-full bg-[#e7efee] text-sm font-bold text-brand-deep disabled:opacity-40"
+          >
+            Previous
+          </button>
+          <span className="text-center text-xs font-semibold text-[#6f7472]">Lesson {lesson} / 3</span>
+          <button
+            type="button"
+            disabled={lesson === '3'}
+            onClick={() => navigate(`/workouts/${w.day}?lesson=${Math.min(3, Number(lesson) + 1)}`)}
+            className="h-11 flex-1 rounded-full bg-brand-deep text-sm font-bold text-white disabled:opacity-40"
+          >
+            Next
+          </button>
+        </div>
       </main>
     </div>
   )
