@@ -43,15 +43,6 @@ export default function Home() {
         </div>
       </section>
 
-      {!p?.checks?.start && (
-        <Link to="/check/start" className={`flex items-center justify-between gap-3 ${card}`}>
-          <span>
-            <span className="block text-base font-black text-slate-900">{L('Dein Selbsttest wartet auf dich', 'Bài tự kiểm tra đang chờ bạn')}</span>
-            <span className="text-sm text-[#6f7472]">{L('Mach ihn, wenn du eine ruhige halbe Stunde hast.', 'Hãy làm khi bạn có nửa tiếng yên tĩnh.')}</span>
-          </span>
-          <span className="shrink-0 rounded-full bg-brand-deep px-4 py-2 text-sm font-bold text-white">{L('Starten', 'Bắt đầu')}</span>
-        </Link>
-      )}
       {finished && !p?.checks?.end && (
         <Link to="/check/end" className={`flex items-center justify-between gap-3 ${card}`}>
           <span>
