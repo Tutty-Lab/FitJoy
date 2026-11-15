@@ -1,4 +1,4 @@
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { groupLabel, groupOf, groups, obsLabel, taskText, tasks, PROGRAM_DAYS } from '../../data/balanceCheck'
 import { loadProfile } from '../../lib/profile'
 import { emptyEntry, type Check } from '../../lib/checks'
@@ -16,10 +16,17 @@ const avgSafety = (c?: Check) => {
 // 08: day 1 vs day 90, grouped Stehen / Gehen / Sitzen.
 export default function Compare() {
   const { start, end } = loadProfile()?.checks ?? {}
-  if (!end) return <Navigate to="/" replace />
+  if (!start && !end) return (
+    <div className="flex flex-col items-center gap-4 px-6 pt-10 text-center">
+      <img src={vestibuWelcome} alt="Vestibu" className="size-32 object-contain" />
+      <h1 className="text-xl font-black">{L('Noch keine Ergebnisse', 'Chưa có kết quả')}</h1>
+      <p className="text-slate-600">{L('Mach deinen Selbsttest – danach siehst du hier deine Werte.', 'Hãy làm bài tự kiểm tra – sau đó kết quả sẽ hiện ở đây.')}</p>
+      <Link to="/check/start" className="flex h-14 w-full items-center justify-center rounded-full bg-brand-deep font-bold text-white">{L('Meinen Selbsttest starten', 'Bắt đầu bài tự kiểm tra')}</Link>
+    </div>
+  )
   return (
     <div className="stagger flex flex-col gap-4 px-4 pt-2 pb-6">
-      <section className={`${card} flex flex-col gap-3 text-[15px] leading-6`}>
+      {end && <section className={`${card} flex flex-col gap-3 text-[15px] leading-6`}>
         <img src={vestibuWelcome} alt="Vestibu" className="mx-auto size-28 object-contain" />
         <h1 className="text-2xl font-black">{L('Danke für deine ehrliche Bestandsaufnahme!', 'Cảm ơn bạn đã thành thật nhìn lại!')}</h1>
         <p>{L('Dein stiller Regisseur sagt Danke für deine Aufmerksamkeit! Drei Monate lang hast du dir immer wieder deine persönlichen Minuten geschenkt – und heute haben wir geschaut, wo du stehst.', 'Người đạo diễn thầm lặng cảm ơn sự chú tâm của bạn! Suốt ba tháng, bạn đã đều đặn dành cho mình những phút riêng – và hôm nay ta đã xem bạn đang ở đâu.')}</p>
@@ -29,7 +36,7 @@ export default function Compare() {
           <li><b>{L('Du siehst bekannte Werte?', 'Bạn thấy kết quả quen thuộc?')}</b> {L('Genau so wichtig! Das Gleichgewichtssystem arbeitet oft lange im Verborgenen, stabilisiert im Hintergrund, stoppt schleichenden Abbau und fängt Alltagsstress ab, bevor es nach außen im Test sichtbar wird.', 'Điều này cũng quan trọng không kém! Hệ thăng bằng thường làm việc thầm lặng rất lâu: ổn định từ bên trong, ngăn suy giảm âm thầm và hấp thụ căng thẳng thường ngày trước khi điều đó hiện rõ trong bài kiểm tra.')}</li>
         </ul>
         <p>{L('Das Wichtigste ist: Du hast drei Monate lang das Fundament gelegt.', 'Điều quan trọng nhất: bạn đã xây nền móng suốt ba tháng.')} <i>{L('„Gras wächst nicht schneller, wenn man daran zieht – ich vertraue meinem eigenen Tempo.“', '„Cỏ không mọc nhanh hơn khi ta kéo nó – tôi tin vào nhịp độ của chính mình.“')}</i></p>
-      </section>
+      </section>}
       <SectionTitle>{L('Meine Ergebnisse', 'Kết quả của tôi')}</SectionTitle>
       <div className={`${card} grid grid-cols-3 gap-2 text-center`}>
         <div />
