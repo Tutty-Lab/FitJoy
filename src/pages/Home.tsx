@@ -6,8 +6,9 @@ import { affirmationFor, localDay, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../dat
 import { loadProfile } from '../lib/profile'
 import { sessionsDone, useCompleted } from '../lib/progress'
 import { L } from '../lib/i18n'
+import { clayCard } from '../components/clay'
 
-const card = 'w-full rounded-3xl border border-mint bg-white p-[17px] drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'
+const card = clayCard
 const phaseName = (phase: string) => phase.replace(/^P(\d):\s*/, `${L('Phase', 'Giai đoạn')} $1 · `)
 
 export default function Home() {
@@ -23,7 +24,7 @@ export default function Home() {
         <RefreshCw aria-hidden="true" className="size-4" />{L('Aktualisieren', 'Làm mới')}
       </button>
       {/* Vestibu's greeting of the day */}
-      <section className="hero-card relative overflow-hidden rounded-3xl border border-[rgba(207,231,229,0.6)] p-[17px] shadow-[0_10px_25px_rgba(19,112,126,0.12)]" style={{ backgroundImage: 'linear-gradient(135deg, rgba(227,242,241,0.9) 0%, #fff 50%, #fffbeb 100%)' }}>
+      <section className="hero-card relative overflow-hidden rounded-[28px] p-4 border-2 border-mint shadow-[0_4px_0_#cfe7e5]" style={{ backgroundImage: 'linear-gradient(135deg, rgba(227,242,241,0.9) 0%, #fff 50%, #fffbeb 100%)' }}>
         <div className="flex items-start gap-3">
           <img src={mascot} alt="Vestibu" className="float size-20 shrink-0 object-contain" />
           <figure className="min-w-0 flex-1">
@@ -34,8 +35,8 @@ export default function Home() {
           <span className="text-xs font-bold tracking-[0.4px] text-brand-ink uppercase">{phaseName(today.phase)}</span>
           <span className="text-sm font-bold text-slate-500">{L('Tag', 'Ngày')} <b className="text-lg font-black text-brand-deep">{current}</b> / {PROGRAM_DAYS}</span>
         </div>
-        <div className="mt-2 h-2 overflow-hidden rounded-full bg-mint" role="progressbar" aria-valuemin={0} aria-valuemax={PROGRAM_DAYS} aria-valuenow={completed.length} aria-label={L('Fortschritt', 'Tiến trình')}>
-          <div className="h-full rounded-full bg-brand transition-all duration-700" style={{ width: `${pct}%` }} />
+        <div className="mt-3 h-4 overflow-hidden rounded-full bg-mint" role="progressbar" aria-valuemin={0} aria-valuemax={PROGRAM_DAYS} aria-valuenow={completed.length} aria-label={L('Fortschritt', 'Tiến trình')}>
+          <div className="relative h-full rounded-full bg-brand transition-all duration-700" style={{ width: `${Math.max(pct, 4)}%` }}><span className="absolute inset-x-2 top-1 h-1 rounded-full bg-white/40" /></div>
         </div>
         <div className="mt-3 rounded-2xl bg-mint/70 p-3">
           <p className="text-xs font-bold tracking-wide text-brand-ink uppercase">♥ {L('Dein Gedanke für heute', 'Suy nghĩ của bạn hôm nay')}</p>
@@ -49,7 +50,7 @@ export default function Home() {
             <span className="block text-base font-black text-slate-900">{L('Dein stiller Regisseur zieht den Hut vor dir!', 'Người đạo diễn thầm lặng ngả mũ trước bạn!')}</span>
             <span className="text-sm text-[#6f7472]">{L('Zeit für deine neue Standortbestimmung – ganz ohne Leistungsdruck.', 'Đến lúc xem lại bạn đang ở đâu – hoàn toàn không áp lực.')}</span>
           </span>
-          <span className="shrink-0 rounded-full bg-brand-deep px-4 py-2 text-sm font-bold text-white">{L('Selbsttest', 'Tự kiểm tra')}</span>
+          <span className="shrink-0 rounded-xl bg-brand-deep px-4 py-2 text-sm font-black text-white shadow-[0_3px_0_#0b4a54]">{L('Selbsttest', 'Tự kiểm tra')}</span>
         </Link>
       )}
       {p?.checks?.end && <Link to="/compare" className={`${card} font-bold text-brand-deep`}>{L('Meine Ergebnisse: Tag 1 und Tag 90 vergleichen →', 'Kết quả của tôi: so sánh ngày 1 và ngày 90 →')}</Link>}
@@ -66,7 +67,7 @@ export default function Home() {
           </div>
         </div>
         {done < SESSIONS_PER_DAY ? (
-          <Link to={`/workouts/${current}?session=${done + 1}`} state={{ from: '/' }} className="mt-3 flex h-14 items-center justify-center rounded-full bg-brand-deep text-base font-bold text-white shadow-md">
+          <Link to={`/workouts/${current}?session=${done + 1}`} state={{ from: '/' }} className="mt-3 flex h-14 items-center justify-center text-base cursor-pointer rounded-2xl bg-brand-deep font-black tracking-wide text-white uppercase shadow-[0_4px_0_#0b4a54] transition-transform duration-150 active:translate-y-[3px] active:shadow-[0_1px_0_#0b4a54]">
             {L(`Minute ${done + 1} starten`, `Bắt đầu phút ${done + 1}`)}
           </Link>
         ) : (

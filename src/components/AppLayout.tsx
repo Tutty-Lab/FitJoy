@@ -1,16 +1,13 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { motion } from 'motion/react'
-import navHome from '../assets/home/c29.svg'
-import navReminders from '../assets/home/c31.svg'
-import navCalendar from '../assets/home/nav-calendar.svg'
-import navProfile from '../assets/home/c32.svg'
+import { AlarmClock, CalendarCheck, House, UserRound, type LucideIcon } from 'lucide-react'
 import { L } from '../lib/i18n'
 
-const tabs = [
-  { to: '/', label: L('Start', 'Trang chủ'), icon: navHome, w: 14.667, h: 16.5 },
-  { to: '/calendar', label: L('Kalender', 'Lịch'), icon: navCalendar, w: 20, h: 20 },
-  { to: '/reminders', label: L('Erinnerungen', 'Nhắc nhở'), icon: navReminders, w: 21.3, h: 19.65 },
-  { to: '/profile', label: L('Profil', 'Hồ sơ'), icon: navProfile, w: 20, h: 20 },
+const tabs: { to: string; label: string; icon: LucideIcon }[] = [
+  { to: '/', label: L('Start', 'Trang chủ'), icon: House },
+  { to: '/calendar', label: L('Kalender', 'Lịch'), icon: CalendarCheck },
+  { to: '/reminders', label: L('Erinnerungen', 'Nhắc nhở'), icon: AlarmClock },
+  { to: '/profile', label: L('Profil', 'Hồ sơ'), icon: UserRound },
 ]
 
 export default function AppLayout() {
@@ -37,15 +34,14 @@ export default function AppLayout() {
                       className="absolute inset-0 rounded-[28px] border border-white/80 bg-white/60 shadow-[0_4px_14px_rgba(19,112,126,0.22),inset_0_1px_0_rgba(255,255,255,1)]"
                     />
                   )}
-                  <motion.img
-                    src={t.icon}
-                    alt=""
+                  <motion.span
                     animate={{ scale: isActive ? 1.12 : 1, y: isActive ? -1 : 0 }}
                     transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                    className="relative"
-                    style={{ width: t.w, height: t.h }}
-                  />
-                  <span className={isActive ? 'sr-only' : 'relative pt-1 text-[11px] leading-4 font-semibold text-slate-600'}>
+                    className={`relative ${isActive ? 'text-brand-deep' : 'text-slate-500'}`}
+                  >
+                    <t.icon aria-hidden="true" className="size-[22px]" strokeWidth={isActive ? 2.6 : 2.2} />
+                  </motion.span>
+                  <span className={`relative pt-0.5 text-[11px] leading-4 ${isActive ? 'font-black text-brand-deep' : 'font-semibold text-slate-500'}`}>
                     {t.label}
                   </span>
                 </>

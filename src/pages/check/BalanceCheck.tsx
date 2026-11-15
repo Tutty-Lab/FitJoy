@@ -8,9 +8,10 @@ import { ensureNotificationPermission } from '../../lib/reminders'
 import mascot from '../../assets/home/mascot.png'
 import vestibuWelcome from '../../assets/home/vestibu-welcome.png'
 import { L } from '../../lib/i18n'
+import { clayCard, clayPrimary, claySecondary } from '../../components/clay'
 
-const card = 'rounded-3xl bg-white p-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'
-const btnPrimary = 'flex h-14 w-full items-center justify-center rounded-full bg-brand-deep px-6 text-base font-bold text-white shadow-md disabled:opacity-50'
+const card = clayCard
+const btnPrimary = clayPrimary
 
 const DRAFT = (p: Phase) => `fitjoy.checkDraft.${p}`
 
@@ -71,8 +72,8 @@ export default function BalanceCheck() {
   }
 
   const shell = 'mx-auto flex min-h-dvh max-w-[440px] flex-col gap-5 p-6 pt-12'
-  const btnSecondary = 'flex h-12 w-full items-center justify-center rounded-full border border-mint bg-white px-6 font-bold text-brand-deep'
-  const Checklist = ({ items }: { items: [string, string][] }) => <ul className="space-y-3 rounded-3xl bg-white p-5 text-[15px] leading-6">{items.map(([k, v]) => <li key={k}><b>{k}:</b> {v}</li>)}</ul>
+  const btnSecondary = claySecondary
+  const Checklist = ({ items }: { items: [string, string][] }) => <ul className="space-y-3 rounded-[28px] bg-white p-5 border-2 border-mint shadow-[0_4px_0_#cfe7e5] text-[15px] leading-6">{items.map(([k, v]) => <li key={k}><b>{k}:</b> {v}</li>)}</ul>
 
   // Day 1: three swipe cards → preparation checklist (with "remind me later") → safety note → tasks.
   if (isStart && stage < 5) {
@@ -101,7 +102,7 @@ export default function BalanceCheck() {
       <p className="text-sm text-slate-600">{L('Falls es gerade nicht passt, ist das kein Problem. Du kannst den Test jederzeit nachholen, wenn du zu Hause Ruhe hast.', 'Nếu bây giờ chưa tiện cũng không sao. Bạn có thể làm bài bất cứ lúc nào khi ở nhà yên tĩnh.')}</p>
       {remindAt && <p role="status" className="rounded-2xl bg-mint p-3 text-sm font-semibold text-brand-deep">{L(`Ich erinnere dich um ${remindAt} Uhr. Lass die App dafür geöffnet oder angepinnt.`, `Mình sẽ nhắc bạn lúc ${remindAt}. Hãy để ứng dụng mở hoặc ghim nó lại.`)}</p>}
       <button className={btnPrimary} onClick={() => setStage(4)}>{L('Alles bereit – los geht’s!', 'Sẵn sàng – bắt đầu thôi!')}</button>
-      {!picking ? <button className={btnSecondary} onClick={() => setPicking(true)}>{L('Später erinnern', 'Nhắc tôi sau')}</button> : <div className="flex flex-col gap-2 rounded-3xl bg-white p-4">
+      {!picking ? <button className={btnSecondary} onClick={() => setPicking(true)}>{L('Später erinnern', 'Nhắc tôi sau')}</button> : <div className="flex flex-col gap-2 rounded-[28px] bg-white p-4 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <button className={btnSecondary} onClick={() => remind('19:00')}>{L('Heute Abend (19:00 Uhr)', 'Tối nay (19:00)')}</button>
         <label className="flex items-center justify-between gap-3 text-sm font-semibold">{L('Eigene Zeit wählen', 'Tự chọn giờ')}<input type="time" onChange={e => e.target.value && remind(e.target.value)} className="h-10 rounded-full bg-canvas px-3" /></label>
       </div>}

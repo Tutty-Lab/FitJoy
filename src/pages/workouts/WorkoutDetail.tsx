@@ -9,6 +9,7 @@ import { playChime } from '../../lib/reminders'
 import vestibuWelcome from '../../assets/home/vestibu-welcome.png'
 import poster from '../../assets/workouts/video-thumb.png'
 import { L } from '../../lib/i18n'
+import { clayPrimary, claySecondary } from '../../components/clay'
 
 type Stage = 'instructions' | 'practice' | 'done' | 'bonus' | 'bonusDone'
 
@@ -52,10 +53,10 @@ export default function WorkoutDetail() {
 
   if (!Number.isInteger(day) || day < 1 || day > 90 || statusOf(day) === 'locked') return <Navigate to="/" replace />
 
-  const primary = 'flex h-14 w-full items-center justify-center rounded-full bg-brand-deep px-5 text-base font-bold text-white shadow-md disabled:opacity-40'
-  const secondary = 'flex h-12 w-full items-center justify-center rounded-full border border-mint bg-white px-5 font-bold text-brand-deep'
+  const primary = clayPrimary
+  const secondary = claySecondary
   const Affirmation = ({ big }: { big?: boolean }) => (
-    <blockquote className={`rounded-3xl bg-mint p-5 text-center font-bold text-brand-deep ${big ? 'text-2xl leading-9' : 'text-lg'}`}>
+    <blockquote className={`rounded-[28px] border-2 border-[#bfe0dd] bg-mint p-5 text-center shadow-[0_4px_0_#bfe0dd] font-bold text-brand-deep ${big ? 'text-2xl leading-9' : 'text-lg'}`}>
       „{affirmation}“
       {big && <p className="mt-2 text-sm font-semibold text-slate-600">{L('Halte die Position und sprich diesen Satz laut aus.', 'Giữ tư thế và đọc to câu này.')}</p>}
     </blockquote>
@@ -77,7 +78,7 @@ export default function WorkoutDetail() {
     {stage === 'instructions' && <>
       <VideoPlayer key={`${day}:instr`} ref={player} src={video} poster={poster} />
       <h2 className="text-xl font-black">{baseText.title}</h2>
-      <ol className="list-decimal space-y-2 rounded-3xl bg-white p-6 pl-10 text-[15px] leading-6">{baseText.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
+      <ol className="list-decimal space-y-2 rounded-[28px] bg-white p-6 pl-10 border-2 border-mint shadow-[0_4px_0_#cfe7e5] text-[15px] leading-6">{baseText.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
       <Affirmation />
       <button type="button" className={secondary} onClick={() => { player.current?.play() }}>{L('Anleitung noch einmal ansehen', 'Xem lại hướng dẫn')}</button>
       <button type="button" className={primary} onClick={() => { setRemaining(PRACTICE_SECONDS); setStage('practice'); setRunning(true) }}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>
@@ -90,7 +91,7 @@ export default function WorkoutDetail() {
       <button type="button" className={primary} onClick={() => setRunning(v => !v)}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
     </>}
 
-    {stage === 'done' && <section className="flex flex-col items-center gap-4 rounded-3xl bg-white p-6 text-center">
+    {stage === 'done' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
       <img src={vestibuWelcome} alt="Vestibu" className="float size-32 object-contain" />
       <h2 className="text-2xl font-black">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
       <p className="text-slate-600">{L(`Grundübung ${session}/${SESSIONS_PER_DAY} für Tag ${day} geschafft.`, `Đã xong bài cơ bản ${session}/${SESSIONS_PER_DAY} của ngày ${day}.`)}</p>
@@ -102,7 +103,7 @@ export default function WorkoutDetail() {
     {stage === 'bonus' && bonus && <>
       <div role="timer" aria-label={L('Verbleibende Zeit', 'Thời gian còn lại')} className="text-center text-6xl font-black tabular-nums text-rust">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
       <VideoPlayer key={`${day}:bonus`} src={video} poster={poster} />
-      <section className="flex flex-col gap-3 rounded-3xl bg-white p-5">
+      <section className="flex flex-col gap-3 rounded-[28px] bg-white p-5 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <p className="text-xs font-bold tracking-wide text-rust uppercase">Bonus · {categoryLabel(bonus.kategorie)}</p>
         <h2 className="text-xl font-black">{bonus.titel}</h2>
         <p className="text-[15px] leading-6">{bonus.anleitung}</p>
@@ -111,7 +112,7 @@ export default function WorkoutDetail() {
       <button type="button" className={primary} onClick={() => setRunning(v => !v)}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
     </>}
 
-    {stage === 'bonusDone' && <section className="flex flex-col items-center gap-4 rounded-3xl bg-white p-6 text-center">
+    {stage === 'bonusDone' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
       <img src={vestibuWelcome} alt="Vestibu" className="float size-32 object-contain" />
       <h2 className="text-2xl font-black">{L('Bonus geschafft!', 'Xong phút bonus!')}</h2>
       <p className="text-slate-600">{L('Eine Extra-Minute für dein Gleichgewicht.', 'Thêm một phút cho sự thăng bằng của bạn.')}</p>

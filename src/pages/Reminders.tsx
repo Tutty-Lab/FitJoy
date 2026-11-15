@@ -31,7 +31,7 @@ export default function Reminders() {
 
   return (
     <div className="stagger flex flex-col gap-5 bg-[#fbf8f3] px-4 pt-2 pb-6">
-      <div className="flex gap-4 overflow-hidden rounded-2xl bg-[#ffece1] p-4 shadow-sm">
+      <div className="flex gap-4 overflow-hidden rounded-[28px] border-2 border-[#ffd9c2] bg-[#ffece1] p-4 shadow-[0_4px_0_#ffd9c2]">
         <div className="relative shrink-0 self-start">
           <img src={coach} alt="Vestibu" className="size-16 object-contain" />
         </div>
@@ -46,7 +46,7 @@ export default function Reminders() {
       <section className="flex flex-col gap-3">
         <SectionTitle aside={saved && <span className="text-xs leading-4 font-bold text-[#13707e]">{L('Gespeichert ✓', 'Đã lưu ✓')}</span>}>{L('Erinnerungszeiten', 'Giờ nhắc')}</SectionTitle>
         {slots.map((s, i) => (
-          <div key={s.title} className={`flex flex-col gap-3 rounded-[32px] p-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)] ${s.card} ${on[i] ? '' : 'opacity-60'}`}>
+          <div key={s.title} className={`flex flex-col gap-3 rounded-[28px] p-4 border-2 border-mint shadow-[0_4px_0_#cfe7e5] ${s.card} ${on[i] ? '' : 'opacity-60'}`}>
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-3">
                 <span className={`flex size-11 items-center justify-center rounded-full ${s.bg}`}>

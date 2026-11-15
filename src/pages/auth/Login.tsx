@@ -35,7 +35,7 @@ export default function Login() {
 
   return (
     <div className="stagger mx-auto min-h-dvh max-w-[440px] bg-[#fbf8f3] px-4 pt-[calc(env(safe-area-inset-top)+64px)] pb-9">
-      <section className="relative mb-4 flex flex-col gap-2 overflow-hidden rounded-[32px] bg-[#f3f6f5] p-4 shadow-sm">
+      <section className="relative mb-4 flex flex-col gap-2 overflow-hidden rounded-[28px] border-2 border-mint bg-[#f3f6f5] p-4 shadow-[0_4px_0_#cfe7e5]">
         <div className="absolute -top-8 -right-8 size-36 rounded-full bg-[#ffe3d3] opacity-40 blur-[40px]" />
         <div className="absolute -bottom-6 -left-6 size-32 rounded-full bg-[#ffece1] opacity-30 blur-[24px]" />
         <div className="relative flex items-center gap-2">
@@ -52,7 +52,7 @@ export default function Login() {
         </div>
       </section>
 
-      <form onSubmit={submit} className="flex flex-col gap-4 rounded-[32px] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(200,220,218,0.4),0_8px_10px_-6px_rgba(200,220,218,0.4)]">
+      <form onSubmit={submit} className="flex flex-col gap-4 rounded-[28px] bg-white p-6 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <div className="flex flex-col gap-1.5">
           <span className="relative">
             <input
@@ -108,7 +108,7 @@ export default function Login() {
         <button
           type="submit"
           disabled={busy}
-          className="mt-1 flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-base leading-5 font-bold tracking-[0.16px] text-white shadow-[0_10px_15px_-3px_rgba(19,112,126,0.3),0_4px_6px_-4px_rgba(19,112,126,0.3)] active:scale-[0.98]"
+          className="mt-1 flex items-center justify-center gap-2 px-6 py-3.5 text-base cursor-pointer rounded-2xl bg-brand-deep font-black tracking-wide text-white uppercase shadow-[0_4px_0_#0b4a54] transition-transform duration-150 active:translate-y-[3px] active:shadow-[0_1px_0_#0b4a54]"
         >
           {busy && <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />}
           {busy ? L('Anmelden…', 'Đang đăng nhập…') : L('Anmelden', 'Đăng nhập')}

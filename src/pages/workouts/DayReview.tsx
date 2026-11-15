@@ -4,8 +4,9 @@ import mascot from '../../assets/home/mascot.png'
 import { affirmationFor, categoryLabel, localBonusFor, localDay, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
 import { sessionsDone, useCompleted } from '../../lib/progress'
 import { L } from '../../lib/i18n'
+import { clayCard } from '../../components/clay'
 
-const card = 'rounded-3xl border border-mint bg-white p-[17px]'
+const card = clayCard
 
 // Look back at an opened day: greeting, affirmation, sessions done, bonus; practise again or catch up.
 export default function DayReview() {
@@ -46,7 +47,7 @@ export default function DayReview() {
             {Array.from({ length: SESSIONS_PER_DAY }, (_, i) => <span key={i} className={`flex size-6 items-center justify-center rounded-full ${i < done ? 'bg-brand text-white' : 'bg-mint'}`}>{i < done && <Check className="size-3.5" strokeWidth={3} />}</span>)}
           </span>
         </div>
-        <Link to={`/workouts/${day}?session=${Math.min(SESSIONS_PER_DAY, done + 1)}`} state={{ from: `/days/${day}` }} className="mt-3 flex h-12 items-center justify-center rounded-full bg-brand-deep font-bold text-white">
+        <Link to={`/workouts/${day}?session=${Math.min(SESSIONS_PER_DAY, done + 1)}`} state={{ from: `/days/${day}` }} className="mt-3 flex h-12 items-center justify-center cursor-pointer rounded-2xl bg-brand-deep font-black tracking-wide text-white uppercase shadow-[0_4px_0_#0b4a54] transition-transform duration-150 active:translate-y-[3px] active:shadow-[0_1px_0_#0b4a54]">
           {done < SESSIONS_PER_DAY ? L(`Minute ${done + 1} starten`, `Bắt đầu phút ${done + 1}`) : L('Nochmal üben', 'Tập lại')}
         </Link>
       </section>

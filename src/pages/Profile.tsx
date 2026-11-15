@@ -47,7 +47,7 @@ function Group({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section>
       <h3 className="px-2 pb-1 text-xs leading-4 font-bold tracking-[0.6px] text-[#6f7472] uppercase">{title}</h3>
-      <div className="divide-y divide-[#f3f6f5] overflow-hidden rounded-[32px] bg-white shadow-sm [&>*]:mx-0">{children}</div>
+      <div className="divide-y divide-[#f3f6f5] overflow-hidden rounded-[28px] bg-white border-2 border-mint shadow-[0_4px_0_#cfe7e5] [&>*]:mx-0">{children}</div>
     </section>
   )
 }
@@ -98,7 +98,7 @@ export default function Profile() {
 
   return (
     <div className="stagger flex flex-col gap-6 bg-[#fbf8f3] px-4 pt-2 pb-6">
-      <section className="relative overflow-hidden rounded-[48px] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(200,220,218,0.4),0_8px_10px_-6px_rgba(200,220,218,0.4)]">
+      <section className="relative overflow-hidden rounded-[28px] bg-white p-6 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <div className="absolute -top-12 -right-12 size-44 rounded-full bg-[rgba(255,227,211,0.3)] blur-[40px]" />
         <div className="absolute bottom-0 -left-8 size-36 rounded-full bg-[rgba(255,236,225,0.4)] blur-[24px]" />
         <div className="relative flex flex-col items-center">

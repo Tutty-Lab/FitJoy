@@ -5,8 +5,9 @@ import { emptyEntry, type Check } from '../../lib/checks'
 import vestibuWelcome from '../../assets/home/vestibu-welcome.png'
 import { SectionTitle } from '../../components/shared'
 import { L, locale } from '../../lib/i18n'
+import { clayCard } from '../../components/clay'
 
-const card = 'rounded-[32px] bg-white p-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'
+const card = clayCard
 const fmt = (d?: string) => (d ? new Date(d).toLocaleDateString(locale) : '–')
 const avgSafety = (c?: Check) => {
   const v = tasks.map(t => c?.entries[t.id]?.safety).filter((n): n is number => typeof n === 'number')
@@ -21,7 +22,7 @@ export default function Compare() {
       <img src={vestibuWelcome} alt="Vestibu" className="size-32 object-contain" />
       <h1 className="text-xl font-black">{L('Noch keine Ergebnisse', 'Chưa có kết quả')}</h1>
       <p className="text-slate-600">{L('Mach deinen Selbsttest – danach siehst du hier deine Werte.', 'Hãy làm bài tự kiểm tra – sau đó kết quả sẽ hiện ở đây.')}</p>
-      <Link to="/check/start" className="flex h-14 w-full items-center justify-center rounded-full bg-brand-deep font-bold text-white">{L('Meinen Selbsttest starten', 'Bắt đầu bài tự kiểm tra')}</Link>
+      <Link to="/check/start" className="flex h-14 w-full items-center justify-center cursor-pointer rounded-2xl bg-brand-deep font-black tracking-wide text-white uppercase shadow-[0_4px_0_#0b4a54] transition-transform duration-150 active:translate-y-[3px] active:shadow-[0_1px_0_#0b4a54]">{L('Meinen Selbsttest starten', 'Bắt đầu bài tự kiểm tra')}</Link>
     </div>
   )
   return (
@@ -46,7 +47,7 @@ export default function Compare() {
         <p className="text-2xl font-black text-brand-deep">{avgSafety(start)}</p>
         <p className="text-2xl font-black text-rust">{avgSafety(end)}</p>
       </div>
-      {!start && <Link to="/check/start" className="flex h-14 items-center justify-center rounded-full bg-brand-deep font-bold text-white">{L('Check starten', 'Bắt đầu kiểm tra')}</Link>}
+      {!start && <Link to="/check/start" className="flex h-14 items-center justify-center cursor-pointer rounded-2xl bg-brand-deep font-black tracking-wide text-white uppercase shadow-[0_4px_0_#0b4a54] transition-transform duration-150 active:translate-y-[3px] active:shadow-[0_1px_0_#0b4a54]">{L('Check starten', 'Bắt đầu kiểm tra')}</Link>}
       {groups.map(g => (
         <section key={g} className="flex flex-col gap-3">
           <SectionTitle>{groupLabel(g)}</SectionTitle>

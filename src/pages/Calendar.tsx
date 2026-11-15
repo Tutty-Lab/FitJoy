@@ -60,11 +60,13 @@ export default function Calendar() {
                   <li key={d}>
                     {s === 'locked' ? (
                       <button type="button" onClick={() => setHint(hint === d ? null : d)} aria-label={`${label}: ${L('gesperrt', 'đang khóa')}`} className={`${bubble} ${styles.locked} cursor-pointer`}>
-                        {hint === d ? d : <Lock aria-hidden="true" className="size-4" strokeWidth={2.5} />}
+                        {d}
+                        <span aria-hidden="true" className="absolute -right-0.5 -bottom-0.5 flex size-5 items-center justify-center rounded-full border-2 border-white bg-slate-300 text-white"><Lock className="size-2.5" strokeWidth={3} /></span>
                       </button>
                     ) : (
                       <Link to={`/days/${d}`} aria-label={`${label}: ${s === 'completed' ? L('erledigt', 'đã xong') : L('heute', 'hôm nay')}`} className={`${bubble} ${d === current && s === 'completed' ? `${styles.completed} ring-4 ring-amber-200/70` : styles[s]}`}>
-                        {s === 'completed' ? <Check aria-hidden="true" className="size-5" strokeWidth={3.5} /> : d}
+                        {d}
+                        {s === 'completed' && <span aria-hidden="true" className="absolute -right-0.5 -bottom-0.5 flex size-5 items-center justify-center rounded-full border-2 border-white bg-amber-400 text-amber-950"><Check className="size-3" strokeWidth={4} /></span>}
                         {s === 'current' && <span aria-hidden="true" className="absolute -top-6 rounded-full bg-amber-950 px-2 py-0.5 text-[10px] font-black whitespace-nowrap text-white">{L('Heute', 'Hôm nay')}</span>}
                       </Link>
                     )}

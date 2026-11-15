@@ -62,14 +62,14 @@ export default function Celebration() {
         {[
           { v: w.mins, l: L('Minuten', 'Phút'), c: 'text-[#d9652c]', bg: 'bg-[#ffece1]' },
         ].map(s => (
-          <div key={s.l} className="flex flex-col items-center rounded-[24px] bg-white p-3 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
+          <div key={s.l} className="flex flex-col items-center rounded-[24px] bg-white p-3 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
             <span className={`mb-1 rounded-full px-2.5 py-0.5 text-lg leading-7 font-black ${s.bg} ${s.c}`}>{s.v}</span>
             <span className="text-[11px] leading-4 font-semibold text-[#6f7472]">{s.l}</span>
           </div>
         ))}
       </div>
 
-      <section className="relative mt-4 flex flex-col gap-2 rounded-[32px] bg-white p-4 shadow-md">
+      <section className="relative mt-4 flex flex-col gap-2 rounded-[28px] bg-white p-4 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <div className="flex items-center justify-between">
           <span className="text-base leading-5 font-bold">{L('90-Tage-Reise', 'Hành trình 90 ngày')}</span>
           <span className="text-sm leading-5 font-bold text-[#13707e]">{total}/{workouts.length}</span>

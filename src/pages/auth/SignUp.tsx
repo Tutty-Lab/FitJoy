@@ -65,7 +65,7 @@ export default function SignUp() {
 
   return (
     <div className="stagger mx-auto min-h-dvh max-w-[440px] bg-[#fbf8f3] px-4 pt-[calc(env(safe-area-inset-top)+64px)] pb-8">
-      <section className="relative mt-2 flex flex-col gap-2 overflow-hidden rounded-[48px] bg-white p-6 shadow-sm">
+      <section className="relative mt-2 flex flex-col gap-2 overflow-hidden rounded-[28px] bg-white p-6 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <div className="absolute -right-6 -bottom-6 size-32 rounded-full bg-[rgba(255,227,211,0.3)] blur-[40px]" />
         <div className="absolute -top-6 -left-6 size-28 rounded-full bg-[rgba(255,236,225,0.4)] blur-[24px]" />
         <div className="relative flex items-start justify-between">
@@ -87,7 +87,7 @@ export default function SignUp() {
         <AuthTabs active="signup" />
       </div>
 
-      <form onSubmit={submit} className="mt-4 flex flex-col gap-4 rounded-[32px] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(200,220,218,0.4),0_8px_10px_-6px_rgba(200,220,218,0.4)]">
+      <form onSubmit={submit} className="mt-4 flex flex-col gap-4 rounded-[28px] bg-white p-6 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <Field
           label="Full Name"
           aside={name.trim() && (
@@ -156,7 +156,7 @@ export default function SignUp() {
         <button
           type="submit"
           disabled={!canSubmit || busy}
-          className="mt-1 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand to-teal-500 px-6 py-4 text-base leading-5 font-bold tracking-[0.16px] text-white drop-shadow-[0_6px_0_#0b4a54] transition active:translate-y-1 active:drop-shadow-[0_2px_0_#0b4a54] disabled:opacity-50"
+          className="mt-1 flex items-center justify-center gap-2 px-6 py-4 text-base disabled:opacity-50 cursor-pointer rounded-2xl bg-brand-deep font-black tracking-wide text-white uppercase shadow-[0_4px_0_#0b4a54] transition-transform duration-150 active:translate-y-[3px] active:shadow-[0_1px_0_#0b4a54]"
         >
           {L('90-Tage-Reise starten', 'Bắt đầu hành trình 90 ngày')}
           <ArrowRight aria-hidden="true" className="size-4" />

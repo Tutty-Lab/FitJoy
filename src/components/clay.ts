@@ -1,0 +1,5 @@
+// Shared "clay" look (Duolingo-like): thick borders, solid bottom shadow, buttons that press down.
+export const clayCard = 'w-full rounded-[28px] border-2 border-mint bg-white p-4 shadow-[0_4px_0_#cfe7e5]'
+export const clayPrimary = 'flex h-14 w-full cursor-pointer items-center justify-center rounded-2xl bg-brand-deep px-5 text-base font-black tracking-wide text-white uppercase shadow-[0_4px_0_#0b4a54] transition-transform duration-150 active:translate-y-[3px] active:shadow-[0_1px_0_#0b4a54] disabled:opacity-40'
+export const claySecondary = 'flex h-12 w-full cursor-pointer items-center justify-center rounded-2xl border-2 border-mint bg-white px-5 font-black text-brand-deep shadow-[0_4px_0_#cfe7e5] transition-transform duration-150 active:translate-y-[3px] active:shadow-[0_1px_0_#cfe7e5]'
+export const clayAccent = 'flex h-14 w-full cursor-pointer items-center justify-center rounded-2xl bg-amber-400 px-5 text-base font-black tracking-wide text-amber-950 uppercase shadow-[0_4px_0_#d97706] transition-transform duration-150 active:translate-y-[3px] active:shadow-[0_1px_0_#d97706]'
