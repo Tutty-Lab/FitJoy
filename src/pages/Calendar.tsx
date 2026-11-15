@@ -37,7 +37,6 @@ export default function Calendar() {
           })}
         </ol>
         {hint !== null && <p role="status" className="mt-3 rounded-2xl bg-amber-50 p-3 text-sm font-semibold text-amber-800">{(() => { const n = hint - current; const after = waitingForTomorrow || done > 0 ? '' : L(' – nach deiner heutigen Grundübung', ' – sau bài tập cơ bản hôm nay'); return L(`Tag ${hint} öffnet sich frühestens ${n === 1 ? 'morgen' : `in ${n} Tagen`}${after}.`, `Ngày ${hint} sớm nhất sẽ mở ${n === 1 ? 'vào ngày mai' : `sau ${n} ngày`}${after}.`) })()}</p>}
-        <p className="mt-3 text-xs text-slate-500">{L('Tippe auf ein Türchen, um den Tag noch einmal anzusehen. Ein neues Türchen öffnet sich jeden Tag, sobald du die Grundübung mindestens einmal gemacht hast.', 'Chạm vào một ô để xem lại ngày đó. Mỗi ngày một ô mới sẽ mở, khi bạn đã tập bài cơ bản ít nhất một lần.')}</p>
       </section>
     </div>
   )

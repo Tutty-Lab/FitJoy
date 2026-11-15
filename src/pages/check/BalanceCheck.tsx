@@ -28,6 +28,7 @@ export default function BalanceCheck() {
   // 0–2 welcome cards, 3 preparation, 4 safety note, 5 tasks, 6 day-1 finish screen.
   const [stage, setStage] = useState(phase === 'start' && loadProfile()?.introSeen ? 5 : 0)
   const [picking, setPicking] = useState(false)
+  const [showErrors, setShowErrors] = useState(false)
   const [remindAt, setRemindAt] = useState<string | null>(null)
   function remind(time: string) {
     const [h, m] = time.split(':').map(Number)
@@ -41,12 +42,13 @@ export default function BalanceCheck() {
   if (phase !== 'start' && phase !== 'end') return <Navigate to="/" replace />
   if (phase === 'end' && !finished) return <Navigate to="/" replace />
   const isStart = phase === 'start'
-  const first = !loadProfile()?.checks?.start
   const pageSize = 1
   const pageCount = Math.ceil(tasks.length / pageSize)
   const visibleTasks = tasks.slice(page * pageSize, (page + 1) * pageSize)
   const valid = (id: string) => { const e = entries[id]; return !!e && e.value.trim() !== '' && Number.isFinite(Number(e.value.replace(',', '.'))) && Number(e.value.replace(',', '.')) >= 0 && e.safety !== null }
   const pageValid = visibleTasks.every(t => valid(t.id))
+  const missing = (id: string) => { const e = entries[id]; const v = e?.value.trim() ?? ''; return { value: v === '' || !Number.isFinite(Number(v.replace(',', '.'))) || Number(v.replace(',', '.')) < 0, safety: e?.safety == null } }
+  const leave = () => { if (!loadProfile()?.checks?.start) saveProfile({ checkPostponed: true }); navigate('/', { replace: true }) }
   const lastPage = page === pageCount - 1
 
   const update = (id: string, patch: Partial<Entry>) =>
@@ -216,10 +218,11 @@ export default function BalanceCheck() {
         <div className="flex items-center justify-between px-1 text-sm font-semibold text-[#6f7472]">
           <button type="button" disabled={page === 0} onClick={() => setPage(p => p - 1)} className="rounded-full px-3 py-2 disabled:opacity-30">{L('Zurück', 'Quay lại')}</button>
           <span>{page + 1} / {pageCount}</span>
-          {lastPage ? <span className="w-[58px]" /> : <button type="button" disabled={!pageValid} onClick={() => { setPage(p => p + 1); window.scrollTo(0, 0) }} className="rounded-full px-3 py-2 text-brand-deep">{L('Weiter', 'Tiếp')}</button>}
+          {lastPage ? <span className="w-[58px]" /> : <button type="button" onClick={() => { if (!pageValid) { setShowErrors(true); return } setShowErrors(false); setPage(p => p + 1); window.scrollTo(0, 0) }} className="rounded-full px-3 py-2 text-brand-deep">{L('Weiter', 'Tiếp')}</button>}
         </div>
-        {lastPage && <button disabled={!tasks.every(t => valid(t.id))} onClick={finish} className={btnPrimary}>{isStart ? L('Speichern und starten', 'Lưu và bắt đầu') : L('Ergebnisse vergleichen', 'So sánh kết quả')}</button>}
-        {!first && <button onClick={() => navigate(-1)} className="h-11 text-sm text-[#6f7472]">{L('Später fortsetzen', 'Tiếp tục sau')}</button>}
+        {showErrors && !pageValid && <p role="alert" className="rounded-2xl bg-red-50 p-3 text-sm font-semibold text-red-700">{(() => { const m = visibleTasks.map(t => missing(t.id)); const v = m.some(x => x.value), s = m.some(x => x.safety); return v && s ? L('Bitte trag deinen Wert ein und wähle deine gefühlte Sicherheit (1–10).', 'Vui lòng nhập kết quả và chọn mức độ an toàn bạn cảm nhận (1–10).') : v ? L('Bitte trag deinen Wert als Zahl ein (z. B. 30).', 'Vui lòng nhập kết quả bằng số (ví dụ 30).') : L('Bitte wähle deine gefühlte Sicherheit (1–10).', 'Vui lòng chọn mức độ an toàn bạn cảm nhận (1–10).') })()}</p>}
+        {lastPage && <button onClick={() => { if (!tasks.every(t => valid(t.id))) { setShowErrors(true); const i = tasks.findIndex(t => !valid(t.id)); if (i !== page) setPage(i); return } finish() }} className={btnPrimary}>{isStart ? L('Speichern und starten', 'Lưu và bắt đầu') : L('Ergebnisse vergleichen', 'So sánh kết quả')}</button>}
+        <button onClick={leave} className="h-11 text-sm text-[#6f7472]">{L('Später fortsetzen', 'Tiếp tục sau')}</button>
       </div>
     </div>
   )

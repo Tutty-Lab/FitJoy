@@ -28,7 +28,6 @@ export default function Home() {
           <img src={mascot} alt="Vestibu" className="float size-20 shrink-0 object-contain" />
           <figure className="min-w-0 flex-1">
             <blockquote className="text-[17px] leading-6 font-bold text-slate-900">„{today.begruessung}“</blockquote>
-            <figcaption className="mt-1 text-xs font-semibold text-slate-500">Vestibu · {L('Tag', 'Ngày')} {current}</figcaption>
           </figure>
         </div>
         <div className="mt-3 flex items-center justify-between rounded-2xl border border-mint bg-white/90 px-[13px] py-2">
@@ -44,6 +43,15 @@ export default function Home() {
         </div>
       </section>
 
+      {!p?.checks?.start && (
+        <Link to="/check/start" className={`flex items-center justify-between gap-3 ${card}`}>
+          <span>
+            <span className="block text-base font-black text-slate-900">{L('Dein Selbsttest wartet auf dich', 'Bài tự kiểm tra đang chờ bạn')}</span>
+            <span className="text-sm text-[#6f7472]">{L('Mach ihn, wenn du eine ruhige halbe Stunde hast.', 'Hãy làm khi bạn có nửa tiếng yên tĩnh.')}</span>
+          </span>
+          <span className="shrink-0 rounded-full bg-brand-deep px-4 py-2 text-sm font-bold text-white">{L('Starten', 'Bắt đầu')}</span>
+        </Link>
+      )}
       {finished && !p?.checks?.end && (
         <Link to="/check/end" className={`flex items-center justify-between gap-3 ${card}`}>
           <span>
@@ -73,7 +81,6 @@ export default function Home() {
         ) : (
           <p className="mt-3 rounded-2xl bg-mint p-3 text-sm font-semibold text-brand-deep">{L('Für heute alles geschafft. Bis morgen!', 'Hôm nay đã xong hết. Hẹn mai nhé!')}</p>
         )}
-        {waitingForTomorrow && done > 0 && done < SESSIONS_PER_DAY && <p className="mt-2 text-xs text-slate-500">{L(`Tag ${current + 1} öffnet sich morgen.`, `Ngày ${current + 1} sẽ mở vào ngày mai.`)}</p>}
       </section>
 
       <Link to="/calendar" className={`${card} flex items-center justify-between`}>

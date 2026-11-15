@@ -5,6 +5,8 @@ export type Profile = {
   introSeen?: boolean
   /** ISO time the user asked to be reminded about the first self-test. */
   checkReminderAt?: string
+  /** User chose "Später fortsetzen" before finishing the first self-test. */
+  checkPostponed?: boolean
   lessonCompletions?: string[]
   // Date (YYYY-MM-DD) each day was first completed; drives the advent-calendar unlock.
   dayDates?: Record<number, string>

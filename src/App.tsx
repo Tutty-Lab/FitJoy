@@ -25,7 +25,7 @@ function RequireAuth({ onboarded }: { onboarded?: boolean }) {
   const p = loadProfile()
   if (!p?.email && !p?.username) return <Navigate to="/login" replace />
   if (apiEnabled && p.role !== 'admin' && !p.access?.active && !['/activate','/profile'].includes(window.location.pathname)) return <Navigate to="/activate" replace />
-  if (onboarded && window.location.pathname !== '/profile' && !p.checks?.start) return <Navigate to="/check/start" replace />
+  if (onboarded && window.location.pathname !== '/profile' && !p.checks?.start && !p.checkPostponed) return <Navigate to="/check/start" replace />
   return <Outlet />
 }
 

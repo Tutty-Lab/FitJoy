@@ -92,8 +92,8 @@ export default function Profile() {
   function redoBalanceCheck() {
     localStorage.removeItem('fitjoy.checkDraft.start')
     localStorage.removeItem('fitjoy.checkDraft.end')
-    setP(saveProfile({ checks: undefined, onboarded: false }))
-    navigate('/check/start', { replace: true })
+    // Keep the old results until the new test is saved, so leaving mid-way never locks the app.
+    navigate('/check/start')
   }
 
   return (
