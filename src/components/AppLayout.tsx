@@ -2,10 +2,12 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { motion } from 'motion/react'
 import navHome from '../assets/home/c29.svg'
 import navReminders from '../assets/home/c31.svg'
+import navCalendar from '../assets/home/nav-calendar.svg'
 import navProfile from '../assets/home/c32.svg'
 
 const tabs = [
   { to: '/', label: 'Home', icon: navHome, w: 14.667, h: 16.5 },
+  { to: '/calendar', label: 'Kalender', icon: navCalendar, w: 20, h: 20 },
   { to: '/reminders', label: 'Reminders', icon: navReminders, w: 21.3, h: 19.65 },
   { to: '/profile', label: 'Profile', icon: navProfile, w: 20, h: 20 },
 ]

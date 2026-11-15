@@ -11,6 +11,7 @@ import WorkoutDetail from './pages/workouts/WorkoutDetail'
 import Celebration from './pages/workouts/Celebration'
 import Profile from './pages/Profile'
 import Reminders from './pages/Reminders'
+import Calendar from './pages/Calendar'
 import Privacy from './pages/Privacy'
 import Activate from './pages/Activate'
 import { apiEnabled } from './lib/api'
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="/days/:day" element={<DayReview />} />
           <Route path="/workouts" element={<Navigate to="/" replace />} />
           <Route path="/compare" element={<Compare />} />
+          <Route path="/calendar" element={<Calendar />} />
           <Route path="/reminders" element={<Reminders />} />
           <Route path="/profile" element={<Profile />} />
         </Route>

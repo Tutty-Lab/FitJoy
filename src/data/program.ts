@@ -7,7 +7,7 @@ export const SESSIONS_PER_DAY = 3
 export const PRACTICE_SECONDS = 60
 
 // TEMP for customer testing: every day is open. Set back to false to restore the advent-calendar unlock.
-export const TEST_UNLOCK_ALL = true
+export const TEST_UNLOCK_ALL = false
 
 export type BonusCategory = 'Gleichgewicht' | 'Wahrnehmung' | 'Entspannung' | 'Bewegung'
 export type BonusExercise = { id: string; nr: string; kategorie: BonusCategory; titel: string; anleitung: string }
