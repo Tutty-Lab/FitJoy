@@ -71,3 +71,6 @@ export function bonusFor(day: number): BonusExercise | undefined {
   const pick = [d, blockStart, blockStart + 1, blockStart + 2].filter(n => n <= PROGRAM_DAYS).map(n => dayContent(n).bonusUebung).find(Boolean)
   return bonusExercises.find(b => b.id === pick) ?? shuffled[(blockStart - 1) / 3]
 }
+
+// Until the customer delivers per-day affirmations, show a default so there is always a sentence to speak.
+export const affirmationFor = (day: number) => dayContent(day).affirmation || 'Ich stehe sicher. Mein Gleichgewicht wird jeden Tag stärker.'

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { RefreshCw } from 'lucide-react'
 import mascot from '../assets/home/mascot.png'
-import { dayContent, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../data/program'
+import { affirmationFor, dayContent, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../data/program'
 import { loadProfile } from '../lib/profile'
 import { sessionsDone, useCompleted } from '../lib/progress'
 
@@ -37,15 +37,19 @@ export default function Home() {
         <div className="mt-2 h-2 overflow-hidden rounded-full bg-mint" role="progressbar" aria-valuemin={0} aria-valuemax={PROGRAM_DAYS} aria-valuenow={completed.length} aria-label="Fortschritt">
           <div className="h-full rounded-full bg-brand transition-all duration-700" style={{ width: `${pct}%` }} />
         </div>
+        <div className="mt-3 rounded-2xl bg-mint/70 p-3">
+          <p className="text-xs font-bold tracking-wide text-brand-ink uppercase">♥ Dein Gedanke für heute</p>
+          <p className="mt-1 text-[16px] leading-6 font-bold text-brand-deep">„{affirmationFor(current)}“</p>
+        </div>
       </section>
 
       {finished && !p?.checks?.end && (
         <Link to="/check/end" className={`flex items-center justify-between gap-3 ${card}`}>
           <span>
-            <span className="block text-base font-black text-slate-900">Du hast 90 Tage geschafft!</span>
-            <span className="text-sm text-[#6f7472]">Mach den Gleichgewichts-Check noch einmal und sieh deinen Fortschritt.</span>
+            <span className="block text-base font-black text-slate-900">Dein stiller Regisseur zieht den Hut vor dir!</span>
+            <span className="text-sm text-[#6f7472]">Zeit für deine neue Standortbestimmung – ganz ohne Leistungsdruck.</span>
           </span>
-          <span className="shrink-0 rounded-full bg-brand-deep px-4 py-2 text-sm font-bold text-white">Check</span>
+          <span className="shrink-0 rounded-full bg-brand-deep px-4 py-2 text-sm font-bold text-white">Selbsttest</span>
         </Link>
       )}
       {p?.checks?.end && <Link to="/compare" className={`${card} font-bold text-brand-deep`}>Meine Ergebnisse: Tag 1 und Tag 90 vergleichen →</Link>}
@@ -63,7 +67,7 @@ export default function Home() {
         </div>
         {done < SESSIONS_PER_DAY ? (
           <Link to={`/workouts/${current}?session=${done + 1}`} state={{ from: '/' }} className="mt-3 flex h-14 items-center justify-center rounded-full bg-brand-deep text-base font-bold text-white shadow-md">
-            {done === 0 ? 'Grundübung starten' : `Übung ${done + 1}. Mal`}
+            Minute {done + 1} starten
           </Link>
         ) : (
           <p className="mt-3 rounded-2xl bg-mint p-3 text-sm font-semibold text-brand-deep">Für heute alles geschafft. Bis morgen!</p>

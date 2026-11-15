@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { loadProfile } from './profile'
+import { loadProfile, saveProfile } from './profile'
 
 export const DEFAULT_TIMES = ['06:30', '12:15', '20:00']
 const SLOT_NAMES = ['Morning', 'Noon', 'Night']
@@ -60,6 +60,14 @@ export function useReminderScheduler() {
   useEffect(() => {
     const check = () => {
       const p = loadProfile()
+      // Self-test the user postponed with "Später erinnern".
+      if (p && !p.checks?.start && p.checkReminderAt && Date.now() >= Date.parse(p.checkReminderAt)) {
+        saveProfile({ checkReminderAt: undefined })
+        if (p.chime ?? true) playChime()
+        if ('Notification' in window && Notification.permission === 'granted') {
+          new Notification('Hallo, hier ist Vestibu 👋', { body: 'Dein Selbsttest wartet auf dich. Mach dir kurz 3 Meter Platz, schnapp dir einen Stuhl und nimm dir eine halbe Stunde Ruhe nur für dich.', icon: '/icon.png', tag: 'vestibu-check' })
+        }
+      }
       if (!p?.onboarded) return
       const times = p.reminderTimes ?? DEFAULT_TIMES
       const enabled = p.reminders ?? [true, true, true]

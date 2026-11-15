@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
-import { baseExercise, baseVideo, bonusFor, dayContent, PRACTICE_SECONDS, SESSIONS_PER_DAY } from '../../data/program'
+import { affirmationFor, baseExercise, baseVideo, bonusFor, dayContent, PRACTICE_SECONDS, SESSIONS_PER_DAY } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { loadProfile } from '../../lib/profile'
 import { playChime } from '../../lib/reminders'
@@ -19,8 +19,7 @@ export default function WorkoutDetail() {
   const { statusOf } = useCompleted()
   const session = Math.min(SESSIONS_PER_DAY, Number(new URLSearchParams(location.search).get('session')) || sessionsDone(day) + 1)
   const content = dayContent(day)
-  // Until the customer delivers per-day affirmations, show a default one so the user always has a sentence to speak.
-  const affirmation = content.affirmation || 'Ich stehe sicher. Mein Gleichgewicht wird jeden Tag stärker.'
+  const affirmation = affirmationFor(day)
   const video = baseVideo()
   const bonus = bonusFor(day)
   const [stage, setStage] = useState<Stage>('instructions')
@@ -94,9 +93,9 @@ export default function WorkoutDetail() {
       <img src={vestibuWelcome} alt="Vestibu" className="float size-32 object-contain" />
       <h2 className="text-2xl font-black">Gut gemacht!</h2>
       <p className="text-slate-600">Grundübung {session}/{SESSIONS_PER_DAY} für Tag {day} geschafft.</p>
-      {bonus && <p className="text-lg font-bold text-rust">„{content.bonusImpuls}“</p>}
-      {bonus && <button type="button" className={primary} onClick={() => { setRemaining(PRACTICE_SECONDS); setStage('bonus'); setRunning(true) }}>Ja, Bonus-Minute</button>}
-      <button type="button" className={secondary} onClick={() => navigate(returnTo, { replace: true })}>Nein, zur Startseite</button>
+      {bonus && <p className="text-lg font-bold text-rust">{content.bonusImpuls || 'Lust auf deine Bonus-Minute?'}</p>}
+      {bonus && <button type="button" className={primary} onClick={() => { setRemaining(PRACTICE_SECONDS); setStage('bonus'); setRunning(true) }}>Bonus-Minute starten</button>}
+      <button type="button" className={bonus ? 'h-10 text-sm font-semibold text-slate-500 underline' : secondary} onClick={() => navigate(returnTo, { replace: true })}>{bonus ? 'Heute nicht' : 'Zur Startseite'}</button>
     </section>}
 
     {stage === 'bonus' && bonus && <>

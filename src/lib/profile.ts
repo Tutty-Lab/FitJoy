@@ -3,6 +3,8 @@ import { pushProfile } from '../services/remote'
 // Local cache of the user's profile; mirrored to Supabase when it is configured (services/remote.ts).
 export type Profile = {
   introSeen?: boolean
+  /** ISO time the user asked to be reminded about the first self-test. */
+  checkReminderAt?: string
   lessonCompletions?: string[]
   // Date (YYYY-MM-DD) each day was first completed; drives the advent-calendar unlock.
   dayDates?: Record<number, string>

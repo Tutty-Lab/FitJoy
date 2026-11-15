@@ -2,6 +2,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { groupOf, groups, tasks, PROGRAM_DAYS } from '../../data/balanceCheck'
 import { loadProfile } from '../../lib/profile'
 import { emptyEntry, type Check } from '../../lib/checks'
+import vestibuWelcome from '../../assets/home/vestibu-welcome.png'
 import { SectionTitle } from '../../components/shared'
 
 const card = 'rounded-[32px] bg-white p-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'
@@ -17,6 +18,17 @@ export default function Compare() {
   if (!end) return <Navigate to="/" replace />
   return (
     <div className="stagger flex flex-col gap-4 px-4 pt-2 pb-6">
+      <section className={`${card} flex flex-col gap-3 text-[15px] leading-6`}>
+        <img src={vestibuWelcome} alt="Vestibu" className="mx-auto size-28 object-contain" />
+        <h1 className="text-2xl font-black">Danke für deine ehrliche Bestandsaufnahme!</h1>
+        <p>Dein stiller Regisseur sagt Danke für deine Aufmerksamkeit! Drei Monate lang hast du dir immer wieder deine persönlichen Minuten geschenkt – und heute haben wir geschaut, wo du stehst.</p>
+        <p>Vielleicht spürst und siehst du heute schon deutliche Veränderungen – vielleicht wirken deine Werte auf den ersten Blick aber auch noch sehr vertraut. Beides ist ein wertvolles Zeichen für dich:</p>
+        <ul className="list-disc space-y-2 pl-5">
+          <li><b>Du siehst Veränderungen?</b> Wunderbar! Dein System reagiert bereits spürbar auf deine regelmäßige Zuwendung.</li>
+          <li><b>Du siehst bekannte Werte?</b> Genau so wichtig! Das Gleichgewichtssystem arbeitet oft lange im Verborgenen, stabilisiert im Hintergrund, stoppt schleichenden Abbau und fängt Alltagsstress ab, bevor es nach außen im Test sichtbar wird.</li>
+        </ul>
+        <p>Das Wichtigste ist: Du hast drei Monate lang das Fundament gelegt. <i>„Gras wächst nicht schneller, wenn man daran zieht – ich vertraue meinem eigenen Tempo.“</i></p>
+      </section>
       <SectionTitle>Meine Ergebnisse</SectionTitle>
       <div className={`${card} grid grid-cols-3 gap-2 text-center`}>
         <div />
