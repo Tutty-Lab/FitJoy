@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Switch, SectionTitle } from '../components/shared'
 import { loadProfile, saveProfile } from '../lib/profile'
 import { DEFAULT_TIMES, ensureNotificationPermission } from '../lib/reminders'
-import coach from '../assets/onboarding/coach-step3.png'
+import coach from '../assets/home/mascot.png'
 import icAlarm from '../assets/onboarding/r-alarm.svg'
 import icBell from '../assets/onboarding/r-bell.svg'
 import icSunset from '../assets/onboarding/r-sunset.svg'
@@ -32,10 +32,7 @@ export default function Reminders() {
     <div className="stagger flex flex-col gap-5 bg-[#fbf8f3] px-4 pt-2 pb-6">
       <div className="flex gap-4 overflow-hidden rounded-2xl bg-[#ffece1] p-4 shadow-sm">
         <div className="relative shrink-0 self-start">
-          <div className="size-14 overflow-hidden rounded-full bg-[#ee7a3f] shadow-md">
-            <img src={coach} alt="" className="size-full object-cover" />
-          </div>
-          <span className="absolute -right-1 -bottom-1 rounded-full bg-[#ef8933] px-1.5 py-0.5 text-[10px] leading-[15px] text-[#5c2c00]">COACH</span>
+          <img src={coach} alt="Vestibu" className="size-16 object-contain" />
         </div>
         <div className="flex min-w-0 flex-1 flex-col items-start gap-1 pt-1">
           <span className="rounded-full bg-white px-2.5 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#d9652c]">3 Daily Reminders</span>

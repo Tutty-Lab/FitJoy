@@ -157,7 +157,7 @@ export default function SignUp() {
           disabled={!canSubmit || busy}
           className="mt-1 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand to-teal-500 px-6 py-4 text-base leading-5 font-bold tracking-[0.16px] text-white drop-shadow-[0_6px_0_#0b4a54] transition active:translate-y-1 active:drop-shadow-[0_2px_0_#0b4a54] disabled:opacity-50"
         >
-          Start 22-Day Journey
+          90-Tage-Reise starten
           <ArrowRight aria-hidden="true" className="size-4" />
         </button>
       </form>

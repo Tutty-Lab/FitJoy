@@ -1,20 +1,21 @@
+import './admin.css'
+import { Building2, LayoutDashboard, Users, Play } from 'lucide-react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { adminSignOut } from '../services/adminApi'
 import mascot from '../assets/home/mascot.png'
 
 const nav = [
-  { to: '/admin/licenses', label: 'Invitations', icon: '◇' },
-  { to: '/admin/organizations', label: 'Organizations', icon: '◎' },
-  { to: '/admin/audit', label: 'Audit log', icon: '≡' },
-  { to: '/admin', label: 'Dashboard', icon: '▦', end: true },
-  { to: '/admin/users', label: 'Users', icon: '◉' },
-  { to: '/admin/workouts', label: 'Workouts', icon: '▶' },
+  { to: '/admin/organizations', label: 'Organizations & invitations', icon: Building2 },
+  { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/admin/users', label: 'Users', icon: Users },
+  { to: '/admin/workouts', label: 'Program', icon: Play },
 ]
 
 export default function AdminLayout() {
   const navigate = useNavigate()
   return (
-    <div className="flex min-h-dvh bg-[#fbf8f3] text-ink">
+    <div className="admin-shell flex min-h-dvh bg-[#fbf8f3] text-ink">
+      <a href="#admin-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:p-3">Skip to content</a>
       <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 flex-col border-r border-slate-200 bg-white p-4 md:flex">
         <div className="mb-6 flex items-center gap-2 px-2">
           <img src={mascot} alt="" className="size-9" />
@@ -23,7 +24,7 @@ export default function AdminLayout() {
             <div className="text-xs leading-4 font-bold text-[#6f7472]">Admin console</div>
           </div>
         </div>
-        <nav className="flex flex-col gap-1">
+        <nav aria-label="Admin navigation" className="flex flex-col gap-1">
           {nav.map(n => (
             <NavLink
               key={n.to}
@@ -31,13 +32,12 @@ export default function AdminLayout() {
               end={n.end}
               className={({ isActive }) => `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold ${isActive ? 'bg-mint text-[#13707e]' : 'text-[#3f4a4b] hover:bg-slate-100'}`}
             >
-              <span aria-hidden className="w-4 text-center">{n.icon}</span>
+              <n.icon aria-hidden="true" className="size-4" />
               {n.label}
             </NavLink>
           ))}
         </nav>
         <div className="mt-auto flex flex-col gap-1">
-          <NavLink to="/" className="rounded-xl px-3 py-2.5 text-sm font-semibold text-[#3f4a4b] hover:bg-slate-100">← Open user app</NavLink>
           <button
             onClick={async () => {
               await adminSignOut()
@@ -59,8 +59,9 @@ export default function AdminLayout() {
               {n.label}
             </NavLink>
           ))}
+          <button type="button" className="shrink-0 px-3 py-2 text-sm text-red-700" onClick={async () => { await adminSignOut(); navigate('/login', { replace: true }) }}>Sign out</button>
         </header>
-        <main className="mx-auto max-w-6xl p-4 md:p-8">
+        <main id="admin-content" className="mx-auto max-w-6xl p-4 md:p-8">
           <Outlet />
         </main>
       </div>

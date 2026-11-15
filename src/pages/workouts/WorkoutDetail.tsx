@@ -1,119 +1,103 @@
 import { useEffect, useRef, useState } from 'react'
-import { Play } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { workouts } from '../../data/workouts'
+import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
+import { baseExercise, baseVideo, bonusFor, dayContent, PRACTICE_SECONDS, SESSIONS_PER_DAY } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
-import { completeDay, useCompleted } from '../../lib/progress'
-import videoThumb from '../../assets/workouts/video-thumb.png'
-import icBack from '../../assets/onboarding/back.svg'
-import icCoach from '../../assets/workouts/d-coach.svg'
+import { loadProfile } from '../../lib/profile'
+import { playChime } from '../../lib/reminders'
+import vestibuWelcome from '../../assets/home/vestibu-welcome.png'
+import poster from '../../assets/workouts/video-thumb.png'
 
+type Stage = 'instructions' | 'practice' | 'done' | 'bonus'
 
+// 05a instructions → 05b 60-second practice → 05c congratulations + bonus question → 06 bonus.
 export default function WorkoutDetail() {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const returnTo = (location.state as { from?: string } | null)?.from ?? '/'
   const day = Number(useParams().day)
-  const lesson = new URLSearchParams(window.location.search).get('lesson') ?? '1'
-  const w = workouts.find(x => x.day === day)
-  const { completed, statusOf } = useCompleted()
-  const [watched, setWatched] = useState(0)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { statusOf } = useCompleted()
+  const session = Math.min(SESSIONS_PER_DAY, Number(new URLSearchParams(location.search).get('session')) || sessionsDone(day) + 1)
+  const content = dayContent(day)
+  const affirmation = content.affirmation
+  const video = baseVideo()
+  const bonus = bonusFor(day)
+  const [stage, setStage] = useState<Stage>('instructions')
+  const [remaining, setRemaining] = useState(PRACTICE_SECONDS)
+  const [running, setRunning] = useState(false)
   const player = useRef<VideoPlayerHandle>(null)
+  const from = (location.state as { from?: string } | null)?.from
+  const returnTo = from && /^\/days\/\d+$/.test(from) ? from : '/'
 
-  const status = w ? statusOf(w.day) : 'locked'
-
+  useEffect(() => { setStage('instructions'); setRemaining(PRACTICE_SECONDS); setRunning(false) }, [day, session])
   useEffect(() => {
-    setWatched(0)
-  }, [day])
+    if (!running || stage !== 'practice') return
+    const id = setInterval(() => setRemaining(n => Math.max(0, n - 1)), 1000)
+    return () => clearInterval(id)
+  }, [running, stage])
+  useEffect(() => {
+    if (stage === 'practice' && remaining === 0) {
+      setRunning(false)
+      completeLesson(day, session)
+      if (loadProfile()?.chime ?? true) playChime()
+      setStage('done')
+    }
+  }, [remaining, stage, day, session])
 
-  if (!w) return <Navigate to="/workouts" replace />
-  if (status === 'locked') return <Navigate to="/workouts" replace />
+  if (!Number.isInteger(day) || day < 1 || day > 90 || statusOf(day) === 'locked') return <Navigate to="/" replace />
 
-  const isDone = completed.includes(w.day)
-  // Watching 90% of the video counts as finishing the workout.
-  const finished = watched >= 0.9
-
-  function finish() {
-    completeDay(w!.day)
-    navigate(`/celebrate/${w!.day}`)
+  const primary = 'flex h-14 w-full items-center justify-center rounded-full bg-brand-deep px-5 text-base font-bold text-white shadow-md disabled:opacity-40'
+  const secondary = 'flex h-12 w-full items-center justify-center rounded-full border border-mint bg-white px-5 font-bold text-brand-deep'
+  const Affirmation = ({ big }: { big?: boolean }) => (
+    <blockquote className={`rounded-3xl bg-mint p-5 text-center font-bold text-brand-deep ${big ? 'text-2xl leading-9' : 'text-lg'}`}>
+      {affirmation ? `„${affirmation}“` : <span className="text-base font-semibold text-slate-500">Deine Affirmation für heute folgt bald.</span>}
+      {big && <p className="mt-2 text-sm font-semibold text-slate-600">Halte die Position und sprich diesen Satz laut aus.</p>}
+    </blockquote>
+  )
+  const back = () => {
+    if (stage === 'practice') { setRunning(false); setRemaining(PRACTICE_SECONDS); setStage('instructions'); return }
+    navigate(returnTo, { replace: true })
   }
 
-  return (
-    <div className="mx-auto min-h-dvh max-w-[440px] bg-[#fbf8f3]">
-      <header className="sticky top-0 z-20 bg-[rgba(251,248,243,0.8)] pt-[env(safe-area-inset-top)] shadow-[0_1px_8px_rgba(0,0,0,0.04)] backdrop-blur-[24px]">
-        <div className="flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-1">
-            <button aria-label="Go back" onClick={() => navigate(returnTo)} className="flex size-11 items-center justify-center rounded-full">
-              <img src={icBack} alt="" className="size-4" />
-            </button>
-            <h1 className="text-[20px] leading-7 font-bold">Lesson</h1>
-          </div>
-          <span className="size-8" aria-hidden="true" />
-        </div>
-      </header>
+  return <div className="flex flex-col gap-5 px-4 pb-8">
+    <header className="sticky top-0 z-30 flex items-center gap-3 bg-canvas/95 py-2 backdrop-blur">
+      <button type="button" aria-label="Zurück" title="Zurück" onClick={back} className="flex size-11 shrink-0 items-center justify-center rounded-full border border-mint bg-white text-brand-deep shadow-sm focus-visible:outline-2 focus-visible:outline-brand">
+        <ArrowLeft aria-hidden="true" className="size-5" />
+      </button>
+      <h1 className="font-bold">{stage === 'bonus' ? `Bonus · Tag ${day}` : `Tag ${day} · ${session}. von ${SESSIONS_PER_DAY} Mal`}</h1>
+    </header>
 
-      <main className="stagger flex flex-col gap-5 px-4 pt-1 pb-10">
-        <VideoPlayer
-          ref={player}
-          src={w.video}
-          poster={videoThumb}
-          onProgress={setWatched}
-          badge={
-            <span className="flex items-center gap-1 rounded-full bg-white/80 px-2.5 py-1 text-xs leading-4 font-bold tracking-[0.48px] backdrop-blur-[12px]">
-              <img src={icCoach} alt="" style={{ width: 14.667, height: 14 }} />Coach Linh Nhi
-            </span>
-          }
-        />
+    {stage === 'instructions' && <>
+      <VideoPlayer key={`${day}:instr`} ref={player} src={video} poster={poster} />
+      <h2 className="text-xl font-black">{baseExercise.title}</h2>
+      <ol className="list-decimal space-y-2 rounded-3xl bg-white p-6 pl-10 text-[15px] leading-6">{baseExercise.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
+      <Affirmation />
+      <button type="button" className={secondary} onClick={() => { player.current?.play() }}>Anleitung noch einmal ansehen</button>
+      <button type="button" className={primary} onClick={() => { setRemaining(PRACTICE_SECONDS); setStage('practice'); setRunning(true) }}>Übung starten · {PRACTICE_SECONDS} Sekunden</button>
+    </>}
 
-        <div className="flex flex-col gap-1">
-          <h2 className="pt-1.5 text-2xl leading-8 font-bold tracking-[-0.24px]">Day {w.day} · Lesson {lesson}: {w.title}</h2>
-          <p className="text-sm leading-5 text-[#3f4a4b]">{w.blurb}</p>
-        </div>
+    {stage === 'practice' && <>
+      <div role="timer" aria-label="Verbleibende Zeit" className="text-center text-6xl font-black tabular-nums text-brand-deep">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
+      <VideoPlayer key={`${day}:practice`} src={video} poster={poster} />
+      <Affirmation big />
+      <button type="button" className={primary} onClick={() => setRunning(v => !v)}>{running ? 'Pause' : 'Fortsetzen'}</button>
+    </>}
 
+    {stage === 'done' && <section className="flex flex-col items-center gap-4 rounded-3xl bg-white p-6 text-center">
+      <img src={vestibuWelcome} alt="Vestibu" className="float size-32 object-contain" />
+      <h2 className="text-2xl font-black">Gut gemacht!</h2>
+      <p className="text-slate-600">Grundübung {session}/{SESSIONS_PER_DAY} für Tag {day} geschafft.</p>
+      {bonus && <p className="text-lg font-bold text-rust">„{content.bonusImpuls}“</p>}
+      {bonus && <button type="button" className={primary} onClick={() => setStage('bonus')}>Ja, Bonus-Minute</button>}
+      <button type="button" className={secondary} onClick={() => navigate(returnTo, { replace: true })}>Nein, zur Startseite</button>
+    </section>}
 
-        <div className="flex gap-3 rounded-[32px] bg-white p-4 shadow-md">
-          <div className="relative size-12 shrink-0 self-start">
-            <span className="flex size-12 items-center justify-center rounded-full bg-[#ffe3d3] text-2xl shadow-inner">🌱</span>
-            <span className="absolute -right-1 -bottom-1 flex size-5 items-center justify-center rounded-full bg-[#ef8933] text-[10px]">✨</span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-sm leading-[18px] font-semibold text-[#13707e]">
-              Joy Sprout <span className="text-xs font-bold tracking-[0.48px] text-[#3f4a4b]">• FitJoy Coach</span>
-            </span>
-            <p className="text-sm leading-[22.75px]">“Coach Tip: Maintain a steady breath and never overstrain. With every exhale, let tension melt away. You're doing amazing! 🌱✨”</p>
-          </div>
-        </div>
-
-        {watched > 0 && (
-          <button
-            onClick={finish}
-            disabled={!finished && !isDone}
-            className="rounded-full bg-brand px-6 py-4 text-base leading-5 font-bold tracking-[0.16px] text-white shadow-[0_10px_15px_-3px_rgba(19,112,126,0.3)] disabled:opacity-60"
-          >
-            {finished ? `Complete Day ${w.day} ✓` : `Keep going… ${Math.round(watched * 100)}% watched`}
-          </button>
-        )}
-
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            disabled={lesson === '1'}
-            onClick={() => navigate(`/workouts/${w.day}?lesson=${Math.max(1, Number(lesson) - 1)}`, { state: { from: returnTo } })}
-            className="h-11 flex-1 rounded-full bg-[#e7efee] text-sm font-bold text-brand-deep disabled:opacity-40"
-          >
-            Previous
-          </button>
-          <span className="text-center text-xs font-semibold text-[#6f7472]">Lesson {lesson} / 3</span>
-          <button
-            type="button"
-            disabled={lesson === '3'}
-            onClick={() => navigate(`/workouts/${w.day}?lesson=${Math.min(3, Number(lesson) + 1)}`, { state: { from: returnTo } })}
-            className="h-11 flex-1 rounded-full bg-brand-deep text-sm font-bold text-white disabled:opacity-40"
-          >
-            Next
-          </button>
-        </div>
-      </main>
-    </div>
-  )
+    {stage === 'bonus' && bonus && <section className="flex flex-col gap-4 rounded-3xl bg-white p-6">
+      <p className="text-xs font-bold tracking-wide text-rust uppercase">Bonus · freiwillig</p>
+      <h2 className="text-2xl font-black">{bonus.titel}</h2>
+      <span className="w-fit rounded-full bg-mint px-3 py-1 text-xs font-bold text-brand-deep">{bonus.kategorie}</span>
+      <p className="text-[16px] leading-7">{bonus.anleitung}</p>
+      <button type="button" className={primary} onClick={() => navigate(returnTo, { replace: true })}>Fertig</button>
+    </section>}
+  </div>
 }

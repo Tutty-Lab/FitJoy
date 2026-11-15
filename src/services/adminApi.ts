@@ -12,7 +12,8 @@ export type Member = {
   goal: 'fat' | 'posture' | 'energy' | 'strength'
   joined: string // YYYY-MM-DD
   lastActive: string // YYYY-MM-DD
-  completed: number // workouts finished, 0–22
+  completed: number // program days with at least one session, 0–90
+  sessions?: number // base-exercise sessions done (up to 3 per day)
   streak: number
   demo: boolean
 }
@@ -44,11 +45,11 @@ const daysAgo = (n: number) => {
 }
 
 const demoMembers: Member[] = (() => {
-  const r = rng(22)
+  const r = rng(90)
   return Array.from({ length: 48 }, (_, i) => {
     const joinedAgo = Math.floor(r() * 40) + 1
-    // Drop-off curve: most people finish the first few days, fewer reach day 22.
-    const completed = Math.min(22, joinedAgo, Math.round(22 * Math.pow(r(), 1.6)))
+    // Drop-off curve: most people finish the first few days, fewer reach day 90.
+    const completed = Math.min(90, joinedAgo, Math.round(90 * Math.pow(r(), 1.6)))
     const idle = Math.floor(r() * 12)
     const first = FIRST[i % FIRST.length]
     const last = LAST[Math.floor(r() * LAST.length)]
@@ -93,7 +94,7 @@ function deviceMember(): Member | null {
 
 // Real members from the API (admin-only endpoint).
 async function remoteMembers(): Promise<Member[]> {
-  const rows = await api<{ id: string; email: string; name: string; goal: Member['goal'] | null; joined: string; completed: number; dates: string[] }[]>('admin/members')
+  const rows = await api<{ id: string; email: string; name: string; goal: Member['goal'] | null; joined: string; completed: number; sessions?: number; dates: string[] }[]>('admin/members')
   return rows.map(r => {
     const set = new Set(r.dates)
     const d = new Date()
@@ -111,6 +112,7 @@ async function remoteMembers(): Promise<Member[]> {
       joined: r.joined,
       lastActive: r.dates[r.dates.length - 1] ?? r.joined,
       completed: r.completed,
+      sessions: r.sessions,
       streak,
       demo: false,
     }
@@ -127,10 +129,10 @@ export function computeStats(members: Member[]) {
   const total = Math.max(1, members.length)
   const week = daysAgo(7)
   const active7 = members.filter(m => m.lastActive >= week).length
-  const sessions = members.reduce((s, m) => s + m.completed, 0)
-  const finishers = members.filter(m => m.completed >= 22).length
+  const sessions = members.reduce((s, m) => s + (m.sessions ?? m.completed), 0)
+  const finishers = members.filter(m => m.completed >= 90).length
   // How many members have completed at least day N — the program's drop-off funnel.
-  const funnel = Array.from({ length: 22 }, (_, i) => ({ day: i + 1, members: members.filter(m => m.completed >= i + 1).length }))
+  const funnel = Array.from({ length: 90 }, (_, i) => ({ day: i + 1, members: members.filter(m => m.completed >= i + 1).length }))
   return { total: members.length, pctBase: total, active7, sessions, finishers, funnel }
 }
 

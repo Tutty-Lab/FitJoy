@@ -6,7 +6,7 @@ import Login from './pages/auth/Login'
 import SignUp from './pages/auth/SignUp'
 import BalanceCheck from './pages/check/BalanceCheck'
 import Compare from './pages/check/Compare'
-import Library from './pages/workouts/Library'
+import DayReview from './pages/workouts/DayReview'
 import WorkoutDetail from './pages/workouts/WorkoutDetail'
 import Celebration from './pages/workouts/Celebration'
 import Profile from './pages/Profile'
@@ -53,7 +53,8 @@ export default function App() {
         <Route path="/celebrate/:day" element={<Celebration />} />
         <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/workouts" element={<Library />} />
+          <Route path="/days/:day" element={<DayReview />} />
+          <Route path="/workouts" element={<Navigate to="/" replace />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/reminders" element={<Reminders />} />
           <Route path="/profile" element={<Profile />} />

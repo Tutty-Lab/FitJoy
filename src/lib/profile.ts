@@ -2,6 +2,10 @@ import { pushProfile } from '../services/remote'
 
 // Local cache of the user's profile; mirrored to Supabase when it is configured (services/remote.ts).
 export type Profile = {
+  introSeen?: boolean
+  lessonCompletions?: string[]
+  // Date (YYYY-MM-DD) each day was first completed; drives the advent-calendar unlock.
+  dayDates?: Record<number, string>
   name: string
   email: string
   username?: string

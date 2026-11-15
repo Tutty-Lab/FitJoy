@@ -7,7 +7,7 @@ const TYPES = new Set(['video/mp4', 'video/webm', 'video/quicktime'])
 export default route({
   async POST(req, res, session) {
     const input = body<{ day?: number; filename?: string; contentType?: string; data?: string }>(req)
-    if (!Number.isInteger(input.day) || input.day! < 1 || input.day! > 22 || !input.filename || !input.data || !TYPES.has(input.contentType ?? '')) {
+    if (!Number.isInteger(input.day) || input.day! < 0 || input.day! > 90 || !input.filename || !input.data || !TYPES.has(input.contentType ?? '')) {
       return res.status(400).json({ error: 'Upload an MP4, WebM or QuickTime video for a valid lesson' })
     }
     const raw = Buffer.from(input.data.replace(/^data:[^;]+;base64,/, ''), 'base64')

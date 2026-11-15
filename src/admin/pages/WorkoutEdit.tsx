@@ -1,132 +1,129 @@
-import { useState, type ReactNode } from 'react'
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
-import type { Category, Step, Workout } from '../../data/workouts'
-import { getWorkout, isEdited, resetWorkout, saveWorkout } from '../../services/catalog'
+import { Button } from '../../components/ui/button'
+import { ArrowLeft } from 'lucide-react'
+import { useEffect, useState, type ReactNode } from 'react'
+import { Link, Navigate, useParams } from 'react-router-dom'
+import { baseExercise, baseVideo, bonusExercises, bonusFor, dayContent, excelDay, PROGRAM_DAYS, type ProgramDay } from '../../data/program'
+import { getDayOverride, saveDay } from '../../services/catalog'
 import { api } from '../../lib/api'
 
-const categories: Category[] = ['Warm-up', 'Core & Cardio', 'Fat Burn', 'Recovery']
-const intensities: Workout['intensity'][] = ['Gentle', 'Moderate', 'Intense']
-const field = 'h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-brand'
+const field = 'w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand'
+type Form = Pick<ProgramDay, 'begruessung' | 'affirmation' | 'bonusImpuls'> & { bonusUebung: string }
 
-function Label({ text, children }: { text: string; children: ReactNode }) {
+function Label({ text, hint, children }: { text: string; hint?: ReactNode; children: ReactNode }) {
   return (
     <label className="flex flex-col gap-1">
       <span className="text-xs font-bold tracking-[0.48px] text-[#6f7472] uppercase">{text}</span>
       {children}
+      {hint && <span className="text-xs text-slate-500">{hint}</span>}
     </label>
   )
 }
 
+// /admin/workouts/0 = base exercise video (all days); /admin/workouts/1–90 = day texts and bonus.
 export default function WorkoutEdit() {
-  const navigate = useNavigate()
   const day = Number(useParams().day)
-  const lesson = new URLSearchParams(window.location.search).get('lesson') ?? '1'
-  const original = getWorkout(day)
-  const [w, setW] = useState<Workout | undefined>(original)
+  const isBase = day === 0
+  const load = (): Form => { const c = dayContent(day || 1); return { begruessung: c.begruessung, affirmation: c.affirmation, bonusImpuls: c.bonusImpuls, bonusUebung: c.bonusUebung ?? '' } }
+  const [f, setF] = useState<Form>(load)
+  const [video, setVideo] = useState(baseVideo())
+  const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
-  const [saveError, setSaveError] = useState('')
+  const [error, setError] = useState('')
   const [uploading, setUploading] = useState(false)
-  if (!w || !original) return <Navigate to="/admin/workouts" replace />
+  useEffect(() => { setF(load()); setVideo(baseVideo()); setSaved(false); setError('') }, [day]) // eslint-disable-line react-hooks/exhaustive-deps
+  if (!Number.isInteger(day) || day < 0 || day > PROGRAM_DAYS) return <Navigate to="/admin/workouts" replace />
 
-  const set = <K extends keyof Workout>(k: K, v: Workout[K]) => {
-    setW({ ...w, [k]: v })
-    setSaved(false)
-  }
-  const setStep = (i: number, patch: Partial<Step>) => set('steps', w.steps.map((s, j) => (j === i ? { ...s, ...patch } : s)))
+  const xl = excelDay(day || 1)
+  const set = (k: keyof Form, v: string) => { setF({ ...f, [k]: v }); setSaved(false) }
+  const blockStart = Math.floor((day - 1) / 3) * 3 + 1
+  const effectiveBonus = bonusFor(day || 1)
 
   async function save() {
-    const { day: _day, ...patch } = w!
+    setSaving(true)
     try {
-      await saveWorkout(day, patch)
-      setSaved(true)
-      setSaveError('')
-    } catch (e) {
-      setSaveError(e instanceof Error ? e.message : 'Save failed')
-    }
+      if (isBase) await saveDay(0, { ...getDayOverride(0), video: video === baseExercise.video ? undefined : video })
+      else await saveDay(day, {
+        begruessung: f.begruessung !== xl.begruessung ? f.begruessung : undefined,
+        affirmation: f.affirmation !== xl.affirmation ? f.affirmation : undefined,
+        bonusImpuls: f.bonusImpuls !== xl.bonusImpuls ? f.bonusImpuls : undefined,
+        bonusUebung: f.bonusUebung !== (xl.bonusUebung ?? '') ? f.bonusUebung : undefined,
+      })
+      setSaved(true); setError('')
+    } catch (e) { setError(e instanceof Error ? e.message : 'Save failed') } finally { setSaving(false) }
+  }
+
+  async function reset() {
+    await saveDay(day, {})
+    setF(load()); setVideo(baseVideo()); setSaved(true)
   }
 
   async function uploadVideo(file: File) {
-    if (file.size > 100 * 1024 * 1024) return setSaveError('Video must be smaller than 100 MB')
-    setUploading(true); setSaveError('')
+    if (file.size > 100 * 1024 * 1024) return setError('Video must be smaller than 100 MB')
+    setUploading(true); setError('')
     try {
-      const data = await new Promise<string>((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result)); reader.onerror = () => reject(new Error('Could not read video')); reader.readAsDataURL(file) })
-      const result = await api<{ url: string }>('admin/video-upload', { method: 'POST', body: { day, filename: file.name, contentType: file.type, data } })
-      set('video', result.url)
-    } catch (e) { setSaveError(e instanceof Error ? e.message : 'Upload failed') } finally { setUploading(false) }
+      const data = await new Promise<string>((resolve, reject) => { const r = new FileReader(); r.onload = () => resolve(String(r.result)); r.onerror = () => reject(new Error('Could not read video')); r.readAsDataURL(file) })
+      const result = await api<{ url: string }>('admin/video-upload', { method: 'POST', body: { day: 0, filename: file.name, contentType: file.type, data } })
+      setVideo(result.url); setSaved(false)
+    } catch (e) { setError(e instanceof Error ? e.message : 'Upload failed') } finally { setUploading(false) }
   }
+
+  const changed = (k: keyof Form) => f[k] !== ((xl[k as keyof ProgramDay] as string | null) ?? '')
 
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <Link to="/admin/workouts" className="text-sm font-semibold text-[#13707e]">← Workouts</Link>
-          <h1 className="text-2xl font-black">Day {day} · Lesson {lesson}: {w.title}</h1>
+          <Link to="/admin/workouts" className="text-sm font-semibold text-[#13707e]"><ArrowLeft aria-hidden="true" className="mr-2 inline size-4" />Program</Link>
+          <h1 className="text-xl font-semibold tracking-tight">{isBase ? `Base exercise · ${baseExercise.title}` : `Day ${day} · ${xl.phase}`}</h1>
         </div>
         <div className="flex gap-2">
-          {isEdited(day) && (
-            <button
-              onClick={async () => {
-                await resetWorkout(day)
-                navigate(0)
-              }}
-              className="h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold text-[#3f4a4b]"
-            >
-              Reset to default
-            </button>
-          )}
-          <button onClick={save} className="h-10 rounded-full bg-brand px-5 text-sm font-bold text-white">{saved ? 'Saved ✓' : 'Save changes'}</button>
+          {!isBase && day > 1 && <Button variant="outline" render={<Link to={`/admin/workouts/${day - 1}`} />}>← Day {day - 1}</Button>}
+          {!isBase && day < PROGRAM_DAYS && <Button variant="outline" render={<Link to={`/admin/workouts/${day + 1}`} />}>Day {day + 1} →</Button>}
+          <Button variant="outline" onClick={reset} disabled={saving}>Reset to Excel</Button>
+          <Button disabled={saving || uploading} onClick={save}>{saving ? 'Saving...' : saved ? 'Saved' : 'Save changes'}</Button>
         </div>
       </div>
-      {saveError && <p role="alert" className="text-sm text-[#ba1a1a]">{saveError}</p>}
+      {error && <p role="alert" className="text-sm text-[#ba1a1a]">{error}</p>}
 
-      <section className="grid gap-4 rounded-3xl border border-slate-200 bg-white p-5 md:grid-cols-2">
-        <Label text="Title"><input className={field} value={w.title} onChange={e => set('title', e.target.value)} /></Label>
-        <Label text="Category">
-          <select className={field} value={w.category} onChange={e => set('category', e.target.value as Category)}>
-            {categories.map(c => <option key={c}>{c}</option>)}
-          </select>
-        </Label>
-        <Label text="Minutes"><input type="number" min={1} className={field} value={w.mins} onChange={e => set('mins', Number(e.target.value))} /></Label>
-        <Label text="kcal (approx.)"><input type="number" min={0} className={field} value={w.kcal} onChange={e => set('kcal', Number(e.target.value))} /></Label>
-        <Label text="Intensity">
-          <select className={field} value={w.intensity} onChange={e => set('intensity', e.target.value as Workout['intensity'])}>
-            {intensities.map(c => <option key={c}>{c}</option>)}
-          </select>
-        </Label>
-        <div className="flex flex-col gap-2">
-          <label className="flex cursor-pointer items-center justify-center rounded-xl border border-dashed border-slate-300 px-3 py-2 text-sm font-semibold text-[#13707e] hover:bg-mint">
-            {uploading ? 'Uploading…' : 'Upload video to storage'}
-            <input type="file" accept="video/mp4,video/webm,video/quicktime" disabled={uploading} onChange={e => { const file = e.target.files?.[0]; if (file) void uploadVideo(file); e.currentTarget.value = '' }} className="sr-only" />
-          </label>
-          <p className="text-[11px] text-slate-500">MP4/WebM/QuickTime, max 100 MB. Save changes after upload.</p>
-        </div>
-        <div className="md:col-span-2">
-          <Label text="Description">
-            <textarea rows={3} className={`${field} h-auto py-2`} value={w.blurb} onChange={e => set('blurb', e.target.value)} />
-          </Label>
-        </div>
-      </section>
-
-      <section className="flex flex-col gap-3 rounded-3xl border border-slate-200 bg-white p-5">
-        <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold">Steps</h2>
-          <button onClick={() => set('steps', [...w.steps, { name: 'New step', mins: 2, note: '' }])} className="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-[#13707e]">+ Add step</button>
-        </div>
-        {w.steps.map((s, i) => (
-          <div key={i} className="grid items-end gap-2 md:grid-cols-[2rem_1fr_6rem_1fr_auto]">
-            <span className="pb-2.5 text-sm font-bold text-[#6f7472]">{i + 1}</span>
-            <Label text="Name"><input className={field} value={s.name} onChange={e => setStep(i, { name: e.target.value })} /></Label>
-            <Label text="Mins"><input type="number" min={1} className={field} value={s.mins} onChange={e => setStep(i, { mins: Number(e.target.value) })} /></Label>
-            <Label text="Note"><input className={field} value={s.note} onChange={e => setStep(i, { note: e.target.value })} /></Label>
-            <button aria-label={`Remove step ${i + 1}`} onClick={() => set('steps', w.steps.filter((_, j) => j !== i))} className="h-10 rounded-xl px-3 text-sm font-semibold text-[#ba1a1a] hover:bg-slate-100">Remove</button>
+      {isBase ? (
+        <section className="grid items-start gap-5 rounded-xl border border-slate-200 bg-white p-5 md:grid-cols-2">
+          <div className="flex flex-col gap-2 text-sm">
+            <p className="text-xs font-bold tracking-[0.48px] text-[#6f7472] uppercase">Instructions (same for all 90 days)</p>
+            <ol className="list-decimal space-y-1 pl-5">{baseExercise.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
+            <p className="text-xs text-slate-500">Text is fixed by the customer brief; change it in src/data/program.ts.</p>
           </div>
-        ))}
-      </section>
-
-      {w.video && (
-        <section className="rounded-3xl border border-slate-200 bg-white p-5">
-          <h2 className="pb-3 text-base font-bold">Video preview</h2>
-          <video src={w.video} controls playsInline preload="metadata" className="aspect-video w-full max-w-xl rounded-2xl bg-black" />
+          <div className="flex min-w-0 flex-col gap-1">
+            <span className="text-xs font-bold tracking-[0.48px] text-[#6f7472] uppercase">Video (used on every day)</span>
+            <label className="relative flex h-10 cursor-pointer items-center justify-center rounded-xl border border-dashed border-slate-300 px-3 text-sm font-semibold text-[#13707e] hover:bg-mint focus-within:ring-2 focus-within:ring-brand">
+              {uploading ? 'Uploading...' : 'Replace video'}
+              <input aria-label="Upload video" type="file" accept="video/mp4,video/webm,video/quicktime" disabled={uploading} onChange={e => { const file = e.target.files?.[0]; if (file) void uploadVideo(file); e.currentTarget.value = '' }} className="absolute inset-0 cursor-pointer opacity-0" />
+            </label>
+            <video src={video} controls playsInline preload="metadata" className="mt-3 aspect-video w-full max-w-sm rounded-xl bg-black" />
+          </div>
+        </section>
+      ) : (
+        <section className="grid items-start gap-5 rounded-xl border border-slate-200 bg-white p-5 md:grid-cols-2">
+          <div className="flex flex-col gap-4">
+            <Label text="Tägliche Begrüßung (Vestibu)" hint={changed('begruessung') && 'Overrides Excel'}><textarea rows={3} className={field} value={f.begruessung} onChange={e => set('begruessung', e.target.value)} /></Label>
+            <Label text="Deine Affirmation" hint={!f.affirmation ? 'Empty – the app shows “folgt bald”.' : changed('affirmation') && 'Overrides Excel'}><textarea rows={2} className={field} value={f.affirmation} onChange={e => set('affirmation', e.target.value)} /></Label>
+            <Label text="Bonus-Minuten Impuls" hint={changed('bonusImpuls') && 'Overrides Excel'}><input className={field} value={f.bonusImpuls} onChange={e => set('bonusImpuls', e.target.value)} /></Label>
+          </div>
+          <div className="flex flex-col gap-4">
+            <Label text={`Bonus exercise · block days ${blockStart}–${blockStart + 2}`} hint="Set it on the first day of the block; the other two days follow unless they have their own pick.">
+              <select className={field} value={f.bonusUebung} onChange={e => set('bonusUebung', e.target.value)}>
+                <option value="">— Not chosen (use block pick / placeholder) —</option>
+                {(['Gleichgewicht', 'Wahrnehmung', 'Entspannung', 'Bewegung'] as const).map(k => (
+                  <optgroup key={k} label={k}>{bonusExercises.filter(b => b.kategorie === k).map(b => <option key={b.id} value={b.id}>{b.titel}{b.nr !== 'ohne Nummer' ? ` (#${b.nr})` : ''}</option>)}</optgroup>
+                ))}
+              </select>
+            </Label>
+            {(() => { const b = bonusExercises.find(x => x.id === f.bonusUebung) ?? effectiveBonus; return b && (
+              <div className="rounded-xl bg-slate-50 p-4 text-sm">
+                <p className="font-semibold">{b.titel} <span className="ml-1 rounded-full bg-mint px-2 py-0.5 text-xs text-brand-deep">{b.kategorie}</span></p>
+                {!f.bonusUebung && <p className="mt-1 text-xs text-amber-700">Currently shown to users (not chosen for this day).</p>}
+                <p className="mt-2 text-slate-600">{b.anleitung}</p>
+              </div>) })()}
+          </div>
         </section>
       )}
     </div>

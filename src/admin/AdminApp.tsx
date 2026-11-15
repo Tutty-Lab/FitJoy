@@ -6,7 +6,6 @@ import Dashboard from './pages/Dashboard'
 import Users from './pages/Users'
 import Workouts from './pages/Workouts'
 import WorkoutEdit from './pages/WorkoutEdit'
-import Organizations from './pages/Organizations'
 import Audit from './pages/Audit'
 import OrganizationDetail from './pages/OrganizationDetail'
 
@@ -22,8 +21,8 @@ export default function AdminApp() {
       <Route element={<RequireAdmin />}>
         <Route element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
-          <Route path="licenses" element={<Licenses />} />
-          <Route path="organizations" element={<Organizations />} />
+          <Route path="licenses" element={<Navigate to="/admin/organizations" replace />} />
+          <Route path="organizations" element={<Licenses />} />
           <Route path="organizations/:id" element={<OrganizationDetail />} />
           <Route path="audit" element={<Audit />} />
           <Route path="users" element={<Users />} />

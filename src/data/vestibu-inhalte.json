@@ -1,0 +1,1245 @@
+{
+ "quelle": "Vestibu_90_Tage_Texte.xlsx",
+ "tage": [
+  {
+   "tag": 1,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Guten Morgen! Dein stiller Regisseur ist bereit. Gönnen wir uns deine erste Minute für heute.",
+   "affirmation": "",
+   "bonusImpuls": "Lust auf deine Bonus-Minute?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 2,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Schön, dass du da bist! Drei kleine Minuten für dich machen heute den großen Unterschied.",
+   "affirmation": "",
+   "bonusImpuls": "Jetzt die Bonus-Minute?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 3,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Hallo! Kurz durchatmen, Alltag ausblenden – hier kommt deine erste Balance-Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Zeit für dein Extra?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 4,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Willkommen zurück! Dein Gleichgewichtsorgan freut sich schon auf deine Aufmerksamkeit.",
+   "affirmation": "",
+   "bonusImpuls": "Noch eine freiwillige Bonus-Minute?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 5,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Ein neuer Tag, eine neue Chance für deine innere Mitte. Starten wir mit Minute eins!",
+   "affirmation": "",
+   "bonusImpuls": "Bereit für deine Bonus-Minute?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 6,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Hallo von Vestibu! Lass uns deinen Tag mit einer Minute Ruhe und Fokus beginnen.",
+   "affirmation": "",
+   "bonusImpuls": "Gönn dir das Extra!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 7,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Schön, dich zu sehen! Auch wenn ich meist im Verborgenen arbeite – jetzt gehört die Bühne dir.",
+   "affirmation": "",
+   "bonusImpuls": "Noch eine Minute extra?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 8,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Bereit für deinen kleinen Boxenstopp? Eine Minute für deinen Körper und deinen Kopf.",
+   "affirmation": "",
+   "bonusImpuls": "Deine Bonus-Minute wartet!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 9,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Guten Tag! Vergiss heute nicht: Du bist die wichtigste Person in deinem Alltag. Los geht’s!",
+   "affirmation": "",
+   "bonusImpuls": "Lust auf noch mehr?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 10,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Hallo! Dein Gehirn und dein Gleichgewicht sind bereit. Holen wir uns deine erste Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Ein Extra für dich?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 11,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Schön, dass du dir diesen Moment schenkst. Eine Minute reicht, um wieder bei dir anzukommen.",
+   "affirmation": "",
+   "bonusImpuls": "Schenk dir die Bonus-Minute!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 12,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Willkommen! Kein Stress, keine Eile – nur du, ich und eine wohltuende Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Noch etwas Zeit übrig?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 13,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Hallo! Wie fühlt sich deine Balance heute an? Finden wir es in einer kurzen Minute heraus.",
+   "affirmation": "",
+   "bonusImpuls": "Bereit für ein Extra?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 14,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Dein stiller Regisseur meldet sich zum Dienst! Bereit für dein heutiges Mini-Training?",
+   "affirmation": "",
+   "bonusImpuls": "Hol dir deine Bonus-Minute!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 15,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Guten Start in den Tag! Mit nur einer Minute bringst du jetzt Ruhe in dein System.",
+   "affirmation": "",
+   "bonusImpuls": "Jetzt noch ein Extra?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 16,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Hallo! Du machst das großartig. Bleib dran – deine heutige Minute wartet schon.",
+   "affirmation": "",
+   "bonusImpuls": "Weiter mit der Bonus-Minute?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 17,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Schön, dass du wieder eingeschaltet hast! Kümmern wir uns kurz um dein inneres Gleichgewicht.",
+   "affirmation": "",
+   "bonusImpuls": "Eine Extra-Minute für dich?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 18,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Zeit für eine kleine Pause vom Funktionieren. Eine Minute nur für dich!",
+   "affirmation": "",
+   "bonusImpuls": "Hast du noch Lust?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 19,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Hallo! Dein Gleichgewichtsorgan arbeitet 24/7 für dich – jetzt geben wir ihm eine Minute zurück.",
+   "affirmation": "",
+   "bonusImpuls": "Startklar für dein Extra?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 20,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Willkommen zu deiner persönlichen Auszeit. Kurz, effektiv und genau richtig für dich.",
+   "affirmation": "",
+   "bonusImpuls": "Noch ein kleiner Nachschlag?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 21,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Guten Tag! Lass uns gemeinsam dafür sorgen, dass dich heute nichts so schnell aus der Ruhe bringt.",
+   "affirmation": "",
+   "bonusImpuls": "Deine Extra-Portion Balance?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 22,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Hallo von Vestibu! Denk dran: Alles kann, nichts muss – auch deine Bonus-Minuten warten nur, wenn du Lust hast.",
+   "affirmation": "",
+   "bonusImpuls": "Möchtest du noch weitermachen?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 23,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Schön, dass du dir treu bleibst! Starten wir entspannt in deine erste Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Gleich noch die Bonus-Minute?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 24,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Ein kurzer Moment der Achtsamkeit wirkt oft Wunder. Bist du bereit?",
+   "affirmation": "",
+   "bonusImpuls": "Schnapp dir dein Extra!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 25,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Hallo! Stell dir vor, wie gut du dich gleich fühlst. Los geht’s mit Minute eins.",
+   "affirmation": "",
+   "bonusImpuls": "Ein Geschenk für dich!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 26,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Dein Körper liebt kleine Routinen. Schön, dass wir heute wieder zusammen trainieren!",
+   "affirmation": "",
+   "bonusImpuls": "Lust auf ein Plus?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 27,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Guten Tag! Kurz innehalten, tief durchatmen und den Fokus schärfen. Ich begleite dich.",
+   "affirmation": "",
+   "bonusImpuls": "Noch eine kurze Zugabe?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 28,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Hallo! Auch an vollen Tagen passt eine Minute immer dazwischen. Schön, dass du da bist!",
+   "affirmation": "",
+   "bonusImpuls": "Dein freiwilliges Extra wartet!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 29,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Willkommen zurück! Dein stiller Regisseur hat schon alles für deine heutige Übung vorbereitet.",
+   "affirmation": "",
+   "bonusImpuls": "Kurz noch dranhängen?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 30,
+   "phase": "P1: Ankommen & Routine",
+   "begruessung": "Fast ein ganzer Monat liegt hinter uns – stark! Starten wir in deine heutige Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Bereit für den Bonus?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 31,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Hallo! Du und dein Gleichgewichtssystem werdet ein immer besseres Team. Weiter so!",
+   "affirmation": "",
+   "bonusImpuls": "Gönn dir noch Ruhe!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 32,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Schön, dass du wieder da bist! Gönn dir jetzt deine verdiente Minute für mehr Stabilität.",
+   "affirmation": "",
+   "bonusImpuls": "Noch ein Moment Balance?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 33,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Guten Tag! Spürst du schon, wie gut dir diese kleinen Inseln im Alltag tun?",
+   "affirmation": "",
+   "bonusImpuls": "Zeit für extra Energie?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 34,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Dein stiller Regisseur grüßt dich! Bereit für eine Minute Klarheit und Ruhe?",
+   "affirmation": "",
+   "bonusImpuls": "Tu dir noch Gutes!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 35,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Hallo! Egal, was heute schon los war – diese eine Minute gehört ganz allein dir.",
+   "affirmation": "",
+   "bonusImpuls": "Ein Extra für Körper & Geist?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 36,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Willkommen! Dein Gehirn freut sich schon auf die Kombination aus Bewegung und guter Energie.",
+   "affirmation": "",
+   "bonusImpuls": "Noch eine Minute Kraft?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 37,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Kurz den Reset-Knopf drücken? Genau dafür bin ich da. Starten wir!",
+   "affirmation": "",
+   "bonusImpuls": "Deine Extra-Zeit für dich!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 38,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Hallo! Regelmäßigkeit schlägt Perfektion. Wie schön, dass du heute wieder dabei bist.",
+   "affirmation": "",
+   "bonusImpuls": "Lust auf mehr Leichtigkeit?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 39,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Guten Tag! Ein starkes Gleichgewicht gibt dir Halt – im Körper und im Kopf. Los geht’s!",
+   "affirmation": "",
+   "bonusImpuls": "Schenk dir noch Fokus!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 40,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Schön, dass du dir diesen Raum nimmst. Eine Minute für deine innere Standfestigkeit.",
+   "affirmation": "",
+   "bonusImpuls": "Noch ein tiefer Atemzug?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 41,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Hallo von Vestibu! Manchmal braucht es nicht viel, um wieder in die eigene Kraft zu kommen.",
+   "affirmation": "",
+   "bonusImpuls": "Mehr Stabilität gefällig?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 42,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Willkommen zurück! Lass uns heute wieder ein kleines Stück mehr Balance in deinen Tag bringen.",
+   "affirmation": "",
+   "bonusImpuls": "Dein persönlicher Energie-Boost?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 43,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Guten Start! Wenn es heute turbulent wird, bist du dank deiner Übungen bestens gewappnet.",
+   "affirmation": "",
+   "bonusImpuls": "Noch ein bisschen Achtsamkeit?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 44,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Hallo! Dein Vestibularsystem dankt dir für jede einzelne Minute Aufmerksamkeit.",
+   "affirmation": "",
+   "bonusImpuls": "Für dein bestes Gefühl!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 45,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Halbzeit auf unserer 90-Tage-Reise! Sei stolz auf dich – starten wir in deine heutige Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Extra-Pause für deinen Kopf?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 46,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Schön, dich zu begleiten! Nimm dir kurz Zeit, um deinen inneren Kompass neu auszurichten.",
+   "affirmation": "",
+   "bonusImpuls": "Noch eine Minute Entspannung?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 47,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Hallo! Kleine Schritte führen zu großen Veränderungen. Auf geht’s zu Minute eins!",
+   "affirmation": "",
+   "bonusImpuls": "Stärke deine innere Mitte!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 48,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Guten Tag! Falls du heute extra Energie hast, warten später auch wieder deine freiwilligen Bonus-Minuten.",
+   "affirmation": "",
+   "bonusImpuls": "Dein Plus an Wohlbefinden!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 49,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Willkommen! Atme den Alltagsstress kurz aus und mach Platz für deine persönliche Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Noch ein Ruhe-Anker?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 50,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Hallo! Du investierst gerade in dein wichtigstes Gut: dein eigenes Wohlbefinden.",
+   "affirmation": "",
+   "bonusImpuls": "Lust auf mehr Klarheit?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 51,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Dein stiller Regisseur ist startklar! Holen wir uns heute wieder ein Stück mehr Leichtigkeit.",
+   "affirmation": "",
+   "bonusImpuls": "Ein Extra-Schritt für dich!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 52,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Schön, dass du da bist! Dein Körper merkt sich jede dieser wertvollen Minuten.",
+   "affirmation": "",
+   "bonusImpuls": "Gönn dir diesen Moment!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 53,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Guten Tag! Kurz stehen bleiben, bei sich ankommen und gestärkt weitermachen.",
+   "affirmation": "",
+   "bonusImpuls": "Noch mehr innere Ruhe?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 54,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Hallo! Auch wenn ich im Verborgenen arbeite – deine Fortschritte sind spürbar. Weiter so!",
+   "affirmation": "",
+   "bonusImpuls": "Deine Extra-Minute Selbstfürsorge!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 55,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Willkommen zu deinem täglichen Anker. Eine Minute Ruhe mitten im Leben.",
+   "affirmation": "",
+   "bonusImpuls": "Kurz noch Kraft tanken?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 56,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Hallo von Vestibu! Lass uns heute wieder dafür sorgen, dass du fest und sicher stehst.",
+   "affirmation": "",
+   "bonusImpuls": "Ein Plus für heute!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 57,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Guten Tag! Nichts muss jetzt perfekt sein – sei einfach nur für eine Minute ganz bei dir.",
+   "affirmation": "",
+   "bonusImpuls": "Mehr Balance für dich?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 58,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Schön, dass du dranbleibst! Deine Beständigkeit zahlt sich jeden Tag ein bisschen mehr aus.",
+   "affirmation": "",
+   "bonusImpuls": "Deine freiwillige Wohlfühl-Minute!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 59,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Hallo! Ein kurzer Blick nach innen macht dich stark für alles, was im Außen passiert.",
+   "affirmation": "",
+   "bonusImpuls": "Noch ein guter Impuls?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 60,
+   "phase": "P2: Vertiefen & Dranbleiben",
+   "begruessung": "Willkommen zurück! Zwei Drittel sind geschafft – genieße deine heutige Balance-Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Mach den Moment rund!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 61,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Hallo! Deine tägliche Minute ist längst zu deiner eigenen kleinen Superkraft geworden.",
+   "affirmation": "",
+   "bonusImpuls": "Du bist im Flow!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 62,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Schön, dass du da bist! Dein stiller Regisseur und du – ihr seid mittlerweile echte Profis.",
+   "affirmation": "",
+   "bonusImpuls": "Heute noch mehr erreichen?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 63,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Guten Tag! Nimm dir deinen gewohnten Moment für Ruhe, Fokus und innere Stärke.",
+   "affirmation": "",
+   "bonusImpuls": "Hol dir den Extra-Punkt!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 64,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Willkommen! Dein Gleichgewichtssystem arbeitet heute wieder auf Hochtouren für dich.",
+   "affirmation": "",
+   "bonusImpuls": "Lust auf die Kür?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 65,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Hallo von Vestibu! Wie gut, dass du dir diese kleine Auszeit so selbstverständlich gönnst.",
+   "affirmation": "",
+   "bonusImpuls": "Setz noch eins drauf!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 66,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Bereit für deinen täglichen Energie-Impuls? Eine Minute reicht, um dich neu auszurichten.",
+   "affirmation": "",
+   "bonusImpuls": "Heute voller Energie?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 67,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Hallo! Du weißt längst, wie gut es tut. Starten wir ohne Umschweife in deine Minute!",
+   "affirmation": "",
+   "bonusImpuls": "Dein Bonus wartet schon!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 68,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Guten Tag! Bleib in deiner Mitte – ganz egal, wie schnell sich die Welt um dich herum dreht.",
+   "affirmation": "",
+   "bonusImpuls": "Noch ein kleiner Triumph?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 69,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Schön, dich zu sehen! Dein Körper und dein Geist sind bereit für euren gemeinsamen Moment.",
+   "affirmation": "",
+   "bonusImpuls": "Zeig, was in dir steckt!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 70,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Willkommen zurück! Jede Minute ist ein kleines Geschenk an dein zukünftiges Ich.",
+   "affirmation": "",
+   "bonusImpuls": "Lust auf eine Zugabe?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 71,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Hallo! Vertraue auf deine innere Balance. Wir festigen sie heute mit deiner ersten Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Mach das Doppelte draus!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 72,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Guten Tag! Ein kurzer Moment der Stille bringt oft die besten Ideen. Los geht’s!",
+   "affirmation": "",
+   "bonusImpuls": "Dein Extra-Erfolg für heute!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 73,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Dein stiller Regisseur meldet sich! Schön, dass wir diesen Weg gemeinsam gehen.",
+   "affirmation": "",
+   "bonusImpuls": "Bereit für Level zwei?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 74,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Hallo! Spürst du diese angenehme Routine? Genieß deine heutige persönliche Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Heute besonders gut drauf?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 75,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Willkommen! Nur noch zwei Wochen bis zur 90-Tage-Marke – du kannst wirklich stolz auf dich sein!",
+   "affirmation": "",
+   "bonusImpuls": "Schnapp dir den Bonus!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 76,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Guten Tag! Lass uns heute wieder für ein rundum gutes Körpergefühl sorgen.",
+   "affirmation": "",
+   "bonusImpuls": "Noch eine Runde Balance?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 77,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Hallo von Vestibu! Eine Minute Aufmerksamkeit – und dein ganzes System profitiert davon.",
+   "affirmation": "",
+   "bonusImpuls": "Kröne deinen heutigen Tag!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 78,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Schön, dass du da bist! Wenn du magst, warten nach der Pflicht heute auch wieder die freiwilligen Bonus-Minuten.",
+   "affirmation": "",
+   "bonusImpuls": "Lust auf den Bonus-Kick?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 79,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Hallo! Ruhe im Kopf, Sicherheit im Stand. Holen wir uns beides in der nächsten Minute.",
+   "affirmation": "",
+   "bonusImpuls": "Heute geht noch was!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 80,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Willkommen zu deiner täglichen Portion Achtsamkeit. Kurz, klar und wohltuend.",
+   "affirmation": "",
+   "bonusImpuls": "Dein tägliches Plus wartet!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 81,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Guten Tag! Du hast bewiesen, dass man auch im vollsten Alltag Zeit für sich findet. Stark!",
+   "affirmation": "",
+   "bonusImpuls": "Einfach mal weitermachen?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 82,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Hallo! Dein Gleichgewichtsorgan ist in Bestform – halten wir dieses tolle Gefühl fest.",
+   "affirmation": "",
+   "bonusImpuls": "Hol dir das Extra-Gefühl!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 83,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Schön, dass du wieder eingeschaltet hast! Eine Minute nur für deine innere Harmonie.",
+   "affirmation": "",
+   "bonusImpuls": "Noch ein starker Moment?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 84,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Willkommen zurück! Lass den Tag kurz draußen und konzentriere dich ganz auf dich.",
+   "affirmation": "",
+   "bonusImpuls": "Dein Bonus steht bereit!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 85,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Hallo von Vestibu! Dein Körper liebt diese Verlässlichkeit. Starten wir in Minute eins!",
+   "affirmation": "",
+   "bonusImpuls": "Lust auf mehr Schwung?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 86,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Guten Tag! Auf der Zielgeraden unserer 90 Tage – genieß deine heutige Übung in vollen Zügen.",
+   "affirmation": "",
+   "bonusImpuls": "Mach deine Serie komplett!",
+   "bonusUebung": null
+  },
+  {
+   "tag": 87,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Hallo! Du bist dein eigener bester Coach. Ich bin nur hier, um dich kurz zu erinnern.",
+   "affirmation": "",
+   "bonusImpuls": "Ein kleines Extra gefällig?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 88,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Schön, dass du da bist! Eine Minute Fokus, damit du den Rest des Tages entspannt meisterst.",
+   "affirmation": "",
+   "bonusImpuls": "Heute Zeit für mehr?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 89,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Willkommen! Morgen machen wir die 90 Tage voll – heute genießen wir erst einmal diesen Moment.",
+   "affirmation": "",
+   "bonusImpuls": "Dein stiller Regisseur fragt: Bonus?",
+   "bonusUebung": null
+  },
+  {
+   "tag": 90,
+   "phase": "P3: Meisterschaft",
+   "begruessung": "Tag 90 – was für eine Leistung! Dein stiller Regisseur verneigt sich vor deiner Ausdauer. Auf deine heutige Minute!",
+   "affirmation": "",
+   "bonusImpuls": "Belohn dich mit Extra-Balance!",
+   "bonusUebung": null
+  }
+ ],
+ "bonusUebungen": [
+  {
+   "id": "zurueck-zur-mitte",
+   "nr": "50",
+   "kategorie": "Gleichgewicht",
+   "titel": "Zurück zur Mitte",
+   "anleitung": "Drehe deinen Oberkörper leicht nach rechts, pausiere und zurück zur Mitte. Dann nach links, pausiere und zurück zur Mitte."
+  },
+  {
+   "id": "zehenspitze-an-die-stufe",
+   "nr": "57",
+   "kategorie": "Gleichgewicht",
+   "titel": "Zehenspitze an die Stufe",
+   "anleitung": "Stell dich vor eine sichere Treppenstufe. Berühre die Stufenkante mit der rechten Fußspitze. Führe den Fuß zurück. Wechsle zum linken Fuß. Berühre die Stufenkante mit der Spitze und führe ihn zurück. Steige nicht hinauf. Stelle nur langsam den Kontakt her und nimm den Abstand zur Stufe wahr."
+  },
+  {
+   "id": "weitblick",
+   "nr": "119",
+   "kategorie": "Wahrnehmung",
+   "titel": "Weitblick",
+   "anleitung": "Schau aus dem Fenster oder in einen möglichst großen Raum. Lass den Blick weit werden, ohne etwas zu suchen oder zu fokussieren. Nimm auch Dinge am Rand deines Blickfeldes wahr: oben, unten und seitlich. Bleibe einige Atemzüge dabei. Schau zum Schluss ruhig geradeaus."
+  },
+  {
+   "id": "weit-nah-blick",
+   "nr": "72",
+   "kategorie": "Entspannung",
+   "titel": "Weit Nah Blick",
+   "anleitung": "Schau vom Bildschirm weg auf einen Punkt in der Ferne. Lass den Blick dort ruhen und schaue dann zum Bildschirm zurück. Schau wieder weit. Drehe den Kopf langsam etwas nach rechts, pausiere, zur Mitte, nach links und zur Mitte. Schau nach vorne und anschließend in die Ferne. Lass Augen und Stirn weich."
+  },
+  {
+   "id": "viererfolge",
+   "nr": "19",
+   "kategorie": "Bewegung",
+   "titel": "Viererfolge",
+   "anleitung": "Berühre langsam nacheinander mit einer Hand deinen rechten Oberschenkel, deinen linken Oberschenkel, deine rechte Schulter und deine linke Schulter. Ändere dann die Reihenfolge: linke Schulter, rechter Oberschenkel, rechte Schulter, linker Oberschenkel. Wechsle die Hand"
+  },
+  {
+   "id": "treppe",
+   "nr": "98",
+   "kategorie": "Wahrnehmung",
+   "titel": "Treppe",
+   "anleitung": "Halte vor einer Treppe kurz inne. Spüre beide Füße und richte dich auf. Gehe die ersten Schritte bewusst langsam und spüre jeden Fußkontakt. Bleibe oben kurz stehen, atme ruhig aus und gehe dann weiter."
+  },
+  {
+   "id": "summen",
+   "nr": "91",
+   "kategorie": "Entspannung",
+   "titel": "Summen",
+   "anleitung": "Setz dich bequem hin. Atme normal ein und summe beim Ausatmen ganz leise, so laut, wie es angenehm ist. Spüre die feine Vibration in Gesicht und Hals. Atme anschließend ruhig ein und ohne Ton aus."
+  },
+  {
+   "id": "uebergang",
+   "nr": "103",
+   "kategorie": "Wahrnehmung",
+   "titel": "Übergang",
+   "anleitung": "Gehe drei langsame Schritte und halte an. Bleibe kurz stehen und spüre den Moment des Anhaltens. Gehe anschließend langsam los und halte plötzlich, aber sicher an. Nimm wahr, wie dein Körper die Bewegung abbremst."
+  },
+  {
+   "id": "stabil-bewegt",
+   "nr": "35",
+   "kategorie": "Gleichgewicht",
+   "titel": "Stabil bewegt",
+   "anleitung": "Steh bequem. Bewege beide Arme langsam nach vorne und zurück. Spüre deine Füße. Hebe dann den rechten Arm, während der linke unten bleibt. Senke ihn und wechsle die Seite. Lass anschließend beide Arme sinken und spüre deinen Stand."
+  },
+  {
+   "id": "sitzend-drehen",
+   "nr": "102",
+   "kategorie": "Wahrnehmung",
+   "titel": "Sitzend drehen",
+   "anleitung": "Setz oder stell dich hin. Drehe den Kopf langsam nach rechts, pausiere und zurück zur Mitte. Dann nach links und zurück zur Mitte. Drehe anschließend den Oberkörper ein kleines Stück mit. Bewege dich langsam und ohne Ruck. Schaue zum Schluss geradeaus und spüre die Bewegung des Oberkörpers auf dem Becken."
+  },
+  {
+   "id": "sitzen-und-mitte",
+   "nr": "48",
+   "kategorie": "Gleichgewicht",
+   "titel": "Sitzen und Mitte",
+   "anleitung": "Setz dich hin. Verlagere dein Gewicht nach rechts, der Sitzhöcker hebt ab. Pausiere ein paar Sekunden und zurück zur Mitte. Dann nach links und zurück zur Mitte. Verlagere es anschließend nach vorne und zurück zur Mitte, danach nach hinten und zurück zur Mitte."
+  },
+  {
+   "id": "seufzer-loesen",
+   "nr": "90",
+   "kategorie": "Entspannung",
+   "titel": "Seufzer lösen",
+   "anleitung": "Atme normal ein. Lass beim Ausatmen einen ganz leisen Seufzer entstehen. Atme danach normal weiter."
+  },
+  {
+   "id": "seitenschritt",
+   "nr": "126",
+   "kategorie": "Wahrnehmung",
+   "titel": "Seitenschritt",
+   "anleitung": "Mache langsam einen kleinen Schritt nach rechts und zurück zur Mitte. Dann nach links und zurück zur Mitte. Dein Blick bleibt nach vorne gerichtet. Spüre die Gewichtsverlagerung."
+  },
+  {
+   "id": "schultern-heben-und-loesen",
+   "nr": "63",
+   "kategorie": "Entspannung",
+   "titel": "Schultern heben und lösen",
+   "anleitung": "Ziehe im Sitzen oder Stehen beide Schultern langsam nach oben und halte kurz. Lass sie beim Ausatmen sinken, ohne sie nach unten zu drücken. Kreise die Schultern langsam und klein nach hinten. Spüre Schultern und Nacken. Lass die Arme locker hängen und nimm ihr Gewicht wahr."
+  },
+  {
+   "id": "schultern",
+   "nr": "67",
+   "kategorie": "Entspannung",
+   "titel": "Schultern",
+   "anleitung": "Stehe bequem. Bewege beide Arme 3x langsam nach vorne und zurück. Hebe dann den rechten Arm, während der linke unten bleibt. Wechsle die Seite. Lass beide Arme sinken und spüre, wie dein Körper die Bewegung ausgleicht."
+  },
+  {
+   "id": "schulterkontakt",
+   "nr": "127",
+   "kategorie": "Wahrnehmung",
+   "titel": "Schulterkontakt",
+   "anleitung": "Lege eine Hand auf die gegenüberliegende Schulter. Spüre die Wärme und streiche langsam über die Schulter. Bewege die Schulter langsam nach vorne und zurück. Wechsle die Seite. Lege dann beide Hände auf die Schultern. Atme natürlich tief ein und lass beim Ausatmen die Hände sinken."
+  },
+  {
+   "id": "schulterbewegung-mit-ausatmen",
+   "nr": "87",
+   "kategorie": "Entspannung",
+   "titel": "Schulterbewegung mit Ausatmen",
+   "anleitung": "Setz dich aufrecht hin und lass die Schultern locker. Hebe die Schultern beim Einatmen hoch. Lass sie beim Ausatmen sinken."
+  },
+  {
+   "id": "schritte-neben-eine-linie",
+   "nr": "13",
+   "kategorie": "Bewegung",
+   "titel": "Schritte neben eine Linie",
+   "anleitung": "Gehe langsam neben einer gedachten Linie. Setze einen Fuß links von der Linie auf, den anderen rechts davon. Gehe anschließend wieder normal."
+  },
+  {
+   "id": "schritt-wechsel",
+   "nr": "94",
+   "kategorie": "Entspannung",
+   "titel": "Schritt Wechsel",
+   "anleitung": "Steh auf. Spüre den Bodenkontakt und richte dich auf. Orientiere deinen Blick im Raum. Gehe drei langsame Schritte, bleibe stehen und atme ruhig aus."
+  },
+  {
+   "id": "schritt-und-blick",
+   "nr": "117",
+   "kategorie": "Wahrnehmung",
+   "titel": "Schritt und Blick",
+   "anleitung": "Gehe langsam. Schaue bei jedem zweiten Schritt auf einen anderen Punkt im Raum: nach rechts, zur Mitte, nach links und zur Mitte. Halte die Schritte ruhig. Gehe anschließend wieder geradeaus und nimm Füße und Blick gleichzeitig wahr."
+  },
+  {
+   "id": "rueckwaerts-orientieren",
+   "nr": "135",
+   "kategorie": "Wahrnehmung",
+   "titel": "Rückwärts orientieren",
+   "anleitung": "Stell dich hin. Mache einen kleinen Schritt rückwärts und dann wieder nach vorne. Achte auf den Fußkontakt. Nutze bei Unsicherheit eine Stütze."
+  },
+  {
+   "id": "rueckkehr-aus-der-kurve",
+   "nr": "145",
+   "kategorie": "Wahrnehmung",
+   "titel": "Rückkehr aus der Kurve",
+   "anleitung": "Gehe eine Kurve und anschließend wieder geradeaus. Spüre den Moment des Richtungswechsels. Bleibe dann stehen."
+  },
+  {
+   "id": "rechts-und-links",
+   "nr": "ohne Nummer",
+   "kategorie": "Gleichgewicht",
+   "titel": "Rechts und links",
+   "anleitung": "Stell oder setze dich hin. Verlagere dein Gewicht langsam ein wenig nach rechts. Warte 3-5 Sekunden und komm zurück zur Mitte. Verlagere es nach links und zurück zur Mitte. Nimm wahr, wie sich Füße, Beine, Becken und Wirbelsäule anpassen."
+  },
+  {
+   "id": "pendeln-mit-arm",
+   "nr": "21",
+   "kategorie": "Gleichgewicht",
+   "titel": "Pendeln mit Arm",
+   "anleitung": "Stell dich hin. Verlagere dein Gewicht langsam nach rechts und links. Die Füße bleiben stehen. Führe die rechte Hand langsam nach rechts und zurück, dann die linke nach links und zurück. Lass den Oberkörper ein wenig folgen. Komm zur Mitte."
+  },
+  {
+   "id": "pendeln",
+   "nr": "22",
+   "kategorie": "Gleichgewicht",
+   "titel": "Pendeln",
+   "anleitung": "Stell dich bequem hin. Verlagere dein Gewicht langsam nach rechts, pausiere und zurück zur Mitte. Dann nach links und zurück zur Mitte. Die Füße bleiben am Boden, die Bewegung bleibt klein. Bleibe anschließend in der Mitte und spüre deinen Stand."
+  },
+  {
+   "id": "mitte",
+   "nr": "49",
+   "kategorie": "Gleichgewicht",
+   "titel": "Mitte",
+   "anleitung": "Stell dich ruhig hin. Die Füße stehen parallel. Spüre ihren Abstand. Verlagere dein Gewicht ein kleines Stück nach rechts und zurück zur Mitte. Dann nach links und zurück zur Mitte. Bleibe dort und spüre deine Mitte."
+  },
+  {
+   "id": "mein-gleichgewichts-code",
+   "nr": "44",
+   "kategorie": "Gleichgewicht",
+   "titel": "Mein Gleichgewichts-Code",
+   "anleitung": "Setz dich bequem hin. Spüre deine Füße und die Sitzfläche. Richte dich angenehm auf. Erinnere dich an eine Übung, die dir besonders gefallen hat, etwa eine Fußbewegung, eine Koordinationsaufgabe oder eine kleine Haltungsbewegung. Führe diese aus."
+  },
+  {
+   "id": "langsames-reiben-der-unterarme",
+   "nr": "85",
+   "kategorie": "Entspannung",
+   "titel": "Langsames Reiben der Unterarme",
+   "anleitung": "Lege eine Hand um das gegenüberliegende Handgelenk. Streiche langsam vom Handgelenk zum Ellenbogen und zurück. Wechsle die Seite. Schüttle anschließend beide Hände ganz leicht aus und lass sie ruhig werden."
+  },
+  {
+   "id": "langsamer-gang",
+   "nr": "53",
+   "kategorie": "Gleichgewicht",
+   "titel": "Langsamer Gang",
+   "anleitung": "Stell dich hin. Beginne mit einem sehr kleinen Schritt, dann folgt der nächste. Lass 3 Schritte etwas größer und anschließend wieder kleiner werden."
+  },
+  {
+   "id": "langsam-starten",
+   "nr": "52",
+   "kategorie": "Gleichgewicht",
+   "titel": "Langsam starten",
+   "anleitung": "Stell dich hin und spüre beide Füße. Verlagere dein Gewicht auf den rechten Fuß und mache einen kleinen Schritt mit dem linken Fuß. Dann folgt die linke Seite. Gehe weiter und nimm wahr, wie jeder Schritt mit einer kleinen Gewichtsverlagerung beginnt."
+  },
+  {
+   "id": "langsam-drehen",
+   "nr": "80",
+   "kategorie": "Entspannung",
+   "titel": "LANGSAM DREHEN",
+   "anleitung": "Drehe deinen Oberkörper langsam ein kleines Stück nach rechts, pausiere und zurück zur Mitte. Dann nach links und zurück zur Mitte. Der Kopf darf folgen, die Arme dürfen locker mitschwingen. Bewege dich ohne Ziehen und ohne Schwung."
+  },
+  {
+   "id": "kreuz-schritt-ueber-eine-linie",
+   "nr": "12",
+   "kategorie": "Bewegung",
+   "titel": "Kreuz-Schritt über eine Linie",
+   "anleitung": "Stell dir eine Linie auf dem Boden vor. Gehe langsam mit Kreuzschritten darüber hinweg. Jeder Fuß überquert bei jedem Schritt die Linie. Balanciere nicht auf der Linie."
+  },
+  {
+   "id": "kopf-drehen-ohne-schultern",
+   "nr": "101",
+   "kategorie": "Wahrnehmung",
+   "titel": "Kopf drehen ohne Schultern",
+   "anleitung": "Schau geradeaus. Drehe den Kopf langsam ein kleines Stück nach rechts, pausiere und zurück zur Mitte. Dann nach links und zurück zur Mitte. Lass die Schultern möglichst ruhig. Nimm die Bewegung wahr, ohne den Kopf weit zu drehen."
+  },
+  {
+   "id": "knie-nach-innen-und-aussen",
+   "nr": "133",
+   "kategorie": "Wahrnehmung",
+   "titel": "Knie nach innen und außen",
+   "anleitung": "Steh oder sitz bequem. Bewege die Knie langsam ein kleines Stück auseinander, pausiere und zurück zur Mitte. Die Füße bleiben stehen. Spüre deine Beine von den Füßen bis zur Hüfte."
+  },
+  {
+   "id": "kaffeepause",
+   "nr": "34",
+   "kategorie": "Gleichgewicht",
+   "titel": "KAFFEEPAUSE",
+   "anleitung": "Wenn du auf Kaffee oder Tee wartest, nutze diese Minute. Verlagere dein Gewicht langsam nach rechts, warte 3-5 Sekunden und zurück zur Mitte. Dann nach links und zurück zur Mitte."
+  },
+  {
+   "id": "handflaechen-drehen",
+   "nr": "6",
+   "kategorie": "Bewegung",
+   "titel": "Handflächen drehen",
+   "anleitung": "Halte beide Hände locker vor den Körper. Die rechte Handfläche zeigt nach oben, die linke nach unten. Drehe beide Hände langsam um: rechts nach unten, links nach oben."
+  },
+  {
+   "id": "haende-und-atmung",
+   "nr": "92",
+   "kategorie": "Entspannung",
+   "titel": "Hände und Atmung",
+   "anleitung": "Lege eine Hand auf deinen Unterbauch. Atme normal ein und aus. Lass die Hand liegen und spüre die Atembewegung, ohne etwas zu erzwingen."
+  },
+  {
+   "id": "haende-hinter-dem-ruecken-verbinden",
+   "nr": "139",
+   "kategorie": "Wahrnehmung",
+   "titel": "Hände hinter dem Rücken verbinden",
+   "anleitung": "Führe beide Hände hinter den Rücken, soweit es angenehm möglich ist. Die Hände müssen sich nicht berühren. Lass sie dort kurz schweben und bringe sie wieder nach vorne."
+  },
+  {
+   "id": "haende-auf-unterschiedliche-hoehen",
+   "nr": "18",
+   "kategorie": "Bewegung",
+   "titel": "Hände auf unterschiedliche Höhen",
+   "anleitung": "Setz dich aufrecht hin. Hebe die rechte Hand auf Brusthöhe. Die linke liegt auf dem Oberschenkel. Wechsle langsam die Seiten. Bewege dann beide Hände gleichzeitig: eine nach oben, die andere nach unten. Wechsle die Richtung. Lege zum Schluss beide Hände auf die Oberschenkel."
+  },
+  {
+   "id": "haende-auf-rippen",
+   "nr": "95",
+   "kategorie": "Entspannung",
+   "titel": "Hände auf Rippen",
+   "anleitung": "Setz dich hin. Lege beide Hände seitlich an deine unteren Rippen. Atme normal. Spüre, wie sich der Brustkorb unter deinen Händen seitlich bewegt, ohne deine Atmung zu verändern. Lass die Hände anschließend sinken."
+  },
+  {
+   "id": "hand-und-knie",
+   "nr": "3",
+   "kategorie": "Bewegung",
+   "titel": "HAND UND KNIE",
+   "anleitung": "Stell dich hin. Hebe das rechte Knie und berühre es mit der linken Hand. Setze den Fuß ab. Hebe das linke Knie und berühre es mit der rechten Hand. Setze den Fuß ab. Bewege dich langsam, mit entspanntem Oberkörper. Schau dabei auf einen festen Punkt vor dir."
+  },
+  {
+   "id": "hand-hinter-den-ruecken",
+   "nr": "138",
+   "kategorie": "Wahrnehmung",
+   "titel": "Hand hinter den Rücken",
+   "anleitung": "Führe die rechte Hand langsam hinter den Rücken, nur so weit, wie es bequem ist. Bringe sie zurück und wechsle zur linken Hand. Spüre, wie sich die Orientierung verändert, wenn du die Hand nicht siehst."
+  },
+  {
+   "id": "hand-auf-brustkorb",
+   "nr": "143",
+   "kategorie": "Wahrnehmung",
+   "titel": "Hand auf Brustkorb",
+   "anleitung": "Lege eine Hand auf den Brustkorb. Drehe den Oberkörper langsam nach rechts, pausiere und zurück. Dann nach links und zurück. Spüre die Bewegung unter deiner Hand."
+  },
+  {
+   "id": "guter-stand",
+   "nr": "29",
+   "kategorie": "Gleichgewicht",
+   "titel": "Guter Stand",
+   "anleitung": "Stelle beide Füße bequem auf den Boden. Im Sitzen stehen sie unter deinen Knien. Verlagere dein Gewicht langsam ein kleines Stück nach vorne, pausiere und zurück zur Mitte. Dann nach hinten, pausiere und zurück zur Mitte. Spüre, wie dein Körper auf die Bewegung reagiert."
+  },
+  {
+   "id": "grosse-und-kleine-schritte",
+   "nr": "8",
+   "kategorie": "Bewegung",
+   "titel": "Große und kleine Schritte",
+   "anleitung": "Gehe mit kleineren Schritten als gewohnt durch den Raum, ohne zu schlurfen. Nimm wahr, wie sich dein Rhythmus verändert. Gehe dann mit größeren Schritten, anschließend wieder mit kleinen. Kehre zu deiner normalen Schrittlänge zurück."
+  },
+  {
+   "id": "grosse-sanfte-kurve",
+   "nr": "144",
+   "kategorie": "Wahrnehmung",
+   "titel": "Große sanfte Kurve",
+   "anleitung": "Gehe langsam eine weite Kurve, ohne abrupt zu drehen. Lass die Richtung allmählich wechseln. Spüre, wie Füße und Oberkörper sich gemeinsam anpassen. Gehe anschließend wieder geradeaus."
+  },
+  {
+   "id": "greifen-und-drehen",
+   "nr": "23",
+   "kategorie": "Gleichgewicht",
+   "titel": "Greifen und Drehen",
+   "anleitung": "Stell dich hin. Greife langsam nach einem Gegenstand neben dir. Lass den Oberkörper ein wenig folgen und komm zurück. Greife zur anderen Seite und komm zurück. Führe das Greifen nach rechts und links mit kleineren Bewegungen aus. Lass den ganzen Körper mitwirken. Die Füße bleiben stabil."
+  },
+  {
+   "id": "gleichgewicht-im-alltag",
+   "nr": "30",
+   "kategorie": "Gleichgewicht",
+   "titel": "Gleichgewicht im Alltag",
+   "anleitung": "Setz dich auf einen Stuhl und rutsche etwas nach vorne. Stelle beide Füße unter dich. Spüre die Füße und beuge den Oberkörper leicht vor. Steh sehr langsam und ohne Schwung auf. Richte dich auf und bleibe kurz stehen. Setz dich sehr langsam wieder hin. Nimm die Bewegung in Füßen, Beinen und Rücken wahr."
+  },
+  {
+   "id": "gesicht-und-haende",
+   "nr": "115",
+   "kategorie": "Wahrnehmung",
+   "titel": "Gesicht und Hände",
+   "anleitung": "Lege beide Hände auf die Wangen. Streiche von dort nach außen über die Schläfen und zurück. Lege die Hände anschließend auf die Oberschenkel."
+  },
+  {
+   "id": "gesicht-und-blick",
+   "nr": "116",
+   "kategorie": "Wahrnehmung",
+   "titel": "Gesicht und Blick",
+   "anleitung": "Streiche sanft über die Stirn und dann über die Wangen. Öffne die Augen bewusst weit und lass sie wieder normal werden. Schaue in die Ferne und dann auf einen nahen Punkt. Lass deinen Blick zum Schluss weich werden."
+  },
+  {
+   "id": "gesicht",
+   "nr": "114",
+   "kategorie": "Wahrnehmung",
+   "titel": "Gesicht",
+   "anleitung": "Streiche mit den Fingerspitzen langsam von der Stirnmitte nach außen. Kreise sanft und ohne Druck an den Schläfen. Streiche über die Wangen von innen nach außen und dann über den Kiefer. Lass den Unterkiefer locker. Lege die Hände kurz auf die Wangen und spüre die Wärme."
+  },
+  {
+   "id": "fussspitze-nach-innen",
+   "nr": "134",
+   "kategorie": "Wahrnehmung",
+   "titel": "Fußspitze nach innen",
+   "anleitung": "Hebe den einenFuß leicht an. Drehe die Fußspitze ein kleines Stück nach innen und zurück. Dann nach außen und zurück. Wechsle den Fuß. Spüre die Veränderung in deiner Beinachse."
+  },
+  {
+   "id": "fuesse-aktivieren",
+   "nr": "123",
+   "kategorie": "Wahrnehmung",
+   "titel": "Füße aktivieren",
+   "anleitung": "Setz dich hin oder stell dich hin. Hebe die Zehen leicht an, pausiere und setze sie ab. Hebe dann die Fersen leicht an und setze sie ab. Bewege dich langsam. Stelle anschließend beide Füße ruhig ab."
+  },
+  {
+   "id": "fuss-auf-die-stufe",
+   "nr": "56",
+   "kategorie": "Gleichgewicht",
+   "titel": "Fuß auf die Stufe",
+   "anleitung": "Stell dich vor eine stabile Treppenstufe. Halte dich bei Bedarf am Geländer fest. Stelle einen Fuß langsam auf die Stufe und belaste ihn leicht. Führe ihn zurück und wechsle den Fuß. Steige nicht hinauf. Nimm wahr, wie sich das Gewicht verändert."
+  },
+  {
+   "id": "finger-streichen",
+   "nr": "112",
+   "kategorie": "Wahrnehmung",
+   "titel": "Finger streichen",
+   "anleitung": "Streiche mit dem Daumen langsam von oben über die Finger derselben Hand: Zeigefinger, Mittelfinger, Ringfinger, kleiner Finger. Streiche anschliessend die Unterseite der einzelnen Finger. Wechsle die Hand. Lass die Finger locker und nimm ihre unterschiedlichen Empfindungen wahr."
+  },
+  {
+   "id": "finger-zaehlen",
+   "nr": "113",
+   "kategorie": "Wahrnehmung",
+   "titel": "Finger zählen",
+   "anleitung": "Berühre mit dem Daumen nacheinander die Finger derselben Hand, ohne hinzuschauen: Zeigefinger, Mittelfinger, Ringfinger, kleiner Finger. Gehe die Reihenfolge zurück. Spüre, welchen Finger du gerade berührst. Wechsle die Hand."
+  },
+  {
+   "id": "fersen-auseinander-fersen-zusammen",
+   "nr": "16",
+   "kategorie": "Bewegung",
+   "titel": "Fersen auseinander, Fersen zusammen",
+   "anleitung": "Setz oder stell dich hin, die Füße nebeneinander. Lass die Zehen am Boden. Bewege nur die Fersen langsam etwas auseinander und zurück. Die Vorderfüße bleiben möglichst ruhig. Spüre die Bewegung in den Beinen. Stelle beide Füße ruhig ab und nimm den Bodenkontakt wahr."
+  },
+  {
+   "id": "ferse-und-ballen",
+   "nr": "129",
+   "kategorie": "Wahrnehmung",
+   "titel": "Ferse und Ballen",
+   "anleitung": "Gehe langsam und spüre den Fußkontakt: zuerst die Ferse, dann die Fußsohle, dann der Ballen. Nimm deinen Gang wahr, ohne ihn zu verändern."
+  },
+  {
+   "id": "ferse-auf-die-stufe",
+   "nr": "54",
+   "kategorie": "Gleichgewicht",
+   "titel": "Ferse auf die Stufe",
+   "anleitung": "Stell dich mit dem Rücken zu einer Treppenstufe, wenn das sicher möglich ist. Führe einen Fuß langsam nach hinten und setze die Ferse auf die Stufe. Die Zehen bleiben unten. Führe den Fuß zurück und wechsle die Seite. Belaste die Stufe nicht. Nutze bei Bedarf das Geländer."
+  },
+  {
+   "id": "fernblick",
+   "nr": "120",
+   "kategorie": "Wahrnehmung",
+   "titel": "Fernblick",
+   "anleitung": "Schau aus dem Fenster oder in die Ferne. Lass den Blick dort ruhen, ohne zu suchen oder zu lesen. Nimm die Umgebung am Rand deines Blickfeldes wahr. Schau zurück in den Raum und dann wieder in die Ferne."
+  },
+  {
+   "id": "entspannte-schultern",
+   "nr": "ohne Nummer",
+   "kategorie": "Gleichgewicht",
+   "titel": "Entspannte Schultern",
+   "anleitung": "Sitze oder stehe entspannt. Spüre deine Füße und den Kontakt zur Sitzfläche oder zum Boden. Nimm wahr, wie sich dein Körper gerade anfühlt. Lass die Schultern etwas sinken, ohne bewusst Entspannung zu erzwingen. Spüre den Bodenkontakt und die kleinen Bewegungen deines Körpers."
+  },
+  {
+   "id": "ein-arm",
+   "nr": "46",
+   "kategorie": "Gleichgewicht",
+   "titel": "Ein Arm",
+   "anleitung": "Setze oder stell dich hin. Hebe den rechten Arm ein kleines Stück und verlagere gleichzeitig dein Gewicht leicht nach links. Komm zur Mitte. Hebe dann den linken Arm und verlagere dein Gewicht leicht nach rechts. Komm zur Mitte. Halte die Bewegungen klein und spüre ihr Zusammenspiel."
+  },
+  {
+   "id": "schritte-rueckwaerts",
+   "nr": "136",
+   "kategorie": "Wahrnehmung",
+   "titel": "Schritte rückwärts",
+   "anleitung": "Stell dich sicher hin und schaue geradeaus. Mache bei ausreichend Platz kleine Schritt rückwärts. Bleibe bei Unsicherheit stehen und orientiere dich an deiner Umgebung. Drehe dich langsam um und gehe wieder nach vorne."
+  },
+  {
+   "id": "die-ungewohnte-seite",
+   "nr": "26",
+   "kategorie": "Gleichgewicht",
+   "titel": "Die ungewohnte Seite",
+   "anleitung": "Nimm einen Alltagsgegenstand mit der Hand, die du sonst nicht benutzt. Führe langsam eine kleine Bewegung aus, etwa einen Stift nehmen und wieder ablegen. Spüre beide Hände. Nimm wahr, welche sich vertrauter anfühlt und welche Bewegung ungewohnt war."
+  },
+  {
+   "id": "die-liegende-acht",
+   "nr": "2",
+   "kategorie": "Bewegung",
+   "titel": "Die liegende Acht",
+   "anleitung": "Streck einen Arm locker nach vorne. Zeichne mit der Hand langsam eine liegende Acht. Folge ihr mit den Augen. Halte dabei den Kopf möglichst ruhig. Wenn die Bewegung unangenehm ist, mach sie kleiner. Lass die Hand sinken. Schau kurz in die Ferne und dann zurück in den Raum."
+  },
+  {
+   "id": "der-boden-unter-dir",
+   "nr": "28",
+   "kategorie": "Gleichgewicht",
+   "titel": "Der Boden unter dir",
+   "anleitung": "Stelle beide Füße auf den Boden. Im Sitzen stehen sie unter den Knien. Im Stehen verteilst du dein Gewicht auf beide Füße. Spüre die Belastung, ohne sie zu verändern. Verlagere dein Gewicht dann langsam etwas nach vorne, pausiere und zurück zur Mitte. Danach etwas nach hinten und zurück zur Mitte."
+  },
+  {
+   "id": "der-bewusste-schritt",
+   "nr": "105",
+   "kategorie": "Wahrnehmung",
+   "titel": "Der bewusste Schritt",
+   "anleitung": "Setze einen Fuß langsam nach vorne und zurück. Dann den anderen Fuß nach vorne, pausiere und zurück. Spüre das Aufsetzen. Mache einen kleinen Schritt zur Seite, pausiere und zurück zur Mitte. Wechsle die Seite und komm zurück."
+  },
+  {
+   "id": "brustkorb-und-becken",
+   "nr": "142",
+   "kategorie": "Wahrnehmung",
+   "titel": "Brustkorb und Becken",
+   "anleitung": "Stell dich hin. Bewege das Becken ganz leicht nach vorne und zurück. Lass den Brustkorb locker. Bewege das Becken dann leicht nach hinten und zurück. Halte die Bewegungen klein."
+  },
+  {
+   "id": "brustkorb-drehen",
+   "nr": "141",
+   "kategorie": "Wahrnehmung",
+   "titel": "Brustkorb drehen",
+   "anleitung": "Lass die Arme im Stehen oder Sitzen locker. Drehe den Brustkorb langsam ein kleines Stück nach rechts, pausiere und zurück zur Mitte. Dann nach links und zurück zur Mitte. Das Becken bleibt möglichst ruhig."
+  },
+  {
+   "id": "blick-rechts-und-links",
+   "nr": "51",
+   "kategorie": "Gleichgewicht",
+   "titel": "Blick rechts und links",
+   "anleitung": "Schau geradeaus. Der Kopf hält still. Bewege nur den Blick nach rechts und zurück zur Mitte. Dann nach links und zurück zur Mitte. Lass nun den Kopf langsam mitdrehen: nach rechts und zur Mitte, dann nach links und zur Mitte."
+  },
+  {
+   "id": "bildschirm-blick",
+   "nr": "73",
+   "kategorie": "Entspannung",
+   "titel": "Bildschirm Blick",
+   "anleitung": "Wende den Blick vom Bildschirm ab. Steh auf oder strecke dich im Sitzen langsam in verschiedene Richtungen, ohne Ziehen. Setz dich bequem hin. Schaue auf etwas weiter Entferntes. Bewege nur die Augen: nach rechts, links, oben und unten. Schau anschließend wieder in die Ferne."
+  },
+  {
+   "id": "aufstehen-aus-dem-sitzen",
+   "nr": "132",
+   "kategorie": "Wahrnehmung",
+   "titel": "Aufstehen aus dem Sitzen",
+   "anleitung": "Setz dich hin. Lehne den Oberkörper leicht nach vorne und drücke die Füße in den Boden. Steh langsam auf und bleibe kurz stabil stehen. Setz dich langsam wieder hin. Achte darauf, dass die Knie in Richtung der Füße zeigen."
+  },
+  {
+   "id": "arme-oeffnen",
+   "nr": "121",
+   "kategorie": "Wahrnehmung",
+   "titel": "Arme öffnen",
+   "anleitung": "Stehe bequem. Führe beide Arme langsam seitlich nach außen, nur so hoch, wie es angenehm ist. Pausiere. Führe sie zurück. Bleibe anschließend stehen und spüre die Veränderung im Oberkörper."
+  },
+  {
+   "id": "am-arbeitsplatz",
+   "nr": "70",
+   "kategorie": "Entspannung",
+   "titel": "Am Arbeitsplatz",
+   "anleitung": "Setz dich hin und stelle beide Füße auf den Boden. Lass die Schultern locker. Richte den Kopf über dem Oberkörper aus und löse die Hände. Atme normal und spüre den Sitzkontakt. Kreise die Schultern langsam und klein nach hinten, dann nach vorne und zurück. Lege die Hände locker ab. Spüre Stuhl, Boden und Rücken."
+  }
+ ]
+}

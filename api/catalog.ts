@@ -10,7 +10,7 @@ export default route({
     const s = readSession(req)
     if (s?.role !== 'admin') return res.status(403).json({ error: 'Admins only' })
     const { day, data } = body<{ day: number; data: object }>(req)
-    if (!Number.isInteger(day) || day < 1 || day > 22) return res.status(400).json({ error: 'Invalid day' })
+    if (!Number.isInteger(day) || day < 0 || day > 90) return res.status(400).json({ error: 'Invalid day' })
     await sql`insert into workout_overrides (day, data, updated_by) values (${day}, ${JSON.stringify(data)}::jsonb, ${s.sub})
       on conflict (day) do update set data = excluded.data, updated_at = now(), updated_by = excluded.updated_by`
   },

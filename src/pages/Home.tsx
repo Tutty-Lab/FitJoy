@@ -1,129 +1,100 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Check, Lock } from 'lucide-react'
 import mascot from '../assets/home/mascot.png'
-import lessonThumb from '../assets/workouts/thumb-active.png'
-import { workouts } from '../data/workouts'
+import { dayContent, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../data/program'
 import { loadProfile } from '../lib/profile'
-import { programDay } from '../lib/checks'
-import { useCompleted } from '../lib/progress'
+import { sessionsDone, useCompleted } from '../lib/progress'
 
 const card = 'w-full rounded-3xl border border-mint bg-white p-[17px] drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'
-
-function SectionHeader({ icon, iconBg, title, right }: { icon: React.ReactNode; iconBg: string; title: string; right: React.ReactNode }) {
-  return (
-    <div className="flex w-full items-center justify-between">
-      <div className="flex items-center gap-2">
-        <span className={`flex size-8 items-center justify-center rounded-full ${iconBg}`}>{icon}</span>
-        <h3 className="text-base leading-6 font-black text-slate-900">{title}</h3>
-      </div>
-      {right}
-    </div>
-  )
-}
-
-function ProgressRing({ pct }: { pct: number }) {
-  const r = 26
-  const c = 2 * Math.PI * r
-  return (
-    <svg viewBox="0 0 64 64" className="size-16 -rotate-90">
-      <circle cx="32" cy="32" r={r} fill="none" stroke="#e3f2f1" strokeWidth="7" />
-      <circle cx="32" cy="32" r={r} fill="none" stroke="#1a8a99" strokeWidth="7" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - pct / 100)} className="transition-all duration-700" />
-    </svg>
-  )
-}
-
-const greeting = () => {
-  const h = new Date().getHours()
-  return h < 12 ? ['Good morning', '☀️'] : h < 18 ? ['Good afternoon', '🌤️'] : ['Good evening', '🌙']
-}
-
+const phaseName = (phase: string) => phase.replace(/^P(\d):\s*/, 'Phase $1 · ')
 
 export default function Home() {
   const [p] = useState(() => loadProfile())
-  const name = p?.name || 'friend'
-  const day = programDay()
-  const { completed } = useCompleted()
-  const currentDay = Math.min(22, Math.max(1, day || 1))
-  const currentWorkout = workouts.find(w => w.day === currentDay)
-  const dailyLessons = [
-    { label: 'Mobility flow', title: currentWorkout?.title ?? 'Daily mobility' },
-    { label: 'Strength & balance', title: 'Core stability practice' },
-    { label: 'Stretch & reset', title: 'Relaxing full-body stretch' },
-  ]
-  const pct = (day / 22) * 100
-  const [hello, sun] = greeting()
+  const [hint, setHint] = useState<number | null>(null)
+  const { completed, current, waitingForTomorrow, finished, statusOf } = useCompleted()
+  const today = dayContent(current)
+  const done = sessionsDone(current)
+  const pct = (completed.length / PROGRAM_DAYS) * 100
 
   return (
     <div className="stagger flex flex-col gap-4 px-4 pt-2 pb-6">
-      {/* Hero */}
-      <section
-        className="hero-card relative w-full overflow-hidden rounded-3xl border border-[rgba(207,231,229,0.6)] p-[17px] shadow-[0_10px_25px_rgba(19,112,126,0.12)]"
-        style={{ backgroundImage: 'linear-gradient(135deg, rgba(227,242,241,0.9) 0%, #fff 50%, #fffbeb 100%)' }}
-      >
-        <div className="absolute -top-10 -right-8 size-36 rounded-full bg-[rgba(255,217,194,0.3)] blur-[40px]" />
-        <div className="absolute -bottom-8 -left-8 size-32 rounded-full bg-[rgba(253,230,138,0.4)] blur-[24px]" />
-        <div className="relative flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <div className="min-w-0 flex-1">
-              <h2 className="text-[22px] leading-[30.25px] font-black tracking-[-0.55px]">{hello}, {name}! {sun}</h2>
-            </div>
-            <div className="relative size-24 shrink-0">
-              <img src={mascot} alt="Mascot" className="float relative size-24 object-contain" />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between rounded-2xl border border-mint bg-white/90 p-[13px] shadow-sm backdrop-blur-[12px]">
-            <div>
-              <div className="text-[11px] leading-6 font-bold tracking-[0.55px] text-brand-ink uppercase">22-day program</div>
-              <div className="flex items-baseline gap-1 pt-0.5">
-                <span className="text-base leading-6 font-bold text-slate-500">Day</span>
-                <span className="text-2xl leading-8 font-black text-brand-deep">{day}</span>
-                <span className="text-base leading-6 font-bold text-slate-500">/ 22</span>
-              </div>
-            </div>
-            <div className="relative size-16 shrink-0">
-              <ProgressRing pct={pct} />
-              <span className="absolute inset-0 flex items-center justify-center text-xs leading-4 font-black text-brand-ink">{Math.round(pct)}%</span>
-            </div>
-          </div>
+      {/* Vestibu's greeting of the day */}
+      <section className="hero-card relative overflow-hidden rounded-3xl border border-[rgba(207,231,229,0.6)] p-[17px] shadow-[0_10px_25px_rgba(19,112,126,0.12)]" style={{ backgroundImage: 'linear-gradient(135deg, rgba(227,242,241,0.9) 0%, #fff 50%, #fffbeb 100%)' }}>
+        <div className="flex items-start gap-3">
+          <img src={mascot} alt="Vestibu" className="float size-20 shrink-0 object-contain" />
+          <figure className="min-w-0 flex-1">
+            <blockquote className="text-[17px] leading-6 font-bold text-slate-900">„{today.begruessung}“</blockquote>
+            <figcaption className="mt-1 text-xs font-semibold text-slate-500">Vestibu · Tag {current}</figcaption>
+          </figure>
+        </div>
+        <div className="mt-3 flex items-center justify-between rounded-2xl border border-mint bg-white/90 px-[13px] py-2">
+          <span className="text-xs font-bold tracking-[0.4px] text-brand-ink uppercase">{phaseName(today.phase)}</span>
+          <span className="text-sm font-bold text-slate-500">Tag <b className="text-lg font-black text-brand-deep">{current}</b> / {PROGRAM_DAYS}</span>
+        </div>
+        <div className="mt-2 h-2 overflow-hidden rounded-full bg-mint" role="progressbar" aria-valuemin={0} aria-valuemax={PROGRAM_DAYS} aria-valuenow={completed.length} aria-label="Fortschritt">
+          <div className="h-full rounded-full bg-brand transition-all duration-700" style={{ width: `${pct}%` }} />
         </div>
       </section>
 
-      {completed.length >= 22 && !p?.checks?.end && (
+      {finished && !p?.checks?.end && (
         <Link to="/check/end" className={`flex items-center justify-between gap-3 ${card}`}>
           <span>
-            <span className="block text-base font-black text-slate-900">22 days done!</span>
-            <span className="text-sm text-[#6f7472]">Take the balance check again</span>
+            <span className="block text-base font-black text-slate-900">Du hast 90 Tage geschafft!</span>
+            <span className="text-sm text-[#6f7472]">Mach den Gleichgewichts-Check noch einmal und sieh deinen Fortschritt.</span>
           </span>
-          <span className="rounded-full bg-brand-deep px-4 py-2 text-sm font-bold text-white">Start</span>
+          <span className="shrink-0 rounded-full bg-brand-deep px-4 py-2 text-sm font-bold text-white">Check</span>
         </Link>
       )}
+      {p?.checks?.end && <Link to="/compare" className={`${card} font-bold text-brand-deep`}>Meine Ergebnisse: Tag 1 und Tag 90 vergleichen →</Link>}
 
-      <section className="flex flex-col gap-3">
-        <div className="flex items-center justify-between px-1">
-          <h3 className="text-lg font-black">Today · Day {currentDay}</h3>
-          <span className="text-sm font-semibold text-slate-500">0/3 complete</span>
+      {/* Today's base exercise */}
+      <section className={card}>
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-xs font-bold tracking-wide text-rust uppercase">Grundübung heute</p>
+            <h3 className="text-lg font-black">{done} / {SESSIONS_PER_DAY} Mal</h3>
+          </div>
+          <div className="flex gap-1.5" aria-hidden="true">
+            {Array.from({ length: SESSIONS_PER_DAY }, (_, i) => <span key={i} className={`size-3 rounded-full ${i < done ? 'bg-brand' : 'bg-mint'}`} />)}
+          </div>
         </div>
-        {dailyLessons.map((lesson, index) => (
-          <Link key={lesson.label} to={`/workouts/${currentDay}?lesson=${index + 1}`} state={{ from: '/' }} className={`flex items-center gap-3 ${card}`}>
-            <img src={lessonThumb} alt="" className="size-16 shrink-0 rounded-2xl object-cover" />
-            <div className="min-w-0 flex-1">
-              <p className="text-xs font-bold uppercase tracking-wide text-rust">Lesson {index + 1} · {lesson.label}</p>
-              <h4 className="truncate text-base font-black">{lesson.title}</h4>
-              <p className="text-sm text-slate-500">10 min</p>
-            </div>
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-200" />
+        {done < SESSIONS_PER_DAY ? (
+          <Link to={`/workouts/${current}?session=${done + 1}`} state={{ from: '/' }} className="mt-3 flex h-14 items-center justify-center rounded-full bg-brand-deep text-base font-bold text-white shadow-md">
+            {done === 0 ? 'Grundübung starten' : `Übung ${done + 1}. Mal`}
           </Link>
-        ))}
-        <Link to="/workouts" className="flex items-center justify-between rounded-3xl border border-mint bg-white p-4 shadow-sm">
-          <span>
-            <span className="block text-xs font-bold uppercase tracking-wide text-rust">Program</span>
-            <span className="block text-base font-black">All lessons</span>
-            <span className="block text-sm text-slate-500">22 days · 3 lessons per day</span>
-          </span>
-        </Link>
+        ) : (
+          <p className="mt-3 rounded-2xl bg-mint p-3 text-sm font-semibold text-brand-deep">Für heute alles geschafft. Bis morgen!</p>
+        )}
+        {waitingForTomorrow && done > 0 && done < SESSIONS_PER_DAY && <p className="mt-2 text-xs text-slate-500">Tag {current + 1} öffnet sich morgen.</p>}
       </section>
 
+      {/* Advent-calendar of 90 days */}
+      <section className={card}>
+        <h3 className="mb-3 text-base font-black">Dein 90-Tage-Kalender</h3>
+        <ol className="grid grid-cols-6 gap-1.5 sm:grid-cols-10">
+          {Array.from({ length: PROGRAM_DAYS }, (_, i) => i + 1).map(d => {
+            const s = statusOf(d)
+            const isToday = d === current
+            const cls = s === 'completed' ? 'bg-brand text-white' : s === 'current' ? 'bg-amber-300 text-slate-900 ring-2 ring-amber-200' : 'bg-[#f3f6f5] text-slate-400'
+            return (
+              <li key={d}>
+                {s === 'locked' ? (
+                  <button type="button" onClick={() => setHint(hint === d ? null : d)} aria-label={`Tag ${d}: gesperrt`} className={`flex aspect-square w-full items-center justify-center rounded-xl text-xs font-bold ${cls}`}>
+                    {hint === d ? d : <Lock aria-hidden="true" className="size-3" />}
+                  </button>
+                ) : (
+                  <Link to={`/days/${d}`} aria-label={`Tag ${d}: ${s === 'completed' ? 'erledigt' : 'heute'}`} className={`flex aspect-square items-center justify-center rounded-xl text-xs font-bold ${cls} ${isToday && s === 'completed' ? 'ring-2 ring-amber-300' : ''}`}>
+                    {s === 'completed' ? <Check aria-hidden="true" className="size-4" strokeWidth={3} /> : d}
+                  </Link>
+                )}
+              </li>
+            )
+          })}
+        </ol>
+        {hint !== null && <p role="status" className="mt-3 rounded-2xl bg-amber-50 p-3 text-sm font-semibold text-amber-800">{(() => { const n = hint - current; return `Tag ${hint} öffnet sich frühestens ${n === 1 ? 'morgen' : `in ${n} Tagen`}${waitingForTomorrow || done > 0 ? '' : ' – nach deiner heutigen Grundübung'}.` })()}</p>}
+        <p className="mt-3 text-xs text-slate-500">Tippe auf ein Türchen, um den Tag noch einmal anzusehen. Ein neues Türchen öffnet sich jeden Tag, sobald du die Grundübung mindestens einmal gemacht hast.</p>
+      </section>
     </div>
   )
 }

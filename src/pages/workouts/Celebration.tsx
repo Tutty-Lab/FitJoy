@@ -23,10 +23,10 @@ export default function Celebration() {
     if (p?.chime ?? true) playChime()
   }, [])
 
-  if (!w || !completed.includes(day)) return <Navigate to="/workouts" replace />
+  if (!w || !completed.includes(day)) return <Navigate to="/" replace />
 
   const total = completed.length
-  const allDone = total >= 22
+  const allDone = total >= workouts.length
   const next = workouts.find(x => x.day === current)
 
   return (
@@ -52,7 +52,7 @@ export default function Celebration() {
         <h1 className="text-[28px] leading-9 font-black tracking-[-0.6px]">{allDone ? 'Program complete!' : 'Amazing work!'}</h1>
         <p className="mt-1 max-w-[300px] text-sm leading-5 text-[#3f4a4b]">
           {allDone
-            ? `You finished all 22 workouts, ${p?.name || 'champ'}! Your consistency is unstoppable. 🏆`
+            ? `You finished all 90 days, ${p?.name || 'champ'}! Your consistency is unstoppable. 🏆`
             : `You crushed “${w.title}”, ${p?.name || 'friend'}! Every session makes you stronger. 🌱`}
         </p>
       </div>
@@ -70,8 +70,8 @@ export default function Celebration() {
 
       <section className="relative mt-4 flex flex-col gap-2 rounded-[32px] bg-white p-4 shadow-md">
         <div className="flex items-center justify-between">
-          <span className="text-base leading-5 font-bold">22-Day Journey</span>
-          <span className="text-sm leading-5 font-bold text-[#13707e]">{total}/22</span>
+          <span className="text-base leading-5 font-bold">90-Tage-Reise</span>
+          <span className="text-sm leading-5 font-bold text-[#13707e]">{total}/{workouts.length}</span>
         </div>
         <div className="flex flex-wrap gap-1">
           {workouts.map(x => (

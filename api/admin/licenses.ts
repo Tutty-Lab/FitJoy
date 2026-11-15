@@ -2,7 +2,15 @@ import { randomBytes } from 'node:crypto'
 import { body, route, sql } from '../_lib.js'
 import { hashCode } from '../_access.js'
 export default route({
- async GET() {
+ async GET(req,res) {
+  if(req.query.batchId) {
+   const id=String(req.query.batchId)
+   if(!/^[0-9a-f-]{36}$/i.test(id)) return res.status(400).json({error:'Invalid batch'})
+   const [batch]=await sql`select b.*,o.name as organization from license_batches b join organizations o on o.id=b.organization_id where b.id=${id}::uuid`
+   if(!batch) return res.status(404).json({error:'Batch not found'})
+   const invitations=await sql`select c.id,c.redeem_before,c.redeemed_at,c.revoked_at,u.name,coalesce(u.username,u.email) as login from invitation_codes c left join users u on u.id=c.redeemed_by where c.batch_id=${id}::uuid order by c.id`
+   return {batch,invitations}
+  }
   const organizations=await sql`select id,name from organizations order by created_at desc`
   const batches=await sql`select b.*,o.name as organization,
    (select count(*)::int from invitation_codes c where c.batch_id=b.id and c.redeemed_at is not null) as redeemed,
@@ -30,6 +38,15 @@ export default route({
   return {batch,codes}
  },
  async DELETE(req,res,session) {
+  if(req.query.invitationId) {
+   const invitationId=String(req.query.invitationId)
+   if(!/^[0-9a-f-]{36}$/i.test(invitationId)) return res.status(400).json({error:'Invalid invitation'})
+   const [code]=await sql`update invitation_codes set revoked_at=now() where id=${invitationId}::uuid and redeemed_at is null and revoked_at is null returning batch_id`
+   if(!code) return res.status(409).json({error:'Invitation already redeemed or revoked'})
+   const [batch]=await sql`select organization_id from license_batches where id=${code.batch_id}`
+   await sql`insert into audit_events(actor_id,organization_id,action,entity_type,entity_id) values(${session?.sub},${batch.organization_id},'invitation.revoked','invitation',${invitationId})`
+   return {revoked:1}
+  }
   const id=String(req.query.batchId??'')
   if(!/^[0-9a-f-]{36}$/i.test(id)) return res.status(400).json({error:'Invalid batch'})
   const revoked=await sql`update invitation_codes set revoked_at=now() where batch_id=${id}::uuid and redeemed_at is null and revoked_at is null returning id`

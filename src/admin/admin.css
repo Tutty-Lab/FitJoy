@@ -1,0 +1,33 @@
+/* Admin controls share one density, focus treatment and table rhythm. */
+.admin-shell {
+  --admin-border: #e2e8f0;
+  --admin-muted: #526174;
+  --primary: #13707e;
+  --primary-foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #111c2d;
+  --muted: #f1f5f9;
+  --muted-foreground: #526174;
+  --border: #e2e8f0;
+  --ring: #13707e;
+  color-scheme: light;
+}
+.admin-shell h1 { font-size: 1.25rem; line-height: 1.5; font-weight: 600; letter-spacing: -0.025em; }
+.admin-shell :is(input:not([type="file"]), select, textarea) { border-color: var(--admin-border); color: #111c2d; background: #fff; border-radius: 8px; }
+.admin-shell :is(input, select, textarea)::placeholder { color: var(--admin-muted); }
+.admin-shell :is(button, a, input, select, textarea, summary):focus-visible { outline: 2px solid #13707e; outline-offset: 3px; }
+.admin-shell button:disabled { cursor: wait; opacity: .55; }
+.admin-shell :is(button, a):active { scale: 1; }
+.admin-shell [data-slot="button"] { min-height: 36px; }
+.admin-shell table { text-align: left; font-variant-numeric: tabular-nums; }
+.admin-shell th { font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--admin-muted); white-space: nowrap; }
+.admin-shell :is(td, th) { vertical-align: middle; }
+.admin-shell td button, .admin-shell td a { white-space: nowrap; }
+.admin-shell .overflow-x-auto { scrollbar-width: thin; scrollbar-color: #bac9cd transparent; }
+.admin-shell .overflow-x-auto::-webkit-scrollbar { display: block; height: 6px; }
+.admin-shell .overflow-x-auto::-webkit-scrollbar-thumb { background: #bac9cd; border-radius: 4px; }
+.admin-shell ::selection { background: #cfe7e5; color: #0e5560; }
+.admin-shell input, .admin-shell textarea { caret-color: #13707e; }
+@media (max-width: 767px) {
+  .admin-shell [data-slot="button"], .admin-shell td button, .admin-shell summary { min-height: 40px; }
+}

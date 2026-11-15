@@ -13,7 +13,7 @@ export function saveCheck(phase: Phase, check: Check) {
   return saveProfile({ checks, onboarded: true })
 }
 
-// Program day (1–22) counted from the date of the first check.
+// Program day (1–90) counted from the date of the first check.
 export function programDay() {
   const start = loadProfile()?.checks?.start?.date
   if (!start) return 0

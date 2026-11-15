@@ -1,60 +1,67 @@
 import { Link, Navigate } from 'react-router-dom'
-import { tasks } from '../../data/balanceCheck'
+import { groupOf, groups, tasks, PROGRAM_DAYS } from '../../data/balanceCheck'
 import { loadProfile } from '../../lib/profile'
-import { emptyEntry } from '../../lib/checks'
+import { emptyEntry, type Check } from '../../lib/checks'
 import { SectionTitle } from '../../components/shared'
 
 const card = 'rounded-[32px] bg-white p-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]'
-const fmt = (d?: string) => (d ? new Date(d).toLocaleDateString('en-GB') : '–')
+const fmt = (d?: string) => (d ? new Date(d).toLocaleDateString('de-DE') : '–')
+const avgSafety = (c?: Check) => {
+  const v = tasks.map(t => c?.entries[t.id]?.safety).filter((n): n is number => typeof n === 'number')
+  return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1).replace('.', ',') : '–'
+}
 
-// Day-1 vs day-22 balance check, side by side.
+// 08: day 1 vs day 90, grouped Stehen / Gehen / Sitzen.
 export default function Compare() {
   const { start, end } = loadProfile()?.checks ?? {}
   if (!end) return <Navigate to="/" replace />
   return (
     <div className="stagger flex flex-col gap-4 px-4 pt-2 pb-6">
-      <SectionTitle>My balance check</SectionTitle>
-      <div className={`${card} grid grid-cols-2 gap-2 text-center`}>
-        <div>
-          <p className="text-xs leading-4 font-bold tracking-[0.48px] text-[#6f7472] uppercase">Day 1</p>
-          <p className="text-lg font-bold text-brand-deep">{fmt(start?.date)}</p>
-        </div>
-        <div>
-          <p className="text-xs leading-4 font-bold tracking-[0.48px] text-[#6f7472] uppercase">After 22 days</p>
-          <p className="text-lg font-bold text-rust">{fmt(end?.date)}</p>
-        </div>
+      <SectionTitle>Meine Ergebnisse</SectionTitle>
+      <div className={`${card} grid grid-cols-3 gap-2 text-center`}>
+        <div />
+        <div><p className="text-xs font-bold text-[#6f7472] uppercase">Tag 1</p><p className="font-bold text-brand-deep">{fmt(start?.date)}</p></div>
+        <div><p className="text-xs font-bold text-[#6f7472] uppercase">Tag {PROGRAM_DAYS}</p><p className="font-bold text-rust">{fmt(end?.date)}</p></div>
+        <p className="text-left text-sm font-semibold">Sicherheit Ø</p>
+        <p className="text-2xl font-black text-brand-deep">{avgSafety(start)}</p>
+        <p className="text-2xl font-black text-rust">{avgSafety(end)}</p>
       </div>
-      {!start && <Link to="/check/start" className="flex h-14 items-center justify-center rounded-full bg-brand-deep font-bold text-white">Start check</Link>}
-      <SectionTitle>My results</SectionTitle>
-      {tasks.map((t, i) => {
-        const a = start?.entries[t.id] ?? emptyEntry()
-        const b = end?.entries[t.id] ?? emptyEntry()
-        return (
-          <div key={t.id} className={card}>
-            <p className="flex items-center gap-2 font-bold">
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-mint text-xs text-brand-deep">{String(i + 1).padStart(2, '0')}</span>
-              {t.title}
-            </p>
-            <div className="mt-3 grid grid-cols-[1fr_56px_56px] gap-y-1 text-sm">
-              <span />
-              <span className="text-center text-xs font-bold text-[#6f7472]">Day 1</span>
-              <span className="text-center text-xs font-bold text-[#6f7472]">Day 22</span>
-              <span className="text-[#3f4a4b]">Result ({t.unit})</span>
-              <span className="text-center font-bold text-brand-deep">{a.value || '–'}</span>
-              <span className="text-center font-bold text-rust">{b.value || '–'}</span>
-              <span className="text-[#3f4a4b]">Felt safe</span>
-              <span className="text-center font-bold text-brand-deep">{a.safety ?? '–'}</span>
-              <span className="text-center font-bold text-rust">{b.safety ?? '–'}</span>
-            </div>
-            {(a.notes.length > 0 || b.notes.length > 0) && (
-              <p className="mt-2 text-xs text-[#6f7472]">
-                {a.notes.length > 0 && <>Day 1: {a.notes.join(', ')}. </>}
-                {b.notes.length > 0 && <>Day 22: {b.notes.join(', ')}.</>}
-              </p>
-            )}
-          </div>
-        )
-      })}
+      {!start && <Link to="/check/start" className="flex h-14 items-center justify-center rounded-full bg-brand-deep font-bold text-white">Check starten</Link>}
+      {groups.map(g => (
+        <section key={g} className="flex flex-col gap-3">
+          <SectionTitle>{g}</SectionTitle>
+          {tasks.map((t, i) => {
+            if (groupOf(i) !== g) return null
+            const a = start?.entries[t.id] ?? emptyEntry()
+            const b = end?.entries[t.id] ?? emptyEntry()
+            return (
+              <div key={t.id} className={card}>
+                <p className="flex items-center gap-2 font-bold">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-mint text-xs text-brand-deep">{String(i + 1).padStart(2, '0')}</span>
+                  {t.title}
+                </p>
+                <div className="mt-3 grid grid-cols-[1fr_64px_64px] gap-y-1 text-sm">
+                  <span />
+                  <span className="text-center text-xs font-bold text-[#6f7472]">Tag 1</span>
+                  <span className="text-center text-xs font-bold text-[#6f7472]">Tag {PROGRAM_DAYS}</span>
+                  <span className="text-[#3f4a4b]">Wert ({t.unit})</span>
+                  <span className="text-center font-bold text-brand-deep">{a.value || '–'}</span>
+                  <span className="text-center font-bold text-rust">{b.value || '–'}</span>
+                  <span className="text-[#3f4a4b]">Sicherheit</span>
+                  <span className="text-center font-bold text-brand-deep">{a.safety ?? '–'}</span>
+                  <span className="text-center font-bold text-rust">{b.safety ?? '–'}</span>
+                </div>
+                {(a.notes.length > 0 || b.notes.length > 0 || a.comment || b.comment) && (
+                  <p className="mt-2 text-xs text-[#6f7472]">
+                    {(a.notes.length > 0 || a.comment) && <>Tag 1: {[...a.notes, a.comment].filter(Boolean).join(', ')}. </>}
+                    {(b.notes.length > 0 || b.comment) && <>Tag {PROGRAM_DAYS}: {[...b.notes, b.comment].filter(Boolean).join(', ')}.</>}
+                  </p>
+                )}
+              </div>
+            )
+          })}
+        </section>
+      ))}
     </div>
   )
 }
