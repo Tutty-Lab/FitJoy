@@ -1,3 +1,4 @@
+import { L } from '../lib/i18n'
 import { api, apiEnabled, getToken, setToken } from '../lib/api'
 import { saveProfile } from '../lib/profile'
 import { reloadProgress } from '../lib/progress'
@@ -9,7 +10,7 @@ import { cacheUser, clearLocalUser, pullUser } from './remote'
 export type AuthResult = { ok: true } | { ok: false; error: string }
 type AuthResponse = { token: string; user: Parameters<typeof cacheUser>[0] }
 
-const message = (e: unknown) => (e instanceof Error ? e.message : 'Something went wrong')
+const message = (e: unknown) => (e instanceof Error ? e.message : L('Etwas ist schiefgelaufen', 'Đã có lỗi xảy ra'))
 
 export async function signIn(username: string, password: string): Promise<AuthResult> {
   if (!apiEnabled) {

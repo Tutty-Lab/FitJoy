@@ -1,6 +1,8 @@
 // Der Gleichgewichts-Code: 90-day plan. Texts come from Michaela's Excel via
 // vestibu-inhalte.json (regenerate with scripts/import-vestibu.py, no code changes needed).
 import content from './vestibu-inhalte.json'
+import contentVi from './vestibu-inhalte.vi.json'
+import { L, lang } from '../lib/i18n'
 
 export const PROGRAM_DAYS = 90
 export const SESSIONS_PER_DAY = 3
@@ -73,4 +75,31 @@ export function bonusFor(day: number): BonusExercise | undefined {
 }
 
 // Until the customer delivers per-day affirmations, show a default so there is always a sentence to speak.
-export const affirmationFor = (day: number) => dayContent(day).affirmation || 'Ich stehe sicher. Mein Gleichgewicht wird jeden Tag stärker.'
+export const affirmationFor = (day: number) => dayContent(day).affirmation || L('Ich stehe sicher. Mein Gleichgewicht wird jeden Tag stärker.', 'Tôi đứng vững. Sự thăng bằng của tôi mỗi ngày một mạnh hơn.')
+
+// ---- User-facing, language-aware views (admin keeps working on the German originals above) ----
+type ViDay = { begruessung: string; bonusImpuls: string; phase: string }
+const viDays = contentVi.tage as ViDay[]
+const viBonus = contentVi.bonusUebungen as Record<string, { titel: string; anleitung: string }>
+
+export const localDay = (day: number): ProgramDay => (lang === 'vi' ? { ...dayContent(day), ...viDays[clampDay(day) - 1] } : dayContent(day))
+export function localBonusFor(day: number): BonusExercise | undefined {
+  const b = bonusFor(day)
+  return b && lang === 'vi' && viBonus[b.id] ? { ...b, ...viBonus[b.id] } : b
+}
+const categoryVi: Record<BonusCategory, string> = { Gleichgewicht: 'Thăng bằng', Wahrnehmung: 'Cảm nhận', Entspannung: 'Thư giãn', Bewegung: 'Vận động' }
+export const categoryLabel = (c: BonusCategory) => (lang === 'vi' ? categoryVi[c] ?? c : c)
+
+export const baseText = lang === 'vi'
+  ? {
+      title: 'Bài tập cơ bản',
+      steps: [
+        'Đứng thẳng hoặc ngồi thẳng trên một chiếc ghế chắc chắn, hai bàn chân đặt trên sàn.',
+        'Nâng chậm một đầu gối, đồng thời nghiêng đầu nhẹ nhàng về phía đầu gối đó.',
+        'Đưa đầu và đầu gối lại gần nhau chỉ trong mức còn dễ chịu.',
+        'Giữ tư thế trong khi đọc to câu khẳng định của bạn.',
+        'Từ từ trở về tư thế đứng/ngồi thẳng ban đầu.',
+        'Đổi bên – luân phiên mỗi đầu gối hai lần.',
+      ],
+    }
+  : { title: baseExercise.title, steps: baseExercise.steps }

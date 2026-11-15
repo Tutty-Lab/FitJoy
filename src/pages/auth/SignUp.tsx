@@ -1,5 +1,5 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AuthTabs from './AuthTabs'
 import { signUp } from '../../services/auth'
 import { api } from '../../lib/api'
@@ -14,6 +14,7 @@ import icLockReset from '../../assets/auth/s-lockreset.svg'
 import icEye from '../../assets/auth/eye.svg'
 import icShield from '../../assets/auth/s-shield.svg'
 import icMatch from '../../assets/auth/s-match.svg'
+import { L } from '../../lib/i18n'
 
 function Field({ icon, children, trailing }: { label: string; aside?: ReactNode; icon: ReactNode; children: ReactNode; trailing?: ReactNode }) {
   return (
@@ -56,7 +57,7 @@ export default function SignUp() {
     setBusy(false)
     if (!res.ok) return setError(res.error)
     const invite = new URLSearchParams(location.search).get('invite')
-    if (invite) { try { await api('redeem', { method: 'POST', body: { code: invite } }) } catch (e) { return setError(e instanceof Error ? e.message : 'Could not redeem invitation') } }
+    if (invite) { try { await api('redeem', { method: 'POST', body: { code: invite } }) } catch (e) { return setError(e instanceof Error ? e.message : L('Einladung konnte nicht eingelöst werden', 'Không thể dùng mã mời')) } }
     navigate('/check/start')
   }
 
@@ -70,13 +71,13 @@ export default function SignUp() {
         <div className="relative flex items-start justify-between">
           <div className="max-w-[210px]">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-[#ffe3d3] px-2.5 py-1 text-xs leading-4 font-bold tracking-[0.48px] text-[#0b4a54]">
-              <img src={icLeaf} alt="" style={{ width: 11.362, height: 11.35 }} />Joy Sprout • Vibe Buddy
+              <img src={icLeaf} alt="" style={{ width: 11.362, height: 11.35 }} />Der Gleichgewichts-Code
             </span>
-            <h1 className="pt-1 text-2xl leading-8 font-bold tracking-[-0.6px]">Create your account!</h1>
+            <h1 className="pt-1 text-2xl leading-8 font-bold tracking-[-0.6px]">{L('Erstelle dein Konto!', 'Tạo tài khoản của bạn!')}</h1>
           </div>
           <div className="relative flex size-24 shrink-0 items-center justify-center">
             <div className="size-20 overflow-hidden rounded-2xl bg-[#e7efee] p-1 shadow-inner">
-              <img src={sprout} alt="Joy Sprout mascot" className="size-full rounded-[48px] object-cover" />
+              <img src={sprout} alt="Vestibu" className="size-full rounded-[48px] object-cover" />
             </div>
           </div>
         </div>
@@ -91,13 +92,13 @@ export default function SignUp() {
           label="Full Name"
           aside={name.trim() && (
             <span className="flex items-center gap-0.5 text-[11px] leading-4 font-medium tracking-[0.48px] text-[#13707e]">
-              <ChevronRight aria-hidden="true" className="size-3" />Profile ready
+              <ChevronRight aria-hidden="true" className="size-3" />{L('Profil bereit', 'Hồ sơ sẵn sàng')}
             </span>
           )}
           icon={<img src={icUser} alt="" style={{ width: 21.333, height: 13.333 }} />}
           trailing={name.trim() ? okMark : null}
         >
-          <input className={input} value={name} onChange={e => setName(e.target.value)} autoComplete="name" required placeholder="Full name" aria-label="Full name" />
+          <input className={input} value={name} onChange={e => setName(e.target.value)} autoComplete="name" required placeholder={L('Vollständiger Name', 'Họ và tên')} aria-label={L('Vollständiger Name', 'Họ và tên')} />
         </Field>
 
         <Field
@@ -105,7 +106,7 @@ export default function SignUp() {
           icon={<img src={icUser} alt="" style={{ width: 24.667, height: 16.667 }} />}
           trailing={usernameOk ? <img src={icVerified} alt="" style={{ width: 18.333, height: 17.5 }} /> : null}
         >
-          <input className={input} type="text" value={username} onChange={e => setUsername(e.target.value)} autoComplete="username" autoCapitalize="none" spellCheck={false} maxLength={64} required placeholder="Username" aria-label="Username" />
+          <input className={input} type="text" value={username} onChange={e => setUsername(e.target.value)} autoComplete="username" autoCapitalize="none" spellCheck={false} maxLength={64} required placeholder={L('Benutzername', 'Tên đăng nhập')} aria-label={L('Benutzername', 'Tên đăng nhập')} />
         </Field>
 
         <div className="flex flex-col gap-1">
@@ -113,12 +114,12 @@ export default function SignUp() {
             label="Create Password"
             icon={<img src={icLock} alt="" style={{ width: 21.333, height: 17.5 }} />}
             trailing={
-              <button type="button" aria-label="Toggle password" onClick={() => setShow(v => !v)} className="p-1">
+              <button type="button" aria-label={L('Passwort anzeigen', 'Hiện mật khẩu')} onClick={() => setShow(v => !v)} className="p-1">
                 <img src={icEye} alt="" style={{ width: 18.333, height: 12.5 }} />
               </button>
             }
           >
-            <input className={`${input} font-mono tracking-[1.6px]`} type={show ? 'text' : 'password'} value={pw} onChange={e => setPw(e.target.value)} autoComplete="new-password" required placeholder="Password" aria-label="Password" />
+            <input className={`${input} font-mono tracking-[1.6px]`} type={show ? 'text' : 'password'} value={pw} onChange={e => setPw(e.target.value)} autoComplete="new-password" required placeholder={L('Passwort', 'Mật khẩu')} aria-label={L('Passwort', 'Mật khẩu')} />
           </Field>
         </div>
 
@@ -128,26 +129,26 @@ export default function SignUp() {
             icon={<img src={icLockReset} alt="" style={{ width: 24.667, height: 16.667 }} />}
             trailing={
               <>
-                <button type="button" aria-label="Toggle password" onClick={() => setShow2(v => !v)} className="p-1 pr-2">
+                <button type="button" aria-label={L('Passwort anzeigen', 'Hiện mật khẩu')} onClick={() => setShow2(v => !v)} className="p-1 pr-2">
                   <img src={icEye} alt="" style={{ width: 18.333, height: 12.5 }} />
                 </button>
                 {match && okMark}
               </>
             }
           >
-            <input className={`${input} font-mono tracking-[1.6px]`} type={show2 ? 'text' : 'password'} value={pw2} onChange={e => setPw2(e.target.value)} autoComplete="new-password" required placeholder="Confirm password" aria-label="Confirm password" />
+            <input className={`${input} font-mono tracking-[1.6px]`} type={show2 ? 'text' : 'password'} value={pw2} onChange={e => setPw2(e.target.value)} autoComplete="new-password" required placeholder={L('Passwort bestätigen', 'Xác nhận mật khẩu')} aria-label={L('Passwort bestätigen', 'Xác nhận mật khẩu')} />
           </Field>
           {pw2 && (
             <span className={`flex items-center gap-1 px-2 text-[11px] leading-6 ${match ? 'text-[#13707e]' : 'text-red-600'}`}>
               {match && <img src={icMatch} alt="" className="size-[10.833px]" />}
-              {match ? 'Passwords match perfectly' : 'Passwords do not match'}
+              {match ? L('Passwörter stimmen überein', 'Mật khẩu khớp') : L('Passwörter stimmen nicht überein', 'Mật khẩu không khớp')}
             </span>
           )}
         </div>
 
         <label className="flex cursor-pointer items-center gap-2.5 px-1 pt-1 text-sm leading-[17.5px] text-[#3f4a4b]">
           <input type="checkbox" checked={agree} onChange={e => setAgree(e.target.checked)} className="size-5 shrink-0 rounded-md accent-[#13707e]" />
-          <span>I agree to the <a href="#" className="text-[#13707e] underline">Terms of Service</a> &amp; <a href="#" className="text-[#13707e] underline">Privacy Policy</a></span>
+          <span>{L('Ich stimme den ', 'Tôi đồng ý với ')}<a href="#" className="text-[#13707e] underline">{L('Nutzungsbedingungen', 'Điều khoản sử dụng')}</a>{L(' und der ', ' và ')}<Link to="/privacy" className="text-[#13707e] underline">{L('Datenschutzerklärung', 'Chính sách bảo mật')}</Link>{L(' zu', '')}</span>
         </label>
 
         {error && <p role="alert" className="text-sm text-[#ba1a1a]">{error}</p>}
@@ -157,7 +158,7 @@ export default function SignUp() {
           disabled={!canSubmit || busy}
           className="mt-1 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand via-brand to-teal-500 px-6 py-4 text-base leading-5 font-bold tracking-[0.16px] text-white drop-shadow-[0_6px_0_#0b4a54] transition active:translate-y-1 active:drop-shadow-[0_2px_0_#0b4a54] disabled:opacity-50"
         >
-          90-Tage-Reise starten
+          {L('90-Tage-Reise starten', 'Bắt đầu hành trình 90 ngày')}
           <ArrowRight aria-hidden="true" className="size-4" />
         </button>
       </form>

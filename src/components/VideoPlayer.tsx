@@ -2,6 +2,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 're
 import { Play } from 'lucide-react'
 import icVolume from '../assets/workouts/d-volume.svg'
 import icFull from '../assets/workouts/d-full.svg'
+import { L } from '../lib/i18n'
 
 const fmt = (s: number) => {
   const t = Math.max(0, Math.floor(s))
@@ -97,7 +98,7 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPl
 
       {!playing && (
         <button
-          aria-label={started ? 'Resume video' : 'Play workout video'}
+          aria-label={started ? L('Video fortsetzen', 'Tiếp tục video') : L('Video abspielen', 'Phát video')}
           onClick={play}
           className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-black/10 to-transparent"
         >
@@ -118,7 +119,7 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPl
       <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1.5 bg-gradient-to-t from-black/80 to-transparent px-3 pt-6 pb-3">
         <input
           type="range"
-          aria-label="Seek"
+          aria-label={L('Position', 'Vị trí')}
           min={0}
           max={duration || 0}
           step={0.1}
@@ -130,11 +131,11 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPl
           style={{ background: `linear-gradient(to right, #1a8a99 ${duration ? (time / duration) * 100 : 0}%, rgb(255 255 255 / 0.3) 0)` }}
         />
         <div className="flex items-center justify-between">
-          <button onClick={() => setMuted(m => !m)} aria-label={muted ? 'Unmute' : 'Mute'} className={`flex items-center gap-2 text-xs leading-4 font-bold tracking-[0.48px] text-white ${muted ? 'opacity-50' : ''}`}>
+          <button onClick={() => setMuted(m => !m)} aria-label={muted ? L('Ton an', 'Bật tiếng') : L('Ton aus', 'Tắt tiếng')} className={`flex items-center gap-2 text-xs leading-4 font-bold tracking-[0.48px] text-white ${muted ? 'opacity-50' : ''}`}>
             <img src={icVolume} alt="" style={{ width: 12, height: 11.667 }} />
             {fmt(time)} / {fmt(duration)}
           </button>
-          <button onClick={fullscreen} aria-label="Fullscreen" className="p-1">
+          <button onClick={fullscreen} aria-label={L('Vollbild', 'Toàn màn hình')} className="p-1">
             <img src={icFull} alt="" className="size-3" />
           </button>
         </div>

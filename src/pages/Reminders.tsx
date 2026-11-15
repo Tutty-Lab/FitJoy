@@ -6,11 +6,12 @@ import coach from '../assets/home/mascot.png'
 import icAlarm from '../assets/onboarding/r-alarm.svg'
 import icBell from '../assets/onboarding/r-bell.svg'
 import icSunset from '../assets/onboarding/r-sunset.svg'
+import { L } from '../lib/i18n'
 
 const slots = [
-  { title: 'Morning', name: 'Sunrise Warmup', icon: icAlarm, w: 15.975, h: 14.738, bg: 'bg-[#ffe3d3]', card: 'bg-white' },
-  { title: 'Noon', name: 'Spine Alignment & Mobility', icon: icBell, w: 12, h: 15, bg: 'bg-[#e7efee]', card: 'bg-white' },
-  { title: 'Night', name: 'Deep Stretch & Rest', icon: icSunset, w: 16.5, h: 15, bg: 'bg-[#ffdcc5]', card: 'bg-white' },
+  { title: L('Morgens', 'Buổi sáng'), icon: icAlarm, w: 15.975, h: 14.738, bg: 'bg-[#ffe3d3]', card: 'bg-white' },
+  { title: L('Mittags', 'Buổi trưa'), icon: icBell, w: 12, h: 15, bg: 'bg-[#e7efee]', card: 'bg-white' },
+  { title: L('Abends', 'Buổi tối'), icon: icSunset, w: 16.5, h: 15, bg: 'bg-[#ffdcc5]', card: 'bg-white' },
 ]
 
 export default function Reminders() {
@@ -35,15 +36,15 @@ export default function Reminders() {
           <img src={coach} alt="Vestibu" className="size-16 object-contain" />
         </div>
         <div className="flex min-w-0 flex-1 flex-col items-start gap-1 pt-1">
-          <span className="rounded-full bg-white px-2.5 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#d9652c]">3 Daily Reminders</span>
+          <span className="rounded-full bg-white px-2.5 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#d9652c]">{L('3 Erinnerungen am Tag', '3 lời nhắc mỗi ngày')}</span>
           <p className="text-sm leading-[22.75px] font-medium text-[#7a3412]">
-            Pick times that fit your day ⏰
+            {L('Wähle Zeiten, die zu deinem Alltag passen – für deine 3 × 1 Minute ⏰', 'Chọn giờ phù hợp với ngày của bạn – cho 3 × 1 phút tập ⏰')}
           </p>
         </div>
       </div>
 
       <section className="flex flex-col gap-3">
-        <SectionTitle aside={saved && <span className="text-xs leading-4 font-bold text-[#13707e]">Saved ✓</span>}>Reminder Slots</SectionTitle>
+        <SectionTitle aside={saved && <span className="text-xs leading-4 font-bold text-[#13707e]">{L('Gespeichert ✓', 'Đã lưu ✓')}</span>}>{L('Erinnerungszeiten', 'Giờ nhắc')}</SectionTitle>
         {slots.map((s, i) => (
           <div key={s.title} className={`flex flex-col gap-3 rounded-[32px] p-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)] ${s.card} ${on[i] ? '' : 'opacity-60'}`}>
             <div className="flex items-center justify-between">
@@ -55,10 +56,10 @@ export default function Reminders() {
                   <span className="block text-base leading-5 font-bold">{s.title}</span>
                 </span>
               </span>
-              <Switch label={`${s.title} reminder`} on={on[i]} onChange={() => update(times, on.map((v, j) => (j === i ? !v : v)))} />
+              <Switch label={`${L('Erinnerung', 'Nhắc')} ${s.title}`} on={on[i]} onChange={() => update(times, on.map((v, j) => (j === i ? !v : v)))} />
             </div>
             <label className="flex items-center justify-between rounded-[48px] bg-[#f3f6f5] py-1 pr-1 pl-4">
-              <span className="text-sm leading-5 font-semibold text-[#3f4a4b]">Time</span>
+              <span className="text-sm leading-5 font-semibold text-[#3f4a4b]">{L('Uhrzeit', 'Giờ')}</span>
               <input
                 type="time"
                 value={times[i]}

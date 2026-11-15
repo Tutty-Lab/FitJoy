@@ -1,3 +1,4 @@
+import { lang } from '../lib/i18n'
 // "My Balance Check" (Der Gleichgewichts-Code, Michaela von der Nahmer).
 // Done barefoot on day 1 and again on day 90, then compared.
 
@@ -33,3 +34,30 @@ export const groupOf = (index: number): TaskGroup => (index < 12 ? 'Stehen' : in
 export const groups: TaskGroup[] = ['Stehen', 'Gehen', 'Sitzen']
 
 export { PROGRAM_DAYS } from './program'
+
+// Vietnamese display texts. Stored values (ids, observation strings, group keys) stay German.
+const viTasks: Record<string, [string, string, string]> = {
+  parallel: ['Đứng chụm chân', '30 giây · Hai bàn chân sát nhau', 'giây'],
+  'parallel-eyes': ['Nhắm mắt · Đứng chụm chân', '30 giây · Hai bàn chân sát nhau', 'giây'],
+  tandem: ['Đứng nối gót', '30 giây · Hai bàn chân trên một đường, mũi chân chạm gót', 'giây'],
+  'tandem-eyes': ['Nhắm mắt · Đứng nối gót', '30 giây · Hai bàn chân trên một đường, mũi chân chạm gót', 'giây'],
+  'flamingo-light-r': ['Hạc nhẹ, bên phải', '30 giây · Bàn chân phải đặt lên bàn chân trái', 'giây'],
+  'flamingo-light-l': ['Hạc nhẹ, bên trái', '30 giây · Bàn chân trái đặt lên bàn chân phải', 'giây'],
+  'flamingo-r': ['Đứng một chân, bên phải', '30 giây', 'giây'],
+  'flamingo-l': ['Đứng một chân, bên trái', '30 giây', 'giây'],
+  'steps-eyes': ['Nhắm mắt · Bước tại chỗ', '50 bước tại chỗ', 'bước'],
+  'mat-parallel': ['Đứng chụm chân trên thảm cuộn', '30 giây · Hai bàn chân sát nhau', 'giây'],
+  'mat-hip': ['Đứng rộng bằng hông trên thảm cuộn', '30 giây', 'giây'],
+  cushion: ['Đứng chụm chân trên đệm hơi', '30 giây · Hai bàn chân sát nhau', 'giây'],
+  'tandem-fwd': ['Đi nối gót tiến', '3 m · Đi chậm trên một đường thẳng', 'm'],
+  'tandem-back': ['Đi nối gót lùi', '3 m · Đi chậm trên một đường thẳng', 'm'],
+  'toes-fwd': ['Đi kiễng chân tiến', '3 m · Đi chậm trên mũi chân', 'm'],
+  'toes-back': ['Đi kiễng chân lùi', '3 m · Đi chậm trên mũi chân', 'm'],
+  dynamic: ['Bước qua chướng ngại vật', 'Bước chậm qua 10 đồ vật', 'đồ vật'],
+  'sit-stand': ['Đứng lên và ngồi xuống', 'Ngồi xuống và đứng lên chậm 10 lần', 'lần'],
+}
+const viObs: Record<string, string> = { Schwindel: 'Chóng mặt', 'Ausgleich durch Arme': 'Dùng tay giữ thăng bằng', 'Körper schwankt': 'Người lắc lư', Festhalten: 'Phải vịn', 'Boden fixieren': 'Nhìn chằm xuống sàn', 'Körper steif': 'Người cứng đờ', 'Linie verlassen': 'Lệch khỏi đường', Abbruch: 'Phải dừng' }
+const viGroup: Record<TaskGroup, string> = { Stehen: 'Đứng', Gehen: 'Đi', Sitzen: 'Ngồi' }
+export const taskText = (t: Task) => (lang === 'vi' && viTasks[t.id] ? { title: viTasks[t.id][0], detail: viTasks[t.id][1], unit: viTasks[t.id][2] } : t)
+export const obsLabel = (o: string) => (lang === 'vi' ? viObs[o] ?? o : o)
+export const groupLabel = (g: TaskGroup) => (lang === 'vi' ? viGroup[g] : g)

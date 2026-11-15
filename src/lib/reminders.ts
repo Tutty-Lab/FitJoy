@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { loadProfile, saveProfile } from './profile'
+import { L } from './i18n'
 
 export const DEFAULT_TIMES = ['06:30', '12:15', '20:00']
-const SLOT_NAMES = ['Morning', 'Noon', 'Night']
+const SLOT_NAMES = [L('Morgens', 'Buổi sáng'), L('Mittags', 'Buổi trưa'), L('Abends', 'Buổi tối')]
 const FIRED_KEY = 'fitjoy.firedReminders'
 
 export function playChime() {
@@ -46,8 +47,8 @@ function alreadyFired(id: string) {
 function fire(slot: number, chime: boolean) {
   if (chime) playChime()
   if ('Notification' in window && Notification.permission === 'granted') {
-    new Notification(`FitJoy • ${SLOT_NAMES[slot]} reminder ⏰`, {
-      body: "Time to move! Today's workout is waiting 🌱",
+    new Notification(`Vestibu • ${SLOT_NAMES[slot]} ⏰`, {
+      body: L('Zeit für deine Gleichgewichts-Minute 🌱', 'Đến giờ tập 1 phút thăng bằng rồi 🌱'),
       icon: '/icon.png',
       tag: `fitjoy-${slot}`,
     })
@@ -65,7 +66,7 @@ export function useReminderScheduler() {
         saveProfile({ checkReminderAt: undefined })
         if (p.chime ?? true) playChime()
         if ('Notification' in window && Notification.permission === 'granted') {
-          new Notification('Hallo, hier ist Vestibu 👋', { body: 'Dein Selbsttest wartet auf dich. Mach dir kurz 3 Meter Platz, schnapp dir einen Stuhl und nimm dir eine halbe Stunde Ruhe nur für dich.', icon: '/icon.png', tag: 'vestibu-check' })
+          new Notification(L('Hallo, hier ist Vestibu 👋', 'Xin chào, mình là Vestibu 👋'), { body: L('Dein Selbsttest wartet auf dich. Mach dir kurz 3 Meter Platz, schnapp dir einen Stuhl und nimm dir eine halbe Stunde Ruhe nur für dich.', 'Bài tự kiểm tra đang chờ bạn. Dọn khoảng 3 mét trống, chuẩn bị một chiếc ghế và dành nửa tiếng yên tĩnh cho riêng mình.'), icon: '/icon.png', tag: 'vestibu-check' })
         }
       }
       if (!p?.onboarded) return

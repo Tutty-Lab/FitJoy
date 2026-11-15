@@ -21,6 +21,7 @@ import iTrophy from '../assets/profile/i-trophy.svg'
 import iFlame from '../assets/profile/i-flame.svg'
 import iStar from '../assets/profile/i-star.svg'
 import { ChevronRight } from 'lucide-react'
+import { L, lang, setLang } from '../lib/i18n'
 
 const Chevron = () => <ChevronRight aria-hidden="true" className="size-4 text-slate-400" />
 
@@ -81,7 +82,7 @@ export default function Profile() {
   }
 
   async function removeAccount() {
-    if (!window.confirm('Delete your FitJoy account and all progress? This cannot be undone.')) return
+    if (!window.confirm(L('Konto und gesamten Fortschritt löschen? Das kann nicht rückgängig gemacht werden.', 'Xóa tài khoản và toàn bộ tiến trình? Không thể hoàn tác.'))) return
     const r = await deleteAccount()
     if (!r.ok) return window.alert(r.error)
     applyTheme(false)
@@ -109,69 +110,69 @@ export default function Profile() {
               <img src={iStar} alt="" style={{ width: 15, height: 14.25 }} />
             </span>
           </div>
-          <h2 className="pb-1 text-2xl leading-8 font-bold tracking-[-0.6px]">{p?.name || 'FitJoy friend'}</h2>
+          <h2 className="pb-1 text-2xl leading-8 font-bold tracking-[-0.6px]">{p?.name || L('Schön, dass du da bist', 'Bạn của Vestibu')}</h2>
         </div>
       </section>
 
       <div className="flex flex-col gap-4">
-        <Group title="Balance">
+        <Group title={L('Gleichgewicht', 'Thăng bằng')}>
           <Row
             onClick={redoBalanceCheck}
             icon={<RefreshCw aria-hidden="true" className="size-4 text-brand-deep" />}
             iconBg="bg-mint"
-            title="Redo balance check"
+            title={L('Selbsttest neu starten', 'Làm lại bài tự kiểm tra')}
           />
           <Row
             to="/compare"
             icon={<img src={iGoal} alt="" style={{ width: 12.5, height: 14.167 }} />}
             iconBg="bg-[rgba(255,227,211,0.3)]"
-            title="Balance Check"
+            title={L('Meine Ergebnisse', 'Kết quả của tôi')}
           />
         </Group>
 
-        <Group title="Notifications & PWA">
+        <Group title={L('Benachrichtigungen', 'Thông báo')}>
           <Row
             icon={<img src={iPhone} alt="" style={{ width: 12.5, height: 18.333 }} />}
             iconBg="bg-[rgba(255,236,225,0.3)]"
-            title="Lock Screen Notifications"
-            right={<Switch label="Lock screen notifications" on={p?.pushAlerts ?? true} onChange={() => toggle('pushAlerts', true)} />}
+            title={L('Mitteilungen auf dem Sperrbildschirm', 'Thông báo trên màn hình khóa')}
+            right={<Switch label={L('Mitteilungen auf dem Sperrbildschirm', 'Thông báo trên màn hình khóa')} on={p?.pushAlerts ?? true} onChange={() => toggle('pushAlerts', true)} />}
           />
           <Row
             icon={<img src={iSound} alt="" style={{ width: 15, height: 14.583 }} />}
             iconBg="bg-[rgba(255,236,225,0.3)]"
-            title="Chime Sound"
-            right={<Switch label="Chime sound" on={p?.chime ?? true} onChange={() => toggle('chime', true)} />}
+            title={L('Signalton', 'Âm báo')}
+            right={<Switch label={L('Signalton', 'Âm báo')} on={p?.chime ?? true} onChange={() => toggle('chime', true)} />}
           />
         </Group>
 
-        <Group title="Preferences">
-          <Row icon={<img src={iLang} alt="" style={{ width: 18.417, height: 16.667 }} />} iconBg="bg-[rgba(255,220,197,0.4)]" title="Language" />
+        <Group title={L('Einstellungen', 'Cài đặt')}>
+          <Row icon={<img src={iLang} alt="" style={{ width: 18.417, height: 16.667 }} />} iconBg="bg-[rgba(255,220,197,0.4)]" title={L('Sprache', 'Ngôn ngữ')} right={<span className="flex rounded-full bg-[#f3f6f5] p-1 text-sm font-bold">{(["de", "vi"] as const).map(l => <button key={l} type="button" aria-pressed={lang === l} onClick={() => lang !== l && setLang(l)} className={`rounded-full px-3 py-1 ${lang === l ? "bg-brand-deep text-white" : "text-[#3f4a4b]"}`}>{l === "de" ? "Deutsch" : "Tiếng Việt"}</button>)}</span>} />
           <Row
             icon={<img src={iMoon} alt="" className="size-[15px]" />}
             iconBg="bg-[#e7efee]"
-            title="Dark Mode"
-            right={<Switch label="Dark mode" on={p?.darkMode ?? false} onChange={() => toggle('darkMode', false)} />}
+            title={L('Dunkelmodus', 'Chế độ tối')}
+            right={<Switch label={L('Dunkelmodus', 'Chế độ tối')} on={p?.darkMode ?? false} onChange={() => toggle('darkMode', false)} />}
           />
         </Group>
 
-        <Group title="Support & Data">
-          <Row onClick={backup} icon={<img src={iBackup} alt="" style={{ width: 16.667, height: 13.333 }} />} iconBg="bg-[#f3f6f5]" title="Backup Health Data" />
-          <Row to="/privacy" icon={<img src={iInfo} alt="" className="size-[16.667px]" />} iconBg="bg-[#f3f6f5]" title="Privacy Policy" />
+        <Group title={L('Hilfe & Daten', 'Hỗ trợ & dữ liệu')}>
+          <Row onClick={backup} icon={<img src={iBackup} alt="" style={{ width: 16.667, height: 13.333 }} />} iconBg="bg-[#f3f6f5]" title={L('Daten sichern', 'Sao lưu dữ liệu')} />
+          <Row to="/privacy" icon={<img src={iInfo} alt="" className="size-[16.667px]" />} iconBg="bg-[#f3f6f5]" title={L('Datenschutz', 'Chính sách bảo mật')} />
         </Group>
       </div>
 
-      <Group title="Account">
+      <Group title={L('Konto', 'Tài khoản')}>
         <Row
           onClick={logout}
           icon={<LogOut aria-hidden="true" className="size-4 text-[#ba1a1a] dark:text-red-300" />}
           iconBg="bg-red-50 dark:bg-red-950/40"
-          title="Log Out"
+          title={L('Abmelden', 'Đăng xuất')}
         />
         <Row
           onClick={removeAccount}
           icon={<Trash2 aria-hidden="true" className="size-4 text-[#ba1a1a] dark:text-red-300" />}
           iconBg="bg-red-50 dark:bg-red-950/40"
-          title="Delete account"
+          title={L('Konto löschen', 'Xóa tài khoản')}
         />
       </Group>
     </div>

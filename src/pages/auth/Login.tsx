@@ -8,6 +8,7 @@ import icHeart from '../../assets/auth/l-heart.svg'
 import icClear from '../../assets/auth/l-clear.svg'
 import icEye from '../../assets/auth/eye.svg'
 import icCheck from '../../assets/auth/l-check.svg'
+import { L } from '../../lib/i18n'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -27,7 +28,7 @@ export default function Login() {
     setBusy(false)
     if (!res.ok) return setError(res.error)
     const invite = new URLSearchParams(location.search).get('invite')
-    if (invite) { try { await api('redeem', { method: 'POST', body: { code: invite } }) } catch (e) { return setError(e instanceof Error ? e.message : 'Could not redeem invitation') } }
+    if (invite) { try { await api('redeem', { method: 'POST', body: { code: invite } }) } catch (e) { return setError(e instanceof Error ? e.message : L('Einladung konnte nicht eingelöst werden', 'Không thể dùng mã mời')) } }
     const profile = loadProfile()
     navigate(profile?.role === 'admin' ? '/admin' : profile?.checks?.start ? '/' : '/check/start', { replace: true })
   }
@@ -39,11 +40,11 @@ export default function Login() {
         <div className="absolute -bottom-6 -left-6 size-32 rounded-full bg-[#ffece1] opacity-30 blur-[24px]" />
         <div className="relative flex items-center gap-2">
           <div className="flex min-w-0 flex-1 flex-col items-start gap-1 pt-1 pr-2">
-            <span className="rounded-full bg-[rgba(238,122,63,0.3)] px-2 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#0b4a54]">Joy Sprout • Vibe Buddy</span>
-            <h1 className="pt-0.5 text-2xl leading-8 font-bold tracking-[-0.6px]">Start your healthy journey!</h1>
+            <span className="rounded-full bg-[rgba(238,122,63,0.3)] px-2 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#0b4a54]">Der Gleichgewichts-Code</span>
+            <h1 className="pt-0.5 text-2xl leading-8 font-bold tracking-[-0.6px]">{L('Willkommen zurück!', 'Chào mừng bạn quay lại!')}</h1>
           </div>
           <div className="float relative size-24 shrink-0 overflow-hidden rounded-2xl bg-white p-1.5 shadow-md">
-            <img src={sprout} alt="Joy Sprout mascot" className="size-full rounded-[48px] object-cover" />
+            <img src={sprout} alt="Vestibu" className="size-full rounded-[48px] object-cover" />
             <span className="absolute right-1 bottom-1 flex size-5 items-center justify-center rounded-full bg-brand shadow-sm">
               <img src={icHeart} alt="" style={{ width: 10, height: 9.175 }} />
             </span>
@@ -62,11 +63,11 @@ export default function Login() {
               spellCheck={false}
               value={username}
               onChange={e => setUsername(e.target.value)}
-              placeholder="Username" aria-label="Username"
+              placeholder={L('Benutzername', 'Tên đăng nhập')} aria-label={L('Benutzername', 'Tên đăng nhập')}
               className="h-[52px] w-full rounded-2xl bg-[#f3f6f5] pr-12 pl-4 text-base outline-none focus:ring-2 focus:ring-brand"
             />
             {username && (
-              <button type="button" aria-label="Clear username" onClick={() => setUsername('')} className="absolute top-1/2 right-3.5 -translate-y-1/2 p-1">
+              <button type="button" aria-label={L('Benutzername löschen', 'Xóa tên đăng nhập')} onClick={() => setUsername('')} className="absolute top-1/2 right-3.5 -translate-y-1/2 p-1">
                 <img src={icClear} alt="" className="size-[15px]" />
               </button>
             )}
@@ -80,13 +81,13 @@ export default function Login() {
               type={showPw ? 'text' : 'password'}
               required
               autoComplete="current-password"
-              placeholder="Password"
-              aria-label="Password"
+              placeholder={L('Passwort', 'Mật khẩu')}
+              aria-label={L('Passwort', 'Mật khẩu')}
               value={password}
               onChange={e => setPassword(e.target.value)}
               className="h-[52px] w-full rounded-2xl bg-[#f3f6f5] pr-12 pl-4 text-base tracking-[0.8px] outline-none focus:ring-2 focus:ring-brand"
             />
-            <button type="button" aria-label={showPw ? 'Hide password' : 'Show password'} onClick={() => setShowPw(v => !v)} className="absolute top-1/2 right-3.5 -translate-y-1/2 p-1">
+            <button type="button" aria-label={showPw ? L('Passwort verbergen', 'Ẩn mật khẩu') : L('Passwort anzeigen', 'Hiện mật khẩu')} onClick={() => setShowPw(v => !v)} className="absolute top-1/2 right-3.5 -translate-y-1/2 p-1">
               <img src={icEye} alt="" style={{ width: 18.333, height: 12.5 }} />
             </button>
           </span>
@@ -98,9 +99,9 @@ export default function Login() {
           <span className={`flex size-6 items-center justify-center rounded-full shadow-inner ${remember ? 'bg-brand' : 'border-2 border-[#e7efee] bg-white'}`}>
             {remember && <img src={icCheck} alt="" style={{ width: 10.867, height: 8.017 }} />}
           </span>
-          <span className="text-sm leading-[18px] font-semibold text-[#3f4a4b]">Remember me</span>
+          <span className="text-sm leading-[18px] font-semibold text-[#3f4a4b]">{L('Angemeldet bleiben', 'Ghi nhớ đăng nhập')}</span>
         </label>
-        <Link to="/signup" className="text-sm font-bold text-brand-deep">Sign Up</Link>
+        <Link to="/signup" className="text-sm font-bold text-brand-deep">{L('Registrieren', 'Đăng ký')}</Link>
         </div>
 
         {error && <p role="alert" className="text-sm text-[#ba1a1a]">{error}</p>}
@@ -110,7 +111,7 @@ export default function Login() {
           className="mt-1 flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-base leading-5 font-bold tracking-[0.16px] text-white shadow-[0_10px_15px_-3px_rgba(19,112,126,0.3),0_4px_6px_-4px_rgba(19,112,126,0.3)] active:scale-[0.98]"
         >
           {busy && <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />}
-          {busy ? 'Logging in…' : 'Log In to FitJoy'}
+          {busy ? L('Anmelden…', 'Đang đăng nhập…') : L('Anmelden', 'Đăng nhập')}
         </button>
 
       </form>

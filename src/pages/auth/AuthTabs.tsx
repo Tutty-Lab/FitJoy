@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import icSignIn from '../../assets/auth/l-signin.svg'
 import icSignUp from '../../assets/auth/l-signup.svg'
 import icSignUpActive from '../../assets/auth/s-signup.svg'
+import { L } from '../../lib/i18n'
 
 export default function AuthTabs({ active }: { active: 'signin' | 'signup' }) {
   const on = 'bg-white shadow-md'
@@ -12,14 +13,14 @@ export default function AuthTabs({ active }: { active: 'signin' | 'signup' }) {
         className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-2.5 text-sm leading-[18px] font-semibold ${active === 'signin' ? `${on} text-ink` : 'text-[#3f4a4b]'}`}
       >
         {active === 'signin' && <img src={icSignIn} alt="" className="size-[13.5px]" />}
-        Sign In
+        {L('Anmelden', 'Đăng nhập')}
       </Link>
       <Link
         to="/signup"
         className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-2.5 text-sm leading-[18px] font-semibold ${active === 'signup' ? `${on} text-[#13707e]` : 'text-[#3f4a4b]'}`}
       >
         <img src={active === 'signup' ? icSignUpActive : icSignUp} alt="" style={active === 'signup' ? { width: 14.667, height: 10.667 } : { width: 16.5, height: 12 }} />
-        Sign Up
+        {L('Registrieren', 'Đăng ký')}
       </Link>
     </div>
   )

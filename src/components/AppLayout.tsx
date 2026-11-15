@@ -4,12 +4,13 @@ import navHome from '../assets/home/c29.svg'
 import navReminders from '../assets/home/c31.svg'
 import navCalendar from '../assets/home/nav-calendar.svg'
 import navProfile from '../assets/home/c32.svg'
+import { L } from '../lib/i18n'
 
 const tabs = [
-  { to: '/', label: 'Home', icon: navHome, w: 14.667, h: 16.5 },
-  { to: '/calendar', label: 'Kalender', icon: navCalendar, w: 20, h: 20 },
-  { to: '/reminders', label: 'Reminders', icon: navReminders, w: 21.3, h: 19.65 },
-  { to: '/profile', label: 'Profile', icon: navProfile, w: 20, h: 20 },
+  { to: '/', label: L('Start', 'Trang chủ'), icon: navHome, w: 14.667, h: 16.5 },
+  { to: '/calendar', label: L('Kalender', 'Lịch'), icon: navCalendar, w: 20, h: 20 },
+  { to: '/reminders', label: L('Erinnerungen', 'Nhắc nhở'), icon: navReminders, w: 21.3, h: 19.65 },
+  { to: '/profile', label: L('Profil', 'Hồ sơ'), icon: navProfile, w: 20, h: 20 },
 ]
 
 export default function AppLayout() {

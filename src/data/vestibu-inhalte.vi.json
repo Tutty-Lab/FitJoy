@@ -1,0 +1,752 @@
+{
+ "tage": [
+  {
+   "begruessung": "Chào buổi sáng! Người đạo diễn thầm lặng của bạn đã sẵn sàng. Hãy dành cho mình phút đầu tiên hôm nay nhé.",
+   "bonusImpuls": "Muốn tập phút bonus không?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Thật vui vì bạn ở đây! Ba phút nhỏ cho bản thân hôm nay sẽ tạo nên khác biệt lớn.",
+   "bonusImpuls": "Tập phút bonus ngay nhé?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Hít thở sâu, gác lại bộn bề – phút thăng bằng đầu tiên của bạn đây.",
+   "bonusImpuls": "Đến lúc tập thêm?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Chào mừng bạn quay lại! Cơ quan thăng bằng của bạn đang chờ sự chú ý của bạn đấy.",
+   "bonusImpuls": "Thêm một phút bonus tùy chọn?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Một ngày mới, một cơ hội mới. Bắt đầu với phút thứ nhất nào!",
+   "bonusImpuls": "Sẵn sàng cho phút bonus?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Vestibu chào bạn! Hãy bắt đầu ngày mới bằng một phút bình yên và tập trung.",
+   "bonusImpuls": "Tự thưởng phần thêm này!",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Rất vui được gặp bạn! Dù mình thường làm việc thầm lặng – giờ sân khấu là của bạn.",
+   "bonusImpuls": "Thêm một phút nữa nhé?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Sẵn sàng cho một lần dừng chân nhỏ? Một phút cho cơ thể và tâm trí bạn.",
+   "bonusImpuls": "Phút bonus đang chờ bạn!",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Đừng quên: bạn là người quan trọng nhất trong ngày của mình. Bắt đầu thôi!",
+   "bonusImpuls": "Muốn tập thêm nữa?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Não bộ và sự thăng bằng của bạn đã sẵn sàng. Cùng tập phút đầu tiên nhé.",
+   "bonusImpuls": "Thêm chút cho bạn nhé?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Thật tốt khi bạn tặng mình khoảnh khắc này. Một phút là đủ để trở về với chính mình.",
+   "bonusImpuls": "Tặng mình phút bonus!",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Chào mừng! Không vội, không áp lực – chỉ có bạn, mình và một phút dễ chịu.",
+   "bonusImpuls": "Còn chút thời gian chứ?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Hôm nay bạn thấy thăng bằng thế nào? Cùng tìm hiểu trong một phút ngắn nhé.",
+   "bonusImpuls": "Sẵn sàng tập thêm?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Người đạo diễn thầm lặng có mặt! Sẵn sàng cho buổi tập nhỏ hôm nay chưa?",
+   "bonusImpuls": "Nhận phút bonus của bạn!",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Chúc bạn khởi đầu ngày tốt lành! Chỉ một phút thôi, bạn mang lại sự bình yên cho cơ thể.",
+   "bonusImpuls": "Thêm một chút ngay nhé?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Bạn đang làm rất tốt. Tiếp tục nhé – phút tập hôm nay đang chờ bạn.",
+   "bonusImpuls": "Tiếp tục với phút bonus?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Thật vui vì bạn lại ghé! Cùng chăm sóc sự thăng bằng của bạn một chút nhé.",
+   "bonusImpuls": "Thêm một phút cho bạn nhé?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Đến lúc tạm nghỉ khỏi guồng quay. Một phút chỉ dành cho bạn!",
+   "bonusImpuls": "Bạn còn hứng không?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Cơ quan thăng bằng làm việc cho bạn 24/7 – giờ ta trả lại cho nó một phút.",
+   "bonusImpuls": "Sẵn sàng cho phần thêm?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Chào mừng đến với khoảng nghỉ riêng của bạn. Ngắn gọn, hiệu quả và vừa vặn cho bạn.",
+   "bonusImpuls": "Thêm một phần nhỏ nhé?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Cùng nhau giúp bạn hôm nay không dễ bị xáo trộn nhé.",
+   "bonusImpuls": "Thêm một phần thăng bằng nhé?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Vestibu chào bạn! Nhớ nhé: không có gì bắt buộc – phút bonus chỉ chờ khi bạn muốn.",
+   "bonusImpuls": "Bạn muốn tập tiếp không?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Thật vui vì bạn giữ được nhịp! Thư thả bắt đầu phút đầu tiên nào.",
+   "bonusImpuls": "Tập luôn phút bonus nhé?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Một khoảnh khắc chánh niệm ngắn thường làm nên điều kỳ diệu. Bạn sẵn sàng chưa?",
+   "bonusImpuls": "Nhận phần thêm của bạn!",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Hãy tưởng tượng lát nữa bạn sẽ thấy dễ chịu thế nào. Bắt đầu phút thứ nhất thôi.",
+   "bonusImpuls": "Một món quà cho bạn!",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Cơ thể bạn thích những thói quen nhỏ. Thật vui vì hôm nay ta lại cùng tập!",
+   "bonusImpuls": "Muốn thêm điểm cộng?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Dừng lại một chút, hít thở sâu và tập trung. Mình đồng hành cùng bạn.",
+   "bonusImpuls": "Thêm một màn ngắn nhé?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Ngày bận rộn đến đâu cũng luôn chen được một phút. Thật vui vì bạn ở đây!",
+   "bonusImpuls": "Phần tùy chọn đang chờ bạn!",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Chào mừng bạn quay lại! Người đạo diễn thầm lặng đã chuẩn bị sẵn bài tập hôm nay.",
+   "bonusImpuls": "Tập thêm chút nữa nhé?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Gần trọn một tháng đã qua – thật tuyệt! Cùng bắt đầu phút tập hôm nay nào.",
+   "bonusImpuls": "Sẵn sàng cho bonus?",
+   "phase": "P1: Làm quen & tạo thói quen"
+  },
+  {
+   "begruessung": "Xin chào! Bạn và hệ thăng bằng của mình ngày càng ăn ý. Cứ thế nhé!",
+   "bonusImpuls": "Tặng mình thêm chút bình yên!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Thật vui vì bạn lại đến! Hãy tặng mình một phút xứng đáng để vững vàng hơn.",
+   "bonusImpuls": "Thêm một khoảnh khắc thăng bằng?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Bạn đã cảm nhận được những khoảng lặng nhỏ này tốt cho mình thế nào chưa?",
+   "bonusImpuls": "Đến lúc nạp thêm năng lượng?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Người đạo diễn thầm lặng chào bạn! Sẵn sàng cho một phút sáng suốt và bình yên?",
+   "bonusImpuls": "Làm điều tốt cho mình nhé!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Dù hôm nay đã có chuyện gì – một phút này hoàn toàn thuộc về bạn.",
+   "bonusImpuls": "Thêm chút cho cơ thể & tâm trí?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Chào mừng! Não bộ của bạn đang mong chờ sự kết hợp giữa vận động và năng lượng tích cực.",
+   "bonusImpuls": "Thêm một phút sức mạnh?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Nhấn nút làm mới một chút nhé? Mình ở đây vì điều đó. Bắt đầu thôi!",
+   "bonusImpuls": "Thêm chút thời gian cho bạn!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Đều đặn quan trọng hơn hoàn hảo. Thật vui vì hôm nay bạn lại có mặt.",
+   "bonusImpuls": "Muốn thấy nhẹ nhõm hơn?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Thăng bằng vững vàng giúp bạn đứng vững – cả cơ thể lẫn tâm trí. Bắt đầu nào!",
+   "bonusImpuls": "Tặng mình thêm chút tập trung!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Thật tốt khi bạn dành khoảng này cho mình. Một phút cho sự vững vàng bên trong.",
+   "bonusImpuls": "Thêm một hơi thở sâu?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Vestibu chào bạn! Đôi khi chẳng cần nhiều để tìm lại sức mạnh của chính mình.",
+   "bonusImpuls": "Muốn vững vàng hơn?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Chào mừng bạn quay lại! Hôm nay ta lại thêm một chút thăng bằng vào ngày của bạn nhé.",
+   "bonusImpuls": "Nạp thêm năng lượng nhé?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Khởi đầu tốt lành! Nếu hôm nay có xáo trộn, những bài tập sẽ giúp bạn vững vàng.",
+   "bonusImpuls": "Thêm chút chánh niệm nhé?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Hệ tiền đình cảm ơn bạn vì từng phút quan tâm.",
+   "bonusImpuls": "Vì cảm giác tốt nhất của bạn!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Hãy tự hào về bản thân – cùng bắt đầu phút tập hôm nay nhé.",
+   "bonusImpuls": "Thêm một quãng nghỉ cho đầu óc?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Rất vui được đồng hành! Dành chút thời gian để chỉnh lại la bàn bên trong bạn.",
+   "bonusImpuls": "Thêm một phút thư giãn?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Những bước nhỏ dẫn đến thay đổi lớn. Tiến đến phút thứ nhất nào!",
+   "bonusImpuls": "Củng cố trung tâm bên trong!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Nếu hôm nay bạn dư năng lượng, phút bonus tùy chọn đang chờ bạn.",
+   "bonusImpuls": "Thêm chút dễ chịu cho bạn!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Chào mừng! Thở ra căng thẳng thường ngày và dành chỗ cho phút riêng của bạn.",
+   "bonusImpuls": "Thêm một điểm neo bình yên?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Bạn đang đầu tư vào tài sản quý nhất: sức khỏe của chính mình.",
+   "bonusImpuls": "Muốn đầu óc sáng suốt hơn?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Người đạo diễn thầm lặng đã sẵn sàng! Hôm nay ta lại thêm một chút nhẹ nhõm nhé.",
+   "bonusImpuls": "Thêm một bước cho bạn!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Thật vui vì bạn ở đây! Cơ thể bạn ghi nhớ từng phút quý giá này.",
+   "bonusImpuls": "Tặng mình khoảnh khắc này!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Dừng lại, trở về với mình và tiếp tục mạnh mẽ hơn.",
+   "bonusImpuls": "Thêm chút bình yên bên trong?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Dù mình làm việc thầm lặng – tiến bộ của bạn là có thật. Cứ thế nhé!",
+   "bonusImpuls": "Thêm một phút chăm sóc bản thân!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Chào mừng đến với điểm neo mỗi ngày. Một phút bình yên giữa nhịp sống.",
+   "bonusImpuls": "Nạp thêm chút sức nhé?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Vestibu chào bạn! Hôm nay ta lại giúp bạn đứng vững và an toàn nhé.",
+   "bonusImpuls": "Một điểm cộng cho hôm nay!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Không cần hoàn hảo lúc này – chỉ cần trọn vẹn với mình trong một phút.",
+   "bonusImpuls": "Thêm thăng bằng cho bạn?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Thật vui vì bạn kiên trì! Sự đều đặn của bạn mỗi ngày lại đền đáp thêm một chút.",
+   "bonusImpuls": "Phút dễ chịu tùy chọn của bạn!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Một cái nhìn vào bên trong giúp bạn vững vàng trước mọi điều bên ngoài.",
+   "bonusImpuls": "Thêm một gợi ý hay nhé?",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Chào mừng bạn quay lại! Hãy tận hưởng phút thăng bằng hôm nay.",
+   "bonusImpuls": "Làm trọn khoảnh khắc này!",
+   "phase": "P2: Đào sâu & kiên trì"
+  },
+  {
+   "begruessung": "Xin chào! Phút tập mỗi ngày đã trở thành siêu năng lực nhỏ của riêng bạn.",
+   "bonusImpuls": "Bạn đang vào guồng!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Thật vui vì bạn ở đây! Bạn và người đạo diễn thầm lặng giờ đã là những chuyên gia thực thụ.",
+   "bonusImpuls": "Hôm nay làm được nhiều hơn nhé?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Hãy dành khoảnh khắc quen thuộc cho sự bình yên, tập trung và sức mạnh bên trong.",
+   "bonusImpuls": "Ghi thêm một điểm nhé!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Chào mừng! Hôm nay hệ thăng bằng của bạn lại hết mình làm việc vì bạn.",
+   "bonusImpuls": "Muốn thử phần tự chọn?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Vestibu chào bạn! Thật tốt khi bạn tự nhiên dành cho mình khoảng nghỉ nhỏ này.",
+   "bonusImpuls": "Thêm một chút nữa nào!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Sẵn sàng cho cú hích năng lượng mỗi ngày? Một phút là đủ để định hướng lại.",
+   "bonusImpuls": "Hôm nay tràn đầy năng lượng?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Bạn đã biết nó tốt thế nào rồi. Bắt đầu phút tập luôn nhé!",
+   "bonusImpuls": "Bonus đang chờ bạn!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Giữ vững trung tâm của mình – dù thế giới quanh bạn quay nhanh đến đâu.",
+   "bonusImpuls": "Thêm một chiến thắng nhỏ?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Rất vui được gặp bạn! Cơ thể và tâm trí đã sẵn sàng cho khoảnh khắc chung.",
+   "bonusImpuls": "Cho thấy bạn làm được gì!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Chào mừng bạn quay lại! Mỗi phút là một món quà nhỏ cho chính bạn trong tương lai.",
+   "bonusImpuls": "Muốn thêm một màn nữa?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Hãy tin vào sự thăng bằng bên trong. Hôm nay ta củng cố nó bằng phút đầu tiên.",
+   "bonusImpuls": "Nhân đôi lên nào!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Một khoảnh khắc tĩnh lặng thường mang lại ý tưởng hay nhất. Bắt đầu nào!",
+   "bonusImpuls": "Thêm một thành công cho hôm nay!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Người đạo diễn thầm lặng đây! Thật vui vì ta cùng nhau đi con đường này.",
+   "bonusImpuls": "Sẵn sàng lên cấp hai?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Bạn có cảm nhận được nhịp quen thuộc dễ chịu này? Tận hưởng phút riêng hôm nay nhé.",
+   "bonusImpuls": "Hôm nay tinh thần tốt chứ?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Chào mừng! Bạn thật sự có thể tự hào về mình!",
+   "bonusImpuls": "Nhận bonus nào!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Hôm nay ta lại mang đến cảm giác dễ chịu trọn vẹn cho cơ thể nhé.",
+   "bonusImpuls": "Thêm một vòng thăng bằng?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Vestibu chào bạn! Một phút chú tâm – và cả cơ thể bạn đều được lợi.",
+   "bonusImpuls": "Hoàn thiện ngày hôm nay!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Thật vui vì bạn ở đây! Nếu muốn, sau bài chính hôm nay phút bonus tùy chọn cũng đang chờ.",
+   "bonusImpuls": "Muốn thêm cú hích bonus?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Đầu óc bình yên, đứng vững an toàn. Cùng có cả hai trong phút tới nhé.",
+   "bonusImpuls": "Hôm nay còn tập thêm được!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Chào mừng đến với liều chánh niệm mỗi ngày. Ngắn gọn, rõ ràng và dễ chịu.",
+   "bonusImpuls": "Phần thêm mỗi ngày đang chờ!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Bạn đã chứng minh ngày bận đến đâu cũng tìm được thời gian cho mình. Tuyệt vời!",
+   "bonusImpuls": "Cứ tiếp tục thêm chút nhé?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Cơ quan thăng bằng của bạn đang ở phong độ tốt nhất – hãy giữ cảm giác tuyệt vời này.",
+   "bonusImpuls": "Đón thêm cảm giác dễ chịu!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Thật vui vì bạn lại ghé! Một phút chỉ dành cho sự hài hòa bên trong bạn.",
+   "bonusImpuls": "Thêm một khoảnh khắc mạnh mẽ?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Chào mừng bạn quay lại! Gác ngày bộn bề sang một bên và tập trung vào chính mình.",
+   "bonusImpuls": "Bonus của bạn đã sẵn sàng!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Vestibu chào bạn! Cơ thể bạn thích sự đều đặn này. Bắt đầu phút thứ nhất nào!",
+   "bonusImpuls": "Muốn thêm năng lượng?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Đã đến chặng cuối của 90 ngày – hãy tận hưởng trọn vẹn bài tập hôm nay.",
+   "bonusImpuls": "Hoàn thành chuỗi của bạn!",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Xin chào! Bạn là huấn luyện viên giỏi nhất của chính mình. Mình chỉ ở đây để nhắc bạn thôi.",
+   "bonusImpuls": "Thêm một chút nhỏ nhé?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Thật vui vì bạn ở đây! Một phút tập trung để bạn thư thái suốt phần còn lại của ngày.",
+   "bonusImpuls": "Hôm nay có thời gian tập thêm?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Chào mừng! Ngày mai ta tròn 90 ngày – hôm nay hãy tận hưởng khoảnh khắc này đã.",
+   "bonusImpuls": "Người đạo diễn thầm lặng hỏi: bonus nhé?",
+   "phase": "P3: Thành thạo"
+  },
+  {
+   "begruessung": "Ngày 90 – thật là một thành tích! Người đạo diễn thầm lặng cúi chào sự bền bỉ của bạn. Vì phút tập hôm nay!",
+   "bonusImpuls": "Thưởng cho mình thêm chút thăng bằng!",
+   "phase": "P3: Thành thạo"
+  }
+ ],
+ "bonusUebungen": {
+  "zurueck-zur-mitte": {
+   "titel": "Trở về trung tâm",
+   "anleitung": "Xoay nhẹ thân trên sang phải, dừng lại rồi trở về giữa. Sau đó sang trái, dừng lại rồi trở về giữa."
+  },
+  "zehenspitze-an-die-stufe": {
+   "titel": "Mũi chân chạm bậc thang",
+   "anleitung": "Đứng trước một bậc thang an toàn. Chạm mép bậc bằng mũi chân phải rồi đưa chân về. Đổi sang chân trái, chạm mép bậc bằng mũi chân rồi đưa về. Không bước lên. Chỉ chạm thật chậm và cảm nhận khoảng cách tới bậc."
+  },
+  "weitblick": {
+   "titel": "Nhìn rộng",
+   "anleitung": "Nhìn ra cửa sổ hoặc vào một không gian thật rộng. Để ánh mắt mở rộng, không tìm kiếm hay tập trung vào gì. Cảm nhận cả những thứ ở rìa tầm nhìn: trên, dưới và hai bên. Giữ vài nhịp thở. Cuối cùng nhìn thẳng phía trước thật bình thản."
+  },
+  "weit-nah-blick": {
+   "titel": "Nhìn xa – nhìn gần",
+   "anleitung": "Rời mắt khỏi màn hình, nhìn một điểm ở xa. Để mắt nghỉ ở đó rồi nhìn lại màn hình. Lại nhìn xa. Xoay đầu chậm sang phải một chút, dừng, về giữa, sang trái và về giữa. Nhìn thẳng rồi nhìn ra xa. Thả lỏng mắt và trán."
+  },
+  "viererfolge": {
+   "titel": "Chuỗi bốn điểm",
+   "anleitung": "Dùng một tay lần lượt chạm chậm vào đùi phải, đùi trái, vai phải và vai trái. Sau đó đổi thứ tự: vai trái, đùi phải, vai phải, đùi trái. Đổi tay."
+  },
+  "treppe": {
+   "titel": "Cầu thang",
+   "anleitung": "Dừng lại một chút trước cầu thang. Cảm nhận hai bàn chân và đứng thẳng. Đi những bước đầu thật chậm, cảm nhận từng lần chân chạm bậc. Lên đến nơi thì đứng lại một chút, thở ra nhẹ nhàng rồi đi tiếp."
+  },
+  "summen": {
+   "titel": "Ngân nga",
+   "anleitung": "Ngồi thoải mái. Hít vào bình thường và khi thở ra thì ngân thật khẽ, ở mức dễ chịu. Cảm nhận rung động nhẹ ở mặt và cổ. Sau đó hít vào nhẹ nhàng và thở ra không thành tiếng."
+  },
+  "uebergang": {
+   "titel": "Chuyển tiếp",
+   "anleitung": "Đi ba bước chậm rồi dừng lại. Đứng yên một chút và cảm nhận khoảnh khắc dừng. Sau đó bước đi chậm và dừng đột ngột nhưng an toàn. Cảm nhận cơ thể hãm chuyển động lại thế nào."
+  },
+  "stabil-bewegt": {
+   "titel": "Vững mà vẫn chuyển động",
+   "anleitung": "Đứng thoải mái. Đưa hai tay chậm ra trước rồi ra sau. Cảm nhận bàn chân. Sau đó nâng tay phải, tay trái để yên. Hạ xuống và đổi bên. Cuối cùng buông hai tay và cảm nhận tư thế đứng."
+  },
+  "sitzend-drehen": {
+   "titel": "Xoay khi ngồi",
+   "anleitung": "Ngồi hoặc đứng. Xoay đầu chậm sang phải, dừng rồi về giữa. Sau đó sang trái rồi về giữa. Tiếp theo xoay thân trên theo một chút. Chuyển động chậm, không giật. Cuối cùng nhìn thẳng và cảm nhận chuyển động của thân trên trên khung chậu."
+  },
+  "sitzen-und-mitte": {
+   "titel": "Ngồi và trung tâm",
+   "anleitung": "Ngồi xuống. Dồn trọng lượng sang phải, ụ ngồi bên kia nhấc lên. Dừng vài giây rồi về giữa. Sau đó sang trái rồi về giữa. Tiếp theo dồn ra trước rồi về giữa, sau đó ra sau rồi về giữa."
+  },
+  "seufzer-loesen": {
+   "titel": "Thở dài thư giãn",
+   "anleitung": "Hít vào bình thường. Khi thở ra, để một tiếng thở dài thật khẽ thoát ra. Sau đó thở tiếp bình thường."
+  },
+  "seitenschritt": {
+   "titel": "Bước sang ngang",
+   "anleitung": "Bước chậm một bước nhỏ sang phải rồi về giữa. Sau đó sang trái rồi về giữa. Mắt vẫn nhìn thẳng. Cảm nhận việc dồn trọng lượng."
+  },
+  "schultern-heben-und-loesen": {
+   "titel": "Nâng vai và thả lỏng",
+   "anleitung": "Ngồi hoặc đứng, nâng chậm hai vai lên và giữ một chút. Khi thở ra để vai hạ xuống, không ấn xuống. Xoay vai chậm, nhỏ ra sau. Cảm nhận vai và gáy. Buông lỏng hai tay và cảm nhận sức nặng của chúng."
+  },
+  "schultern": {
+   "titel": "Vai",
+   "anleitung": "Đứng thoải mái. Đưa hai tay chậm ra trước và ra sau 3 lần. Sau đó nâng tay phải, tay trái để yên. Đổi bên. Buông hai tay và cảm nhận cơ thể cân bằng lại chuyển động."
+  },
+  "schulterkontakt": {
+   "titel": "Chạm vai",
+   "anleitung": "Đặt một tay lên vai đối diện. Cảm nhận hơi ấm và vuốt chậm trên vai. Đưa vai chậm ra trước rồi ra sau. Đổi bên. Sau đó đặt cả hai tay lên vai. Hít sâu tự nhiên và khi thở ra thì hạ tay xuống."
+  },
+  "schulterbewegung-mit-ausatmen": {
+   "titel": "Chuyển động vai theo hơi thở",
+   "anleitung": "Ngồi thẳng và thả lỏng vai. Khi hít vào nâng vai lên. Khi thở ra để vai hạ xuống."
+  },
+  "schritte-neben-eine-linie": {
+   "titel": "Bước hai bên một đường kẻ",
+   "anleitung": "Đi chậm dọc một đường kẻ tưởng tượng. Đặt một chân bên trái đường, chân kia bên phải. Sau đó đi lại bình thường."
+  },
+  "schritt-wechsel": {
+   "titel": "Đổi bước",
+   "anleitung": "Đứng dậy. Cảm nhận sàn nhà và đứng thẳng. Định hướng ánh mắt trong phòng. Đi ba bước chậm, dừng lại và thở ra nhẹ nhàng."
+  },
+  "schritt-und-blick": {
+   "titel": "Bước và nhìn",
+   "anleitung": "Đi chậm. Cứ mỗi bước thứ hai lại nhìn một điểm khác trong phòng: bên phải, giữa, bên trái và giữa. Giữ bước chân đều. Sau đó đi thẳng và cảm nhận cùng lúc bàn chân và ánh mắt."
+  },
+  "rueckwaerts-orientieren": {
+   "titel": "Định hướng khi lùi",
+   "anleitung": "Đứng thẳng. Bước một bước nhỏ ra sau rồi lại lên trước. Chú ý cảm giác bàn chân chạm sàn. Nếu chưa vững, hãy dùng chỗ vịn."
+  },
+  "rueckkehr-aus-der-kurve": {
+   "titel": "Trở lại sau khúc cua",
+   "anleitung": "Đi theo một đường cong rồi đi thẳng trở lại. Cảm nhận khoảnh khắc đổi hướng. Sau đó đứng lại."
+  },
+  "rechts-und-links": {
+   "titel": "Phải và trái",
+   "anleitung": "Đứng hoặc ngồi. Dồn trọng lượng chậm sang phải một chút. Chờ 3–5 giây rồi về giữa. Dồn sang trái rồi về giữa. Cảm nhận bàn chân, chân, khung chậu và cột sống thích nghi thế nào."
+  },
+  "pendeln-mit-arm": {
+   "titel": "Đung đưa cùng cánh tay",
+   "anleitung": "Đứng thẳng. Dồn trọng lượng chậm sang phải và trái, bàn chân giữ nguyên. Đưa tay phải chậm sang phải rồi về, sau đó tay trái sang trái rồi về. Để thân trên theo một chút. Trở về giữa."
+  },
+  "pendeln": {
+   "titel": "Đung đưa",
+   "anleitung": "Đứng thoải mái. Dồn trọng lượng chậm sang phải, dừng rồi về giữa. Sau đó sang trái rồi về giữa. Bàn chân giữ trên sàn, chuyển động nhỏ thôi. Sau đó đứng ở giữa và cảm nhận tư thế đứng."
+  },
+  "mitte": {
+   "titel": "Trung tâm",
+   "anleitung": "Đứng yên. Hai bàn chân song song, cảm nhận khoảng cách giữa chúng. Dồn trọng lượng sang phải một chút rồi về giữa. Sau đó sang trái rồi về giữa. Đứng ở đó và cảm nhận trung tâm của mình."
+  },
+  "mein-gleichgewichts-code": {
+   "titel": "Mã thăng bằng của tôi",
+   "anleitung": "Ngồi thoải mái. Cảm nhận bàn chân và mặt ghế. Ngồi thẳng dễ chịu. Nhớ lại một bài tập bạn đặc biệt thích, ví dụ một động tác bàn chân, một bài phối hợp hay một động tác tư thế nhỏ. Thực hiện bài đó."
+  },
+  "langsames-reiben-der-unterarme": {
+   "titel": "Xoa chậm cẳng tay",
+   "anleitung": "Vòng một tay quanh cổ tay bên kia. Vuốt chậm từ cổ tay lên khuỷu tay rồi trở lại. Đổi bên. Sau đó lắc nhẹ hai bàn tay và để chúng yên lại."
+  },
+  "langsamer-gang": {
+   "titel": "Đi chậm",
+   "anleitung": "Đứng thẳng. Bắt đầu bằng một bước thật nhỏ, rồi bước tiếp. Để 3 bước lớn dần một chút rồi lại nhỏ dần."
+  },
+  "langsam-starten": {
+   "titel": "Khởi đầu chậm",
+   "anleitung": "Đứng thẳng và cảm nhận hai bàn chân. Dồn trọng lượng lên chân phải và bước một bước nhỏ bằng chân trái. Rồi đến bên kia. Đi tiếp và cảm nhận mỗi bước bắt đầu bằng một lần dồn trọng lượng nhỏ."
+  },
+  "langsam-drehen": {
+   "titel": "Xoay chậm",
+   "anleitung": "Xoay thân trên chậm một chút sang phải, dừng rồi về giữa. Sau đó sang trái rồi về giữa. Đầu có thể xoay theo, tay có thể đung đưa nhẹ. Chuyển động không kéo căng, không lấy đà."
+  },
+  "kreuz-schritt-ueber-eine-linie": {
+   "titel": "Bước chéo qua đường kẻ",
+   "anleitung": "Tưởng tượng một đường kẻ trên sàn. Đi chậm bằng những bước chéo qua đường đó. Mỗi bước, bàn chân đều vượt qua đường kẻ. Không giữ thăng bằng trên đường kẻ."
+  },
+  "kopf-drehen-ohne-schultern": {
+   "titel": "Xoay đầu, vai giữ yên",
+   "anleitung": "Nhìn thẳng. Xoay đầu chậm sang phải một chút, dừng rồi về giữa. Sau đó sang trái rồi về giữa. Giữ vai yên nhất có thể. Cảm nhận chuyển động mà không xoay đầu quá xa."
+  },
+  "knie-nach-innen-und-aussen": {
+   "titel": "Đầu gối vào trong và ra ngoài",
+   "anleitung": "Đứng hoặc ngồi thoải mái. Đưa hai đầu gối chậm ra xa nhau một chút, dừng rồi về giữa. Bàn chân giữ nguyên. Cảm nhận đôi chân từ bàn chân đến hông."
+  },
+  "kaffeepause": {
+   "titel": "Giờ cà phê",
+   "anleitung": "Khi đang chờ cà phê hoặc trà, hãy tận dụng phút này. Dồn trọng lượng chậm sang phải, chờ 3–5 giây rồi về giữa. Sau đó sang trái rồi về giữa."
+  },
+  "handflaechen-drehen": {
+   "titel": "Xoay lòng bàn tay",
+   "anleitung": "Đưa hai tay thả lỏng ra trước người. Lòng bàn tay phải ngửa lên, tay trái úp xuống. Xoay chậm cả hai tay: tay phải úp xuống, tay trái ngửa lên."
+  },
+  "haende-und-atmung": {
+   "titel": "Bàn tay và hơi thở",
+   "anleitung": "Đặt một tay lên bụng dưới. Hít vào và thở ra bình thường. Để tay yên và cảm nhận chuyển động của hơi thở, không gượng ép."
+  },
+  "haende-hinter-dem-ruecken-verbinden": {
+   "titel": "Đưa hai tay ra sau lưng",
+   "anleitung": "Đưa hai tay ra sau lưng trong mức dễ chịu. Hai tay không cần chạm nhau. Giữ chúng lơ lửng một chút rồi đưa về phía trước."
+  },
+  "haende-auf-unterschiedliche-hoehen": {
+   "titel": "Hai tay ở độ cao khác nhau",
+   "anleitung": "Ngồi thẳng. Nâng tay phải ngang ngực, tay trái đặt trên đùi. Đổi bên thật chậm. Sau đó di chuyển hai tay cùng lúc: một tay lên, tay kia xuống. Đổi hướng. Cuối cùng đặt hai tay lên đùi."
+  },
+  "haende-auf-rippen": {
+   "titel": "Tay trên xương sườn",
+   "anleitung": "Ngồi xuống. Đặt hai tay hai bên xương sườn dưới. Thở bình thường. Cảm nhận lồng ngực chuyển động sang hai bên dưới tay mà không thay đổi hơi thở. Sau đó hạ tay xuống."
+  },
+  "hand-und-knie": {
+   "titel": "Tay và đầu gối",
+   "anleitung": "Đứng thẳng. Nâng đầu gối phải và chạm bằng tay trái. Hạ chân xuống. Nâng đầu gối trái và chạm bằng tay phải. Hạ chân xuống. Chuyển động chậm, thân trên thả lỏng. Mắt nhìn một điểm cố định phía trước."
+  },
+  "hand-hinter-den-ruecken": {
+   "titel": "Tay ra sau lưng",
+   "anleitung": "Đưa tay phải chậm ra sau lưng, chỉ trong mức thoải mái. Đưa về rồi đổi sang tay trái. Cảm nhận khả năng định hướng thay đổi thế nào khi bạn không nhìn thấy tay."
+  },
+  "hand-auf-brustkorb": {
+   "titel": "Tay trên ngực",
+   "anleitung": "Đặt một tay lên ngực. Xoay thân trên chậm sang phải, dừng rồi về. Sau đó sang trái rồi về. Cảm nhận chuyển động dưới bàn tay."
+  },
+  "guter-stand": {
+   "titel": "Đứng vững",
+   "anleitung": "Đặt hai bàn chân thoải mái trên sàn; khi ngồi thì đặt dưới đầu gối. Dồn trọng lượng chậm ra trước một chút, dừng rồi về giữa. Sau đó ra sau, dừng rồi về giữa. Cảm nhận cơ thể phản ứng với chuyển động."
+  },
+  "grosse-und-kleine-schritte": {
+   "titel": "Bước lớn và bước nhỏ",
+   "anleitung": "Đi trong phòng với bước nhỏ hơn bình thường, không lê chân. Cảm nhận nhịp đi thay đổi. Sau đó đi bước lớn hơn, rồi lại bước nhỏ. Trở về độ dài bước bình thường."
+  },
+  "grosse-sanfte-kurve": {
+   "titel": "Đường cong rộng và mềm",
+   "anleitung": "Đi chậm theo một đường cong rộng, không xoay đột ngột. Để hướng đi thay đổi từ từ. Cảm nhận bàn chân và thân trên cùng thích nghi. Sau đó đi thẳng trở lại."
+  },
+  "greifen-und-drehen": {
+   "titel": "Với và xoay",
+   "anleitung": "Đứng thẳng. Với chậm tới một đồ vật bên cạnh. Để thân trên theo một chút rồi trở về. Với sang bên kia rồi trở về. Lặp lại với sang phải và trái bằng động tác nhỏ hơn. Để cả cơ thể cùng tham gia. Bàn chân giữ vững."
+  },
+  "gleichgewicht-im-alltag": {
+   "titel": "Thăng bằng trong đời sống",
+   "anleitung": "Ngồi lên ghế và nhích ra phía trước một chút. Đặt hai bàn chân dưới người. Cảm nhận bàn chân và hơi nghiêng thân trên về trước. Đứng dậy thật chậm, không lấy đà. Đứng thẳng và giữ một chút. Ngồi xuống lại thật chậm. Cảm nhận chuyển động ở bàn chân, chân và lưng."
+  },
+  "gesicht-und-haende": {
+   "titel": "Khuôn mặt và bàn tay",
+   "anleitung": "Đặt hai tay lên má. Vuốt từ đó ra ngoài qua thái dương rồi trở lại. Sau đó đặt hai tay lên đùi."
+  },
+  "gesicht-und-blick": {
+   "titel": "Khuôn mặt và ánh nhìn",
+   "anleitung": "Vuốt nhẹ trán rồi đến má. Mở to mắt có chủ ý rồi để mắt trở lại bình thường. Nhìn ra xa rồi nhìn một điểm gần. Cuối cùng để ánh nhìn dịu lại."
+  },
+  "gesicht": {
+   "titel": "Khuôn mặt",
+   "anleitung": "Dùng đầu ngón tay vuốt chậm từ giữa trán ra ngoài. Xoay tròn nhẹ ở thái dương, không ấn. Vuốt má từ trong ra ngoài rồi dọc xương hàm. Thả lỏng hàm dưới. Đặt tay lên má một chút và cảm nhận hơi ấm."
+  },
+  "fussspitze-nach-innen": {
+   "titel": "Mũi chân hướng vào trong",
+   "anleitung": "Nhấc nhẹ một bàn chân. Xoay mũi chân vào trong một chút rồi về. Sau đó ra ngoài rồi về. Đổi chân. Cảm nhận sự thay đổi ở trục chân."
+  },
+  "fuesse-aktivieren": {
+   "titel": "Đánh thức bàn chân",
+   "anleitung": "Ngồi hoặc đứng. Nhấc nhẹ các ngón chân, dừng rồi đặt xuống. Sau đó nhấc nhẹ gót chân rồi đặt xuống. Chuyển động chậm. Cuối cùng đặt yên hai bàn chân."
+  },
+  "fuss-auf-die-stufe": {
+   "titel": "Đặt chân lên bậc",
+   "anleitung": "Đứng trước một bậc thang chắc chắn. Vịn tay vịn nếu cần. Đặt chậm một chân lên bậc và dồn nhẹ trọng lượng. Đưa chân về và đổi chân. Không bước lên. Cảm nhận trọng lượng thay đổi."
+  },
+  "finger-streichen": {
+   "titel": "Vuốt ngón tay",
+   "anleitung": "Dùng ngón cái vuốt chậm từ trên xuống các ngón cùng bàn tay: ngón trỏ, ngón giữa, ngón áp út, ngón út. Sau đó vuốt mặt dưới từng ngón. Đổi tay. Thả lỏng các ngón và cảm nhận cảm giác khác nhau của chúng."
+  },
+  "finger-zaehlen": {
+   "titel": "Đếm ngón tay",
+   "anleitung": "Dùng ngón cái lần lượt chạm các ngón cùng bàn tay mà không nhìn: ngón trỏ, ngón giữa, ngón áp út, ngón út. Đi ngược lại thứ tự. Cảm nhận ngón nào đang được chạm. Đổi tay."
+  },
+  "fersen-auseinander-fersen-zusammen": {
+   "titel": "Gót chân ra, gót chân vào",
+   "anleitung": "Ngồi hoặc đứng, hai bàn chân cạnh nhau. Giữ ngón chân trên sàn. Chỉ đưa gót chân chậm ra xa nhau một chút rồi về. Phần trước bàn chân giữ yên nhất có thể. Cảm nhận chuyển động ở chân. Đặt yên hai bàn chân và cảm nhận sàn nhà."
+  },
+  "ferse-und-ballen": {
+   "titel": "Gót và ức bàn chân",
+   "anleitung": "Đi chậm và cảm nhận bàn chân chạm sàn: trước tiên là gót, rồi lòng bàn chân, rồi ức bàn chân. Cảm nhận dáng đi mà không thay đổi nó."
+  },
+  "ferse-auf-die-stufe": {
+   "titel": "Gót chân lên bậc",
+   "anleitung": "Đứng quay lưng vào một bậc thang nếu làm vậy an toàn. Đưa chậm một chân ra sau và đặt gót lên bậc, ngón chân vẫn ở dưới. Đưa chân về và đổi bên. Không dồn trọng lượng lên bậc. Vịn tay vịn nếu cần."
+  },
+  "fernblick": {
+   "titel": "Nhìn xa",
+   "anleitung": "Nhìn ra cửa sổ hoặc ra xa. Để ánh mắt nghỉ ở đó, không tìm kiếm hay đọc. Cảm nhận khung cảnh ở rìa tầm nhìn. Nhìn lại vào phòng rồi lại nhìn ra xa."
+  },
+  "entspannte-schultern": {
+   "titel": "Vai thư giãn",
+   "anleitung": "Ngồi hoặc đứng thư thái. Cảm nhận bàn chân và điểm tiếp xúc với mặt ghế hoặc sàn. Cảm nhận cơ thể lúc này. Để vai hạ xuống một chút, không gượng ép thư giãn. Cảm nhận sàn nhà và những chuyển động nhỏ của cơ thể."
+  },
+  "ein-arm": {
+   "titel": "Một cánh tay",
+   "anleitung": "Ngồi hoặc đứng. Nâng tay phải lên một chút, đồng thời dồn nhẹ trọng lượng sang trái. Trở về giữa. Sau đó nâng tay trái và dồn nhẹ trọng lượng sang phải. Trở về giữa. Giữ chuyển động nhỏ và cảm nhận sự phối hợp."
+  },
+  "schritte-rueckwaerts": {
+   "titel": "Bước lùi",
+   "anleitung": "Đứng vững và nhìn thẳng. Nếu đủ chỗ, bước những bước nhỏ ra sau. Nếu chưa chắc chắn thì đứng lại và định hướng theo xung quanh. Quay người chậm rồi đi về phía trước."
+  },
+  "die-ungewohnte-seite": {
+   "titel": "Bên không quen",
+   "anleitung": "Cầm một đồ vật hằng ngày bằng tay bạn ít dùng. Thực hiện chậm một động tác nhỏ, ví dụ cầm bút lên rồi đặt xuống. Cảm nhận cả hai tay. Nhận ra tay nào quen thuộc hơn và động tác nào lạ lẫm."
+  },
+  "die-liegende-acht": {
+   "titel": "Số tám nằm ngang",
+   "anleitung": "Duỗi một tay thả lỏng ra trước. Dùng tay vẽ chậm hình số tám nằm ngang. Mắt dõi theo. Giữ đầu yên nhất có thể. Nếu thấy khó chịu thì vẽ nhỏ lại. Hạ tay xuống. Nhìn ra xa một chút rồi nhìn lại vào phòng."
+  },
+  "der-boden-unter-dir": {
+   "titel": "Mặt đất dưới chân",
+   "anleitung": "Đặt hai bàn chân trên sàn; khi ngồi thì đặt dưới đầu gối, khi đứng thì chia đều trọng lượng lên hai chân. Cảm nhận sức nặng mà không thay đổi nó. Sau đó dồn trọng lượng chậm ra trước một chút, dừng rồi về giữa. Rồi ra sau một chút và về giữa."
+  },
+  "der-bewusste-schritt": {
+   "titel": "Bước chân có ý thức",
+   "anleitung": "Đưa một chân chậm ra trước rồi về. Sau đó chân kia ra trước, dừng rồi về. Cảm nhận lúc đặt chân. Bước một bước nhỏ sang ngang, dừng rồi về giữa. Đổi bên và trở về."
+  },
+  "brustkorb-und-becken": {
+   "titel": "Lồng ngực và khung chậu",
+   "anleitung": "Đứng thẳng. Đẩy khung chậu thật nhẹ ra trước rồi về. Thả lỏng lồng ngực. Sau đó đẩy khung chậu nhẹ ra sau rồi về. Giữ chuyển động nhỏ."
+  },
+  "brustkorb-drehen": {
+   "titel": "Xoay lồng ngực",
+   "anleitung": "Đứng hoặc ngồi, thả lỏng hai tay. Xoay lồng ngực chậm sang phải một chút, dừng rồi về giữa. Sau đó sang trái rồi về giữa. Khung chậu giữ yên nhất có thể."
+  },
+  "blick-rechts-und-links": {
+   "titel": "Nhìn phải và trái",
+   "anleitung": "Nhìn thẳng, đầu giữ yên. Chỉ đưa mắt sang phải rồi về giữa. Sau đó sang trái rồi về giữa. Giờ để đầu xoay chậm theo: sang phải và về giữa, rồi sang trái và về giữa."
+  },
+  "bildschirm-blick": {
+   "titel": "Rời mắt khỏi màn hình",
+   "anleitung": "Rời mắt khỏi màn hình. Đứng dậy hoặc khi ngồi thì vươn người chậm theo nhiều hướng, không kéo căng. Ngồi lại thoải mái. Nhìn một thứ ở xa hơn. Chỉ di chuyển mắt: sang phải, trái, lên và xuống. Sau đó lại nhìn ra xa."
+  },
+  "aufstehen-aus-dem-sitzen": {
+   "titel": "Đứng lên từ tư thế ngồi",
+   "anleitung": "Ngồi xuống. Nghiêng nhẹ thân trên về trước và ấn bàn chân xuống sàn. Đứng dậy chậm và đứng vững một chút. Ngồi xuống lại thật chậm. Chú ý đầu gối hướng theo bàn chân."
+  },
+  "arme-oeffnen": {
+   "titel": "Mở rộng cánh tay",
+   "anleitung": "Đứng thoải mái. Đưa hai tay chậm sang hai bên, chỉ cao đến mức dễ chịu. Dừng lại. Đưa tay về. Sau đó đứng yên và cảm nhận sự thay đổi ở thân trên."
+  },
+  "am-arbeitsplatz": {
+   "titel": "Tại chỗ làm việc",
+   "anleitung": "Ngồi xuống và đặt hai bàn chân trên sàn. Thả lỏng vai. Giữ đầu thẳng trên thân và thả lỏng hai tay. Thở bình thường và cảm nhận mặt ghế. Xoay vai chậm, nhỏ ra sau, rồi ra trước và về. Đặt tay thả lỏng. Cảm nhận ghế, sàn và lưng."
+  }
+ }
+}
