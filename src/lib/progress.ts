@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react'
-import { PROGRAM_DAYS, SESSIONS_PER_DAY } from '../data/program'
+import { PROGRAM_DAYS, SESSIONS_PER_DAY, TEST_UNLOCK_ALL } from '../data/program'
 import { loadProfile, saveProfile } from './profile'
 import { pushCompletion } from '../services/remote'
 
@@ -83,7 +83,7 @@ export function useCompleted() {
   const waiting = firstOpen !== undefined && prev >= 1 && dayDates[prev] === today()
   const current = firstOpen === undefined ? PROGRAM_DAYS : waiting ? prev : firstOpen
   const statusOf = (day: number) =>
-    (day === current && !completed.includes(day) ? 'current' : completed.includes(day) ? 'completed' : 'locked') as 'completed' | 'current' | 'locked'
+    (TEST_UNLOCK_ALL && !completed.includes(day) ? 'current' : day === current && !completed.includes(day) ? 'current' : completed.includes(day) ? 'completed' : 'locked') as 'completed' | 'current' | 'locked'
   return {
     completed,
     current,

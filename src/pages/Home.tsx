@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Check, Lock } from 'lucide-react'
+import { Check, Lock, RefreshCw } from 'lucide-react'
 import mascot from '../assets/home/mascot.png'
 import { dayContent, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../data/program'
 import { loadProfile } from '../lib/profile'
@@ -19,6 +19,9 @@ export default function Home() {
 
   return (
     <div className="stagger flex flex-col gap-4 px-4 pt-2 pb-6">
+      <button type="button" onClick={() => window.location.reload()} className="flex h-10 items-center justify-center gap-2 self-end rounded-full border border-mint bg-white px-4 text-sm font-bold text-brand-deep shadow-sm">
+        <RefreshCw aria-hidden="true" className="size-4" />Aktualisieren
+      </button>
       {/* Vestibu's greeting of the day */}
       <section className="hero-card relative overflow-hidden rounded-3xl border border-[rgba(207,231,229,0.6)] p-[17px] shadow-[0_10px_25px_rgba(19,112,126,0.12)]" style={{ backgroundImage: 'linear-gradient(135deg, rgba(227,242,241,0.9) 0%, #fff 50%, #fffbeb 100%)' }}>
         <div className="flex items-start gap-3">
