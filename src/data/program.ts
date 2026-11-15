@@ -56,9 +56,18 @@ export const phaseIndex = (day: number) => Math.ceil(clampDay(day) / 30)
 
 // The bonus changes every 3 days (30 blocks). Michaela assigns it per day in the Excel;
 // until a block is filled, fall back to the library entry with the block's index so the flow stays testable.
+// Fixed pseudo-random order (seeded), so every user sees the same exercise in a block and it never repeats within 90 days.
+const shuffled = (() => {
+  const list = [...bonusExercises]
+  let seed = 90
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647 }
+  for (let i = list.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [list[i], list[j]] = [list[j], list[i]] }
+  return list
+})()
+
 export function bonusFor(day: number): BonusExercise | undefined {
   const d = clampDay(day)
   const blockStart = Math.floor((d - 1) / 3) * 3 + 1
   const pick = [d, blockStart, blockStart + 1, blockStart + 2].filter(n => n <= PROGRAM_DAYS).map(n => dayContent(n).bonusUebung).find(Boolean)
-  return bonusExercises.find(b => b.id === pick) ?? bonusExercises[(blockStart - 1) / 3]
+  return bonusExercises.find(b => b.id === pick) ?? shuffled[(blockStart - 1) / 3]
 }

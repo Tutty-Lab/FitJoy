@@ -73,7 +73,7 @@ export default function Workouts() {
                 <td className="px-4 py-3 whitespace-nowrap"><span className="font-semibold tabular-nums">Day {r.day}</span><p className="text-xs text-slate-500">{r.c.phase.slice(0, 2)}</p>{r.edited && <span className="mt-1 inline-block rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">Edited</span>}</td>
                 <td className="max-w-72 px-4 py-3"><p className="line-clamp-2">{r.c.begruessung}</p></td>
                 <td className="max-w-60 px-4 py-3">{r.c.affirmation ? <p className="line-clamp-2">{r.c.affirmation}</p> : <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-700">Missing</span>}</td>
-                <td className="px-4 py-3">{r.bonus?.titel}<p className="text-xs text-slate-500">{r.bonus?.kategorie}{!r.pickedBonus && (blockPicked(r.day) ? ' · from block' : ' · placeholder')}</p></td>
+                <td className="px-4 py-3">{r.bonus?.titel}<p className="text-xs text-slate-500">{r.bonus?.kategorie}{!r.pickedBonus && (blockPicked(r.day) ? ' · from block' : ' · random')}</p></td>
                 <td className="px-4 py-3 text-right"><Link to={`/admin/workouts/${r.day}`} className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 font-semibold text-brand-deep">Edit</Link></td>
               </tr>
             ))}
