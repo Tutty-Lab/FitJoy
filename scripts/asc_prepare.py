@@ -1,5 +1,8 @@
 """Prepare public German listing metadata; never submits a version for review."""
-from ios_ci_signing import api, token, BUNDLE
+from functools import lru_cache
+from ios_ci_signing import api, token as signing_token, BUNDLE
+
+token = lru_cache(maxsize=1)(signing_token)
 
 DESCRIPTION = '''Der Gleichgewichts-Code begleitet dich durch ein 90-Tage-Programm mit kurzen Gleichgewichtsübungen für deinen Alltag.
 

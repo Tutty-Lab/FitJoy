@@ -39,7 +39,8 @@ def command(*args, output=False):
 def token():
     import jwt  # PyJWT, installed by the workflow
     now = int(time.time())
-    claims = {'iss': os.environ['ASC_ISSUER_ID'], 'iat': now, 'exp': now + 900, 'aud': 'appstoreconnect-v1'}
+    # Allow for small clock differences between the CI runner and Apple's servers.
+    claims = {'iss': os.environ['ASC_ISSUER_ID'], 'iat': now - 60, 'exp': now + 900, 'aud': 'appstoreconnect-v1'}
     return jwt.encode(claims, os.environ['ASC_API_KEY_P8'], algorithm='ES256', headers={'kid': os.environ['ASC_KEY_ID']})
 
 
