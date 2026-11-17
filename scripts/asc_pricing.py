@@ -16,8 +16,10 @@ def configure():
             raise
         schedule = None
     if schedule:
-        print('An app price schedule already exists; leaving it unchanged:', schedule['id'])
-        return
+        manual = api('GET', f'/appPriceSchedules/{schedule["id"]}/manualPrices?include=appPricePoint&limit=200', auth)
+        if manual['data']:
+            print('App download pricing already has assigned price points; leaving it unchanged.')
+            return
     points = api('GET', f'/apps/{app_id}/appPricePoints?filter[territory]=DEU&limit=200', auth)
     while True:
         free = [point for point in points['data'] if Decimal(point['attributes']['customerPrice']) == 0]
