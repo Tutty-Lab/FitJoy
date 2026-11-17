@@ -1,4 +1,4 @@
-import { Button } from '../../components/ui/button'
+import { Button, buttonVariants } from '../../components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 import { useEffect, useState, type ReactNode } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
@@ -77,8 +77,8 @@ export default function WorkoutEdit() {
           <h1 className="text-xl font-semibold tracking-tight">{isBase ? `Base exercise · ${baseExercise.title}` : `Day ${day} · ${xl.phase}`}</h1>
         </div>
         <div className="flex gap-2">
-          {!isBase && day > 1 && <Button variant="outline" render={<Link to={`/admin/workouts/${day - 1}`} />}>← Day {day - 1}</Button>}
-          {!isBase && day < PROGRAM_DAYS && <Button variant="outline" render={<Link to={`/admin/workouts/${day + 1}`} />}>Day {day + 1} →</Button>}
+          {!isBase && day > 1 && <Link className={buttonVariants({ variant: 'outline' })} to={`/admin/workouts/${day - 1}`}>← Day {day - 1}</Link>}
+          {!isBase && day < PROGRAM_DAYS && <Link className={buttonVariants({ variant: 'outline' })} to={`/admin/workouts/${day + 1}`}>Day {day + 1} →</Link>}
           <Button variant="outline" onClick={reset} disabled={saving}>Reset to Excel</Button>
           <Button disabled={saving || uploading} onClick={save}>{saving ? 'Saving...' : saved ? 'Saved' : 'Save changes'}</Button>
         </div>
@@ -105,12 +105,13 @@ export default function WorkoutEdit() {
         <section className="grid items-start gap-5 rounded-xl border border-slate-200 bg-white p-5 md:grid-cols-2">
           <div className="flex flex-col gap-4">
             <Label text="Tägliche Begrüßung (Vestibu)" hint={changed('begruessung') && 'Overrides Excel'}><textarea rows={3} className={field} value={f.begruessung} onChange={e => set('begruessung', e.target.value)} /></Label>
-            <Label text="Deine Affirmation" hint={!f.affirmation ? 'Empty – the app shows “folgt bald”.' : changed('affirmation') && 'Overrides Excel'}><textarea rows={2} className={field} value={f.affirmation} onChange={e => set('affirmation', e.target.value)} /></Label>
+            <p className="text-sm text-slate-500">Custom texts are displayed verbatim in both languages. Automatic translation is not applied.</p>
+            <Label text="Deine Affirmation" hint={!f.affirmation ? 'Empty – the app shows a sample affirmation.' : changed('affirmation') && 'Overrides Excel'}><textarea rows={2} className={field} value={f.affirmation} onChange={e => set('affirmation', e.target.value)} /></Label>
             <Label text="Bonus-Minuten Impuls" hint={changed('bonusImpuls') && 'Overrides Excel'}><input className={field} value={f.bonusImpuls} onChange={e => set('bonusImpuls', e.target.value)} /></Label>
           </div>
           <div className="flex flex-col gap-4">
-            <Label text={`Bonus exercise · block days ${blockStart}–${blockStart + 2}`} hint="Set it on the first day of the block; the other two days follow unless they have their own pick.">
-              <select className={field} value={f.bonusUebung} onChange={e => set('bonusUebung', e.target.value)}>
+            <Label text={`Bonus exercise · block days ${blockStart}–${blockStart + 2}`} hint={day === blockStart ? 'The first valid pick in this block applies to all three days.' : <Link to={`/admin/workouts/${blockStart}`} className="underline">Edit the bonus on day {blockStart} for all three days.</Link>}>
+              <select className={field} disabled={day !== blockStart} value={day === blockStart ? f.bonusUebung : effectiveBonus?.id ?? ''} onChange={e => set('bonusUebung', e.target.value)}>
                 <option value="">— Not chosen (use block pick / placeholder) —</option>
                 {(['Gleichgewicht', 'Wahrnehmung', 'Entspannung', 'Bewegung'] as const).map(k => (
                   <optgroup key={k} label={k}>{bonusExercises.filter(b => b.kategorie === k).map(b => <option key={b.id} value={b.id}>{b.titel}{b.nr !== 'ohne Nummer' ? ` (#${b.nr})` : ''}</option>)}</optgroup>

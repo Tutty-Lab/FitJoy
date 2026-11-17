@@ -56,8 +56,8 @@ export const baseVideo = () => readOverrides()[0]?.video || baseExercise.video
 
 export const phaseIndex = (day: number) => Math.ceil(clampDay(day) / 30)
 
-// The bonus changes every 3 days (30 blocks). Michaela assigns it per day in the Excel;
-// until a block is filled, fall back to the library entry with the block's index so the flow stays testable.
+// The bonus changes every 3 days (30 blocks). First valid assignment in the block wins;
+// otherwise use the seeded random order approved by the customer.
 // Fixed pseudo-random order (seeded), so every user sees the same exercise in a block and it never repeats within 90 days.
 const shuffled = (() => {
   const list = [...bonusExercises]
@@ -70,8 +70,8 @@ const shuffled = (() => {
 export function bonusFor(day: number): BonusExercise | undefined {
   const d = clampDay(day)
   const blockStart = Math.floor((d - 1) / 3) * 3 + 1
-  const pick = [d, blockStart, blockStart + 1, blockStart + 2].filter(n => n <= PROGRAM_DAYS).map(n => dayContent(n).bonusUebung).find(Boolean)
-  return bonusExercises.find(b => b.id === pick) ?? shuffled[(blockStart - 1) / 3]
+  const assigned = [blockStart, blockStart + 1, blockStart + 2].map(n => bonusExercises.find(b => b.id === dayContent(n).bonusUebung)).find(Boolean)
+  return assigned ?? shuffled[(blockStart - 1) / 3]
 }
 
 // Until the customer delivers per-day affirmations, show a default so there is always a sentence to speak.
@@ -82,7 +82,7 @@ type ViDay = { begruessung: string; bonusImpuls: string; phase: string }
 const viDays = contentVi.tage as ViDay[]
 const viBonus = contentVi.bonusUebungen as Record<string, { titel: string; anleitung: string }>
 
-export const localDay = (day: number): ProgramDay => (lang === 'vi' ? { ...dayContent(day), ...viDays[clampDay(day) - 1] } : dayContent(day))
+export const localDay = (day: number): ProgramDay => (lang === 'vi' ? { ...dayContent(day), ...viDays[clampDay(day) - 1], ...pickText(readOverrides()[clampDay(day)]) } : dayContent(day))
 export function localBonusFor(day: number): BonusExercise | undefined {
   const b = bonusFor(day)
   return b && lang === 'vi' && viBonus[b.id] ? { ...b, ...viBonus[b.id] } : b

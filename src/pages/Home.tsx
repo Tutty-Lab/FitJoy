@@ -13,7 +13,7 @@ const phaseName = (phase: string) => phase.replace(/^P(\d):\s*/, `${L('Phase', '
 
 export default function Home() {
   const [p] = useState(() => loadProfile())
-  const { completed, current, waitingForTomorrow, finished } = useCompleted()
+  const { completed, current, finished } = useCompleted()
   const today = localDay(current)
   const done = sessionsDone(current)
   const pct = (completed.length / PROGRAM_DAYS) * 100
@@ -31,16 +31,15 @@ export default function Home() {
             <blockquote className="text-[17px] leading-6 font-bold text-slate-900">„{today.begruessung}“</blockquote>
           </figure>
         </div>
-        <div className="mt-3 flex items-center justify-between rounded-2xl border border-mint bg-white/90 px-[13px] py-2">
+        <div className="mt-3 rounded-2xl border border-mint bg-white/90 px-[13px] py-2">
           <span className="text-xs font-bold tracking-[0.4px] text-brand-ink uppercase">{phaseName(today.phase)}</span>
-          <span className="text-sm font-bold text-slate-500">{L('Tag', 'Ngày')} <b className="text-lg font-black text-brand-deep">{current}</b> / {PROGRAM_DAYS}</span>
         </div>
-        <div className="mt-3 h-4 overflow-hidden rounded-full bg-mint" role="progressbar" aria-valuemin={0} aria-valuemax={PROGRAM_DAYS} aria-valuenow={completed.length} aria-label={L('Fortschritt', 'Tiến trình')}>
-          <div className="relative h-full rounded-full bg-brand transition-all duration-700" style={{ width: `${Math.max(pct, 4)}%` }}><span className="absolute inset-x-2 top-1 h-1 rounded-full bg-white/40" /></div>
+        <div className="relative mt-3 h-8 overflow-hidden rounded-full bg-mint" role="progressbar" aria-valuemin={0} aria-valuemax={PROGRAM_DAYS} aria-valuenow={completed.length} aria-valuetext={L(`${completed.length} von ${PROGRAM_DAYS} Tagen abgeschlossen`, `Đã hoàn thành ${completed.length} trên ${PROGRAM_DAYS} ngày`)} aria-label={L('Fortschritt', 'Tiến trình')}>
+          <div className="h-full rounded-full bg-brand/25 transition-all duration-700 motion-reduce:transition-none" style={{ width: `${pct}%` }} />
+          <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-brand-deep">{L('Tag', 'Ngày')} {current} / {PROGRAM_DAYS}</span>
         </div>
         <div className="mt-3 rounded-2xl bg-mint/70 p-3">
-          <p className="text-xs font-bold tracking-wide text-brand-ink uppercase">♥ {L('Dein Gedanke für heute', 'Suy nghĩ của bạn hôm nay')}</p>
-          <p className="mt-1 text-[16px] leading-6 font-bold text-brand-deep">„{affirmationFor(current)}“</p>
+          <p className="text-[16px] leading-6 font-bold text-brand-deep">„{affirmationFor(current)}“</p>
         </div>
       </section>
 

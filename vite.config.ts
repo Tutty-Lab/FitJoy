@@ -20,8 +20,8 @@ export default defineConfig(({ mode }) => {
     injectRegister: 'auto',
     includeAssets: ['favicon.png', 'apple-touch-icon.png', 'icon.png', 'icon-512.png', 'icon-maskable.png'],
     manifest: {
-      name: 'FitJoy', short_name: 'FitJoy', lang: 'en',
-      description: 'Your 22-day balance program',
+      name: 'FitJoy', short_name: 'FitJoy', lang: 'de',
+      description: 'Dein 90-Tage-Programm für mehr Gleichgewicht',
       start_url: '/', scope: '/', display: 'standalone',
       background_color: '#fbf8f3', theme_color: '#fbf8f3',
       icons: [

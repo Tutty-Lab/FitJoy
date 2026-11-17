@@ -29,6 +29,7 @@ jobs:
         run: |
           npm ci
           npm run build
+          node scripts/check-program.cjs
           npx cap sync ios
         env:
           VITE_BACKEND: neon

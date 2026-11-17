@@ -47,7 +47,7 @@ export default function Workouts() {
         <div className="rounded-xl border border-slate-200 bg-white p-4">
           <p className="text-xs font-semibold text-slate-500 uppercase">Bonus blocks not chosen</p>
           <p className={`mt-1 text-2xl font-semibold ${missingBonus ? 'text-amber-600' : 'text-emerald-600'}`}>{missingBonus} / 30</p>
-          {missingBonus > 0 && <p className="text-xs text-slate-500">Placeholder from library order until chosen.</p>}
+          {missingBonus > 0 && <p className="text-xs text-slate-500">Seeded random exercise per 3-day block until chosen.</p>}
         </div>
       </section>
 

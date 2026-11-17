@@ -26,7 +26,6 @@ export default function DayReview() {
         </button>
         <div>
           <h1 className="font-bold">{L('Tag', 'Ngày')} {day}{day === current ? ` · ${L('heute', 'hôm nay')}` : ''}</h1>
-          <p className="text-xs text-slate-500">{c.phase.replace(/^P(\d):\s*/, `${L('Phase', 'Giai đoạn')} $1 · `)}</p>
         </div>
       </header>
 

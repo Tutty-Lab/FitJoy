@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
-import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, localDay, PRACTICE_SECONDS, SESSIONS_PER_DAY } from '../../data/program'
+import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, localDay, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { loadProfile } from '../../lib/profile'
 import { playChime } from '../../lib/reminders'
@@ -19,7 +19,10 @@ export default function WorkoutDetail() {
   const location = useLocation()
   const navigate = useNavigate()
   const { statusOf } = useCompleted()
-  const session = Math.min(SESSIONS_PER_DAY, Number(new URLSearchParams(location.search).get('session')) || sessionsDone(day) + 1)
+  const session = useMemo(() => {
+    const requested = Number(new URLSearchParams(location.search).get('session'))
+    return Number.isInteger(requested) && requested >= 1 && requested <= SESSIONS_PER_DAY ? requested : Math.min(SESSIONS_PER_DAY, sessionsDone(day) + 1)
+  }, [day, location.search])
   const content = localDay(day)
   const affirmation = affirmationFor(day)
   const video = baseVideo()
@@ -28,14 +31,20 @@ export default function WorkoutDetail() {
   const [remaining, setRemaining] = useState(PRACTICE_SECONDS)
   const [running, setRunning] = useState(false)
   const player = useRef<VideoPlayerHandle>(null)
+  const remainingMs = useRef(PRACTICE_SECONDS * 1000)
   const from = (location.state as { from?: string } | null)?.from
   const returnTo = from && /^\/days\/\d+$/.test(from) ? from : '/'
 
-  useEffect(() => { setStage('instructions'); setRemaining(PRACTICE_SECONDS); setRunning(false) }, [day, session])
+  useEffect(() => { setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false) }, [day, session])
   useEffect(() => {
     if (!running || (stage !== 'practice' && stage !== 'bonus')) return
-    const id = setInterval(() => setRemaining(n => Math.max(0, n - 1)), 1000)
-    return () => clearInterval(id)
+    const startedAt = performance.now()
+    const available = remainingMs.current
+    const id = setInterval(() => setRemaining(Math.ceil(Math.max(0, available - (performance.now() - startedAt)) / 1000)), 100)
+    return () => {
+      clearInterval(id)
+      remainingMs.current = Math.max(0, available - (performance.now() - startedAt))
+    }
   }, [running, stage])
   useEffect(() => {
     if (stage === 'practice' && remaining === 0) {
@@ -51,7 +60,18 @@ export default function WorkoutDetail() {
     }
   }, [remaining, stage, day, session])
 
-  if (!Number.isInteger(day) || day < 1 || day > 90 || statusOf(day) === 'locked') return <Navigate to="/" replace />
+  if (!Number.isInteger(day) || day < 1 || day > PROGRAM_DAYS || statusOf(day) === 'locked') return <Navigate to="/" replace />
+
+  const start = (next: 'practice' | 'bonus') => {
+    remainingMs.current = PRACTICE_SECONDS * 1000
+    setRemaining(PRACTICE_SECONDS)
+    setRunning(false)
+    setStage(next)
+  }
+  const togglePlayback = () => {
+    if (running) player.current?.pause()
+    else player.current?.play()
+  }
 
   const primary = clayPrimary
   const secondary = claySecondary
@@ -80,15 +100,15 @@ export default function WorkoutDetail() {
       <h2 className="text-xl font-black">{baseText.title}</h2>
       <ol className="list-decimal space-y-2 rounded-[28px] bg-white p-6 pl-10 border-2 border-mint shadow-[0_4px_0_#cfe7e5] text-[15px] leading-6">{baseText.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
       <Affirmation />
-      <button type="button" className={secondary} onClick={() => { player.current?.play() }}>{L('Anleitung noch einmal ansehen', 'Xem lại hướng dẫn')}</button>
-      <button type="button" className={primary} onClick={() => { setRemaining(PRACTICE_SECONDS); setStage('practice'); setRunning(true) }}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>
+      <button type="button" className={secondary} onClick={() => { player.current?.replay() }}>{L('Anleitung noch einmal ansehen', 'Xem lại hướng dẫn')}</button>
+      <button type="button" className={primary} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>
     </>}
 
     {stage === 'practice' && <>
       <div role="timer" aria-label={L('Verbleibende Zeit', 'Thời gian còn lại')} className="text-center text-6xl font-black tabular-nums text-brand-deep">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
-      <VideoPlayer key={`${day}:practice`} src={video} poster={poster} />
+      <VideoPlayer key={`${day}:practice`} ref={player} src={video} poster={poster} autoPlay loop onPlaybackChange={setRunning} />
       <Affirmation big />
-      <button type="button" className={primary} onClick={() => setRunning(v => !v)}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
+      <button type="button" className={primary} onClick={togglePlayback}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
     </>}
 
     {stage === 'done' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
@@ -96,20 +116,20 @@ export default function WorkoutDetail() {
       <h2 className="text-2xl font-black">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
       <p className="text-slate-600">{L(`Grundübung ${session}/${SESSIONS_PER_DAY} für Tag ${day} geschafft.`, `Đã xong bài cơ bản ${session}/${SESSIONS_PER_DAY} của ngày ${day}.`)}</p>
       {bonus && <p className="text-lg font-bold text-rust">{content.bonusImpuls || L('Lust auf deine Bonus-Minute?', 'Muốn tập thêm phút bonus không?')}</p>}
-      {bonus && <button type="button" className={primary} onClick={() => { setRemaining(PRACTICE_SECONDS); setStage('bonus'); setRunning(true) }}>{L('Bonus-Minute starten', 'Bắt đầu phút bonus')}</button>}
+      {bonus && <button type="button" className={primary} onClick={() => start('bonus')}>{L('Bonus-Minute starten', 'Bắt đầu phút bonus')}</button>}
       <button type="button" className={bonus ? 'h-10 text-sm font-semibold text-slate-500 underline' : secondary} onClick={() => navigate(returnTo, { replace: true })}>{bonus ? L('Heute nicht', 'Hôm nay thôi') : L('Zur Startseite', 'Về trang chủ')}</button>
     </section>}
 
     {stage === 'bonus' && bonus && <>
       <div role="timer" aria-label={L('Verbleibende Zeit', 'Thời gian còn lại')} className="text-center text-6xl font-black tabular-nums text-rust">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
-      <VideoPlayer key={`${day}:bonus`} src={video} poster={poster} />
+      <VideoPlayer key={`${day}:bonus`} ref={player} src={video} poster={poster} autoPlay loop onPlaybackChange={setRunning} />
       <section className="flex flex-col gap-3 rounded-[28px] bg-white p-5 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <p className="text-xs font-bold tracking-wide text-rust uppercase">Bonus · {categoryLabel(bonus.kategorie)}</p>
         <h2 className="text-xl font-black">{bonus.titel}</h2>
         <p className="text-[15px] leading-6">{bonus.anleitung}</p>
       </section>
       <Affirmation big />
-      <button type="button" className={primary} onClick={() => setRunning(v => !v)}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
+      <button type="button" className={primary} onClick={togglePlayback}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
     </>}
 
     {stage === 'bonusDone' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">

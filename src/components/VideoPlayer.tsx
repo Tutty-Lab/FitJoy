@@ -9,7 +9,7 @@ const fmt = (s: number) => {
   return `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`
 }
 
-export type VideoPlayerHandle = { play: () => void }
+export type VideoPlayerHandle = { play: () => void; pause: () => void; replay: () => void }
 
 type Props = {
   src: string
@@ -18,11 +18,14 @@ type Props = {
   // Fraction of the video (0–1) the viewer has reached at least once.
   onProgress?: (watched: number) => void
   onEnded?: () => void
+  autoPlay?: boolean
+  loop?: boolean
+  onPlaybackChange?: (playing: boolean) => void
 }
 
 // Native <video> with FitJoy-styled controls. Native playback keeps it light and works inside
 // the iOS WebView (Capacitor) with inline play and the system fullscreen player.
-export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPlayer({ src, poster, badge, onProgress, onEnded }, ref) {
+export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPlayer({ src, poster, badge, onProgress, onEnded, autoPlay = false, loop = false, onPlaybackChange }, ref) {
   const video = useRef<HTMLVideoElement>(null)
   const box = useRef<HTMLDivElement>(null)
   const maxSeen = useRef(0)
@@ -39,15 +42,27 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPl
     setStarted(false)
     setPlaying(false)
     setError(false)
-  }, [src])
+    setDuration(0)
+    if (autoPlay) play()
+  }, [src, autoPlay])
 
   const play = () => {
     const v = video.current
     if (!v) return
-    v.play().catch(() => setError(true))
+    v.play().catch((e: DOMException) => {
+      onPlaybackChange?.(false)
+      // Autoplay may require another tap; this is not a broken video.
+      if (e.name !== 'NotAllowedError' && e.name !== 'AbortError') setError(true)
+    })
   }
   useImperativeHandle(ref, () => ({
     play() {
+      box.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      play()
+    },
+    pause() { video.current?.pause(); onPlaybackChange?.(false) },
+    replay() {
+      if (video.current) video.current.currentTime = 0
       box.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       play()
     },
@@ -71,12 +86,16 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPl
         playsInline
         preload="metadata"
         muted={muted}
+        loop={loop}
         onClick={toggle}
         onPlay={() => {
-          setPlaying(true)
           setStarted(true)
         }}
-        onPause={() => setPlaying(false)}
+        onPlaying={() => { setPlaying(true); onPlaybackChange?.(true) }}
+        onPause={() => { setPlaying(false); onPlaybackChange?.(false) }}
+        onWaiting={() => { setPlaying(false); onPlaybackChange?.(false) }}
+        onSeeking={() => onPlaybackChange?.(false)}
+        onSeeked={e => { if (!e.currentTarget.paused && !e.currentTarget.ended && e.currentTarget.readyState >= 3) onPlaybackChange?.(true) }}
         onLoadedMetadata={e => setDuration(e.currentTarget.duration)}
         onTimeUpdate={e => {
           const v = e.currentTarget
@@ -87,10 +106,12 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPl
           }
         }}
         onEnded={() => {
+          setPlaying(false)
+          onPlaybackChange?.(false)
           onProgress?.(1)
           onEnded?.()
         }}
-        onError={() => setError(true)}
+        onError={() => { setError(true); setPlaying(false); onPlaybackChange?.(false) }}
         className="block aspect-video w-full object-cover"
       />
 
@@ -111,8 +132,9 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, Props>(function VideoPl
       )}
 
       {error && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/70 p-6 text-center text-sm text-white">
-          Video couldn’t load. Check your connection and try again.
+        <div role="alert" className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/80 p-6 text-center text-sm text-white">
+          <p>{L('Das Video konnte nicht geladen werden. Prüfe deine Verbindung und versuche es erneut.', 'Không tải được video. Kiểm tra kết nối rồi thử lại.')}</p>
+          <button type="button" onClick={() => { setError(false); video.current?.load(); play() }} className="rounded-xl bg-white px-4 py-2 font-bold text-brand-deep">{L('Erneut versuchen', 'Thử lại')}</button>
         </div>
       )}
 

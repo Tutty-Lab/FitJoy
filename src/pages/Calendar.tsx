@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Check, Lock, Star } from 'lucide-react'
+import { Check, Lock, Star, X } from 'lucide-react'
 import mascot from '../assets/home/mascot.png'
 import { localDay, PROGRAM_DAYS } from '../data/program'
 import { sessionsDone, useCompleted } from '../lib/progress'
@@ -16,10 +16,28 @@ const styles = {
 const phaseName = (phase: string) => phase.replace(/^P\d:\s*/, '')
 
 export default function Calendar() {
-  const [hint, setHint] = useState<number | null>(null)
+  const [hint, setHint] = useState<{ day: number } | null>(null)
   const { current, completed, waitingForTomorrow, statusOf } = useCompleted()
   const done = sessionsDone(current)
   const pct = Math.round((completed.length / PROGRAM_DAYS) * 100)
+  useEffect(() => {
+    if (!hint) return
+    const timer = window.setTimeout(() => setHint(null), 6000)
+    const dismiss = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setHint(null)
+    }
+    window.addEventListener('keydown', dismiss)
+    return () => {
+      window.clearTimeout(timer)
+      window.removeEventListener('keydown', dismiss)
+    }
+  }, [hint])
+  const hintText = (() => {
+    if (!hint) return ''
+    const n = hint.day - current
+    const after = waitingForTomorrow || done > 0 ? '' : L(' – nach deiner heutigen Grundübung', ' – sau bài tập cơ bản hôm nay')
+    return L(`Tag ${hint.day} öffnet sich frühestens ${n === 1 ? 'morgen' : `in ${n} Tagen`}${after}.`, `Ngày ${hint.day} sớm nhất sẽ mở ${n === 1 ? 'vào ngày mai' : `sau ${n} ngày`}${after}.`)
+  })()
 
   return (
     <div className="flex flex-col gap-5 px-4 pb-4">
@@ -59,7 +77,7 @@ export default function Calendar() {
                 return (
                   <li key={d}>
                     {s === 'locked' ? (
-                      <button type="button" onClick={() => setHint(hint === d ? null : d)} aria-label={`${label}: ${L('gesperrt', 'đang khóa')}`} className={`${bubble} ${styles.locked} cursor-pointer`}>
+                      <button type="button" onClick={() => setHint({ day: d })} aria-label={`${label}: ${L('gesperrt', 'đang khóa')}`} className={`${bubble} ${styles.locked} cursor-pointer`}>
                         {d}
                         <span aria-hidden="true" className="absolute -right-0.5 -bottom-0.5 flex size-5 items-center justify-center rounded-full border-2 border-white bg-slate-300 text-white"><Lock className="size-2.5" strokeWidth={3} /></span>
                       </button>
@@ -74,14 +92,21 @@ export default function Calendar() {
                 )
               })}
             </ol>
-            {hint !== null && days.includes(hint) && (
-              <p role="status" className="mt-4 rounded-2xl bg-amber-50 p-3 text-sm font-semibold text-amber-800">
-                {(() => { const n = hint - current; const after = waitingForTomorrow || done > 0 ? '' : L(' – nach deiner heutigen Grundübung', ' – sau bài tập cơ bản hôm nay'); return L(`Tag ${hint} öffnet sich frühestens ${n === 1 ? 'morgen' : `in ${n} Tagen`}${after}.`, `Ngày ${hint} sớm nhất sẽ mở ${n === 1 ? 'vào ngày mai' : `sau ${n} ngày`}${after}.`) })()}
-              </p>
-            )}
           </section>
         )
       })}
+      <div role="status" aria-live="polite" aria-atomic="true" className="pointer-events-none fixed bottom-[calc(7rem+env(safe-area-inset-bottom))] left-1/2 z-50 w-[calc(100%-2rem)] max-w-[400px] -translate-x-1/2">
+        {hint && (
+          <div key={hint.day} className="pointer-events-auto flex items-start gap-3 rounded-[24px] border-2 border-amber-400 bg-amber-50 p-3 text-amber-950 shadow-[0_5px_0_#d97706,0_12px_24px_#78350f20] animate-in fade-in slide-in-from-bottom-3 duration-200 motion-reduce:animate-none">
+            <span aria-hidden="true" className="mt-1 flex size-11 shrink-0 -rotate-6 items-center justify-center rounded-2xl border-2 border-amber-500 bg-amber-300 shadow-[0_3px_0_#d97706]"><Lock className="size-6" strokeWidth={3} /></span>
+            <div className="min-w-0 flex-1 py-1">
+              <p className="font-black">{L('Noch ein bisschen Geduld!', 'Chờ thêm chút nhé!')}</p>
+              <p className="mt-1 text-sm leading-5 font-semibold">{hintText}</p>
+            </div>
+            <button type="button" onClick={() => setHint(null)} aria-label={L('Schließen', 'Đóng')} className="flex size-11 shrink-0 items-center justify-center rounded-xl text-amber-900 hover:bg-amber-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800"><X aria-hidden="true" className="size-5" strokeWidth={3} /></button>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
