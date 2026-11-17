@@ -47,13 +47,19 @@ def token():
 def api(method, path, auth, body=None):
     request = urllib.request.Request(API + path, method=method, data=json.dumps(body).encode() if body else None,
                                      headers={'Authorization': 'Bearer ' + auth, 'Content-Type': 'application/json'})
-    try:
-        with urllib.request.urlopen(request) as response:
-            raw = response.read()
-            return json.loads(raw) if raw else {}
-    except urllib.error.HTTPError as error:
-        detail = json.loads(error.read() or b'{}').get('errors', [{}])[0].get('detail', '')
-        raise RuntimeError(f'App Store Connect {method} {path.split("?")[0]} failed ({error.code}): {detail}') from None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request) as response:
+                raw = response.read()
+                return json.loads(raw) if raw else {}
+        except urllib.error.HTTPError as error:
+            errors = json.loads(error.read() or b'{}').get('errors', [])
+            if method == 'GET' and error.code == 401 and attempt < 2:
+                time.sleep(1)
+                request.add_header('Authorization', 'Bearer ' + token())
+                continue
+            detail = '; '.join(e.get('detail', '') for e in errors)
+            raise RuntimeError(f'App Store Connect {method} {path.split("?")[0]} failed ({error.code}): {detail}') from None
 
 
 def ensure_profile(fingerprint):
