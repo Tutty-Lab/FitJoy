@@ -58,7 +58,17 @@ def api(method, path, auth, body=None):
                 time.sleep(1)
                 request.add_header('Authorization', 'Bearer ' + token())
                 continue
-            detail = '; '.join(e.get('detail', '') for e in errors)
+            def details(value):
+                if isinstance(value, dict):
+                    if value.get('detail'):
+                        yield value['detail']
+                    for key, nested in value.items():
+                        if key != 'detail':
+                            yield from details(nested)
+                elif isinstance(value, list):
+                    for nested in value:
+                        yield from details(nested)
+            detail = '; '.join(dict.fromkeys(details(errors)))
             raise RuntimeError(f'App Store Connect {method} {path.split("?")[0]} failed ({error.code}): {detail}') from None
 
 
