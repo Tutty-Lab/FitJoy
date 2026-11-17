@@ -16,7 +16,12 @@ def configure():
             raise
         schedule = None
     if schedule:
-        manual = api('GET', f'/appPriceSchedules/{schedule["id"]}/manualPrices?include=appPricePoint&limit=200', auth)
+        try:
+            manual = api('GET', f'/appPriceSchedules/{schedule["id"]}/manualPrices?include=appPricePoint&limit=200', auth)
+        except RuntimeError as error:
+            if 'failed (404)' not in str(error):
+                raise
+            manual = {'data': []}
         if manual['data']:
             print('App download pricing already has assigned price points; leaving it unchanged.')
             return
