@@ -14,7 +14,7 @@
 
 The user authorized using the existing Apple API key in `Tutty-Lab/nail-game` for FitJoy. The separate `.github/workflows/fitjoy-release.yml` there checks out a pinned FitJoy commit; it does not change the Nail Play build workflow. Apple credentials have not been copied into FitJoy.
 
-Modes: `inspect`, `build`, `prepare`, `pricing`, `submit`.
+Modes: `inspect`, `build`, `prepare`, `pricing`, `rights`, `screenshots`, `submit`.
 
 - `build`: builds, signs and uploads in the same job, then revokes its temporary distribution certificate. An IPA retained after cleanup cannot be uploaded later with that revoked certificate; rebuild and upload together.
 - `prepare`: sets German public metadata, category, privacy/support URLs, age declaration and selects processed build 141. Private review details were supplied through a temporary encrypted CI secret, then that secret was deleted after successful use. Existing review details remain in App Store Connect.
@@ -23,17 +23,17 @@ Modes: `inspect`, `build`, `prepare`, `pricing`, `submit`.
 
 ## Current blockers
 
-Apple rejected adding the version to the review submission because these fields are incomplete:
+The final validation run reports one remaining blocker:
 
-1. iPhone screenshots (accepted large-screen iPhone screenshot family).
-2. iPad 13-inch screenshots.
-3. Version copyright.
-4. App content-rights declaration.
-5. Published App Privacy answers. This is a web-only App Store Connect step; the official API has no endpoint for these declarations.
+1. Published App Privacy answers. This is a web-only App Store Connect step; the official API has no endpoint for these declarations.
 
-Pricing was also reported missing by the initial validation; it has since been configured successfully.
+German screenshots are uploaded and processed as complete: three iPhone captures at 1320×2868, three iPad captures at 2064×2752. The actual local app was captured using the existing demo account without changing its data. Source images are in `store/app-store/de-DE/`.
 
-Pending user replies: confirmation of `2026 Tutty Lab` and rights to supplied materials; permission to use Playwright for screenshots; opening the Fitjoy App Store Connect page in the visible Edge tab so the web-only privacy setup can continue.
+The owner confirmed `2026 Tutty Lab` and rights to the supplied materials; copyright and content-rights declaration have been saved. Pricing is free. Screenshot upload: https://github.com/Tutty-Lab/nail-game/actions/runs/44215911735
+
+Final validation (only App Privacy remains): https://github.com/Tutty-Lab/nail-game/actions/runs/44216145769
+
+Pending user action: select the Fitjoy App Store Connect tab in the visible Edge window so the web-only privacy setup can continue. The last observed Edge tab was WhatsApp; do not inspect unrelated conversations.
 
 Suggested privacy classifications must reflect the account name/identifier, optional stored email, exercise progress, self-test results and notes actually synchronized to the backend. These data support app functionality and are linked to accounts; no advertising/tracking SDK is present. Do not select “Data Not Collected.”
 
