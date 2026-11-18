@@ -97,7 +97,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="stagger flex flex-col gap-6 bg-[#fbf8f3] px-4 pt-2 pb-6">
+    <div className="stagger flex flex-col gap-6 px-4 pt-2 pb-6">
       <section className="relative overflow-hidden rounded-[28px] bg-white p-6 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <div className="absolute -top-12 -right-12 size-44 rounded-full bg-[rgba(255,227,211,0.3)] blur-[40px]" />
         <div className="absolute bottom-0 -left-8 size-36 rounded-full bg-[rgba(255,236,225,0.4)] blur-[24px]" />
@@ -115,6 +115,7 @@ export default function Profile() {
       </section>
 
       <div className="flex flex-col gap-4">
+        <Link to="/onboarding" className="game-secondary">{L('Streak-Ziel & Widget einrichten', 'Thiết lập mục tiêu streak & widget')}</Link>
         <Group title={L('Gleichgewicht', 'Thăng bằng')}>
           <Row
             onClick={redoBalanceCheck}

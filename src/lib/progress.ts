@@ -1,4 +1,6 @@
-import { useSyncExternalStore } from 'react'
+import { syncWidget } from './widget'
+import { dayKey, streakOf } from './game'
+import { useEffect, useSyncExternalStore } from 'react'
 import { PROGRAM_DAYS, SESSIONS_PER_DAY, TEST_UNLOCK_ALL } from '../data/program'
 import { loadProfile, saveProfile } from './profile'
 import { pushCompletion } from '../services/remote'
@@ -19,9 +21,10 @@ function read<T>(key: string): T[] {
 
 let cache = { completed: read<number>(KEY), dates: read<string>(DATES_KEY), version: 0 }
 
-export const today = () => new Date().toLocaleDateString('en-CA')
+export const today = () => dayKey(new Date())
 
 function notify() {
+  syncWidget(cache.dates, Boolean(loadProfile()?.username || loadProfile()?.email))
   cache = { ...cache, version: cache.version + 1 }
   listeners.forEach(l => l())
 }
@@ -50,25 +53,20 @@ export function reloadProgress() {
   notify()
 }
 
-// Consecutive days with a session, ending today (or yesterday, so the streak survives until tonight).
-function streakOf(dates: string[]) {
-  const set = new Set(dates)
-  const d = new Date()
-  if (!set.has(d.toLocaleDateString('en-CA'))) d.setDate(d.getDate() - 1)
-  let n = 0
-  while (set.has(d.toLocaleDateString('en-CA'))) {
-    n++
-    d.setDate(d.getDate() - 1)
-  }
-  return n
-}
-
 // Number of base-exercise sessions (0–3) done for a program day.
 export function sessionsDone(day: number) {
   return (loadProfile()?.lessonCompletions ?? []).filter(k => k.startsWith(`${day}:`)).length
 }
 
 export function useCompleted() {
+  useEffect(() => {
+    let last = today()
+    const refresh = () => { if (today() !== last) { last = today(); notify() } }
+    const interval = window.setInterval(refresh, 30000)
+    window.addEventListener('focus', refresh)
+    document.addEventListener('visibilitychange', refresh)
+    return () => { window.clearInterval(interval); window.removeEventListener('focus', refresh); document.removeEventListener('visibilitychange', refresh) }
+  }, [])
   const { completed, dates } = useSyncExternalStore(
     cb => {
       listeners.add(cb)
@@ -86,6 +84,7 @@ export function useCompleted() {
     (TEST_UNLOCK_ALL && !completed.includes(day) ? 'current' : day === current && !completed.includes(day) ? 'current' : completed.includes(day) ? 'completed' : 'locked') as 'completed' | 'current' | 'locked'
   return {
     completed,
+    dates,
     current,
     // True when today's door is done and tomorrow's is still closed.
     waitingForTomorrow: waiting,
@@ -98,8 +97,10 @@ export function useCompleted() {
 
 // Records one session (1–3) of the base exercise; the first one completes and dates the day.
 export function completeLesson(day: number, session: number) {
+  if (!Number.isInteger(day) || day < 1 || day > PROGRAM_DAYS || !Number.isInteger(session) || session < 1 || session > SESSIONS_PER_DAY) return
   const p = loadProfile()
   const key = `${day}:${Math.min(SESSIONS_PER_DAY, Math.max(1, session))}`
+  if (p?.lessonCompletions?.includes(key)) return
   const dayDates = { ...(p?.dayDates ?? {}) }
   dayDates[day] ??= today()
   saveProfile({ lessonCompletions: [...new Set([...(p?.lessonCompletions ?? []), key])], dayDates })

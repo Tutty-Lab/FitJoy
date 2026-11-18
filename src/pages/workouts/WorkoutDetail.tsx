@@ -1,3 +1,7 @@
+import Vestibu from '../../components/Vestibu'
+import { Confetti } from '../../components/GameEffects'
+import { playGameSound, unlockGameAudio } from '../../lib/gameAudio'
+import { StreakSummary } from '../Streak'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -5,8 +9,6 @@ import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
 import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, localDay, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { loadProfile } from '../../lib/profile'
-import { playChime } from '../../lib/reminders'
-import vestibuWelcome from '../../assets/home/vestibu-welcome.png'
 import poster from '../../assets/workouts/video-thumb.png'
 import { L } from '../../lib/i18n'
 import { clayPrimary, claySecondary } from '../../components/clay'
@@ -50,12 +52,12 @@ export default function WorkoutDetail() {
     if (stage === 'practice' && remaining === 0) {
       setRunning(false)
       completeLesson(day, session)
-      if (loadProfile()?.chime ?? true) playChime()
+      if (loadProfile()?.chime ?? true) playGameSound('success')
       setStage('done')
     }
     if (stage === 'bonus' && remaining === 0) {
       setRunning(false)
-      if (loadProfile()?.chime ?? true) playChime()
+      if (loadProfile()?.chime ?? true) playGameSound('success')
       setStage('bonusDone')
     }
   }, [remaining, stage, day, session])
@@ -63,6 +65,7 @@ export default function WorkoutDetail() {
   if (!Number.isInteger(day) || day < 1 || day > PROGRAM_DAYS || statusOf(day) === 'locked') return <Navigate to="/" replace />
 
   const start = (next: 'practice' | 'bonus') => {
+    unlockGameAudio()
     remainingMs.current = PRACTICE_SECONDS * 1000
     setRemaining(PRACTICE_SECONDS)
     setRunning(false)
@@ -88,7 +91,7 @@ export default function WorkoutDetail() {
   }
 
   return <div className="flex flex-col gap-5 px-4 pb-8">
-    <header className="sticky top-0 z-30 flex items-center gap-3 bg-canvas/95 py-2 backdrop-blur">
+    <header className="sticky top-0 z-30 flex items-center gap-3 bg-white/95 py-2 backdrop-blur">
       <button type="button" aria-label={L('Zurück', 'Quay lại')} title={L('Zurück', 'Quay lại')} onClick={back} className="flex size-11 shrink-0 items-center justify-center rounded-full border border-mint bg-white text-brand-deep shadow-sm focus-visible:outline-2 focus-visible:outline-brand">
         <ArrowLeft aria-hidden="true" className="size-5" />
       </button>
@@ -112,8 +115,9 @@ export default function WorkoutDetail() {
     </>}
 
     {stage === 'done' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
-      <img src={vestibuWelcome} alt="Vestibu" className="float size-32 object-contain" />
+      <Confetti /><Vestibu mood="celebrate" className="size-32" />
       <h2 className="text-2xl font-black">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
+        <StreakSummary />
       <p className="text-slate-600">{L(`Grundübung ${session}/${SESSIONS_PER_DAY} für Tag ${day} geschafft.`, `Đã xong bài cơ bản ${session}/${SESSIONS_PER_DAY} của ngày ${day}.`)}</p>
       {bonus && <p className="text-lg font-bold text-rust">{content.bonusImpuls || L('Lust auf deine Bonus-Minute?', 'Muốn tập thêm phút bonus không?')}</p>}
       {bonus && <button type="button" className={primary} onClick={() => start('bonus')}>{L('Bonus-Minute starten', 'Bắt đầu phút bonus')}</button>}
@@ -133,7 +137,7 @@ export default function WorkoutDetail() {
     </>}
 
     {stage === 'bonusDone' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
-      <img src={vestibuWelcome} alt="Vestibu" className="float size-32 object-contain" />
+      <Confetti /><Vestibu mood="celebrate" className="size-32" />
       <h2 className="text-2xl font-black">{L('Bonus geschafft!', 'Xong phút bonus!')}</h2>
       <p className="text-slate-600">{L('Eine Extra-Minute für dein Gleichgewicht.', 'Thêm một phút cho sự thăng bằng của bạn.')}</p>
       <button type="button" className={primary} onClick={() => navigate(returnTo, { replace: true })}>{L('Fertig', 'Xong')}</button>

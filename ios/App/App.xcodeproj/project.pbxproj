@@ -15,6 +15,9 @@
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
+F10000000000000000000001 = {isa = PBXBuildFile; fileRef = F10000000000000000000002; };
+F10000000000000000000003 = {isa = PBXBuildFile; fileRef = F10000000000000000000004; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+F10000000000000000000010 = {isa = PBXBuildFile; fileRef = F10000000000000000000011; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+F10000000000000000000002 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakWidget.swift; sourceTree = "<group>"; };
+F10000000000000000000004 = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StreakWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+F10000000000000000000011 = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vestibu.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,13 +44,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+F10000000000000000000009 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXFrameworksBuildPhase section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+F1000000000000000000000D = {isa = PBXCopyFilesBuildPhase; buildActionMask = 2147483647; dstPath = ""; dstSubfolderSpec = 13; files = (F10000000000000000000003, ); name = "Embed App Extensions"; runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXCopyFilesBuildPhase section */
+/* Begin PBXContainerItemProxy section */
+F1000000000000000000000E = {isa = PBXContainerItemProxy; containerPortal = 504EC2FC1FED79650016851F; proxyType = 1; remoteGlobalIDString = F10000000000000000000006; remoteInfo = StreakWidget; };
+/* End PBXContainerItemProxy section */
+/* Begin PBXTargetDependency section */
+F1000000000000000000000F = {isa = PBXTargetDependency; target = F10000000000000000000006; targetProxy = F1000000000000000000000E; };
+/* End PBXTargetDependency section */
 /* Begin PBXGroup section */
 		504EC2FB1FED79650016851F = {
 			isa = PBXGroup;
 			children = (
 				504EC3061FED79650016851F /* App */,
+                F10000000000000000000005,
 				504EC3051FED79650016851F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				504EC3041FED79650016851F /* App.app */,
+                F10000000000000000000004,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +90,7 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+F10000000000000000000005 = {isa = PBXGroup; children = (F10000000000000000000002, F10000000000000000000011, ); path = StreakWidget; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,10 +101,12 @@
 				504EC3001FED79650016851F /* Sources */,
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
+                F1000000000000000000000D,
 			);
 			buildRules = (
 			);
 			dependencies = (
+                F1000000000000000000000F,
 			);
 			name = App;
 			packageProductDependencies = (
@@ -95,6 +116,7 @@
 			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
 		};
+F10000000000000000000006 = {isa = PBXNativeTarget; buildConfigurationList = F10000000000000000000007; buildPhases = (F10000000000000000000008, F10000000000000000000009, F1000000000000000000000A, ); buildRules = (); dependencies = (); name = StreakWidget; productName = StreakWidget; productReference = F10000000000000000000004; productType = "com.apple.product-type.app-extension"; };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -128,6 +150,7 @@
 			projectRoot = "";
 			targets = (
 				504EC3031FED79650016851F /* App */,
+                F10000000000000000000006,
 			);
 		};
 /* End PBXProject section */
@@ -146,6 +169,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+F1000000000000000000000A = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (F10000000000000000000010, ); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -157,6 +181,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+F10000000000000000000008 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (F10000000000000000000001, ); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -291,6 +316,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+                CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MNN7PQYBD;
 				CURRENT_PROJECT_VERSION = 1;
@@ -314,6 +340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+                CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -334,6 +361,8 @@
 			};
 			name = Release;
 		};
+F1000000000000000000000B = {isa = XCBuildConfiguration; buildSettings = {APPLICATION_EXTENSION_API_ONLY = YES; CODE_SIGN_ENTITLEMENTS = StreakWidget/StreakWidget.entitlements; CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = 5MNN7PQYBD; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_FILE = StreakWidget/Info.plist; INFOPLIST_KEY_CFBundleDisplayName = "FitJoy Streak"; IPHONEOS_DEPLOYMENT_TARGET = 17.0; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks"; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.tuttylab.fitjoy.streak; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SKIP_INSTALL = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
+F1000000000000000000000C = {isa = XCBuildConfiguration; buildSettings = {APPLICATION_EXTENSION_API_ONLY = YES; CODE_SIGN_ENTITLEMENTS = StreakWidget/StreakWidget.entitlements; CODE_SIGN_STYLE = Manual; CODE_SIGN_IDENTITY = "Apple Distribution"; PROVISIONING_PROFILE_SPECIFIER = "FitJoy Streak App Store CI"; DEVELOPMENT_TEAM = 5MNN7PQYBD; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_FILE = StreakWidget/Info.plist; INFOPLIST_KEY_CFBundleDisplayName = "FitJoy Streak"; IPHONEOS_DEPLOYMENT_TARGET = 17.0; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks"; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.tuttylab.fitjoy.streak; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SKIP_INSTALL = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -355,6 +384,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+F10000000000000000000007 = {isa = XCConfigurationList; buildConfigurations = (F1000000000000000000000B, F1000000000000000000000C, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */

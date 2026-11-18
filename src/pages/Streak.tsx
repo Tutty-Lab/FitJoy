@@ -1,0 +1,25 @@
+import Vestibu from '../components/Vestibu'
+import { StreakFlame, Confetti } from '../components/GameEffects'
+import { playGameSound } from '../lib/gameAudio'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ArrowLeft, Check } from 'lucide-react'
+import { useCompleted } from '../lib/progress'
+import { dayKey } from '../lib/game'
+import { loadProfile } from '../lib/profile'
+import { L, locale } from '../lib/i18n'
+
+export function StreakSummary() {
+  const { streak, doneToday } = useCompleted()
+  let dates: string[] = []
+  try { dates = JSON.parse(localStorage.getItem('fitjoy.activeDates') ?? '[]') } catch { /* empty history */ }
+  const goal = loadProfile()?.streakGoal ?? 7
+  return <><p className="game-speech mb-3 text-center font-bold">{doneToday ? L('Deine Flamme leuchtet. Gut gemacht!', 'Ngọn lửa của bạn đang tỏa sáng. Giỏi lắm!') : L('Ein kleiner Schritt. Jeden Tag.', 'Một bước nhỏ. Mỗi ngày.')}</p><div className="relative mx-auto w-52"><Vestibu mood={doneToday ? 'celebrate' : 'idle'} className="absolute -right-4 bottom-0 w-24 z-10" /><div className={`game-flame ${doneToday ? 'lit' : ''}`}><StreakFlame lit={doneToday} /></div></div><h1 className="text-center text-5xl font-black text-orange-500">{streak}</h1><p className="text-center text-xl font-black">{L('Tage im Streak', 'ngày liên tiếp')}</p><div className="game-week">{Array.from({length:7}, (_, i) => { const date = new Date(); date.setDate(date.getDate() - ((date.getDay() + 6) % 7) + i); const active = dates.includes(dayKey(date)); return <div key={i}><span>{date.toLocaleDateString(locale, {weekday:'narrow'})}</span><span className={active ? 'active' : ''}>{active ? <Check size={18} /> : '·'}</span></div> })}</div><p className="text-center text-slate-600">{doneToday ? L('Flamme an! Du hast heute für dich geübt.', 'Lửa đã cháy! Hôm nay bạn đã tập rồi.') : L('Eine Minute heute hält deine Flamme am Leben.', 'Một phút hôm nay để giữ ngọn lửa của bạn.')} {L(`Dein Ziel: ${goal} Tage.`, `Mục tiêu: ${goal} ngày.`)}</p></>
+}
+
+export default function Streak() {
+  const [revealed, setRevealed] = useState(false)
+  const { doneToday } = useCompleted()
+  const reveal = () => { if (!revealed) { playGameSound(doneToday ? 'streak' : 'tap'); setRevealed(true) } }
+  return <div className={`game-onboarding ${revealed ? '' : 'streak-night'}`}><Link to="/" aria-label={L('Zurück', 'Quay lại')} className="p-3 self-start"><ArrowLeft /></Link><main className="flex flex-1 flex-col justify-center gap-5" onTouchStart={e => { e.currentTarget.dataset.y = String(e.touches[0].clientY) }} onTouchEnd={e => { if (Number(e.currentTarget.dataset.y) - e.changedTouches[0].clientY > 40) reveal() }}>{revealed ? <>{doneToday && <Confetti />}<StreakSummary /></> : <><div className="game-flame"><StreakFlame /></div><h1 className="text-center text-3xl font-black">{L('Deine kleine Flamme.', 'Ngọn lửa nhỏ của bạn.')}</h1><p className="text-center">{L('Nach oben wischen oder tippen, um deinen Streak zu sehen.', 'Vuốt lên hoặc chạm để xem chuỗi ngày.')}</p></>}</main><footer className="game-footer">{revealed ? <Link className="game-primary block text-center" to="/">{L('Weiter', 'Tiếp tục')}</Link> : <button className="game-primary w-full" onClick={reveal}>{L('Streak ansehen', 'Xem chuỗi ngày')}</button>}</footer></div>
+}

@@ -1,3 +1,4 @@
+import { syncWidget } from '../lib/widget'
 import { api, apiEnabled, getToken, setToken } from '../lib/api'
 
 // Server adapter (FitJoy API on Vercel + Neon). The app reads from localStorage as a fast local
@@ -32,6 +33,7 @@ export function cacheUser(user: ServerUser, completed: number[] = [], dates: str
   localStorage.setItem(KEYS.profile, JSON.stringify({ ...user.data, photos: local.photos, name: user.name, username: user.username ?? '', email: user.email ?? '', role: user.role, access: user.access }))
   localStorage.setItem(KEYS.completed, JSON.stringify(completed))
   localStorage.setItem(KEYS.dates, JSON.stringify(dates))
+  syncWidget(dates, true)
 }
 
 // Refreshes the cache from the server. Returns the user's role, or null if signed out.
@@ -67,5 +69,6 @@ export async function pushCatalog(day: number, data: object | null) {
 }
 
 export function clearLocalUser() {
+  syncWidget([], false)
   for (const k of [KEYS.profile, KEYS.completed, KEYS.dates]) localStorage.removeItem(k)
 }

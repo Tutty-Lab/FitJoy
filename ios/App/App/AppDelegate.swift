@@ -1,12 +1,17 @@
 import UIKit
 import Capacitor
+import WidgetKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    static var pendingStreak = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        if let url = launchOptions?[.url] as? URL, url.scheme == "fitjoy", url.host == "streak" {
+            AppDelegate.pendingStreak = true
+        }
         // Override point for customization after application launch.
         return true
     }
@@ -36,6 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         // Called when the app was launched with a url. Feel free to add additional processing here,
         // but if you want the App API to support tracking app url opens, make sure to keep this call
+        if url.scheme == "fitjoy", url.host == "streak" {
+            AppDelegate.pendingStreak = true
+            if let controller = window?.rootViewController as? CAPBridgeViewController {
+                controller.webView?.evaluateJavaScript("window.dispatchEvent(new Event('fitjoy:streak'))", completionHandler: nil)
+            }
+            return true
+        }
         return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
     }
 
@@ -46,4 +58,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return ApplicationDelegateProxy.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
     }
 
+}
+
+@objc(StreakWidgetPlugin)
+public class StreakWidgetPlugin: CAPPlugin, CAPBridgedPlugin {
+    public let identifier = "StreakWidgetPlugin"
+    public let jsName = "StreakWidget"
+    public let pluginMethods: [CAPPluginMethod] = [CAPPluginMethod(name: "update", returnType: CAPPluginReturnPromise), CAPPluginMethod(name: "getLaunchRoute", returnType: CAPPluginReturnPromise)]
+    @objc func getLaunchRoute(_ call: CAPPluginCall) {
+        let pending = AppDelegate.pendingStreak
+        AppDelegate.pendingStreak = false
+        call.resolve(pending ? ["route": "/streak"] : [:])
+    }
+    @objc func update(_ call: CAPPluginCall) {
+        let defaults = UserDefaults(suiteName: "group.com.tuttylab.fitjoy")
+        defaults?.set(call.getArray("dates", String.self) ?? [], forKey: "activeDates")
+        defaults?.set(call.getBool("signedIn") ?? false, forKey: "signedIn")
+        defaults?.set(call.getString("language") ?? "de", forKey: "language")
+        WidgetCenter.shared.reloadAllTimelines()
+        call.resolve()
+    }
+}
+
+@objc(FitJoyBridgeViewController)
+class FitJoyBridgeViewController: CAPBridgeViewController {
+    override func capacitorDidLoad() {
+        bridge?.registerPluginInstance(StreakWidgetPlugin())
+    }
 }

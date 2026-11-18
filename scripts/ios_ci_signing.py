@@ -72,25 +72,25 @@ def api(method, path, auth, body=None):
             raise RuntimeError(f'App Store Connect {method} {path.split("?")[0]} failed ({error.code}): {detail}') from None
 
 
-def ensure_profile(fingerprint):
+def ensure_profile(fingerprint, bundle=BUNDLE, name=NAME, profile_name=PROFILE):
     auth = token()
-    found = api('GET', f'/bundleIds?filter[identifier]={BUNDLE}&filter[platform]=IOS', auth)['data']
-    found = [b for b in found if b['attributes']['identifier'] == BUNDLE]
+    found = api('GET', f'/bundleIds?filter[identifier]={bundle}&filter[platform]=IOS', auth)['data']
+    found = [b for b in found if b['attributes']['identifier'] == bundle]
     if found:
         bundle_id = found[0]['id']
     else:
-        body = {'data': {'type': 'bundleIds', 'attributes': {'identifier': BUNDLE, 'name': NAME, 'platform': 'IOS'}}}
+        body = {'data': {'type': 'bundleIds', 'attributes': {'identifier': bundle, 'name': name, 'platform': 'IOS'}}}
         bundle_id = api('POST', '/bundleIds', auth, body)['data']['id']
-        print('Registered bundle ID ' + BUNDLE)
+        print('Registered bundle ID ' + bundle)
     certificates = api('GET', '/certificates?filter[certificateType]=DISTRIBUTION,IOS_DISTRIBUTION&limit=200', auth)['data']
     match = [c for c in certificates
              if hashlib.sha1(base64.b64decode(c['attributes']['certificateContent'])).hexdigest().upper() == fingerprint]
     if not match:
         raise RuntimeError('The imported distribution certificate is not registered for this team')
     # Recreate the CI profile so it always carries the current certificate.
-    for profile in api('GET', f'/profiles?filter[name]={urllib.parse.quote(PROFILE)}&limit=50', auth)['data']:
+    for profile in api('GET', f'/profiles?filter[name]={urllib.parse.quote(profile_name)}&limit=50', auth)['data']:
         api('DELETE', '/profiles/' + profile['id'], auth)
-    body = {'data': {'type': 'profiles', 'attributes': {'name': PROFILE, 'profileType': 'IOS_APP_STORE'},
+    body = {'data': {'type': 'profiles', 'attributes': {'name': profile_name, 'profileType': 'IOS_APP_STORE'},
                      'relationships': {'bundleId': {'data': {'type': 'bundleIds', 'id': bundle_id}},
                                        'certificates': {'data': [{'type': 'certificates', 'id': match[0]['id']}]}}}}
     return base64.b64decode(api('POST', '/profiles', auth, body)['data']['attributes']['profileContent'])
@@ -139,25 +139,30 @@ def install():
     if not fingerprint:
         raise RuntimeError('No distribution identity available for signing')
 
-    profile_path = ROOT / 'FitJoy.mobileprovision'
-    profile_path.write_bytes(ensure_profile(fingerprint.upper()))
-    data = plistlib.loads(command('security', 'cms', '-D', '-i', str(profile_path), output=True))
-    if data['TeamIdentifier'] != [TEAM] or data['Entitlements']['application-identifier'] != TEAM + '.' + BUNDLE:
-        raise RuntimeError('Provisioning profile belongs to another team/application')
     installed = []
-    for directory in [Path.home() / 'Library/MobileDevice/Provisioning Profiles',
-                      Path.home() / 'Library/Developer/Xcode/UserData/Provisioning Profiles']:
-        directory.mkdir(parents=True, exist_ok=True)
-        target = directory / (data['UUID'] + '.mobileprovision')
-        shutil.copyfile(profile_path, target)
-        installed.append(str(target))
-    (ROOT / 'installed-profiles.json').write_text(json.dumps(installed))
-    (ROOT / 'profile.json').write_text(json.dumps({'name': data['Name'], 'team': TEAM, 'uuid': data['UUID']}))
+    export_profiles = {}
+    for bundle, name, profile_name in [(BUNDLE, NAME, PROFILE),
+                                      (BUNDLE + '.streak', 'FitJoy Streak', 'FitJoy Streak App Store CI')]:
+        profile_path = ROOT / (name.replace(' ', '') + '.mobileprovision')
+        profile_path.write_bytes(ensure_profile(fingerprint.upper(), bundle, name, profile_name))
+        data = plistlib.loads(command('security', 'cms', '-D', '-i', str(profile_path), output=True))
+        if data['TeamIdentifier'] != [TEAM] or data['Entitlements']['application-identifier'] != TEAM + '.' + bundle:
+            raise RuntimeError('Provisioning profile belongs to another team/application')
+        if 'group.com.tuttylab.fitjoy' not in data['Entitlements'].get('com.apple.security.application-groups', []):
+            raise RuntimeError('Enable group.com.tuttylab.fitjoy for ' + bundle + ' in Apple Developer before signing')
+        for directory in [Path.home() / 'Library/MobileDevice/Provisioning Profiles',
+                          Path.home() / 'Library/Developer/Xcode/UserData/Provisioning Profiles']:
+            directory.mkdir(parents=True, exist_ok=True)
+            target = directory / (data['UUID'] + '.mobileprovision')
+            shutil.copyfile(profile_path, target)
+            installed.append(str(target))
+            (ROOT / 'installed-profiles.json').write_text(json.dumps(installed))
+        export_profiles[bundle] = data['Name']
     keys = ROOT / 'private_keys'
     keys.mkdir(mode=0o700)
     (keys / ('AuthKey_' + os.environ['ASC_KEY_ID'] + '.p8')).write_text(os.environ['ASC_API_KEY_P8'])
     export = {'method': 'app-store-connect', 'teamID': TEAM, 'signingStyle': 'manual', 'signingCertificate': 'Apple Distribution',
-              'provisioningProfiles': {BUNDLE: data['Name']}, 'uploadSymbols': True, 'manageAppVersionAndBuildNumber': False}
+              'provisioningProfiles': export_profiles, 'uploadSymbols': True, 'manageAppVersionAndBuildNumber': False}
     (ROOT / 'ExportOptions.plist').write_bytes(plistlib.dumps(export))
     print('Installed isolated distribution identity and App Store profile for ' + BUNDLE)
 

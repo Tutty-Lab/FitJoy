@@ -34,7 +34,7 @@ export default function Login() {
   }
 
   return (
-    <div className="stagger mx-auto min-h-dvh max-w-[440px] bg-[#fbf8f3] px-4 pt-[calc(env(safe-area-inset-top)+64px)] pb-9">
+    <div className="stagger mx-auto min-h-dvh max-w-[440px] bg-white px-4 pt-[calc(env(safe-area-inset-top)+64px)] pb-9">
       <section className="relative mb-4 flex flex-col gap-2 overflow-hidden rounded-[28px] border-2 border-mint bg-[#f3f6f5] p-4 shadow-[0_4px_0_#cfe7e5]">
         <div className="absolute -top-8 -right-8 size-36 rounded-full bg-[#ffe3d3] opacity-40 blur-[40px]" />
         <div className="absolute -bottom-6 -left-6 size-32 rounded-full bg-[#ffece1] opacity-30 blur-[24px]" />

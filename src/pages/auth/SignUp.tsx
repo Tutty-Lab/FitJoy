@@ -58,13 +58,13 @@ export default function SignUp() {
     if (!res.ok) return setError(res.error)
     const invite = new URLSearchParams(location.search).get('invite')
     if (invite) { try { await api('redeem', { method: 'POST', body: { code: invite } }) } catch (e) { return setError(e instanceof Error ? e.message : L('Einladung konnte nicht eingelöst werden', 'Không thể dùng mã mời')) } }
-    navigate('/check/start')
+    navigate('/onboarding')
   }
 
   const okMark = <img src={icOk} alt="" style={{ width: 17.583, height: 14.021 }} />
 
   return (
-    <div className="stagger mx-auto min-h-dvh max-w-[440px] bg-[#fbf8f3] px-4 pt-[calc(env(safe-area-inset-top)+64px)] pb-8">
+    <div className="stagger mx-auto min-h-dvh max-w-[440px] bg-white px-4 pt-[calc(env(safe-area-inset-top)+64px)] pb-8">
       <section className="relative mt-2 flex flex-col gap-2 overflow-hidden rounded-[28px] bg-white p-6 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <div className="absolute -right-6 -bottom-6 size-32 rounded-full bg-[rgba(255,227,211,0.3)] blur-[40px]" />
         <div className="absolute -top-6 -left-6 size-28 rounded-full bg-[rgba(255,236,225,0.4)] blur-[24px]" />

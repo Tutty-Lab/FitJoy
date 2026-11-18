@@ -13,7 +13,7 @@ export default function Activate() {
   catch(e) {setError(e instanceof Error?e.message:L('Aktivierung fehlgeschlagen', 'Kích hoạt không thành công'))}
   finally {setBusy(false)}
  }
- return <main className="mx-auto flex min-h-dvh max-w-[440px] flex-col gap-5 bg-canvas px-5 py-16">
+ return <main className="mx-auto flex min-h-dvh max-w-[440px] flex-col gap-5 bg-white px-5 py-16">
  <h1 className="text-2xl font-bold">{L('Einladungscode eingeben', 'Nhập mã mời')}</h1>
  <form onSubmit={submit} className="flex flex-col gap-4 rounded-[28px] bg-white p-6 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
  <label className="text-sm font-semibold">{L('Einladungscode', 'Mã mời')}<input aria-label={L('Einladungscode', 'Mã mời')} value={code} onChange={e=>setCode(e.target.value)} autoCapitalize="characters" autoComplete="off" spellCheck={false} required maxLength={100} className="mt-2 w-full rounded-xl bg-canvas p-3 font-mono" /></label>

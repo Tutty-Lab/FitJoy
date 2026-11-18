@@ -20,7 +20,7 @@ export default function DayReview() {
 
   return (
     <div className="flex flex-col gap-4 px-4 pb-8">
-      <header className="sticky top-0 z-30 flex items-center gap-3 bg-canvas/95 py-2 backdrop-blur">
+      <header className="sticky top-0 z-30 flex items-center gap-3 bg-white/95 py-2 backdrop-blur">
         <button type="button" aria-label={L('Zurück', 'Quay lại')} title={L('Zurück', 'Quay lại')} onClick={() => navigate('/', { replace: true })} className="flex size-11 shrink-0 items-center justify-center rounded-full border border-mint bg-white text-brand-deep shadow-sm">
           <ArrowLeft aria-hidden="true" className="size-5" />
         </button>

@@ -1,7 +1,10 @@
+import { syncWidget, widgetLaunchRoute } from './lib/widget'
 import { lazy, Suspense, useEffect } from 'react'
-import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import AppLayout from './components/AppLayout'
 import Home from './pages/Home'
+import Onboarding from './pages/Onboarding'
+import Streak from './pages/Streak'
 import Login from './pages/auth/Login'
 import SignUp from './pages/auth/SignUp'
 import BalanceCheck from './pages/check/BalanceCheck'
@@ -25,12 +28,23 @@ function RequireAuth({ onboarded }: { onboarded?: boolean }) {
   const p = loadProfile()
   if (!p?.email && !p?.username) return <Navigate to="/login" replace />
   if (apiEnabled && p.role !== 'admin' && !p.access?.active && !['/activate','/profile'].includes(window.location.pathname)) return <Navigate to="/activate" replace />
+  if (onboarded && !p.gameOnboarded && window.location.pathname !== '/profile') return <Navigate to="/onboarding" replace />
   if (onboarded && window.location.pathname !== '/profile' && !p.checks?.start && !p.checkPostponed) return <Navigate to="/check/start" replace />
   return <Outlet />
 }
 
 export default function App() {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
+  useEffect(() => {
+    const openStreak = () => navigate('/streak')
+    window.addEventListener('fitjoy:streak', openStreak)
+    widgetLaunchRoute().then(route => { if (route === '/streak') navigate(route) })
+    let dates: string[] = []
+    try { dates = JSON.parse(localStorage.getItem('fitjoy.activeDates') ?? '[]') } catch { /* empty */ }
+    syncWidget(dates, Boolean(loadProfile()?.username || loadProfile()?.email))
+    return () => { window.removeEventListener('fitjoy:streak', openStreak) }
+  }, [navigate])
   useReminderScheduler()
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -44,6 +58,8 @@ export default function App() {
       <Route path="/join/:orgId/:code" element={<JoinOrganization />} />
       <Route path="/privacy" element={<Privacy />} />
       <Route element={<RequireAuth />}>
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/streak" element={<Streak />} />
         <Route path="/activate" element={<Activate />} />
         <Route path="/check/:phase" element={<BalanceCheck />} />
       </Route>

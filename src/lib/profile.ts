@@ -1,7 +1,10 @@
+import { syncWidget } from './widget'
 import { pushProfile } from '../services/remote'
 
 // Local cache of the user's profile; mirrored to Supabase when it is configured (services/remote.ts).
 export type Profile = {
+  gameOnboarded?: boolean
+  streakGoal?: number
   introSeen?: boolean
   /** ISO time the user asked to be reminded about the first self-test. */
   checkReminderAt?: string
@@ -68,6 +71,7 @@ export function saveProfile(patch: Partial<Profile>): Profile {
 }
 
 export function signOut() {
+  syncWidget([], false)
   try {
     localStorage.removeItem(KEY)
   } catch {
