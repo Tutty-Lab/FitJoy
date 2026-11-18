@@ -1,8 +1,9 @@
 """Submit the selected FitJoy iOS draft; Apple validates listing completeness first."""
 from ios_ci_signing import api, token, BUNDLE
+import argparse
 
 
-def submit():
+def submit(prepare_only=False):
     auth = token()
     apps = api('GET', f'/apps?filter[bundleId]={BUNDLE}', auth)['data']
     if len(apps) != 1:
@@ -13,6 +14,18 @@ def submit():
     if len(drafts) != 1:
         raise RuntimeError('Expected exactly one editable iOS draft')
     version = drafts[0]
+    # Copyright and rights to the supplied materials were confirmed by the owner.
+    api('PATCH', f'/apps/{app_id}', auth, {'data': {
+        'type': 'apps', 'id': app_id,
+        'attributes': {'contentRightsDeclaration': 'USES_THIRD_PARTY_CONTENT'},
+    }})
+    api('PATCH', f'/appStoreVersions/{version["id"]}', auth, {'data': {
+        'type': 'appStoreVersions', 'id': version['id'],
+        'attributes': {'copyright': '2026 Tutty Lab'},
+    }})
+    if prepare_only:
+        print('Saved owner-confirmed copyright and content rights.')
+        return
     if not version.get('relationships', {}).get('build', {}).get('data'):
         raise RuntimeError('No build selected for review')
     submissions = api('GET', f'/apps/{app_id}/reviewSubmissions?filter[platform]=IOS', auth)['data']
@@ -47,4 +60,6 @@ def submit():
 
 
 if __name__ == '__main__':
-    submit()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--prepare-only', action='store_true')
+    submit(parser.parse_args().prepare_only)
