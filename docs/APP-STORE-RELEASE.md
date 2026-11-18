@@ -1,5 +1,11 @@
 # App Store release — 18 November 2026
 
+**Submitted successfully.** Version `1.0` (build `141`) is `WAITING_FOR_REVIEW`.
+
+- Review submission: `c4da1e1e-d4af-48b3-b747-06d11591d662`.
+- Confirmed submission run: https://github.com/Tutty-Lab/nail-game/actions/runs/44219220929
+- The owner completed and published App Privacy answers before submission; Apple's final validation accepted the listing.
+
 - App Store Connect app: `6836089248`, current listing name `Fitjoy`.
 - Product name in the customer requirements: **Der Gleichgewichts-Code**. No listing rename has been requested.
 - Bundle ID: `com.tuttylab.fitjoy`; Apple team: `5MNN7PQYBD`.
@@ -21,19 +27,15 @@ Modes: `inspect`, `build`, `prepare`, `pricing`, `rights`, `screenshots`, `submi
 - `pricing`: sets the initial free download tier; preserves an already assigned price schedule.
 - `submit`: creates/reuses a review draft, links the selected iOS version and submits only if Apple's validation accepts it. The user has explicitly authorized public App Review submission.
 
-## Current blockers
+## Completed requirements
 
-The final validation run reports one remaining blocker:
-
-1. Published App Privacy answers. This is a web-only App Store Connect step; the official API has no endpoint for these declarations.
+No submission blockers remain. Apple review is pending.
 
 German screenshots are uploaded and processed as complete: three iPhone captures at 1320×2868, three iPad captures at 2064×2752. The actual local app was captured using the existing demo account without changing its data. Source images are in `store/app-store/de-DE/`.
 
 The owner confirmed `2026 Tutty Lab` and rights to the supplied materials; copyright and content-rights declaration have been saved. Pricing is free. Screenshot upload: https://github.com/Tutty-Lab/nail-game/actions/runs/44215911735
 
-Final validation (only App Privacy remains): https://github.com/Tutty-Lab/nail-game/actions/runs/44216145769
-
-Pending user action: select the Fitjoy App Store Connect tab in the visible Edge window so the web-only privacy setup can continue. The last observed Edge tab was WhatsApp; do not inspect unrelated conversations.
+The earlier validation run https://github.com/Tutty-Lab/nail-game/actions/runs/44216145769 reported only App Privacy missing. The owner completed this web-only step, then the successful submission run above confirmed `WAITING_FOR_REVIEW`.
 
 Suggested privacy classifications must reflect the account name/identifier, optional stored email, exercise progress, self-test results and notes actually synchronized to the backend. These data support app functionality and are linked to accounts; no advertising/tracking SDK is present. Do not select “Data Not Collected.”
 
