@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
   const apiTarget = process.env.API_PROXY
   return {
   plugins: [react(), tailwindcss(), VitePWA({
-    registerType: 'prompt',
+    registerType: 'autoUpdate',
     injectRegister: 'auto',
     includeAssets: ['favicon.png', 'apple-touch-icon.png', 'icon.png', 'icon-512.png', 'icon-maskable.png'],
     manifest: {
@@ -34,6 +34,8 @@ export default defineConfig(({ mode }) => {
       globPatterns: ['**/*.{js,css,html,png,svg,woff2}'],
       navigateFallbackDenylist: [/^\/api(?:\/|$)/],
       cleanupOutdatedCaches: true,
+      skipWaiting: true,
+      clientsClaim: true,
     },
   }), ...(!apiTarget ? [devApi()] : [])],
   resolve: { alias: { '@': path.resolve(__dirname, './src') } },
