@@ -1,7 +1,8 @@
+import BackArrow from '../components/BackArrow'
 import { useEffect, useState } from 'react'
 import { StreakFlame } from '../components/GameEffects'
 import { Link, useSearchParams } from 'react-router-dom'
-import { ArrowLeft, Flame } from 'lucide-react'
+import { Flame } from 'lucide-react'
 import { useCompleted } from '../lib/progress'
 import { dayKey } from '../lib/game'
 import { playGameSound } from '../lib/gameAudio'
@@ -43,7 +44,7 @@ export default function Streak() {
     try { const v = Number(sessionStorage.getItem('fitjoy.streakUp') ?? 0); sessionStorage.removeItem('fitjoy.streakUp'); return v } catch { return 0 }
   })
   return <div className="game-onboarding">
-    {!up && <Link to="/" aria-label={L('Zurück', 'Quay lại')} className="flow-back"><ArrowLeft /></Link>}
+    {!up && <Link to="/" aria-label={L('Zurück', 'Quay lại')} className="cartoon-back"><BackArrow /></Link>}
     <main className="flex flex-1 flex-col justify-center gap-5 py-6"><StreakSummary up={up} from={from} /></main>
     <Link className="game-primary text-center" to={up ? next : '/'} replace={up}>{up ? L('Weiter', 'Tiếp tục') : L('Zur heutigen Minute', 'Về phút tập hôm nay')}</Link>
   </div>

@@ -1,10 +1,10 @@
+import BackArrow from '../../components/BackArrow'
 import ExitMinuteDialog from '../../components/ExitMinuteDialog'
-import StoryReward from '../../components/StoryReward'
+import { StoryBeat } from '../../components/StoryReward'
 import Vestibu from '../../components/Vestibu'
 import { Confetti } from '../../components/GameEffects'
 import { playGameSound, unlockGameAudio } from '../../lib/gameAudio'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowLeft } from 'lucide-react'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
 import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, localDay, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
@@ -110,8 +110,8 @@ export default function WorkoutDetail() {
 
   return <div className="flex flex-col gap-5 px-4 pb-8">
     <header className="sticky top-0 z-30 flex items-center gap-3 bg-white/95 py-2 backdrop-blur">
-      <button type="button" aria-label={L('Zurück', 'Quay lại')} title={L('Zurück', 'Quay lại')} onClick={back} className="flex size-11 shrink-0 items-center justify-center rounded-full border border-mint bg-white text-brand-deep shadow-sm focus-visible:outline-2 focus-visible:outline-brand">
-        <ArrowLeft aria-hidden="true" className="size-5" />
+      <button type="button" aria-label={L('Zurück', 'Quay lại')} title={L('Zurück', 'Quay lại')} onClick={back} className="cartoon-back">
+        <BackArrow />
       </button>
       <h1 className="font-bold">{stage === 'bonus' || stage === 'bonusDone' ? `Bonus · ${L('Tag', 'Ngày')} ${day}` : L(`Tag ${day} · ${session}. von ${SESSIONS_PER_DAY} Mal`, `Ngày ${day} · lần ${session}/${SESSIONS_PER_DAY}`)}</h1>
     </header>
@@ -133,7 +133,7 @@ export default function WorkoutDetail() {
     {stage === 'done' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
       <Confetti /><Vestibu mood="celebrate" className="size-32" />
       <h2 className="text-2xl font-black">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
-      {newDiscovery && <StoryReward day={day} />}
+      <StoryBeat day={day} session={session} />
       {streakUp ? <Link className={primary} to={`/streak?up=1&next=${encodeURIComponent(nextRoute)}`} replace>{L('Weiter', 'Tiếp tục')}</Link> : <>
       <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>
       {nextRoute !== '/' && <Link to="/" className="flow-back">{L('Für jetzt aufhören', 'Tạm nghỉ, về Hôm nay')}</Link>}</>}

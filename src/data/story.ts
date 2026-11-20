@@ -46,3 +46,15 @@ export function restoredInRegion(completed: number[], region: Region) {
 export function earnedEpisodes(completed: number[]) {
   return [...new Set(completed.filter(day=>Number.isInteger(day)&&day>=1&&day<=90))].sort((a,b)=>a-b).map(episodeFor)
 }
+
+// One story beat per session, so every practice moves the day's story on:
+// 1 = the day's scene, 2 = Vestibu brings the discovery home, 3 = the day closes with what comes next.
+export function storyBeat(day: number, session: number): Copy {
+  const e = episodeFor(day)
+  if (session <= 1) return e.before
+  if (session === 2) return {
+    de: `Vestibu trägt „${e.reward.de}“ vorsichtig zu seinem Platz. Mit deiner zweiten Übung kommt es ein gutes Stück weiter.`,
+    vi: `Vestibu cẩn thận mang “${e.reward.vi}” về đúng chỗ. Nhờ lần tập thứ hai, nó đã đi được một quãng xa.`,
+  }
+  return e.after
+}

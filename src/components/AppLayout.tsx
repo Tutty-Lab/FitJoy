@@ -1,5 +1,6 @@
+import BackArrow from './BackArrow'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Flame } from 'lucide-react'
+import { Flame } from 'lucide-react'
 import { useCompleted } from '../lib/progress'
 import { L } from '../lib/i18n'
 import avatar from '../assets/profile/avatar.png'
@@ -17,8 +18,8 @@ export default function AppLayout() {
         <header className="sticky top-0 z-30 bg-white/95 pt-[env(safe-area-inset-top)] backdrop-blur">
           <div className="flex h-14 items-center justify-between gap-3 px-3">
             {home ? <span /> : (
-              <button type="button" aria-label={L('Zurück', 'Quay lại')} onClick={() => ((window.history.state?.idx ?? 0) > 0 ? navigate(-1) : navigate('/', { replace: true }))} className="flex size-11 items-center justify-center rounded-full text-brand-deep">
-                <ArrowLeft />
+              <button type="button" aria-label={L('Zurück', 'Quay lại')} onClick={() => ((window.history.state?.idx ?? 0) > 0 ? navigate(-1) : navigate('/', { replace: true }))} className="cartoon-back">
+                <BackArrow />
               </button>
             )}
             <div className="flex items-center gap-2">

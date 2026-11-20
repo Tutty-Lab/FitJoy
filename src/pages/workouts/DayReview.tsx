@@ -1,5 +1,6 @@
+import BackArrow from '../../components/BackArrow'
 import { useEffect, useRef, useState } from 'react'
-import { ArrowLeft, Check } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import Vestibu from '../../components/Vestibu'
 import { episodeFor } from '../../data/story'
@@ -27,7 +28,7 @@ function DaySteps({day}:{day:number}) {
   useEffect(()=>{heading.current?.focus({preventScroll:true});window.scrollTo(0,0)},[step])
   return <div className="day-steps">
     <header className="flex items-center gap-3">
-      <button type="button" className="flow-back p-2" aria-label={L('Zurück','Quay lại')} onClick={()=>navigate('/',{replace:true})}><ArrowLeft/></button>
+      <button type="button" className="cartoon-back" aria-label={L('Zurück','Quay lại')} onClick={()=>navigate('/',{replace:true})}><BackArrow /></button>
       <div className="flex-1"><p className="flow-note mb-2">{L('Tag','Ngày')} {day}</p><div className="game-progress" role="progressbar" aria-label={L('Vorbereitung','Chuẩn bị')} aria-valuemin={0} aria-valuemax={2} aria-valuenow={step+1} aria-valuetext={titles[step]}><span style={{width:`${(step+1)/2*100}%`}}/></div></div>
     </header>
     <section key={step} className="day-step-content">
