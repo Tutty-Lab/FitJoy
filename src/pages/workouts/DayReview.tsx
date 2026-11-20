@@ -29,7 +29,7 @@ function DaySteps({day}:{day:number}) {
   return <div className="day-steps">
     <header className="flex items-center gap-3">
       <button type="button" className="cartoon-back" aria-label={L('Zurück','Quay lại')} onClick={()=>navigate('/',{replace:true})}><BackArrow /></button>
-      <div className="flex-1"><p className="flow-note mb-2">{L('Tag','Ngày')} {day}</p><div className="game-progress" role="progressbar" aria-label={L('Vorbereitung','Chuẩn bị')} aria-valuemin={0} aria-valuemax={2} aria-valuenow={step+1} aria-valuetext={titles[step]}><span style={{width:`${(step+1)/2*100}%`}}/></div></div>
+      <div className="flex-1"><div className="game-progress" role="progressbar" aria-label={L('Vorbereitung','Chuẩn bị')} aria-valuemin={0} aria-valuemax={2} aria-valuenow={step+1} aria-valuetext={titles[step]}><span style={{width:`${(step+1)/2*100}%`}}/></div></div>
     </header>
     <section key={step} className="day-step-content">
       <Vestibu mood={step===1?'encourage':'wave'} className="mx-auto w-28"/>

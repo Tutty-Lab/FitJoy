@@ -117,7 +117,6 @@ export default function WorkoutDetail() {
     </header>
 
     {stage === 'instructions' && <>
-      <VideoPlayer key={`${day}:instr`} ref={player} src={video} poster={poster} />
       <ol className="list-decimal space-y-2 rounded-[28px] bg-white p-6 pl-10 border-2 border-mint shadow-[0_4px_0_#cfe7e5] text-[15px] leading-6">{baseText.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
       <Affirmation />
       <button type="button" className={primary} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>
