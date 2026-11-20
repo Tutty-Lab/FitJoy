@@ -8,13 +8,21 @@ import type { Region } from '../data/story'
 
 const width = 400
 const points = adventurePoints
+// Painted backgrounds (public/map/<region>.webp); the road and stops are drawn on top.
+const painted = true
 const land = 'M45 158Q51 102 122 127Q144 82 207 107Q244 58 305 113Q371 115 369 190Q404 229 358 301Q391 353 347 409Q355 464 305 512Q350 553 358 618Q397 683 349 749Q373 795 322 858Q335 918 290 973Q318 1040 274 1110Q241 1175 169 1158Q93 1172 65 1115Q17 1081 42 1013Q7 963 56 897Q26 847 66 782Q24 726 60 664Q14 615 55 551Q20 504 44 442Q12 388 50 329Q14 274 57 222Q22 194 45 158Z'
 export default function AdventureMap({chapter,current,statusOf,onPick,region,restored}:{chapter:number;current:number;statusOf:(day:number)=>string;onPick:(day:number,status:string)=>void;region:Region;restored:number}) {
   const motionRef=useMapMotion()
   const road=points.reduce((path,[x,y],i)=>i===0?`M${x} ${y}`:`${path} C${points[i-1][0]} ${y-47} ${x} ${points[i-1][1]+47} ${x} ${y}`,'')
   return <section ref={motionRef} data-moving="false" className={`adventure-map adventure-${region.id}`} aria-label={L('Dein Inselweg', 'Hành trình trên đảo')}>
     <div className="adventure-water">
-      <svg viewBox="0 0 400 1200" className="adventure-scenery" aria-hidden="true">
+      {painted ? <svg viewBox="0 0 400 1200" className="adventure-scenery" aria-hidden="true">
+        <image href={`/map/${region.id}.webp`} x="0" y="0" width="400" height="1200" preserveAspectRatio="xMidYMid slice" transform={chapter%2 ? 'translate(400 0) scale(-1 1)' : undefined} />
+        <path d={road} fill="none" stroke="#00000022" strokeWidth="48" strokeLinecap="round" transform="translate(0 6)" />
+        <path d={road} fill="none" stroke="#e9bf77" strokeWidth="40" strokeLinecap="round" />
+        <path d={road} fill="none" stroke="#ffdf9c" strokeWidth="32" strokeLinecap="round" />
+        <path d={road} fill="none" stroke="#fff0bd" strokeWidth="3" strokeDasharray="2 14" strokeLinecap="round" />
+      </svg> : <svg viewBox="0 0 400 1200" className="adventure-scenery" aria-hidden="true">
         {region.id !== 'harbor' ? <RegionScenery region={region.id} restored={restored} /> : <>
         <rect width="400" height="1200" fill="#a4e4e9" />
         <path d="M0 64q100-33 200 0t200 0v-64H0Z" fill="#c6f0ed" /><path d="M0 1180q90-35 200 0t200 0v20H0Z" fill="#86d7df" />
@@ -41,8 +49,8 @@ export default function AdventureMap({chapter,current,statusOf,onPick,region,res
         <g fill="#f9ffff"><path d="M28 45q-2-13 13-14 7-16 22-7 12-3 17 10 14 0 15 11Z" /><path d="M249 30q-1-10 11-12 7-12 18-5 11-3 15 9 13-1 15 8Z" /></g>
         <g stroke="#388b95" strokeWidth="2.5" fill="none" strokeLinecap="round"><path d="m240 84 6-3 6 3m15-16 5-3 5 3m-190 37 5-3 5 3" /></g>
         </>}
-      </svg>
-      <MapLife region={region.id}/>
+      </svg>}
+      {!painted && <MapLife region={region.id}/>}
       {points.map(([x,y],i)=>{
         const day=chapter*10+i+1,status=statusOf(day),now=day===current,mins=sessionsDone(day),partial=status==='completed'&&mins>0&&mins<3
         return <div className={`adventure-stop ${now?'is-current':''}`} key={day} style={{left:`${x/width*100}%`,top:`${y/1200*100}%`}}>
