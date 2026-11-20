@@ -38,8 +38,8 @@ export default function WorkoutDetail() {
   const wasCompleted = useRef(completed.includes(day))
   const player = useRef<VideoPlayerHandle>(null)
   const remainingMs = useRef(PRACTICE_SECONDS * 1000)
-  const from = (location.state as { from?: string } | null)?.from
-  const returnTo = from && /^\/days\/\d+$/.test(from) ? from : '/'
+  // Leaving a session always goes straight back to the map.
+  const returnTo = '/'
 
   useEffect(() => { setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false); setExitOpen(false); setNewDiscovery(false); wasCompleted.current=completed.includes(day) }, [day, session])
   useEffect(() => {
