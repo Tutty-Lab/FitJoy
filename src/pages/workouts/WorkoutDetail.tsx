@@ -10,7 +10,7 @@ import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
 import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, localDay, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { loadProfile, saveProfile } from '../../lib/profile'
-import { episodeFor } from '../../data/story'
+import { episodeFor, regionFor } from '../../data/story'
 import { Flame, Gem } from 'lucide-react'
 import poster from '../../assets/home/vestibu-welcome.png'
 import { L, lang } from '../../lib/i18n'
@@ -46,6 +46,8 @@ export default function WorkoutDetail() {
   const { statusOf, completed, finished, current, streak, doneToday } = useCompleted()
   const [streakUp, setStreakUp] = useState(false)
   const [earned, setEarned] = useState(0)
+  // The pre-session part is split into three short screens: story -> how to -> affirmation.
+  const [intro_, setIntro] = useState(0)
   const session = useMemo(() => {
     const requested = Number(new URLSearchParams(location.search).get('session'))
     return Number.isInteger(requested) && requested >= 1 && requested <= SESSIONS_PER_DAY ? requested : Math.min(SESSIONS_PER_DAY, sessionsDone(day) + 1)
@@ -65,7 +67,7 @@ export default function WorkoutDetail() {
   // Leaving a session always goes straight back to the map.
   const returnTo = '/'
 
-  useEffect(() => { setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false); setExitOpen(false); setNewDiscovery(false); wasCompleted.current=completed.includes(day) }, [day, session])
+  useEffect(() => { setIntro(0); setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false); setExitOpen(false); setNewDiscovery(false); wasCompleted.current=completed.includes(day) }, [day, session])
   useEffect(() => {
     const pause=()=>{ if(document.hidden){player.current?.pause();setRunning(false)} }
     document.addEventListener('visibilitychange',pause)
@@ -137,7 +139,7 @@ export default function WorkoutDetail() {
 
   const xp = loadProfile()?.xp ?? 0
   const practising = stage === 'practice' || stage === 'bonus'
-  const progress = stage === 'instructions' ? 0.06 : practising ? 0.1 + 0.9 * (1 - remaining / PRACTICE_SECONDS) : 1
+  const progress = stage === 'instructions' ? 0.04 + intro_ * 0.03 : practising ? 0.1 + 0.9 * (1 - remaining / PRACTICE_SECONDS) : 1
   const episode = episodeFor(day)
   // What Vestibu says before each session: the day's story leads into session 1, sessions 2 and 3 pick it up.
   const intro = session === 1 ? episode.before[lang]
@@ -156,13 +158,27 @@ export default function WorkoutDetail() {
       <span className="flex items-center gap-1 font-black text-orange-500"><Flame size={20} fill="currentColor" />{streak}</span>
     </header>
 
-    {stage === 'instructions' && <>
-      <p className="text-center text-sm font-black tracking-wide text-[#6f7472] uppercase">{L(`Tag ${day} · ${session}. von ${SESSIONS_PER_DAY} Mal`, `Ngày ${day} · lần ${session}/${SESSIONS_PER_DAY}`)}</p>
-      <Talk text={intro} mood="wave" />
-      <ol className="list-decimal space-y-2 rounded-[28px] bg-white p-6 pl-10 border-2 border-mint shadow-[0_4px_0_#cfe7e5] text-[15px] leading-6">{baseText.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
-      <Affirmation />
-      <button type="button" className={primary} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>
-    </>}
+    {stage === 'instructions' && <section key={intro_} className="day-step-content flex min-h-[calc(100dvh-110px)] flex-col gap-5">
+      {intro_ === 0 && <>
+        <div className="story-scene" style={{ backgroundImage: `url(/map/${regionFor(day).id}.webp)` }}>
+          <span className="story-scene-tag">{L(`Tag ${day} · ${session}. von ${SESSIONS_PER_DAY} Mal`, `Ngày ${day} · lần ${session}/${SESSIONS_PER_DAY}`)}</span>
+          <Vestibu mood="wave" className="story-scene-hero" />
+          <span className="story-scene-title">{episode.reward[lang]}</span>
+        </div>
+        <p className="game-speech font-bold leading-7">{intro}</p>
+      </>}
+      {intro_ === 1 && <>
+        <h2 className="text-2xl font-black">{L('So geht die Übung', 'Cách tập')}</h2>
+        <ol className="flex flex-col gap-2">{baseText.steps.map((s, i) => <li key={i} className="duo-step"><b>{i + 1}</b><span>{s}</span></li>)}</ol>
+      </>}
+      {intro_ === 2 && <>
+        <Talk text={L('Sprich diesen Satz laut, während du die Position hältst.', 'Hãy đọc to câu này khi giữ tư thế nhé.')} mood="encourage" />
+        <Affirmation big />
+      </>}
+      {intro_ < 2
+        ? <button type="button" className={`${primary} mt-auto`} onClick={() => setIntro(intro_ + 1)}>{L('Weiter', 'Tiếp tục')}</button>
+        : <button type="button" className={`${primary} mt-auto`} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>}
+    </section>}
 
     {stage === 'practice' && <>
       <Talk text={cheer} mood="encourage" />
