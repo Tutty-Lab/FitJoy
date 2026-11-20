@@ -60,3 +60,28 @@
 @keyframes map-invitation{0%,80%,100%{transform:translateY(0)}88%{transform:translateY(-3px)}}
 @keyframes map-pop{from{transform:scale(.6);opacity:1}to{transform:scale(1.5);opacity:0}}
 @media(prefers-reduced-motion:reduce){.adventure-map *, .adventure-map *::before,.adventure-map *::after{animation:none!important}.map-landmark-hit{transition:none}.map-landmark-hit:active{transform:none}}
+
+/* Ambient life on painted maps */
+.painted-life{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+.painted-life>*{position:absolute;animation-play-state:paused}
+.adventure-map[data-moving=true] .painted-life>*,.adventure-map[data-moving=true] .painted-life>* i{animation-play-state:running}
+.pl-cloud{left:-40%;width:55%;height:7%;border-radius:50%;background:radial-gradient(closest-side,#0d3b4524,transparent);animation:pl-drift 48s linear infinite}
+.pl-cloud-b{width:45%;animation-duration:62s}
+@keyframes pl-drift{to{transform:translateX(260%)}}
+.pl-sparkle{width:9px;height:9px;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:pl-twinkle 3.2s ease-in-out infinite;opacity:0}
+@keyframes pl-twinkle{0%,100%{opacity:0;transform:scale(.4)}45%{opacity:.95;transform:scale(1)}}
+.pl-bird{left:-12%;display:flex;gap:1px;animation:pl-fly 26s linear infinite}
+.pl-bird-b{animation-duration:34s}
+.pl-bird i{display:block;width:9px;height:5px;border-top:2.5px solid #2f4a52;border-radius:50% 50% 0 0;transform-origin:bottom;animation:pl-flap .5s ease-in-out infinite alternate;animation-play-state:paused}
+.pl-bird i:last-child{transform:scaleX(-1)}
+@keyframes pl-fly{0%{transform:translate(0,0)}50%{transform:translate(60vw,-18px)}100%{transform:translate(125vw,6px)}}
+@keyframes pl-flap{to{height:2px}}
+.pl-firefly{width:7px;height:7px;border-radius:50%;background:#fff6a8;box-shadow:0 0 10px 4px #ffe96a99;animation:pl-glow 4s ease-in-out infinite;opacity:0}
+@keyframes pl-glow{0%,100%{opacity:0;transform:translate(0,0)}40%{opacity:1;transform:translate(8px,-10px)}70%{opacity:.6;transform:translate(-6px,-18px)}}
+.pl-leaf{top:-4%;width:12px;height:8px;border-radius:0 80% 0 80%;background:#7cc46a;animation:pl-fall 18s linear infinite;opacity:.9}
+@keyframes pl-fall{0%{transform:translate(0,0) rotate(0)}25%{transform:translate(24px,25vh) rotate(90deg)}50%{transform:translate(-10px,50vh) rotate(180deg)}75%{transform:translate(20px,75vh) rotate(270deg)}100%{transform:translate(0,105vh) rotate(360deg)}}
+.pl-beam{top:1%;left:55%;width:60%;height:5%;transform-origin:0 50%;background:linear-gradient(90deg,#fff8c9cc,transparent);clip-path:polygon(0 45%,100% 0,100% 100%,0 55%);animation:pl-sweep 6s ease-in-out infinite}
+@keyframes pl-sweep{0%,100%{transform:rotate(-25deg);opacity:.2}50%{transform:rotate(25deg);opacity:.8}}
+.adventure-node.now{animation:pl-bounce 1.8s ease-in-out infinite}
+@keyframes pl-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media(prefers-reduced-motion:reduce){.painted-life{display:none}.adventure-node.now{animation:none}}

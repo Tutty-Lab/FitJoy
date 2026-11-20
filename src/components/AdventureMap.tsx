@@ -1,3 +1,4 @@
+import PaintedLife from './PaintedLife'
 import { sessionsDone } from '../lib/progress'
 import MapLife, { useMapMotion } from './MapLife'
 import RegionScenery, { adventurePoints } from './RegionScenery'
@@ -50,7 +51,7 @@ export default function AdventureMap({chapter,current,statusOf,onPick,region,res
         <g stroke="#388b95" strokeWidth="2.5" fill="none" strokeLinecap="round"><path d="m240 84 6-3 6 3m15-16 5-3 5 3m-190 37 5-3 5 3" /></g>
         </>}
       </svg>}
-      {!painted && <MapLife region={region.id}/>}
+      {painted ? <PaintedLife region={region.id} flip={chapter%2===1}/> : <MapLife region={region.id}/>}
       {points.map(([x,y],i)=>{
         const day=chapter*10+i+1,status=statusOf(day),now=day===current,mins=sessionsDone(day),partial=status==='completed'&&mins>0&&mins<3
         return <div className={`adventure-stop ${now?'is-current':''}`} key={day} style={{left:`${x/width*100}%`,top:`${y/1200*100}%`}}>
