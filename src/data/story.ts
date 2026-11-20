@@ -2,6 +2,7 @@ import { chapterFor } from './storyChapters'
 import { storyScenes } from './storyScenes'
 export { chapterFor, storyChapters } from './storyChapters'
 import { storyMid } from './storyMid'
+import { storyEnd } from './storyEnd'
 export type Copy = { de: string; vi: string }
 export type Region = { id: 'harbor' | 'forest' | 'lighthouse'; start: number; end: number; name: Copy; mission: Copy }
 export const regions: Region[] = [
@@ -54,5 +55,5 @@ export function storyBeat(day: number, session: number): Copy {
   const e = episodeFor(day)
   if (session <= 1) return e.before
   if (session === 2) return storyMid[day] ?? e.before
-  return e.after
+  return storyEnd[day] ?? e.after
 }
