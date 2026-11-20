@@ -34,10 +34,9 @@ function DaySteps({day}:{day:number}) {
       <Vestibu mood={step===2?'encourage':'wave'} className="mx-auto w-28"/>
       <h1 ref={heading} tabIndex={-1} className="text-2xl font-black outline-none">{titles[step]}</h1>
       {step===0 && <><blockquote className="game-speech font-bold leading-7">„{localDay(day).begruessung}“</blockquote><div><h2 className="font-bold mb-2">{episode.title[lang]}</h2><p className="text-sm leading-6">{completed.includes(day)?episode.after[lang]:episode.before[lang]}</p></div></>}
-      {step===1 && <><blockquote className="flow-card text-xl font-bold text-brand-deep leading-8">„{affirmationFor(day)}“</blockquote><p className="flow-note">{L('Dieser Satz begleitet deine Übung. Du siehst ihn während der Übung noch einmal.','Câu này sẽ đồng hành cùng bài tập. Bạn sẽ thấy lại câu này khi tập.')}</p></>}
+      {step===1 && <><blockquote className="flow-card text-xl font-bold text-brand-deep leading-8">„{affirmationFor(day)}“</blockquote></>}
       {step===2 && <><p>{done<SESSIONS_PER_DAY?L(`Heute ${done} von 3 Mal geübt. Jetzt kommt Mal ${done+1}: 60 Sekunden.`,`Hôm nay đã tập ${done}/3 lần. Tiếp theo là lần ${done+1}: 60 giây.`):L('Heute 3 von 3 Mal geübt. Du kannst gern noch einmal üben.','Hôm nay đã tập đủ 3/3 lần. Bạn có thể tập thêm.')}</p><p className="flow-note">{L('Stelle einen stabilen Stuhl bereit. Pausiere bei Schwindel oder Unwohlsein.','Chuẩn bị ghế chắc chắn. Tạm dừng khi chóng mặt hoặc khó chịu.')}</p></>}
     </section>
-    {step===2&&day===current&&waitingForTomorrow&&<p role="status" className="flow-note">{L(`Tag ${current+1} öffnet morgen. Deine bisherigen Entdeckungen bleiben erhalten.`,`Ngày ${current+1} mở vào ngày mai. Các khám phá đã nhận vẫn được giữ.`)}</p>}
     <footer className="day-step-footer">{step<2?<button type="button" className="game-primary w-full" onClick={()=>setStep(step+1)}>{L('Weiter','Tiếp tục')}</button>:<Link className="game-primary block text-center" to={destination} state={{from:`/days/${day}`}}>{finalCheck?(loadProfile()?.checks?.end?L('Meine Ergebnisse','Xem kết quả'):L('Abschließenden Selbsttest starten','Bắt đầu tự kiểm tra cuối hành trình')):done<SESSIONS_PER_DAY?L(`Mal ${done+1} starten`,`Bắt đầu lần ${done+1}`):L('Nochmal üben','Tập lại')}</Link>}</footer>
   </div>
 }
