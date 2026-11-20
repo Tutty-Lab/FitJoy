@@ -48,6 +48,7 @@ export default function WorkoutDetail() {
   const [earned, setEarned] = useState(0)
   // The pre-session part is split into three short screens: story -> how to -> affirmation.
   const [intro_, setIntro] = useState(0)
+  const [said, setSaid] = useState(1)
   const session = useMemo(() => {
     const requested = Number(new URLSearchParams(location.search).get('session'))
     return Number.isInteger(requested) && requested >= 1 && requested <= SESSIONS_PER_DAY ? requested : Math.min(SESSIONS_PER_DAY, sessionsDone(day) + 1)
@@ -67,7 +68,7 @@ export default function WorkoutDetail() {
   // Leaving a session always goes straight back to the map.
   const returnTo = '/'
 
-  useEffect(() => { setIntro(0); setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false); setExitOpen(false); setNewDiscovery(false); wasCompleted.current=completed.includes(day) }, [day, session])
+  useEffect(() => { setIntro(0); setSaid(1); setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false); setExitOpen(false); setNewDiscovery(false); wasCompleted.current=completed.includes(day) }, [day, session])
   useEffect(() => {
     const pause=()=>{ if(document.hidden){player.current?.pause();setRunning(false)} }
     document.addEventListener('visibilitychange',pause)
@@ -145,6 +146,12 @@ export default function WorkoutDetail() {
   const intro = session === 1 ? episode.before[lang]
     : session === 2 ? L(`Schön, dass du wieder da bist! „${episode.reward.de}“ wartet noch auf uns.`, `Bạn quay lại rồi! “${episode.reward.vi}” vẫn đang chờ mình.`)
     : L('Letzte Runde für heute! Danach erfährst du, wie die Geschichte heute endet.', 'Lượt cuối hôm nay! Tập xong bạn sẽ biết câu chuyện hôm nay kết thúc thế nào.')
+  const sentences = (t: string) => t.match(/[^.!?…]+[.!?…]+[“”"]?/g)?.map(x => x.trim()).filter(Boolean) ?? [t]
+  const chat: { text: string; me?: boolean }[] = session === 1
+    ? [{ text: content.begruessung }, ...sentences(episode.before[lang]).map(text => ({ text })), { text: L('Los geht’s!', 'Đi thôi!'), me: true }, { text: L('Super! Erst kurz die Übung, dann legen wir los.', 'Tuyệt! Xem nhanh cách tập rồi mình bắt đầu nhé.') }]
+    : session === 2
+      ? [{ text: L('Da bist du ja wieder!', 'A, bạn quay lại rồi!') }, { text: L(`Weißt du noch? Heute geht es um „${episode.reward.de}“.`, `Nhớ không? Hôm nay là chuyện về “${episode.reward.vi}”.`) }, { text: L('Ich bin bereit für Runde zwei.', 'Mình sẵn sàng cho lượt hai.'), me: true }, { text: L('Dann weiter! Nach dieser Runde geht unsere Geschichte weiter.', 'Vậy tiếp nào! Tập xong lượt này, câu chuyện sẽ đi tiếp.') }]
+      : [{ text: L('Letzte Runde für heute!', 'Lượt cuối hôm nay rồi!') }, { text: L(`„${episode.reward.de}“ ist fast an seinem Platz.`, `“${episode.reward.vi}” sắp về đúng chỗ rồi.`) }, { text: L('Wie endet es?', 'Rồi sẽ kết thúc thế nào?'), me: true }, { text: L('Das erfährst du gleich nach dieser Runde.', 'Tập xong lượt này bạn sẽ biết ngay.') }]
   const cheer = remaining > 40 ? L('Ganz ruhig. Halt dich fest, wenn du magst.', 'Thật thong thả. Cứ vịn nếu bạn muốn nhé.')
     : remaining > 20 ? L('Super, du machst das toll!', 'Tuyệt lắm, cứ thế nhé!')
     : remaining > 5 ? L('Fast geschafft!', 'Sắp xong rồi!')
@@ -162,10 +169,11 @@ export default function WorkoutDetail() {
       {intro_ === 0 && <>
         <div className="story-scene" style={{ backgroundImage: `url(/map/${regionFor(day).id}.webp)` }}>
           <span className="story-scene-tag">{L(`Tag ${day} · ${session}. von ${SESSIONS_PER_DAY} Mal`, `Ngày ${day} · lần ${session}/${SESSIONS_PER_DAY}`)}</span>
-          <Vestibu mood="wave" className="story-scene-hero" />
           <span className="story-scene-title">{episode.reward[lang]}</span>
         </div>
-        <p className="game-speech font-bold leading-7">{intro}</p>
+        <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite">
+          {chat.slice(0, said).map((m, i) => <p key={i} className={`chat-line ${m.me ? 'me' : ''}`}>{m.text}</p>)}
+        </div></div>
       </>}
       {intro_ === 1 && <>
         <h2 className="text-2xl font-black">{L('So geht die Übung', 'Cách tập')}</h2>
@@ -176,7 +184,7 @@ export default function WorkoutDetail() {
         <Affirmation big />
       </>}
       {intro_ < 2
-        ? <button type="button" className={`${primary} mt-auto`} onClick={() => setIntro(intro_ + 1)}>{L('Weiter', 'Tiếp tục')}</button>
+        ? <button type="button" className={`${primary} mt-auto`} onClick={() => intro_ === 0 && said < chat.length ? setSaid(said + 1) : setIntro(intro_ + 1)}>{intro_ === 0 && said < chat.length && chat[said].me ? chat[said].text : L('Weiter', 'Tiếp tục')}</button>
         : <button type="button" className={`${primary} mt-auto`} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>}
     </section>}
 
