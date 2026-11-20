@@ -1,4 +1,7 @@
 import type { Copy } from './story'
+import { harborDialog } from './storyHarbor'
+import { forestDialog } from './storyForest'
+import { lighthouseDialog } from './storyLighthouse'
 
 // Story as conversations. Cast:
 //   v  = Vestibu, the balance helper (calm, warm, a little clumsy)
@@ -137,5 +140,7 @@ export const storyDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Aus dem Boot steigt niemand. Nur ein Brief liegt darin: „Kommt zum Leuchtturm. Bringt den Stein mit. – Ilse“', vi: 'Không ai bước xuống thuyền. Chỉ có một lá thư: “Hãy tới hải đăng. Mang theo hòn đá. – Ilse”' } },
   ],
 }
+
+Object.assign(storyDialog, harborDialog, forestDialog, lighthouseDialog)
 
 export const dialogFor = (day: number, session: number): SessionScene | undefined => storyDialog[day]?.[session - 1]
