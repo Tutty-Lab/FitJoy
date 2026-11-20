@@ -1,6 +1,7 @@
 import { chapterFor } from './storyChapters'
 import { storyScenes } from './storyScenes'
 export { chapterFor, storyChapters } from './storyChapters'
+import { storyMid } from './storyMid'
 export type Copy = { de: string; vi: string }
 export type Region = { id: 'harbor' | 'forest' | 'lighthouse'; start: number; end: number; name: Copy; mission: Copy }
 export const regions: Region[] = [
@@ -52,9 +53,6 @@ export function earnedEpisodes(completed: number[]) {
 export function storyBeat(day: number, session: number): Copy {
   const e = episodeFor(day)
   if (session <= 1) return e.before
-  if (session === 2) return {
-    de: `Vestibu trägt „${e.reward.de}“ vorsichtig zu seinem Platz. Mit deiner zweiten Übung kommt es ein gutes Stück weiter.`,
-    vi: `Vestibu cẩn thận mang “${e.reward.vi}” về đúng chỗ. Nhờ lần tập thứ hai, nó đã đi được một quãng xa.`,
-  }
+  if (session === 2) return storyMid[day] ?? e.before
   return e.after
 }
