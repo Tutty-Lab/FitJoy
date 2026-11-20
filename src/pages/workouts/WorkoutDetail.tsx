@@ -103,7 +103,7 @@ export default function WorkoutDetail() {
   }
   const done = sessionsDone(day)
   const nextRoute = finished && day===90 && done>=SESSIONS_PER_DAY ? (loadProfile()?.checks?.end ? '/compare' : '/check/end') : done<SESSIONS_PER_DAY && day===current ? `/workouts/${day}?session=${done+1}` : '/'
-  const nextLabel = finished && day===90 && done>=SESSIONS_PER_DAY ? L('Zum abschließenden Selbsttest', 'Đến tự kiểm tra cuối hành trình') : done<SESSIONS_PER_DAY && day===current ? L(`Weiter zu Minute ${done+1}`, `Đến phút ${done+1}`) : L('Zurück zu Heute', 'Về Hôm nay')
+  const nextLabel = finished && day===90 && done>=SESSIONS_PER_DAY ? L('Zum abschließenden Selbsttest', 'Đến tự kiểm tra cuối hành trình') : done<SESSIONS_PER_DAY && day===current ? L(`Weiter zu Mal ${done+1}`, `Tập lần ${done+1}`) : L('Zurück zu Heute', 'Về Hôm nay')
 
   return <div className="flex flex-col gap-5 px-4 pb-8">
     <header className="sticky top-0 z-30 flex items-center gap-3 bg-white/95 py-2 backdrop-blur">
@@ -131,11 +131,10 @@ export default function WorkoutDetail() {
       <Confetti /><Vestibu mood="celebrate" className="size-32" />
       <h2 className="text-2xl font-black">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
       {newDiscovery && <StoryReward day={day} />}
-      <p className="text-slate-600">{L(`Grundübung ${session}/${SESSIONS_PER_DAY} für Tag ${day} geschafft.`, `Đã xong bài cơ bản ${session}/${SESSIONS_PER_DAY} của ngày ${day}.`)}</p>
-      {!newDiscovery && <p className="flow-note">{L('Diese Geschichte ist bereits in deinem Inselbuch. Wiederholen gibt keine doppelte Entdeckung.', 'Diễn biến này đã lưu trong nhật ký. Tập lại không nhận thêm khám phá trùng.')}</p>}
+      <p className="text-slate-600">{L(`Tag ${day}: ${session} von ${SESSIONS_PER_DAY} Mal geschafft.`, `Ngày ${day}: xong lần ${session}/${SESSIONS_PER_DAY}.`)}</p>
       <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>
       {nextRoute !== '/' && <Link to="/" className="flow-back">{L('Für jetzt aufhören', 'Tạm nghỉ, về Hôm nay')}</Link>}
-      {bonus && <details className="w-full text-left"><summary className="flow-summary">{L('Bonus · freiwillig', 'Bonus · tùy chọn')}</summary><p className="flow-note mb-3">{content.bonusImpuls || L('Eine weitere Minute, ohne zusätzliche Freischaltung.', 'Tập thêm một phút, không mở thêm ngày hay phần thưởng.')}</p><button type="button" className={secondary} onClick={() => start('bonus')}>{L('Bonus-Minute starten', 'Bắt đầu phút bonus')}</button></details>}
+      {bonus && <details className="w-full text-left"><summary className="flow-summary">{L('Bonus · freiwillig', 'Bonus · tùy chọn')}</summary><p className="flow-note mb-3">{content.bonusImpuls || L('Noch 60 Sekunden extra, ohne neue Freischaltung.', 'Tập thêm 60 giây, không mở thêm ngày.')}</p><button type="button" className={secondary} onClick={() => start('bonus')}>{L('Bonus-Minute starten', 'Bắt đầu phút bonus')}</button></details>}
     </section>}
 
     {stage === 'bonus' && bonus && <>
@@ -152,8 +151,8 @@ export default function WorkoutDetail() {
 
     {stage === 'bonusDone' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
       <Confetti /><Vestibu mood="celebrate" className="size-32" />
-      <h2 className="text-2xl font-black">{L('Bonus geschafft!', 'Xong phút bonus!')}</h2>
-      <p className="text-slate-600">{L('Eine Extra-Minute für dein Gleichgewicht.', 'Thêm một phút cho sự thăng bằng của bạn.')}</p>
+      <h2 className="text-2xl font-black">{L('Bonus geschafft!', 'Xong bonus!')}</h2>
+      <p className="text-slate-600">{L('Extra für dein Gleichgewicht.', 'Thêm chút cho sự thăng bằng của bạn.')}</p>
       <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>
       {nextRoute !== '/' && <Link to="/" className="flow-back">{L('Für jetzt aufhören','Tạm nghỉ, về Hôm nay')}</Link>}
     </section>}

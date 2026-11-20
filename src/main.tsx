@@ -13,7 +13,7 @@ import { pullCatalog, pullUser } from './services/remote'
 
 // Soft tap sound on the main game buttons, map stops and tab icons (respects the sound setting).
 document.addEventListener('click', e => {
-  if ((e.target as Element | null)?.closest?.('.game-primary, .game-secondary, .adventure-node, nav a')) playGameSound('tap')
+  if ((e.target as Element | null)?.closest?.('.game-primary, .game-secondary, .adventure-node, nav a, button.bg-brand-deep, a.bg-brand-deep, .rounded-2xl.border-mint')) playGameSound('tap')
 }, { capture: true })
 
 async function boot() {
