@@ -134,11 +134,10 @@ export default function WorkoutDetail() {
       <Confetti /><Vestibu mood="celebrate" className="size-32" />
       <h2 className="text-2xl font-black">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
       {newDiscovery && <StoryReward day={day} />}
-      <p className="text-slate-600">{L(`Tag ${day}: ${session} von ${SESSIONS_PER_DAY} Mal geschafft.`, `Ngày ${day}: xong lần ${session}/${SESSIONS_PER_DAY}.`)}</p>
       {streakUp ? <Link className={primary} to={`/streak?up=1&next=${encodeURIComponent(nextRoute)}`} replace>{L('Weiter', 'Tiếp tục')}</Link> : <>
       <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>
       {nextRoute !== '/' && <Link to="/" className="flow-back">{L('Für jetzt aufhören', 'Tạm nghỉ, về Hôm nay')}</Link>}</>}
-      {bonus && <details className="w-full text-left"><summary className="flow-summary">{L('Bonus · freiwillig', 'Bonus · tùy chọn')}</summary><p className="flow-note mb-3">{content.bonusImpuls || L('Noch 60 Sekunden extra, ohne neue Freischaltung.', 'Tập thêm 60 giây, không mở thêm ngày.')}</p><button type="button" className={secondary} onClick={() => start('bonus')}>{L('Bonus-Minute starten', 'Bắt đầu phút bonus')}</button></details>}
+      {bonus && <button type="button" className={secondary} onClick={() => start('bonus')}>{L('Bonus · 60 Sekunden', 'Bonus · 60 giây')}</button>}
     </section>}
 
     {stage === 'bonus' && bonus && <>
