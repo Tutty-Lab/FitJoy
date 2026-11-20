@@ -1,3 +1,4 @@
+import { sessionsDone } from '../lib/progress'
 import MapLife, { useMapMotion } from './MapLife'
 import RegionScenery, { adventurePoints } from './RegionScenery'
 import { Check, Gift, LockKeyhole, Play, Trophy } from 'lucide-react'
@@ -43,11 +44,11 @@ export default function AdventureMap({chapter,current,statusOf,onPick,region,res
       </svg>
       <MapLife region={region.id}/>
       {points.map(([x,y],i)=>{
-        const day=chapter*10+i+1,status=statusOf(day),now=day===current
+        const day=chapter*10+i+1,status=statusOf(day),now=day===current,mins=sessionsDone(day),partial=status==='completed'&&mins>0&&mins<3
         return <div className={`adventure-stop ${now?'is-current':''}`} key={day} style={{left:`${x/width*100}%`,top:`${y/1200*100}%`}}>
-          {now && <span className="adventure-here">{L('Hier starten','Bắt đầu ở đây')}</span>}
-          <button className={`adventure-node ${status} ${now?'now':''}`} aria-label={L(`Tag ${day}: ${status==='locked'?'gesperrt':status==='completed'?'abgeschlossen':'starten'}`,`Ngày ${day}: ${status==='locked'?'chưa mở':status==='completed'?'đã xong':'bắt đầu'}`)} onClick={()=>onPick(day,status)}>
-            {status==='completed'?<Check />:i===9?<Trophy />:i===4?<Gift />:now?<Play fill="currentColor" />:<LockKeyhole />}
+          {now && <span className="adventure-here">{mins>0?L(`Weiter · ${mins}/3`,`Tiếp tục · ${mins}/3`):L('Hier starten','Bắt đầu ở đây')}</span>}
+          <button className={`adventure-node ${status} ${now?'now':''}`} aria-label={L(`Tag ${day}: ${status==='locked'?'gesperrt':partial?`${mins} von 3 Minuten`:status==='completed'?'abgeschlossen':'starten'}`,`Ngày ${day}: ${status==='locked'?'chưa mở':partial?`${mins}/3 phút`:status==='completed'?'đã xong':'bắt đầu'}`)} onClick={()=>onPick(day,status)}>
+            {partial?<span className="text-lg font-black">{mins}/3</span>:status==='completed'?<Check />:i===9?<Trophy />:i===4?<Gift />:now?<Play fill="currentColor" />:<LockKeyhole />}
           </button><span className="adventure-day">{L('Tag','Ngày')} {day}</span>
         </div>
       })}

@@ -10,7 +10,7 @@ import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
 import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, localDay, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { loadProfile } from '../../lib/profile'
-import poster from '../../assets/workouts/video-thumb.png'
+import poster from '../../assets/home/vestibu-welcome.png'
 import { L } from '../../lib/i18n'
 import { clayPrimary, claySecondary } from '../../components/clay'
 
@@ -115,7 +115,7 @@ export default function WorkoutDetail() {
       <h2 className="text-xl font-black">{baseText.title}</h2>
       <ol className="list-decimal space-y-2 rounded-[28px] bg-white p-6 pl-10 border-2 border-mint shadow-[0_4px_0_#cfe7e5] text-[15px] leading-6">{baseText.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
       <Affirmation />
-      <p className="flow-note">{L('Der Zähler läuft nur, solange das Video spielt. Bei Unwohlsein pausieren und hinsetzen.', 'Đồng hồ chỉ chạy khi video đang phát. Nếu khó chịu, hãy tạm dừng và ngồi xuống.')}</p>
+      <p className="flow-note">{L('Pausierst du das Video, hält auch der Zähler an. Bei Unwohlsein pausieren und hinsetzen.', 'Tạm dừng video thì đồng hồ cũng dừng. Nếu khó chịu, hãy tạm dừng và ngồi xuống.')}</p>
       <button type="button" className={primary} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>
     </>}
 

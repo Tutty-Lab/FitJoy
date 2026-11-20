@@ -1,7 +1,7 @@
 import LanguagePicker from '../components/LanguagePicker'
 import { useCompleted } from '../lib/progress'
 import { useState, type ReactNode } from 'react'
-import { LogOut, RefreshCw, Trash2 } from 'lucide-react'
+import { LogOut, Trash2 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Switch } from '../components/shared'
 import { loadProfile, saveProfile } from '../lib/profile'
@@ -92,12 +92,6 @@ export default function Profile() {
     navigate('/signup', { replace: true })
   }
 
-  function redoBalanceCheck() {
-    localStorage.removeItem('fitjoy.checkDraft.start')
-    localStorage.removeItem('fitjoy.checkDraft.end')
-    // Keep the old results until the new test is saved, so leaving mid-way never locks the app.
-    navigate('/check/start')
-  }
 
   return (
     <div className="stagger flex flex-col gap-6 px-4 pt-2 pb-6">
@@ -119,15 +113,7 @@ export default function Profile() {
 
       <div className="flex flex-col gap-4">
         <Link to="/streak" className="game-secondary">{L('Meinen Streak ansehen', 'Xem chuỗi ngày của tôi')}</Link>
-        <Link to="/onboarding" className="game-secondary">{L('Einführung noch einmal lesen', 'Đọc lại giới thiệu hành trình')}</Link>
-        <details className="flow-card"><summary className="font-bold">{L('Streak-Ziel und iPhone-Widget', 'Mục tiêu chuỗi ngày và widget iPhone')}</summary><label className="flex justify-between gap-3">{L('Mein Ziel', 'Mục tiêu của tôi')}<select aria-label={L('Streak-Ziel', 'Mục tiêu chuỗi ngày')} value={p?.streakGoal??7} onChange={e=>setP(saveProfile({streakGoal:Number(e.target.value)}))}>{[3,7,14].map(n=><option key={n} value={n}>{n} {L('Tage', 'ngày')}</option>)}</select></label><p className="flow-note">{L('Auf dem iPhone: Home-Bildschirm gedrückt halten, Bearbeiten, Widget hinzufügen und FitJoy suchen. Dafür ist die installierte iOS-App nötig. Im Browser gibt es kein Home-Bildschirm-Widget.', 'Trên iPhone: giữ màn hình chính, chọn Sửa, Thêm tiện ích rồi tìm FitJoy. Cần cài ứng dụng iOS. Bản trình duyệt không có widget màn hình chính.')}</p></details>
         <Group title={L('Gleichgewicht', 'Thăng bằng')}>
-          <Row
-            onClick={redoBalanceCheck}
-            icon={<RefreshCw aria-hidden="true" className="size-4 text-brand-deep" />}
-            iconBg="bg-mint"
-            title={L('Selbsttest neu starten', 'Làm lại bài tự kiểm tra')}
-          />
           <Row
             to="/compare"
             icon={<img src={iGoal} alt="" style={{ width: 12.5, height: 14.167 }} />}

@@ -16,7 +16,7 @@ export default function DayReview() {
 }
 
 function DaySteps({day}:{day:number}) {
-  const [step,setStep]=useState(0)
+  const [step,setStep]=useState(()=>sessionsDone(Number(day))>0?2:0)
   const navigate=useNavigate()
   const heading=useRef<HTMLHeadingElement>(null)
   const {completed,current,finished,waitingForTomorrow}=useCompleted()

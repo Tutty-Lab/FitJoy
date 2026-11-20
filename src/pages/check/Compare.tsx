@@ -84,6 +84,7 @@ export default function Compare() {
           })}
         </section>
       ))}
+      {start && <Link to="/check/start" onClick={() => { localStorage.removeItem('fitjoy.checkDraft.start'); localStorage.removeItem('fitjoy.checkDraft.end') }} className="game-secondary text-center">{L('Selbsttest neu starten', 'Làm lại bài tự kiểm tra')}</Link>}
     </div>
   )
 }
