@@ -17,7 +17,6 @@ import iPhone from '../assets/profile/i-phone.svg'
 import iSound from '../assets/profile/i-sound.svg'
 import iLang from '../assets/profile/i-lang.svg'
 import iMoon from '../assets/profile/i-moon.svg'
-import iBackup from '../assets/profile/i-backup.svg'
 import iInfo from '../assets/profile/i-info.svg'
 import iTrophy from '../assets/profile/i-trophy.svg'
 import iFlame from '../assets/profile/i-flame.svg'
@@ -68,15 +67,6 @@ export default function Profile() {
     if (key === 'darkMode') applyTheme(next)
   }
 
-  function backup() {
-    const data = { version:1, profile: loadProfile(), completed, activeDates:dates, exportedAt: new Date().toISOString() }
-    const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }))
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'fitjoy-backup.json'
-    a.click()
-    URL.revokeObjectURL(url)
-  }
 
   async function logout() {
     await signOutEverywhere()
@@ -113,6 +103,7 @@ export default function Profile() {
 
       <div className="flex flex-col gap-4">
         <Link to="/streak" className="game-secondary">{L('Meinen Streak ansehen', 'Xem chuỗi ngày của tôi')}</Link>
+        <Link to="/onboarding" className="game-secondary">{L('Einführung noch einmal ansehen', 'Xem lại phần giới thiệu')}</Link>
         <Group title={L('Gleichgewicht', 'Thăng bằng')}>
           <Row
             to="/compare"
@@ -149,7 +140,6 @@ export default function Profile() {
         </Group>
 
         <Group title={L('Hilfe & Daten', 'Hỗ trợ & dữ liệu')}>
-          <Row onClick={backup} icon={<img src={iBackup} alt="" style={{ width: 16.667, height: 13.333 }} />} iconBg="bg-[#f3f6f5]" title={L('Daten sichern', 'Sao lưu dữ liệu')} />
           <Row to="/privacy" icon={<img src={iInfo} alt="" className="size-[16.667px]" />} iconBg="bg-[#f3f6f5]" title={L('Datenschutz', 'Chính sách bảo mật')} />
         </Group>
       </div>
