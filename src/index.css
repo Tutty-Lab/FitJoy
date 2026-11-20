@@ -457,3 +457,10 @@ body {
 /* Cartoon back button (clay style) */
 .cartoon-back{display:grid;place-items:center;width:44px;height:44px;flex-shrink:0;border-radius:14px;background:#fff;color:#13707e;border:2px solid #cfe7e5;border-bottom-width:5px;transition:transform .12s ease,border-bottom-width .12s ease}
 .cartoon-back:active{transform:translateY(3px);border-bottom-width:2px}
+
+/* Duolingo-style result tiles */
+.duo-stat{display:flex;flex-direction:column;align-items:center;gap:2px;border:2px solid;border-bottom-width:5px;border-radius:16px;padding:8px 4px;background:#fff}
+.duo-stat span{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}
+.duo-stat b{font-size:20px;font-weight:900}
+.xp-pop{animation:streak-bump .7s .3s cubic-bezier(.3,1.6,.5,1) both}
+@media(prefers-reduced-motion:reduce){.xp-pop{animation:none}}

@@ -1,6 +1,7 @@
+import { loadProfile } from '../lib/profile'
 import BackArrow from './BackArrow'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { Flame } from 'lucide-react'
+import { Flame, Gem } from 'lucide-react'
 import { useCompleted } from '../lib/progress'
 import { L } from '../lib/i18n'
 import avatar from '../assets/profile/avatar.png'
@@ -12,6 +13,7 @@ export default function AppLayout() {
   const { streak, doneToday } = useCompleted()
   const training = pathname.startsWith('/workouts/') || pathname.startsWith('/days/')
   const home = pathname === '/'
+  const xp = loadProfile()?.xp ?? 0
   return (
     <div className="mx-auto min-h-dvh max-w-[440px] bg-white">
       {!training && (
@@ -26,6 +28,7 @@ export default function AppLayout() {
               <Link to="/streak" aria-label={L(`${streak} Tage in Folge`, `${streak} ngày liên tiếp`)} className={`flex items-center gap-1 px-2 py-1 text-lg font-black ${doneToday ? 'text-orange-500' : 'text-slate-400'}`}>
                 <Flame size={22} fill={doneToday ? 'currentColor' : 'none'} />{streak}
               </Link>
+              <span aria-label={L(`${xp} Punkte`, `${xp} điểm`)} className="flex items-center gap-1 px-1 text-lg font-black text-sky-500"><Gem size={20} />{xp}</span>
               <Link to="/profile" aria-label={L('Profil', 'Hồ sơ')} className="rounded-full">
                 <img src={avatar} alt="" className="size-9 rounded-full object-cover ring-2 ring-mint" />
               </Link>

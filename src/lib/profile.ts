@@ -5,6 +5,7 @@ import { pushProfile } from '../services/remote'
 export type Profile = {
   gameOnboarded?: boolean
   streakGoal?: number
+  xp?: number
   introSeen?: boolean
   /** ISO time the user asked to be reminded about the first self-test. */
   checkReminderAt?: string

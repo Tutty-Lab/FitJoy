@@ -4,25 +4,48 @@ import { StoryBeat } from '../../components/StoryReward'
 import Vestibu from '../../components/Vestibu'
 import { Confetti } from '../../components/GameEffects'
 import { playGameSound, unlockGameAudio } from '../../lib/gameAudio'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
 import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, localDay, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
-import { loadProfile } from '../../lib/profile'
+import { loadProfile, saveProfile } from '../../lib/profile'
+import { episodeFor } from '../../data/story'
+import { Flame, Gem } from 'lucide-react'
 import poster from '../../assets/home/vestibu-welcome.png'
-import { L } from '../../lib/i18n'
+import { L, lang } from '../../lib/i18n'
 import { clayPrimary, claySecondary } from '../../components/clay'
 
 type Stage = 'instructions' | 'practice' | 'done' | 'bonus' | 'bonusDone'
 
 // 05a instructions → 05b 60-second practice → 05c congratulations + bonus question → 06 bonus.
+const XP_SESSION = 10
+const XP_BONUS = 5
+
+function Talk({ text, mood }: { text: string; mood: 'wave' | 'encourage' | 'celebrate' }) {
+  return <div className="flex items-end gap-3"><Vestibu mood={mood} className="w-24 shrink-0" /><p className="game-speech flex-1 font-bold leading-6">{text}</p></div>
+}
+
+function Done({ title, xp, streak, earned, children }: { title: string; xp: number; streak: number; earned: number; children?: ReactNode }) {
+  return <section className="flex flex-col items-center gap-4 text-center">
+    <Confetti /><Vestibu mood="celebrate" className="size-36" />
+    <h2 className="text-3xl font-black text-brand-deep">{title}</h2>
+    <div className="grid w-full grid-cols-3 gap-2">
+      <div className="duo-stat border-amber-300 text-amber-600"><span>{L('Punkte', 'Điểm')}</span><b className="xp-pop">+{earned}</b></div>
+      <div className="duo-stat border-orange-300 text-orange-500"><span>Streak</span><b><Flame size={18} fill="currentColor" className="inline" /> {Math.max(streak, 1)}</b></div>
+      <div className="duo-stat border-sky-300 text-sky-600"><span>{L('Gesamt', 'Tổng')}</span><b><Gem size={16} className="inline" /> {xp}</b></div>
+    </div>
+    {children}
+  </section>
+}
+
 export default function WorkoutDetail() {
   const day = Number(useParams().day)
   const location = useLocation()
   const navigate = useNavigate()
   const { statusOf, completed, finished, current, streak, doneToday } = useCompleted()
   const [streakUp, setStreakUp] = useState(false)
+  const [earned, setEarned] = useState(0)
   const session = useMemo(() => {
     const requested = Number(new URLSearchParams(location.search).get('session'))
     return Number.isInteger(requested) && requested >= 1 && requested <= SESSIONS_PER_DAY ? requested : Math.min(SESSIONS_PER_DAY, sessionsDone(day) + 1)
@@ -68,11 +91,15 @@ export default function WorkoutDetail() {
       // First session today raises the streak: celebrate it on the streak screen next.
       if (!doneToday) { try { sessionStorage.setItem('fitjoy.streakUp', String(streak)) } catch { /* private mode */ } setStreakUp(true) }
       completeLesson(day, session)
+      saveProfile({ xp: (loadProfile()?.xp ?? 0) + XP_SESSION })
+      setEarned(XP_SESSION)
       if (loadProfile()?.chime ?? true) playGameSound('success')
       setStage('done')
     }
     if (stage === 'bonus' && remaining === 0) {
       setRunning(false)
+      saveProfile({ xp: (loadProfile()?.xp ?? 0) + XP_BONUS })
+      setEarned(XP_BONUS)
       if (loadProfile()?.chime ?? true) playGameSound('success')
       setStage('bonusDone')
     }
@@ -108,38 +135,52 @@ export default function WorkoutDetail() {
   const nextRoute = finished && day===90 && done>=SESSIONS_PER_DAY ? (loadProfile()?.checks?.end ? '/compare' : '/check/end') : done<SESSIONS_PER_DAY && day===current ? `/workouts/${day}?session=${done+1}` : '/'
   const nextLabel = finished && day===90 && done>=SESSIONS_PER_DAY ? L('Zum abschließenden Selbsttest', 'Đến tự kiểm tra cuối hành trình') : done<SESSIONS_PER_DAY && day===current ? L(`Weiter zu Mal ${done+1}`, `Tập lần ${done+1}`) : L('Zurück zu Heute', 'Về Hôm nay')
 
+  const xp = loadProfile()?.xp ?? 0
+  const practising = stage === 'practice' || stage === 'bonus'
+  const progress = stage === 'instructions' ? 0.06 : practising ? 0.1 + 0.9 * (1 - remaining / PRACTICE_SECONDS) : 1
+  const episode = episodeFor(day)
+  // What Vestibu says before each session: the day's story leads into session 1, sessions 2 and 3 pick it up.
+  const intro = session === 1 ? episode.before[lang]
+    : session === 2 ? L(`Schön, dass du wieder da bist! „${episode.reward.de}“ wartet noch auf uns.`, `Bạn quay lại rồi! “${episode.reward.vi}” vẫn đang chờ mình.`)
+    : L('Letzte Runde für heute! Danach erfährst du, wie die Geschichte heute endet.', 'Lượt cuối hôm nay! Tập xong bạn sẽ biết câu chuyện hôm nay kết thúc thế nào.')
+  const cheer = remaining > 40 ? L('Ganz ruhig. Halt dich fest, wenn du magst.', 'Thật thong thả. Cứ vịn nếu bạn muốn nhé.')
+    : remaining > 20 ? L('Super, du machst das toll!', 'Tuyệt lắm, cứ thế nhé!')
+    : remaining > 5 ? L('Fast geschafft!', 'Sắp xong rồi!')
+    : L('Noch ein kleines bisschen …', 'Chút xíu nữa thôi …')
   return <div className="flex flex-col gap-5 px-4 pb-8">
     <header className="sticky top-0 z-30 flex items-center gap-3 bg-white/95 py-2 backdrop-blur">
       <button type="button" aria-label={L('Zurück', 'Quay lại')} title={L('Zurück', 'Quay lại')} onClick={back} className="cartoon-back">
         <BackArrow />
       </button>
-      <h1 className="font-bold">{stage === 'bonus' || stage === 'bonusDone' ? `Bonus · ${L('Tag', 'Ngày')} ${day}` : L(`Tag ${day} · ${session}. von ${SESSIONS_PER_DAY} Mal`, `Ngày ${day} · lần ${session}/${SESSIONS_PER_DAY}`)}</h1>
+      <div className="game-progress flex-1" role="progressbar" aria-label={L('Fortschritt', 'Tiến độ')} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}><span style={{ width: `${progress * 100}%`, transition: 'width .3s linear' }} /></div>
+      <span className="flex items-center gap-1 font-black text-orange-500"><Flame size={20} fill="currentColor" />{streak}</span>
     </header>
 
     {stage === 'instructions' && <>
+      <p className="text-center text-sm font-black tracking-wide text-[#6f7472] uppercase">{L(`Tag ${day} · ${session}. von ${SESSIONS_PER_DAY} Mal`, `Ngày ${day} · lần ${session}/${SESSIONS_PER_DAY}`)}</p>
+      <Talk text={intro} mood="wave" />
       <ol className="list-decimal space-y-2 rounded-[28px] bg-white p-6 pl-10 border-2 border-mint shadow-[0_4px_0_#cfe7e5] text-[15px] leading-6">{baseText.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
       <Affirmation />
       <button type="button" className={primary} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>
     </>}
 
     {stage === 'practice' && <>
+      <Talk text={cheer} mood="encourage" />
       <div role="timer" aria-label={L('Verbleibende Zeit', 'Thời gian còn lại')} className="text-center text-6xl font-black tabular-nums text-brand-deep">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
       <VideoPlayer key={`${day}:practice`} ref={player} src={video} poster={poster} autoPlay loop onPlaybackChange={setRunning} />
       <Affirmation big />
       <button type="button" className={primary} onClick={togglePlayback}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
     </>}
 
-    {stage === 'done' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
-      <Confetti /><Vestibu mood="celebrate" className="size-32" />
-      <h2 className="text-2xl font-black">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
+    {stage === 'done' && <Done xp={xp} streak={streak} earned={earned} title={L('Gut gemacht!', 'Làm tốt lắm!')}>
       <StoryBeat day={day} session={session} />
-      {streakUp ? <Link className={primary} to={`/streak?up=1&next=${encodeURIComponent(nextRoute)}`} replace>{L('Weiter', 'Tiếp tục')}</Link> : <>
-      <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>
-      {nextRoute !== '/' && <Link to="/" className="flow-back">{L('Für jetzt aufhören', 'Tạm nghỉ, về Hôm nay')}</Link>}</>}
-      {bonus && <button type="button" className={secondary} onClick={() => start('bonus')}>{L('Bonus · 60 Sekunden', 'Bonus · 60 giây')}</button>}
-    </section>}
+      {streakUp ? <Link className={primary} to={`/streak?up=1&next=${encodeURIComponent(nextRoute)}`} replace>{L('Weiter', 'Tiếp tục')}</Link> : <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>}
+      <button type="button" className={secondary} onClick={() => start('practice')}>{L('Nochmal üben', 'Tập lại')}</button>
+      {bonus && <button type="button" className={secondary} onClick={() => start('bonus')}>{L(`Bonus · +${XP_BONUS} Punkte`, `Bonus · +${XP_BONUS} điểm`)}</button>}
+    </Done>}
 
     {stage === 'bonus' && bonus && <>
+      <Talk text={cheer} mood="encourage" />
       <div role="timer" aria-label={L('Verbleibende Zeit', 'Thời gian còn lại')} className="text-center text-6xl font-black tabular-nums text-rust">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
       <VideoPlayer key={`${day}:bonus`} ref={player} src={video} poster={poster} autoPlay loop onPlaybackChange={setRunning} />
       <section className="flex flex-col gap-3 rounded-[28px] bg-white p-5 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
@@ -151,13 +192,10 @@ export default function WorkoutDetail() {
       <button type="button" className={primary} onClick={togglePlayback}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
     </>}
 
-    {stage === 'bonusDone' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
-      <Confetti /><Vestibu mood="celebrate" className="size-32" />
-      <h2 className="text-2xl font-black">{L('Bonus geschafft!', 'Xong bonus!')}</h2>
-      <p className="text-slate-600">{L('Extra für dein Gleichgewicht.', 'Thêm chút cho sự thăng bằng của bạn.')}</p>
+    {stage === 'bonusDone' && <Done xp={xp} streak={streak} earned={earned} title={L('Bonus geschafft!', 'Xong bonus!')}>
       <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>
-      {nextRoute !== '/' && <Link to="/" className="flow-back">{L('Für jetzt aufhören','Tạm nghỉ, về Hôm nay')}</Link>}
-    </section>}
+      <button type="button" className={secondary} onClick={() => start('bonus')}>{L('Nochmal üben', 'Tập lại')}</button>
+    </Done>}
     {exitOpen && <ExitMinuteDialog stay={()=>setExitOpen(false)} leave={()=>navigate(returnTo,{replace:true})}/>}
   </div>
 }
