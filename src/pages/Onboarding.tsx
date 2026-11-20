@@ -16,8 +16,7 @@ export default function Onboarding() {
     navigate(loadProfile()?.checks?.start||loadProfile()?.checkPostponed?'/':'/check/start',{replace:true})
   }
   return <div className="game-onboarding">
-    <LanguagePicker/>
-    <header className="flex items-center gap-3 mt-4"><button className="p-2" disabled={step===0} aria-label={L('Zurück','Quay lại')} onClick={()=>setStep(step-1)}><ArrowLeft/></button><p className="flow-note">{L(`Einführung ${step+1}/3`,`Giới thiệu ${step+1}/3`)}</p></header>
+    <header className="flex items-center justify-between gap-3"><button className={`p-2 ${step===0?'invisible':''}`} disabled={step===0} aria-label={L('Zurück','Quay lại')} onClick={()=>setStep(step-1)}><ArrowLeft/></button><LanguagePicker compact/></header>
     <main className="flex flex-1 flex-col justify-center gap-6 py-6">
       <Vestibu mood="wave" className="mx-auto w-28"/><h1 className="text-2xl font-black">{titles[step]}</h1>
       {step===0 && <><p>{L('Vestibu findet eine leere Postkarte im Hafen. Wer hat sie geschickt? Gemeinsam folgen wir den Spuren durch den Wald bis zum Leuchtturm.','Vestibu tìm thấy một tấm thiệp trắng ở bến cảng. Ai đã gửi nó? Mình cùng lần theo manh mối qua rừng tới hải đăng nhé.')}</p><p className="flow-note">{L('90 Programmtage, neun Kapitel. Du bestimmst dein Tempo. Eine Pause löscht keine Entdeckung.','90 ngày chương trình, chín chương truyện. Bạn chọn nhịp của mình. Nghỉ một ngày không làm mất khám phá.')}</p></>}
