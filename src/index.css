@@ -441,3 +441,10 @@ body {
 .vb-video{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;pointer-events:none;background:transparent}
 .vestibu-rig:has(.vb-video){isolation:auto}
 .vestibu-celebrate:before{display:none}
+
+/* Streak increase */
+@keyframes streak-bump{0%{transform:scale(.6);opacity:.4}55%{transform:scale(1.35)}100%{transform:scale(1);opacity:1}}
+@keyframes streak-ignite{0%{transform:scale(.7)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+.streak-bump{animation:streak-bump .6s cubic-bezier(.3,1.6,.5,1) both}
+.streak-ignite{animation:streak-ignite .6s cubic-bezier(.3,1.6,.5,1) both}
+@media(prefers-reduced-motion:reduce){.streak-bump,.streak-ignite{animation:none}}

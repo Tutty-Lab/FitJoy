@@ -21,7 +21,8 @@ export default function WorkoutDetail() {
   const day = Number(useParams().day)
   const location = useLocation()
   const navigate = useNavigate()
-  const { statusOf, completed, finished, current } = useCompleted()
+  const { statusOf, completed, finished, current, streak, doneToday } = useCompleted()
+  const [streakUp, setStreakUp] = useState(false)
   const session = useMemo(() => {
     const requested = Number(new URLSearchParams(location.search).get('session'))
     return Number.isInteger(requested) && requested >= 1 && requested <= SESSIONS_PER_DAY ? requested : Math.min(SESSIONS_PER_DAY, sessionsDone(day) + 1)
@@ -64,6 +65,8 @@ export default function WorkoutDetail() {
     if (stage === 'practice' && remaining === 0) {
       setRunning(false)
       setNewDiscovery(!wasCompleted.current)
+      // First session today raises the streak: celebrate it on the streak screen next.
+      if (!doneToday) { try { sessionStorage.setItem('fitjoy.streakUp', String(streak)) } catch { /* private mode */ } setStreakUp(true) }
       completeLesson(day, session)
       if (loadProfile()?.chime ?? true) playGameSound('success')
       setStage('done')
@@ -132,8 +135,9 @@ export default function WorkoutDetail() {
       <h2 className="text-2xl font-black">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
       {newDiscovery && <StoryReward day={day} />}
       <p className="text-slate-600">{L(`Tag ${day}: ${session} von ${SESSIONS_PER_DAY} Mal geschafft.`, `Ngày ${day}: xong lần ${session}/${SESSIONS_PER_DAY}.`)}</p>
+      {streakUp ? <Link className={primary} to={`/streak?up=1&next=${encodeURIComponent(nextRoute)}`} replace>{L('Weiter', 'Tiếp tục')}</Link> : <>
       <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>
-      {nextRoute !== '/' && <Link to="/" className="flow-back">{L('Für jetzt aufhören', 'Tạm nghỉ, về Hôm nay')}</Link>}
+      {nextRoute !== '/' && <Link to="/" className="flow-back">{L('Für jetzt aufhören', 'Tạm nghỉ, về Hôm nay')}</Link>}</>}
       {bonus && <details className="w-full text-left"><summary className="flow-summary">{L('Bonus · freiwillig', 'Bonus · tùy chọn')}</summary><p className="flow-note mb-3">{content.bonusImpuls || L('Noch 60 Sekunden extra, ohne neue Freischaltung.', 'Tập thêm 60 giây, không mở thêm ngày.')}</p><button type="button" className={secondary} onClick={() => start('bonus')}>{L('Bonus-Minute starten', 'Bắt đầu phút bonus')}</button></details>}
     </section>}
 
