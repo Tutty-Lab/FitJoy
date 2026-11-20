@@ -483,3 +483,7 @@ body {
 
 .chat-line.pip{background:#fff8e6;border-color:#f5d48a}
 .chat-pip{width:22px;height:22px;display:inline-block;vertical-align:-5px;margin-right:6px}
+
+/* Session intro: no vertical centering, sticky bottom button */
+.intro-flow{animation:day-step-enter .2s ease-out}
+.intro-cta{position:sticky;bottom:calc(env(safe-area-inset-bottom) + 12px);margin-top:auto;z-index:5;box-shadow:0 4px 0 #0b4a54,0 -14px 18px 6px #fff}

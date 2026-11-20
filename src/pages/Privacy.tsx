@@ -15,7 +15,6 @@ function Block({ title, children }: { title: string; children: ReactNode }) {
 export default function Privacy() {
   return (
     <SubPage title={L('Datenschutz', 'Chính sách bảo mật')} back="/profile">
-      <p className="text-xs text-[#6f7472]">{L('Stand: 16. November 2026 · Tutty Lab', 'Cập nhật: 16/11/2026 · Tutty Lab')}</p>
       <Block title={L('Was wir speichern', 'Chúng tôi lưu gì')}>
         {L('Deinen Namen, deinen Benutzernamen und ein verschlüsseltes Passwort für dein Konto. Außerdem deinen Übungsfortschritt, die Ergebnisse deiner Selbsttests und deine Erinnerungszeiten, damit sie zwischen deinen Geräten synchronisiert werden.', 'Tên, tên đăng nhập và mật khẩu đã mã hóa cho tài khoản của bạn. Ngoài ra là tiến trình tập, kết quả các bài tự kiểm tra và giờ nhắc, để đồng bộ giữa các thiết bị của bạn.')}
       </Block>

@@ -38,7 +38,6 @@ export default function Compare() {
         </ul>
         <p>{L('Das Wichtigste ist: Du hast drei Monate lang das Fundament gelegt.', 'Điều quan trọng nhất: bạn đã xây nền móng suốt ba tháng.')} <i>{L('„Gras wächst nicht schneller, wenn man daran zieht – ich vertraue meinem eigenen Tempo.“', '„Cỏ không mọc nhanh hơn khi ta kéo nó – tôi tin vào nhịp độ của chính mình.“')}</i></p>
       </section>}
-      <SectionTitle>{L('Meine Ergebnisse', 'Kết quả của tôi')}</SectionTitle>
       <div className={`${card} grid grid-cols-3 gap-2 text-center`}>
         <div />
         <div><p className="text-xs font-bold text-[#6f7472] uppercase">{L('Tag 1', 'Ngày 1')}</p><p className="font-bold text-brand-deep">{fmt(start?.date)}</p></div>

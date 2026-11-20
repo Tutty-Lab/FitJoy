@@ -50,6 +50,8 @@ export default function WorkoutDetail() {
   // The pre-session part is split into three short screens: story -> how to -> affirmation.
   const [intro_, setIntro] = useState(0)
   const [said, setSaid] = useState(1)
+  const chatEnd = useRef<HTMLDivElement>(null)
+  useEffect(() => { chatEnd.current?.lastElementChild?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }) }, [said])
   const session = useMemo(() => {
     const requested = Number(new URLSearchParams(location.search).get('session'))
     return Number.isInteger(requested) && requested >= 1 && requested <= SESSIONS_PER_DAY ? requested : Math.min(SESSIONS_PER_DAY, sessionsDone(day) + 1)
@@ -159,7 +161,7 @@ export default function WorkoutDetail() {
     : remaining > 20 ? L('Super, du machst das toll!', 'Tuyệt lắm, cứ thế nhé!')
     : remaining > 5 ? L('Fast geschafft!', 'Sắp xong rồi!')
     : L('Noch ein kleines bisschen …', 'Chút xíu nữa thôi …')
-  return <div className="flex flex-col gap-5 px-4 pb-8">
+  return <div className="flex flex-col gap-3 px-4 pb-4">
     <header className="sticky top-0 z-30 flex items-center gap-3 bg-white/95 py-2 backdrop-blur">
       <button type="button" aria-label={L('Zurück', 'Quay lại')} title={L('Zurück', 'Quay lại')} onClick={back} className="cartoon-back">
         <BackArrow />
@@ -168,13 +170,13 @@ export default function WorkoutDetail() {
       <span className="flex items-center gap-1 font-black text-orange-500"><Flame size={20} fill="currentColor" />{streak}</span>
     </header>
 
-    {stage === 'instructions' && <section key={intro_} className="day-step-content flex min-h-[calc(100dvh-110px)] flex-col gap-5">
+    {stage === 'instructions' && <section key={intro_} className="intro-flow flex min-h-[calc(100dvh-76px)] flex-col gap-4">
       {intro_ === 0 && <>
         <div className="story-scene" style={{ backgroundImage: `url(/map/${regionFor(day).id}.webp)` }}>
           <span className="story-scene-tag">{L(`Tag ${day} · ${session}. von ${SESSIONS_PER_DAY} Mal`, `Ngày ${day} · lần ${session}/${SESSIONS_PER_DAY}`)}</span>
           <span className="story-scene-title">{episode.reward[lang]}</span>
         </div>
-        <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite">
+        <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
           {chat.slice(0, said).map((m, i) => <p key={i} className={`chat-line ${m.me ? 'me' : ''} ${m.who === 'p' ? 'pip' : ''}`}>{m.who === 'p' && <img src="/map/seagull.webp" alt="Pip" className="chat-pip" />}{m.text}</p>)}
         </div></div>
       </>}
@@ -187,8 +189,8 @@ export default function WorkoutDetail() {
         <Affirmation big />
       </>}
       {intro_ < 2
-        ? <button type="button" className={`${primary} mt-auto`} onClick={() => intro_ === 0 && said < chat.length ? setSaid(said + 1) : setIntro(intro_ + 1)}>{intro_ === 0 && said < chat.length && chat[said].me ? chat[said].text : L('Weiter', 'Tiếp tục')}</button>
-        : <button type="button" className={`${primary} mt-auto`} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>}
+        ? <button type="button" className={`${primary} intro-cta`} onClick={() => intro_ === 0 && said < chat.length ? setSaid(said + 1) : setIntro(intro_ + 1)}>{intro_ === 0 && said < chat.length && chat[said].me ? chat[said].text : L('Weiter', 'Tiếp tục')}</button>
+        : <button type="button" className={`${primary} intro-cta`} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>}
     </section>}
 
     {stage === 'practice' && <>

@@ -20,7 +20,7 @@ export default function AppLayout() {
         <header className="sticky top-0 z-30 bg-white/95 pt-[env(safe-area-inset-top)] backdrop-blur">
           <div className="flex h-14 items-center justify-between gap-3 px-3">
             {home ? <span /> : (
-              <button type="button" aria-label={L('Zurück', 'Quay lại')} onClick={() => ((window.history.state?.idx ?? 0) > 0 ? navigate(-1) : navigate('/', { replace: true }))} className="cartoon-back">
+              <button type="button" aria-label={L('Zurück', 'Quay lại')} onClick={() => navigate(['/reminders', '/compare', '/privacy'].includes(pathname) ? '/profile' : '/', { replace: true })} className="cartoon-back">
                 <BackArrow />
               </button>
             )}
