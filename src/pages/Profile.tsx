@@ -1,11 +1,11 @@
 import LanguagePicker from '../components/LanguagePicker'
 import { useCompleted } from '../lib/progress'
 import { useState, type ReactNode } from 'react'
-import { LogOut, Trash2 } from 'lucide-react'
+import { LogOut } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Switch } from '../components/shared'
 import { loadProfile, saveProfile } from '../lib/profile'
-import { deleteAccount, signOutEverywhere } from '../services/auth'
+import { signOutEverywhere } from '../services/auth'
 import { applyTheme } from '../lib/theme'
 import avatar from '../assets/profile/avatar.png'
 import sWorkouts from '../assets/profile/s-workouts.svg'
@@ -74,13 +74,6 @@ export default function Profile() {
     navigate('/login', { replace: true })
   }
 
-  async function removeAccount() {
-    if (!window.confirm(L('Konto und gesamten Fortschritt löschen? Das kann nicht rückgängig gemacht werden.', 'Xóa tài khoản và toàn bộ tiến trình? Không thể hoàn tác.'))) return
-    const r = await deleteAccount()
-    if (!r.ok) return window.alert(r.error)
-    applyTheme(false)
-    navigate('/signup', { replace: true })
-  }
 
 
   return (
@@ -150,12 +143,6 @@ export default function Profile() {
           icon={<LogOut aria-hidden="true" className="size-4 text-[#ba1a1a] dark:text-red-300" />}
           iconBg="bg-red-50 dark:bg-red-950/40"
           title={L('Abmelden', 'Đăng xuất')}
-        />
-        <Row
-          onClick={removeAccount}
-          icon={<Trash2 aria-hidden="true" className="size-4 text-[#ba1a1a] dark:text-red-300" />}
-          iconBg="bg-red-50 dark:bg-red-950/40"
-          title={L('Konto löschen', 'Xóa tài khoản')}
         />
       </Group>
     </div>
