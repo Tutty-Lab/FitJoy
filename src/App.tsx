@@ -51,7 +51,8 @@ export default function App() {
   }, [navigate])
   useReminderScheduler()
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // The map positions itself on today's stop.
+    if (pathname !== '/') window.scrollTo(0, 0)
   }, [pathname])
 
   return (

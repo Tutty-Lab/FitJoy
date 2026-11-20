@@ -1,7 +1,7 @@
 import LanguagePicker from '../components/LanguagePicker'
 import { useCompleted } from '../lib/progress'
 import { useState, type ReactNode } from 'react'
-import { LogOut } from 'lucide-react'
+import { ArrowLeft, LogOut } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Switch } from '../components/shared'
 import { loadProfile, saveProfile } from '../lib/profile'
@@ -78,6 +78,7 @@ export default function Profile() {
 
   return (
     <div className="stagger flex flex-col gap-6 px-4 pt-2 pb-6">
+      <Link to="/" className="flow-back"><ArrowLeft />{L('Zur Karte', 'Về hành trình')}</Link>
       <section className="relative overflow-hidden rounded-[28px] bg-white p-6 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <div className="absolute -top-12 -right-12 size-44 rounded-full bg-[rgba(255,227,211,0.3)] blur-[40px]" />
         <div className="absolute bottom-0 -left-8 size-36 rounded-full bg-[rgba(255,236,225,0.4)] blur-[24px]" />
@@ -95,7 +96,6 @@ export default function Profile() {
       </section>
 
       <div className="flex flex-col gap-4">
-        <Link to="/streak" className="game-secondary">{L('Meinen Streak ansehen', 'Xem chuỗi ngày của tôi')}</Link>
         <Link to="/onboarding" className="game-secondary">{L('Einführung noch einmal ansehen', 'Xem lại phần giới thiệu')}</Link>
         <Group title={L('Gleichgewicht', 'Thăng bằng')}>
           <Row
