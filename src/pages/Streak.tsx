@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { StreakFlame } from '../components/GameEffects'
 import { Link, useSearchParams } from 'react-router-dom'
-import { ArrowLeft, Check } from 'lucide-react'
+import { ArrowLeft, Flame } from 'lucide-react'
 import { useCompleted } from '../lib/progress'
 import { dayKey } from '../lib/game'
 import { playGameSound } from '../lib/gameAudio'
@@ -30,7 +30,7 @@ export function StreakSummary({ up = false, from = 0 }: { up?: boolean; from?: n
       const date = new Date(); date.setDate(date.getDate() - ((date.getDay() + 6) % 7) + i)
       const key = dayKey(date), isToday = key === todayKey, future = key > todayKey
       const active = dates.includes(key) && !(up && isToday && !lit)
-      return <div key={i} className={`${isToday ? 'is-today' : ''} ${future ? 'is-future' : ''}`}><span>{date.toLocaleDateString(locale, { weekday: 'narrow' })}</span><span className={active ? 'active' : ''}>{active && <Check size={18} />}</span></div>
+      return <div key={i} className={`${isToday ? 'is-today' : ''} ${future ? 'is-future' : ''}`}><span>{date.toLocaleDateString(locale, { weekday: 'narrow' })}</span><span className={active ? 'active' : ''}><Flame size={22} fill={active ? 'currentColor' : 'none'} strokeWidth={active ? 1.5 : 2} /></span></div>
     })}</div>
   </>
 }

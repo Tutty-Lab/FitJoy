@@ -448,3 +448,8 @@ body {
 .streak-bump{animation:streak-bump .6s cubic-bezier(.3,1.6,.5,1) both}
 .streak-ignite{animation:streak-ignite .6s cubic-bezier(.3,1.6,.5,1) both}
 @media(prefers-reduced-motion:reduce){.streak-bump,.streak-ignite{animation:none}}
+
+/* Streak week: one small flame per day */
+.game-week>div>span:last-child{background:transparent!important;width:36px;height:36px;color:#d5dddd}
+.game-week>div>span.active:last-child{color:#ff8a1f!important;background:#fff1e3!important}
+.game-week .is-today>span:last-child{box-shadow:none;outline:2.5px solid #13707e;outline-offset:1px}
