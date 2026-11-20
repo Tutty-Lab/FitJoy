@@ -27,7 +27,7 @@ export default function BalanceCheck() {
     }
   })
   // 0–2 welcome cards, 3 preparation, 4 safety note, 5 tasks, 6 day-1 finish screen.
-  const [stage, setStage] = useState(phase === 'start' && loadProfile()?.introSeen ? 5 : 0)
+  const [stage, setStage] = useState(phase === 'start' ? (loadProfile()?.introSeen ? 5 : loadProfile()?.gameOnboarded ? 3 : 0) : 0)
   const [picking, setPicking] = useState(false)
   const [showErrors, setShowErrors] = useState(false)
   const [remindAt, setRemindAt] = useState<string | null>(null)
@@ -39,7 +39,10 @@ export default function BalanceCheck() {
     ensureNotificationPermission()
     setRemindAt(time); setPicking(false)
   }
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(() => {
+    const firstMissing=tasks.findIndex(t=>{const e=entries[t.id];return !e || e.value.trim()==='' || !Number.isFinite(Number(e.value.replace(',','.'))) || Number(e.value.replace(',','.'))<0 || e.safety===null})
+    return firstMissing<0 ? tasks.length-1 : firstMissing
+  })
   if (phase !== 'start' && phase !== 'end') return <Navigate to="/" replace />
   if (phase === 'end' && !finished) return <Navigate to="/" replace />
   const isStart = phase === 'start'
@@ -98,10 +101,11 @@ export default function BalanceCheck() {
       <h1 className="text-2xl font-black">{L('Schön, dass du dir Zeit für dich nimmst!', 'Thật tốt khi bạn dành thời gian cho mình!')}</h1>
       <p>{L('Du möchtest dein Gleichgewichtssystem besser kennenlernen? Wir machen gemeinsam deinen persönlichen Check-up. Ich bin Vestibu, dein stiller Regisseur, wir schauen uns in Ruhe an, wie wir aktuell zusammenarbeiten.', 'Bạn muốn hiểu rõ hơn về hệ thăng bằng của mình? Chúng ta sẽ cùng làm bài kiểm tra riêng cho bạn. Mình là Vestibu, người đạo diễn thầm lặng – ta sẽ thong thả xem hiện giờ hai ta phối hợp thế nào.')}</p>
       <h2 className="font-black">{L('Das brauchst du für deinen Selbsttest:', 'Bạn cần chuẩn bị cho bài tự kiểm tra:')}</h2>
-      <Checklist items={[['Zeit', L('Nimm dir eine ruhige halbe Stunde ungestört für dich.', 'Dành nửa tiếng yên tĩnh, không bị làm phiền.')], ['Platz', L('Eine frei begehbare Fläche von ca. 3 Metern, damit du dich sicher bewegen kannst.', 'Một khoảng trống khoảng 3 mét để bạn di chuyển an toàn.')], ['Hilfsmittel', L('Einen stabilen Stuhl für die Übungen und deine Sicherheit.', 'Một chiếc ghế chắc chắn cho bài tập và sự an toàn của bạn.')]]} />
+      <Checklist items={[[L('Zeit','Thời gian'), L('Nimm dir eine ruhige halbe Stunde ungestört für dich.', 'Dành nửa tiếng yên tĩnh, không bị làm phiền.')], [L('Platz','Không gian'), L('Eine frei begehbare Fläche von ca. 3 Metern, damit du dich sicher bewegen kannst.', 'Một khoảng trống khoảng 3 mét để bạn di chuyển an toàn.')], [L('Hilfsmittel','Dụng cụ'), L('Einen stabilen Stuhl für die Übungen und deine Sicherheit.', 'Một chiếc ghế chắc chắn cho bài tập và sự an toàn của bạn.')]]} />
       <p className="text-sm text-slate-600">{L('Falls es gerade nicht passt, ist das kein Problem. Du kannst den Test jederzeit nachholen, wenn du zu Hause Ruhe hast.', 'Nếu bây giờ chưa tiện cũng không sao. Bạn có thể làm bài bất cứ lúc nào khi ở nhà yên tĩnh.')}</p>
       {remindAt && <p role="status" className="rounded-2xl bg-mint p-3 text-sm font-semibold text-brand-deep">{L(`Ich erinnere dich um ${remindAt} Uhr. Lass die App dafür geöffnet oder angepinnt.`, `Mình sẽ nhắc bạn lúc ${remindAt}. Hãy để ứng dụng mở hoặc ghim nó lại.`)}</p>}
       <button className={btnPrimary} onClick={() => setStage(4)}>{L('Alles bereit – los geht’s!', 'Sẵn sàng – bắt đầu thôi!')}</button>
+      <button className="h-11 text-sm font-semibold text-brand-deep" onClick={leave}>{L('Selbsttest später machen', 'Làm bài tự kiểm tra sau')}</button>
       {!picking ? <button className={btnSecondary} onClick={() => setPicking(true)}>{L('Später erinnern', 'Nhắc tôi sau')}</button> : <div className="flex flex-col gap-2 rounded-[28px] bg-white p-4 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <button className={btnSecondary} onClick={() => remind('19:00')}>{L('Heute Abend (19:00 Uhr)', 'Tối nay (19:00)')}</button>
         <label className="flex items-center justify-between gap-3 text-sm font-semibold">{L('Eigene Zeit wählen', 'Tự chọn giờ')}<input type="time" onChange={e => e.target.value && remind(e.target.value)} className="h-10 rounded-full bg-canvas px-3" /></label>
@@ -129,7 +133,7 @@ export default function BalanceCheck() {
     </> : <>
       <h1 className="text-2xl font-black">{L('Bereit für deinen Vorher-Nachher-Vergleich?', 'Sẵn sàng so sánh trước và sau?')}</h1>
       <p>{L('Damit wir deine Werte von heute mit Tag 1 vergleichen können, gelten dieselben Bedingungen wie beim ersten Mal:', 'Để so sánh kết quả hôm nay với ngày 1, điều kiện sẽ giống như lần đầu:')}</p>
-      <Checklist items={[['Zeit', L('Eine ruhige halbe Stunde ungestört für dich.', 'Nửa tiếng yên tĩnh, không bị làm phiền.')], ['Platz', L('Ca. 3 Meter frei begehbare Fläche.', 'Khoảng 3 mét trống để đi lại.')], [L('Sicherheit', 'An toàn'), L('Dein stabiler Stuhl steht griffbereit.', 'Chiếc ghế chắc chắn ở ngay trong tầm tay.')]]} />
+      <Checklist items={[[L('Zeit','Thời gian'), L('Eine ruhige halbe Stunde ungestört für dich.', 'Nửa tiếng yên tĩnh, không bị làm phiền.')], [L('Platz','Không gian'), L('Ca. 3 Meter frei begehbare Fläche.', 'Khoảng 3 mét trống để đi lại.')], [L('Sicherheit', 'An toàn'), L('Dein stabiler Stuhl steht griffbereit.', 'Chiếc ghế chắc chắn ở ngay trong tầm tay.')]]} />
       <button className={btnPrimary} onClick={() => setStage(5)}>{L('Alles bereit – Vergleich starten!', 'Sẵn sàng – bắt đầu so sánh!')}</button>
     </>}
   </main>
@@ -148,6 +152,7 @@ export default function BalanceCheck() {
   return (
     <div className="mx-auto min-h-dvh max-w-[440px] bg-cream px-4 pt-[calc(env(safe-area-inset-top)+16px)] pb-10">
       <header className="pb-2 text-center">
+        <p className="flow-note mb-2">{L('Deine Eingaben werden nach jeder Aufgabe gespeichert.', 'Câu trả lời được lưu sau mỗi bài.')}</p>
         <h1 className="text-[26px] leading-8 font-extrabold tracking-[-0.6px]">{L('Selbsttest', 'Tự kiểm tra')}</h1>
         <p className="mt-1 text-sm font-semibold text-rust">{isStart ? L('Tag 1', 'Ngày 1') : L(`Tag ${PROGRAM_DAYS}`, `Ngày ${PROGRAM_DAYS}`)} · {L('Aufgabe', 'Bài')} {page + 1}/{tasks.length}</p>
         <nav aria-label={L('Kategorien', 'Nhóm')} className="mt-3 grid grid-cols-3 gap-1 rounded-full bg-white p-1">

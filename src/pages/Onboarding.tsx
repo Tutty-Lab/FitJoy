@@ -1,35 +1,28 @@
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
 import Vestibu from '../components/Vestibu'
-import { StreakFlame } from '../components/GameEffects'
-import { playGameSound, stopGameAudio } from '../lib/gameAudio'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, Check, Flame, ShieldCheck, Target } from 'lucide-react'
+import LanguagePicker from '../components/LanguagePicker'
 import { L } from '../lib/i18n'
 import { loadProfile, saveProfile } from '../lib/profile'
 
 export default function Onboarding() {
-  const reduced = useReducedMotion()
-  const navigate = useNavigate()
-  useEffect(() => () => stopGameAudio(), [])
-  const [step, setStep] = useState(0)
-  const [goal, setGoal] = useState(loadProfile()?.goal ?? '')
-  const [days, setDays] = useState(loadProfile()?.streakGoal ?? 7)
-  const titles = [L('Hallo! Ich bin Vestibu.', 'Chào bạn! Mình là Vestibu.'), L('Was möchtest du erreichen?', 'Bạn muốn đạt điều gì?'), L('Dein erster Streak beginnt hier.', 'Chuỗi ngày đầu tiên bắt đầu ở đây.'), L('Ein kleiner Anstoß. Jeden Tag.', 'Một lời nhắc nhỏ. Mỗi ngày.'), L('Bereit für deinen ersten Schritt?', 'Sẵn sàng bước đầu tiên chưa?')]
-  const next = () => {
-    if (step < 4) { stopGameAudio(); playGameSound('tap'); setStep(step + 1); return }
-    saveProfile({ gameOnboarded: true, goal, streakGoal: days })
-    navigate(loadProfile()?.checks?.start || loadProfile()?.checkPostponed ? '/' : '/check/start', { replace: true })
+  const [step,setStep]=useState(0)
+  const navigate=useNavigate()
+  const titles=[L('Eine Postkarte. Eine gemeinsame Reise.','Một tấm thiệp. Một hành trình cùng nhau.'),L('Dein Tag in drei kleinen Minuten','Một ngày với ba phút nhỏ'),L('In Ruhe und mit sicherem Halt','Thong thả và có chỗ vịn chắc chắn')]
+  const next=()=>{
+    if(step<2){setStep(step+1);return}
+    saveProfile({gameOnboarded:true,onboarded:true})
+    navigate(loadProfile()?.checks?.start||loadProfile()?.checkPostponed?'/':'/check/start',{replace:true})
   }
   return <div className="game-onboarding">
-    <header className="flex items-center gap-4"><button aria-label={L('Zurück', 'Quay lại')} disabled={step === 0} onClick={() => setStep(step - 1)} className="p-2 disabled:opacity-25"><ArrowLeft /></button><div className="game-progress flex-1" role="progressbar" aria-label={L('Einrichtung', 'Thiết lập')} aria-valuemin={0} aria-valuemax={5} aria-valuenow={step + 1}><span style={{ width: `${(step + 1) * 20}%` }} /></div></header>
-    <AnimatePresence mode="wait" initial={false}><motion.main key={step} initial={reduced ? false : { opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={reduced ? undefined : { opacity: 0, x: -16 }} transition={{duration: .16}} className="flex flex-1 flex-col justify-center gap-6 py-8">
-      <div className="flex items-center gap-3"><Vestibu mood={step === 4 ? 'celebrate' : 'wave'} className="w-28 shrink-0" /><h1 className="game-speech text-xl font-black">{titles[step]}</h1></div>
-      {step === 0 && <><p className="text-center text-lg text-slate-600">{L('Dein Gleichgewicht ist ein Abenteuer. Wir gehen es gemeinsam an – eine Minute nach der anderen.', 'Thăng bằng là một hành trình. Mình cùng đi nhé, từng phút một.')}</p><p className="text-center font-bold">{L('90 Tage. Kleine Schritte. Dein Tempo.', '90 ngày. Từng bước nhỏ. Theo nhịp của bạn.')}</p></>}
-      {step === 1 && <div className="grid gap-3">{[L('Sicherer im Alltag', 'Vững vàng hơn mỗi ngày'), L('Mehr Vertrauen in meinen Körper', 'Tự tin hơn với cơ thể'), L('Eine gesunde Gewohnheit', 'Xây dựng thói quen tốt')].map(text => <button key={text} aria-pressed={goal === text} className={`game-choice ${goal === text ? 'selected' : ''}`} onClick={() => setGoal(text)}><Target className="text-brand" />{text}{goal === text && <Check className="ml-auto shrink-0" />}</button>)}</div>}
-      {step === 2 && <><div className="game-flame"><StreakFlame lit /></div><p className="text-center text-slate-600">{L('Eine abgeschlossene Minute pro Tag hält deine Flamme am Leben. Welches Ziel motiviert dich?', 'Hoàn thành một phút mỗi ngày để giữ ngọn lửa. Mục tiêu nào truyền động lực cho bạn?')}</p><div className="grid grid-cols-3 gap-3">{[3,7,14].map(n => <button key={n} aria-pressed={days === n} className={`game-choice flex-col ${days === n ? 'selected' : ''}`} onClick={() => setDays(n)}><strong className="text-3xl">{n}</strong>{L('Tage', 'ngày')}</button>)}</div></>}
-      {step === 3 && <><div className="widget-phone" role="img" aria-label={L('Vorschau des FitJoy-Widgets auf dem iPhone', 'Minh họa widget FitJoy trên iPhone')}><div className="widget-phone-island" /><div className="widget-phone-screen"><div className="widget-preview"><div className="widget-preview-streak"><Flame fill="currentColor" /><strong>7</strong></div><Vestibu mood="wave" /><strong>FitJoy</strong><span>{L('Eine Minute für dich.', 'Một phút cho bạn.')}</span></div><div className="widget-apps" aria-hidden="true">{Array.from({length:6}, (_, i) => <i key={i} />)}</div></div><div className="widget-phone-home" /></div><p className="text-center text-slate-600">{L('Mit dem iPhone-Widget bleibt dein Streak im Blick. Halte den Home-Bildschirm gedrückt, tippe auf Bearbeiten → Widget hinzufügen und suche FitJoy.', 'Giữ màn hình chính iPhone, chọn Sửa → Thêm tiện ích, tìm FitJoy để theo dõi chuỗi ngày.')}</p><p className="text-center text-xs text-slate-500">{L('Optional. Du kannst es jederzeit später hinzufügen.', 'Không bắt buộc. Bạn có thể thêm sau.')}</p></>}
-      {step === 4 && <><div className="game-choice"><ShieldCheck className="shrink-0 text-brand" /><p>{L('Zuerst lernen wir dein Gleichgewicht kennen. Übe mit sicherem Halt und pausiere, wenn du dich unwohl fühlst.', 'Trước tiên, mình tìm hiểu khả năng thăng bằng của bạn. Tập gần chỗ vịn chắc chắn, dừng khi thấy khó chịu.')}</p></div></>}
-    </motion.main></AnimatePresence><footer className="game-footer"><button disabled={step === 1 && !goal} className="game-primary w-full" onClick={next}>{step === 4 ? L('Los geht’s', 'Bắt đầu thôi') : L('Weiter', 'Tiếp tục')}</button></footer>
+    <LanguagePicker/>
+    <header className="flex items-center gap-3 mt-4"><button className="p-2" disabled={step===0} aria-label={L('Zurück','Quay lại')} onClick={()=>setStep(step-1)}><ArrowLeft/></button><p className="flow-note">{L(`Einführung ${step+1}/3`,`Giới thiệu ${step+1}/3`)}</p></header>
+    <main className="flex flex-1 flex-col justify-center gap-6 py-6">
+      <Vestibu mood="wave" className="mx-auto w-28"/><h1 className="text-2xl font-black">{titles[step]}</h1>
+      {step===0 && <><p>{L('Vestibu findet eine leere Postkarte im Hafen. Wer hat sie geschickt? Gemeinsam folgen wir den Spuren durch den Wald bis zum Leuchtturm.','Vestibu tìm thấy một tấm thiệp trắng ở bến cảng. Ai đã gửi nó? Mình cùng lần theo manh mối qua rừng tới hải đăng nhé.')}</p><p className="flow-note">{L('90 Programmtage, neun Kapitel. Du bestimmst dein Tempo. Eine Pause löscht keine Entdeckung.','90 ngày chương trình, chín chương truyện. Bạn chọn nhịp của mình. Nghỉ một ngày không làm mất khám phá.')}</p></>}
+      {step===1 && <ol className="list-decimal pl-5 space-y-4"><li>{L('Öffne „Heute“ und starte deine nächste 60-Sekunden-Minute.','Mở “Hôm nay”, bắt đầu phút tập 60 giây tiếp theo.')}</li><li>{L('Nach der ersten Minute öffnet sich die heutige Geschichte. Zwei weitere Minuten kannst du später am Tag machen.','Phút đầu mở diễn biến truyện hôm nay. Hai phút còn lại có thể tập sau trong ngày.')}</li><li>{L('Der nächste Programmtag öffnet am nächsten Kalendertag. Bonus ist freiwillig und öffnet nichts zusätzlich.','Ngày chương trình tiếp theo mở vào ngày lịch mới. Bonus tùy chọn, không mở thêm ngày.')}</li></ol>}
+      {step===2 && <><p>{L('Bereite einen stabilen Stuhl und freien Platz vor. Übe nur so weit, wie es angenehm bleibt. Bei Schwindel oder Unwohlsein pausieren und hinsetzen.','Chuẩn bị ghế chắc chắn và chỗ trống. Chỉ tập trong mức dễ chịu. Khi chóng mặt hoặc khó chịu, dừng và ngồi xuống.')}</p><p>{L('Zuerst kannst du deinen Ausgangspunkt mit einem Selbsttest festhalten. Plane dafür etwa 30 ruhige Minuten ein; du kannst ihn speichern und später fortsetzen.','Trước tiên bạn có thể ghi lại điểm khởi đầu bằng bài tự kiểm tra. Dành khoảng 30 phút yên tĩnh; có thể lưu và tiếp tục sau.')}</p><p className="flow-note">{L('Sprache, Erinnerungen und Widget-Hilfe findest du später im Profil.','Ngôn ngữ, nhắc nhở và hướng dẫn widget nằm trong Hồ sơ.')}</p></>}
+    </main><footer className="game-footer"><button className="game-primary w-full" onClick={next}>{step===2?(loadProfile()?.checks?.start||loadProfile()?.checkPostponed?L('Zur heutigen Minute','Về phút tập hôm nay'):L('Zum Selbsttest','Đến bài tự kiểm tra')):L('Weiter','Tiếp tục')}</button>{loadProfile()?.gameOnboarded&&<Link to="/profile" className="flow-back justify-center w-full">{L('Zurück zum Profil','Về hồ sơ')}</Link>}</footer>
   </div>
 }

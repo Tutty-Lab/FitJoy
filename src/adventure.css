@@ -1,0 +1,62 @@
+.game-home:has(.adventure-map){background:#fff}
+.adventure-map{margin:0;overflow:hidden;background:#a4e4e9;border-top:3px solid #c7ece5;border-bottom:3px solid #85d3ce}
+.adventure-water{position:relative;width:100%;aspect-ratio:1 / 3;isolation:isolate}
+.adventure-scenery{position:absolute;inset:0;width:100%;height:100%;display:block}
+.adventure-map-title{position:absolute;top:18px;inset-inline:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:1;color:#176c78;font-size:12px;font-weight:900}
+.adventure-map-title>a{display:flex;align-items:center;gap:7px;min-height:40px;padding:8px 12px;background:#fffdf2;border:2px solid #fff;border-bottom:4px solid #78bec0;border-radius:14px}
+.adventure-map-title>span{max-width:60%;font-size:14px;line-height:1.5}
+.adventure-stop{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;z-index:2;width:80px}
+.adventure-node{position:relative;display:grid;place-items:center;width:65px;height:61px;border-radius:50%;background:#c4d8b3;border:3px solid #d7e8c6;border-bottom:8px solid #91ac85;box-shadow:0 6px 0 #689e5c29;color:#607b5b;transition:transform .15s ease,border-bottom-width .15s ease}
+.adventure-node svg{width:26px;height:26px;stroke-width:3}
+.adventure-node.completed{background:#32b49a;border-color:#65d5b6;border-bottom-color:#178b7e;color:white;box-shadow:0 6px 0 #1879682b}
+.adventure-node.current,.adventure-node.now{background:#ffce4c;border-color:#ffe790;border-bottom-color:#dfa329;color:#7d5416;outline:5px solid #fff9dc;outline-offset:3px;width:73px;height:68px;box-shadow:0 8px 0 #907d3433}
+.adventure-node:active{transform:translateY(4px);border-bottom-width:4px}
+.adventure-node:focus-visible{outline:4px solid #13707e;outline-offset:7px}
+.adventure-day{color:#466344;background:#e8f5cb;box-shadow:0 2px 0 #86b47644;border-radius:8px;font-size:10px;font-weight:900;padding:3px 8px;margin-top:7px;white-space:nowrap}
+.adventure-here{position:absolute;bottom:calc(100% + 12px);padding:7px 12px;border-radius:12px;background:white;border:2px solid #e9b53e;border-bottom-width:4px;color:#886017;font-size:11px;font-weight:900;white-space:nowrap;box-shadow:0 3px 0 #647b4220}
+.adventure-here:after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#e9b53e}
+.game-home>.story-dialogue{padding-top:14px;padding-bottom:18px}
+.game-home>.story-dialogue .game-speech{padding:12px 14px;font-size:12px;line-height:1.65}
+.game-home>.story-dialogue>.vestibu-rig{flex-basis:64px;width:64px;min-height:80px}
+.game-home:has(.adventure-map)>.game-chapter{padding:16px 18px;margin-top:6px}
+@media(min-width:400px){.adventure-node{width:70px;height:65px}.adventure-node.current,.adventure-node.now{width:78px;height:72px}.adventure-day{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.adventure-node{transition:none}}
+
+.adventure-regions{display:flex;gap:8px;padding:0 16px 16px}.adventure-regions button{flex:1;min-width:0;min-height:54px;padding:8px 5px;border:2px solid #dbe7e3;border-bottom-width:4px;border-radius:14px;font-size:11px;font-weight:900;color:#58736a;line-height:1.4}.adventure-regions button[aria-pressed="true"]{background:#def3e9;border-color:#4cae96;color:#176f67}.adventure-regions button:focus-visible{outline:3px solid #176f67;outline-offset:3px}
+
+.journey-map{margin-top:-12px}.journey-map .adventure-map+.adventure-map{border-top:0}.journey-map .adventure-map:last-of-type{margin-bottom:12px}
+.journey-chapter{position:relative}.journey-map .adventure-map{border:0;margin:0!important}.journey-map .adventure-water{isolation:auto}.map-join{position:absolute;top:90%;left:0;width:100%;height:auto;aspect-ratio:400/385;z-index:1;pointer-events:none;overflow:visible}.map-to-top{position:fixed;right:max(20px,calc((100vw - 440px)/2 + 16px));bottom:calc(100px + env(safe-area-inset-bottom));z-index:18;display:grid;place-items:center;width:48px;height:48px;border:2px solid #e5ac42;border-bottom:5px solid #c88b2e;border-radius:17px;background:#ffcd62;box-shadow:0 4px 12px #506b5a33}.map-to-top:active{transform:translateY(2px)}.map-to-top:focus-visible{outline:3px solid #13707e;outline-offset:3px}
+
+/* Ambient motion is scoped to visible maps; the journal's illustrations stay still. */
+.map-atmosphere{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden}
+.adventure-map{--map-breeze:5s;--map-water:4s;--map-drift:12s;--map-feedback:420ms}
+.adventure-map .island-tree-crown{transform-box:fill-box;transform-origin:50% 100%;animation:map-sway var(--map-breeze) ease-in-out infinite alternate}
+.adventure-map .island-boat-body{transform-origin:0 15px;animation:map-boat var(--map-water) ease-in-out infinite}
+.adventure-map .island-beam{animation:map-light 6s ease-in-out infinite}
+.map-ripple{transform-box:fill-box;transform-origin:center;animation:map-ripple var(--map-water) ease-out infinite}
+.map-cloud{animation:map-cloud var(--map-drift) ease-in-out infinite alternate}
+.map-cloud-far{animation-duration:17s;animation-delay:-8s}
+.map-firefly{animation:map-firefly 5s ease-in-out infinite}
+.map-phase-1{animation-delay:-1.7s}.map-phase-2{animation-delay:-3.3s}
+.map-butterfly-wings{transform-box:fill-box;transform-origin:center;animation:map-flutter 1.8s ease-in-out infinite}
+.adventure-map .map-wave-lines{animation:map-waterline 5s ease-in-out infinite}
+.adventure-map .adventure-node.now svg{animation:map-invitation 3s ease-in-out infinite}
+.adventure-map .island-tree-crown,.adventure-map .island-boat-body,.adventure-map .island-beam,.adventure-map .map-ripple,.adventure-map .map-cloud,.adventure-map .map-firefly,.adventure-map .map-butterfly-wings,.adventure-map .map-wave-lines,.adventure-map .adventure-node.now svg{animation-play-state:paused}
+.adventure-map[data-moving=true] .island-tree-crown,.adventure-map[data-moving=true] .island-boat-body,.adventure-map[data-moving=true] .island-beam,.adventure-map[data-moving=true] .map-ripple,.adventure-map[data-moving=true] .map-cloud,.adventure-map[data-moving=true] .map-firefly,.adventure-map[data-moving=true] .map-butterfly-wings,.adventure-map[data-moving=true] .map-wave-lines,.adventure-map[data-moving=true] .adventure-node.now svg{animation-play-state:running}
+.map-landmark{position:absolute;transform:translate(-50%,-50%);z-index:1;width:48px;height:48px}
+.map-landmark-hit{width:48px;height:48px;border-radius:50%;display:flex;justify-content:flex-end;align-items:flex-start;color:#fff5b8;font-size:23px;text-shadow:0 2px #9a783e;background:transparent;transition:background-color .15s ease,transform .15s ease}
+.map-landmark-hit:active{transform:scale(.97)}.map-landmark-hit:focus-visible{outline:3px solid #13707e;outline-offset:3px;background:#ffffff66}
+@media(hover:hover) and (pointer:fine){.map-landmark-hit:hover{background:#ffffff44}}
+.map-landmark-message{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);width:145px;padding:10px;border:2px solid #e4bd60;border-radius:14px;background:#fffcf0;color:#6b541e;font-size:12px;font-weight:800;line-height:1.5;text-align:center;pointer-events:none;box-shadow:0 3px #d3aa54}
+.map-pop{position:absolute;inset:0;display:grid;place-items:center;color:#fff5bd;font-size:42px;pointer-events:none;animation:map-pop var(--map-feedback) ease-out both}
+@keyframes map-sway{from{transform:rotate(-1.4deg)}to{transform:rotate(1.4deg)}}
+@keyframes map-boat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-3px) rotate(3deg)}}
+@keyframes map-light{0%,100%{opacity:.25}50%{opacity:.65}}
+@keyframes map-ripple{from{transform:scale(.65);opacity:.7}to{transform:scale(1.35);opacity:0}}
+@keyframes map-cloud{from{transform:translateX(-8px)}to{transform:translateX(12px)}}
+@keyframes map-firefly{0%,100%{transform:translate(0,0);opacity:.35}50%{transform:translate(4px,-7px);opacity:1}}
+@keyframes map-flutter{0%,100%{transform:scaleX(1) rotate(-7deg)}50%{transform:scaleX(.6) rotate(7deg)}}
+@keyframes map-waterline{0%,100%{opacity:.6;transform:translateX(0)}50%{opacity:1;transform:translateX(4px)}}
+@keyframes map-invitation{0%,80%,100%{transform:translateY(0)}88%{transform:translateY(-3px)}}
+@keyframes map-pop{from{transform:scale(.6);opacity:1}to{transform:scale(1.5);opacity:0}}
+@media(prefers-reduced-motion:reduce){.adventure-map *, .adventure-map *::before,.adventure-map *::after{animation:none!important}.map-landmark-hit{transition:none}.map-landmark-hit:active{transform:none}}

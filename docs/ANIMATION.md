@@ -9,3 +9,5 @@
 ElevenLabs sound generation and voice lookup both timed out during implementation. No ElevenLabs audio was generated or integrated. Replace the static reward asset and welcome playback with reviewed recorded files when the service becomes available. Do not put API credentials in frontend code.
 
 Verified: production web build; mobile onboarding and widget layout; streak reveal; reduced-motion confetti suppression; reward file served successfully; existing game logic checks.
+
+Map: scoped CSS motion in src/adventure.css; useMapMotion pauses offscreen/hidden maps. Reduced motion disables map animation. scripts/check-map-motion.js verifies movement, pause, landmark feedback, day navigation; run in an isolated Playwright session only (writes preview localStorage).

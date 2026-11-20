@@ -1,10 +1,11 @@
+import ExitMinuteDialog from '../../components/ExitMinuteDialog'
+import StoryReward from '../../components/StoryReward'
 import Vestibu from '../../components/Vestibu'
 import { Confetti } from '../../components/GameEffects'
 import { playGameSound, unlockGameAudio } from '../../lib/gameAudio'
-import { StreakSummary } from '../Streak'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
-import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
 import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, localDay, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
@@ -20,7 +21,7 @@ export default function WorkoutDetail() {
   const day = Number(useParams().day)
   const location = useLocation()
   const navigate = useNavigate()
-  const { statusOf } = useCompleted()
+  const { statusOf, completed, finished, current } = useCompleted()
   const session = useMemo(() => {
     const requested = Number(new URLSearchParams(location.search).get('session'))
     return Number.isInteger(requested) && requested >= 1 && requested <= SESSIONS_PER_DAY ? requested : Math.min(SESSIONS_PER_DAY, sessionsDone(day) + 1)
@@ -32,12 +33,20 @@ export default function WorkoutDetail() {
   const [stage, setStage] = useState<Stage>('instructions')
   const [remaining, setRemaining] = useState(PRACTICE_SECONDS)
   const [running, setRunning] = useState(false)
+  const [exitOpen, setExitOpen] = useState(false)
+  const [newDiscovery, setNewDiscovery] = useState(false)
+  const wasCompleted = useRef(completed.includes(day))
   const player = useRef<VideoPlayerHandle>(null)
   const remainingMs = useRef(PRACTICE_SECONDS * 1000)
   const from = (location.state as { from?: string } | null)?.from
   const returnTo = from && /^\/days\/\d+$/.test(from) ? from : '/'
 
-  useEffect(() => { setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false) }, [day, session])
+  useEffect(() => { setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false); setExitOpen(false); setNewDiscovery(false); wasCompleted.current=completed.includes(day) }, [day, session])
+  useEffect(() => {
+    const pause=()=>{ if(document.hidden){player.current?.pause();setRunning(false)} }
+    document.addEventListener('visibilitychange',pause)
+    return ()=>document.removeEventListener('visibilitychange',pause)
+  }, [])
   useEffect(() => {
     if (!running || (stage !== 'practice' && stage !== 'bonus')) return
     const startedAt = performance.now()
@@ -51,6 +60,7 @@ export default function WorkoutDetail() {
   useEffect(() => {
     if (stage === 'practice' && remaining === 0) {
       setRunning(false)
+      setNewDiscovery(!wasCompleted.current)
       completeLesson(day, session)
       if (loadProfile()?.chime ?? true) playGameSound('success')
       setStage('done')
@@ -85,10 +95,12 @@ export default function WorkoutDetail() {
     </blockquote>
   )
   const back = () => {
-    if (stage === 'bonus') { setRunning(false); setStage('done'); return }
-    if (stage === 'practice') { setRunning(false); setRemaining(PRACTICE_SECONDS); setStage('instructions'); return }
+    if (stage === 'bonus' || stage === 'practice') { player.current?.pause(); setRunning(false); setExitOpen(true); return }
     navigate(returnTo, { replace: true })
   }
+  const done = sessionsDone(day)
+  const nextRoute = finished && day===90 && done>=SESSIONS_PER_DAY ? (loadProfile()?.checks?.end ? '/compare' : '/check/end') : done<SESSIONS_PER_DAY && day===current ? `/workouts/${day}?session=${done+1}` : '/'
+  const nextLabel = finished && day===90 && done>=SESSIONS_PER_DAY ? L('Zum abschließenden Selbsttest', 'Đến tự kiểm tra cuối hành trình') : done<SESSIONS_PER_DAY && day===current ? L(`Weiter zu Minute ${done+1}`, `Đến phút ${done+1}`) : L('Zurück zu Heute', 'Về Hôm nay')
 
   return <div className="flex flex-col gap-5 px-4 pb-8">
     <header className="sticky top-0 z-30 flex items-center gap-3 bg-white/95 py-2 backdrop-blur">
@@ -103,7 +115,7 @@ export default function WorkoutDetail() {
       <h2 className="text-xl font-black">{baseText.title}</h2>
       <ol className="list-decimal space-y-2 rounded-[28px] bg-white p-6 pl-10 border-2 border-mint shadow-[0_4px_0_#cfe7e5] text-[15px] leading-6">{baseText.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
       <Affirmation />
-      <button type="button" className={secondary} onClick={() => { player.current?.replay() }}>{L('Anleitung noch einmal ansehen', 'Xem lại hướng dẫn')}</button>
+      <p className="flow-note">{L('Der Zähler läuft nur, solange das Video spielt. Bei Unwohlsein pausieren und hinsetzen.', 'Đồng hồ chỉ chạy khi video đang phát. Nếu khó chịu, hãy tạm dừng và ngồi xuống.')}</p>
       <button type="button" className={primary} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>
     </>}
 
@@ -117,11 +129,12 @@ export default function WorkoutDetail() {
     {stage === 'done' && <section className="flex flex-col items-center gap-4 rounded-[28px] bg-white p-6 text-center border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
       <Confetti /><Vestibu mood="celebrate" className="size-32" />
       <h2 className="text-2xl font-black">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
-        <StreakSummary />
+      {newDiscovery && <StoryReward day={day} />}
       <p className="text-slate-600">{L(`Grundübung ${session}/${SESSIONS_PER_DAY} für Tag ${day} geschafft.`, `Đã xong bài cơ bản ${session}/${SESSIONS_PER_DAY} của ngày ${day}.`)}</p>
-      {bonus && <p className="text-lg font-bold text-rust">{content.bonusImpuls || L('Lust auf deine Bonus-Minute?', 'Muốn tập thêm phút bonus không?')}</p>}
-      {bonus && <button type="button" className={primary} onClick={() => start('bonus')}>{L('Bonus-Minute starten', 'Bắt đầu phút bonus')}</button>}
-      <button type="button" className={bonus ? 'h-10 text-sm font-semibold text-slate-500 underline' : secondary} onClick={() => navigate(returnTo, { replace: true })}>{bonus ? L('Heute nicht', 'Hôm nay thôi') : L('Zur Startseite', 'Về trang chủ')}</button>
+      {!newDiscovery && <p className="flow-note">{L('Diese Geschichte ist bereits in deinem Inselbuch. Wiederholen gibt keine doppelte Entdeckung.', 'Diễn biến này đã lưu trong nhật ký. Tập lại không nhận thêm khám phá trùng.')}</p>}
+      <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>
+      {nextRoute !== '/' && <Link to="/" className="flow-back">{L('Für jetzt aufhören', 'Tạm nghỉ, về Hôm nay')}</Link>}
+      {bonus && <details className="w-full text-left"><summary className="flow-summary">{L('Bonus · freiwillig', 'Bonus · tùy chọn')}</summary><p className="flow-note mb-3">{content.bonusImpuls || L('Eine weitere Minute, ohne zusätzliche Freischaltung.', 'Tập thêm một phút, không mở thêm ngày hay phần thưởng.')}</p><button type="button" className={secondary} onClick={() => start('bonus')}>{L('Bonus-Minute starten', 'Bắt đầu phút bonus')}</button></details>}
     </section>}
 
     {stage === 'bonus' && bonus && <>
@@ -140,7 +153,9 @@ export default function WorkoutDetail() {
       <Confetti /><Vestibu mood="celebrate" className="size-32" />
       <h2 className="text-2xl font-black">{L('Bonus geschafft!', 'Xong phút bonus!')}</h2>
       <p className="text-slate-600">{L('Eine Extra-Minute für dein Gleichgewicht.', 'Thêm một phút cho sự thăng bằng của bạn.')}</p>
-      <button type="button" className={primary} onClick={() => navigate(returnTo, { replace: true })}>{L('Fertig', 'Xong')}</button>
+      <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>
+      {nextRoute !== '/' && <Link to="/" className="flow-back">{L('Für jetzt aufhören','Tạm nghỉ, về Hôm nay')}</Link>}
     </section>}
+    {exitOpen && <ExitMinuteDialog stay={()=>setExitOpen(false)} leave={()=>navigate(returnTo,{replace:true})}/>}
   </div>
 }

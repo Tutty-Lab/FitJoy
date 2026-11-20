@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import still from '../assets/home/vestibu-welcome.png'
 
-type Mood = 'wave' | 'idle' | 'celebrate' | 'sad' | 'think'
+export type Mood = 'wave' | 'idle' | 'celebrate' | 'sad' | 'think' | 'encourage' | 'rest'
 type Clip = 'wave' | 'jump' | 'thumbs' | 'clap' | 'sad' | 'think' | 'point' | 'dance' | 'stretch' | 'kiss'
 
 // Hand-drawn cartoon clips (generated from the original artwork, ~1.2 s each, in /public/vestibu).
@@ -12,6 +12,8 @@ const POOLS: Record<Mood, Clip[]> = {
   celebrate: ['jump', 'clap', 'dance', 'thumbs'],
   sad: ['sad', 'think'],
   think: ['think', 'point'],
+  encourage: ['thumbs', 'clap'],
+  rest: ['stretch', 'think'],
 }
 const src = (c: Clip, ext: 'mp4' | 'jpg') => `${import.meta.env.BASE_URL}vestibu/${c}.${ext}`
 

@@ -1,3 +1,4 @@
+import LanguagePicker from '../../components/LanguagePicker'
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { loadProfile } from '../../lib/profile'
@@ -7,7 +8,6 @@ import sprout from '../../assets/home/mascot.png'
 import icHeart from '../../assets/auth/l-heart.svg'
 import icClear from '../../assets/auth/l-clear.svg'
 import icEye from '../../assets/auth/eye.svg'
-import icCheck from '../../assets/auth/l-check.svg'
 import { L } from '../../lib/i18n'
 
 export default function Login() {
@@ -15,7 +15,6 @@ export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPw, setShowPw] = useState(false)
-  const [remember, setRemember] = useState(true)
 
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
@@ -30,11 +29,12 @@ export default function Login() {
     const invite = new URLSearchParams(location.search).get('invite')
     if (invite) { try { await api('redeem', { method: 'POST', body: { code: invite } }) } catch (e) { return setError(e instanceof Error ? e.message : L('Einladung konnte nicht eingelöst werden', 'Không thể dùng mã mời')) } }
     const profile = loadProfile()
-    navigate(profile?.role === 'admin' ? '/admin' : profile?.checks?.start ? '/' : '/check/start', { replace: true })
+    navigate(profile?.role === 'admin' ? '/admin' : !profile?.gameOnboarded ? '/onboarding' : profile?.checks?.start || profile?.checkPostponed ? '/' : '/check/start', { replace: true })
   }
 
   return (
     <div className="stagger mx-auto min-h-dvh max-w-[440px] bg-white px-4 pt-[calc(env(safe-area-inset-top)+64px)] pb-9">
+      <LanguagePicker />
       <section className="relative mb-4 flex flex-col gap-2 overflow-hidden rounded-[28px] border-2 border-mint bg-[#f3f6f5] p-4 shadow-[0_4px_0_#cfe7e5]">
         <div className="absolute -top-8 -right-8 size-36 rounded-full bg-[#ffe3d3] opacity-40 blur-[40px]" />
         <div className="absolute -bottom-6 -left-6 size-32 rounded-full bg-[#ffece1] opacity-30 blur-[24px]" />
@@ -94,13 +94,7 @@ export default function Login() {
         </div>
 
         <div className="flex items-center justify-between pt-1">
-        <label className="flex cursor-pointer items-center gap-2.5">
-          <input type="checkbox" checked={remember} onChange={e => setRemember(e.target.checked)} className="sr-only" />
-          <span className={`flex size-6 items-center justify-center rounded-full shadow-inner ${remember ? 'bg-brand' : 'border-2 border-[#e7efee] bg-white'}`}>
-            {remember && <img src={icCheck} alt="" style={{ width: 10.867, height: 8.017 }} />}
-          </span>
-          <span className="text-sm leading-[18px] font-semibold text-[#3f4a4b]">{L('Angemeldet bleiben', 'Ghi nhớ đăng nhập')}</span>
-        </label>
+
         <Link to="/signup" className="text-sm font-bold text-brand-deep">{L('Registrieren', 'Đăng ký')}</Link>
         </div>
 

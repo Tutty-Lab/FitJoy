@@ -1,0 +1,31 @@
+.story-island{display:block;width:100%;height:auto;flex-shrink:0}
+.story-home-card{display:block;margin:20px 16px 0;border:2px solid #dce7e6;border-bottom-width:5px;border-radius:24px;overflow:hidden;background:#fff}
+.story-home-card .story-island{border-radius:0}
+.story-home-caption{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px}
+.story-home-caption>span{font-size:13px;font-weight:900;color:#13707e;white-space:nowrap}
+.story-eyebrow{color:#13707e;text-transform:uppercase;font-size:10px;font-weight:900;letter-spacing:.8px}
+.story-dialogue{display:flex;align-items:center;gap:12px;min-width:0}
+.story-dialogue>div{min-width:0;flex:1}
+.story-page{display:flex;flex-direction:column;gap:20px;padding:8px 16px 24px}
+.story-region-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.story-region-tabs button{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;border:2px solid #e2eae8;border-bottom-width:4px;border-radius:16px;padding:12px 6px;color:#64748b;font-size:11px;font-weight:800;line-height:1.5}
+.story-region-tabs button[aria-pressed=true]{background:#e3f6f0;border-color:#1a8a99;color:#0e5560}
+.story-region-tabs button>span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#eef3f2;font-size:14px}
+.story-card,.story-reward{border:2px solid #dce7e6;border-bottom-width:5px;border-radius:24px;overflow:hidden;background:white}
+.story-card .story-island,.story-reward .story-island{border-radius:0}
+.story-card-body{display:flex;flex-direction:column;gap:8px;padding:18px}
+.story-episode{border:2px solid #e2eae8;border-bottom-width:4px;border-radius:18px;background:white}
+.story-episode.earned{border-color:#a8d9c5;background:#f4fbf7}
+.story-episode summary{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;list-style:none;font-size:14px}
+.story-episode summary::-webkit-details-marker{display:none}
+.story-episode summary:after{content:'+';margin-left:auto;color:#13707e;font-size:18px;font-weight:700}
+.story-episode[open] summary:after{content:'−'}
+.story-episode-number{display:grid;place-items:center;flex-shrink:0;width:34px;height:34px;border-radius:12px;background:#e3f2f1;color:#13707e;font-weight:900}
+.story-episode.earned .story-episode-number{background:#1a8a99;color:white}
+.story-kind-note{border-radius:16px;background:#f2f7f5;padding:16px;color:#506962;font-size:12px;line-height:1.8}
+.story-character{display:flex;flex-direction:column;gap:16px;border:2px solid #dce7e6;border-radius:22px;padding:18px;background:white}
+.story-mood-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.story-mood-buttons button{border:2px solid #dce7e6;border-bottom-width:4px;border-radius:12px;padding:10px 5px;font-size:11px;font-weight:800;color:#506962}
+.story-mood-buttons button[aria-pressed=true]{border-color:#1a8a99;background:#e3f6f0;color:#0e5560}
+.story-dialogue>.vestibu-rig{flex:0 0 80px;width:80px;min-height:96px;align-self:center}
+.story-dialogue>.game-speech{flex:1;min-width:0}

@@ -69,7 +69,7 @@ export function useReminderScheduler() {
           new Notification(L('Hallo, hier ist Vestibu 👋', 'Xin chào, mình là Vestibu 👋'), { body: L('Dein Selbsttest wartet auf dich. Mach dir kurz 3 Meter Platz, schnapp dir einen Stuhl und nimm dir eine halbe Stunde Ruhe nur für dich.', 'Bài tự kiểm tra đang chờ bạn. Dọn khoảng 3 mét trống, chuẩn bị một chiếc ghế và dành nửa tiếng yên tĩnh cho riêng mình.'), icon: '/icon.png', tag: 'vestibu-check' })
         }
       }
-      if (!p?.onboarded) return
+      if ((!p?.onboarded && !p?.gameOnboarded) || p?.pushAlerts === false) return
       const times = p.reminderTimes ?? DEFAULT_TIMES
       const enabled = p.reminders ?? [true, true, true]
       const now = new Date()

@@ -1,3 +1,5 @@
+import LanguagePicker from '../components/LanguagePicker'
+import { useCompleted } from '../lib/progress'
 import { useState, type ReactNode } from 'react'
 import { LogOut, RefreshCw, Trash2 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -21,7 +23,7 @@ import iTrophy from '../assets/profile/i-trophy.svg'
 import iFlame from '../assets/profile/i-flame.svg'
 import iStar from '../assets/profile/i-star.svg'
 import { ChevronRight } from 'lucide-react'
-import { L, lang, setLang } from '../lib/i18n'
+import { L } from '../lib/i18n'
 
 const Chevron = () => <ChevronRight aria-hidden="true" className="size-4 text-slate-400" />
 
@@ -54,6 +56,7 @@ function Group({ title, children }: { title: string; children: ReactNode }) {
 
 export default function Profile() {
   const navigate = useNavigate()
+  const {completed,dates}=useCompleted()
   const [p, setP] = useState(() => loadProfile())
 
   const toggle = (key: 'pushAlerts' | 'chime' | 'darkMode', fallback: boolean) => {
@@ -66,7 +69,7 @@ export default function Profile() {
   }
 
   function backup() {
-    const data = { profile: loadProfile(), exportedAt: new Date().toISOString() }
+    const data = { version:1, profile: loadProfile(), completed, activeDates:dates, exportedAt: new Date().toISOString() }
     const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }))
     const a = document.createElement('a')
     a.href = url
@@ -115,7 +118,9 @@ export default function Profile() {
       </section>
 
       <div className="flex flex-col gap-4">
-        <Link to="/onboarding" className="game-secondary">{L('Streak-Ziel & Widget einrichten', 'Thiết lập mục tiêu streak & widget')}</Link>
+        <Link to="/streak" className="game-secondary">{L('Meinen Streak ansehen', 'Xem chuỗi ngày của tôi')}</Link>
+        <Link to="/onboarding" className="game-secondary">{L('Einführung noch einmal lesen', 'Đọc lại giới thiệu hành trình')}</Link>
+        <details className="flow-card"><summary className="font-bold">{L('Streak-Ziel und iPhone-Widget', 'Mục tiêu chuỗi ngày và widget iPhone')}</summary><label className="flex justify-between gap-3">{L('Mein Ziel', 'Mục tiêu của tôi')}<select aria-label={L('Streak-Ziel', 'Mục tiêu chuỗi ngày')} value={p?.streakGoal??7} onChange={e=>setP(saveProfile({streakGoal:Number(e.target.value)}))}>{[3,7,14].map(n=><option key={n} value={n}>{n} {L('Tage', 'ngày')}</option>)}</select></label><p className="flow-note">{L('Auf dem iPhone: Home-Bildschirm gedrückt halten, Bearbeiten, Widget hinzufügen und FitJoy suchen. Dafür ist die installierte iOS-App nötig. Im Browser gibt es kein Home-Bildschirm-Widget.', 'Trên iPhone: giữ màn hình chính, chọn Sửa, Thêm tiện ích rồi tìm FitJoy. Cần cài ứng dụng iOS. Bản trình duyệt không có widget màn hình chính.')}</p></details>
         <Group title={L('Gleichgewicht', 'Thăng bằng')}>
           <Row
             onClick={redoBalanceCheck}
@@ -132,11 +137,12 @@ export default function Profile() {
         </Group>
 
         <Group title={L('Benachrichtigungen', 'Thông báo')}>
+          <Row to="/reminders" icon={<img src={iPhone} alt="" className="size-4" />} iconBg="bg-mint" title={L('Erinnerungszeiten', 'Giờ nhắc tập')} />
           <Row
             icon={<img src={iPhone} alt="" style={{ width: 12.5, height: 18.333 }} />}
             iconBg="bg-[rgba(255,236,225,0.3)]"
-            title={L('Mitteilungen auf dem Sperrbildschirm', 'Thông báo trên màn hình khóa')}
-            right={<Switch label={L('Mitteilungen auf dem Sperrbildschirm', 'Thông báo trên màn hình khóa')} on={p?.pushAlerts ?? true} onChange={() => toggle('pushAlerts', true)} />}
+            title={L('Erinnerungen bei geöffneter App', 'Nhắc khi ứng dụng đang mở')}
+            right={<Switch label={L('Erinnerungen bei geöffneter App', 'Nhắc khi ứng dụng đang mở')} on={p?.pushAlerts ?? true} onChange={() => toggle('pushAlerts', true)} />}
           />
           <Row
             icon={<img src={iSound} alt="" style={{ width: 15, height: 14.583 }} />}
@@ -147,7 +153,7 @@ export default function Profile() {
         </Group>
 
         <Group title={L('Einstellungen', 'Cài đặt')}>
-          <Row icon={<img src={iLang} alt="" style={{ width: 18.417, height: 16.667 }} />} iconBg="bg-[rgba(255,220,197,0.4)]" title={L('Sprache', 'Ngôn ngữ')} right={<span className="flex rounded-full bg-[#f3f6f5] p-1 text-sm font-bold">{(["de", "vi"] as const).map(l => <button key={l} type="button" aria-pressed={lang === l} onClick={() => lang !== l && setLang(l)} className={`rounded-full px-3 py-1 ${lang === l ? "bg-brand-deep text-white" : "text-[#3f4a4b]"}`}>{l === "de" ? "Deutsch" : "Tiếng Việt"}</button>)}</span>} />
+          <div className="p-4"><LanguagePicker /></div>
           <Row
             icon={<img src={iMoon} alt="" className="size-[15px]" />}
             iconBg="bg-[#e7efee]"

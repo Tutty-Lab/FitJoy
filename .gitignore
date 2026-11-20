@@ -11,3 +11,7 @@ android
 *.local.txt
 
 .env*
+
+.playwright-cli/
+output/
+__pycache__/

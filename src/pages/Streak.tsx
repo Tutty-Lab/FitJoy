@@ -1,7 +1,5 @@
 import Vestibu from '../components/Vestibu'
-import { StreakFlame, Confetti } from '../components/GameEffects'
-import { playGameSound } from '../lib/gameAudio'
-import { useState } from 'react'
+import { StreakFlame } from '../components/GameEffects'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Check } from 'lucide-react'
 import { useCompleted } from '../lib/progress'
@@ -18,8 +16,5 @@ export function StreakSummary() {
 }
 
 export default function Streak() {
-  const [revealed, setRevealed] = useState(false)
-  const { doneToday } = useCompleted()
-  const reveal = () => { if (!revealed) { playGameSound(doneToday ? 'streak' : 'tap'); setRevealed(true) } }
-  return <div className={`game-onboarding ${revealed ? '' : 'streak-night'}`}><Link to="/" aria-label={L('Zurück', 'Quay lại')} className="p-3 self-start"><ArrowLeft /></Link><main className="flex flex-1 flex-col justify-center gap-5" onTouchStart={e => { e.currentTarget.dataset.y = String(e.touches[0].clientY) }} onTouchEnd={e => { if (Number(e.currentTarget.dataset.y) - e.changedTouches[0].clientY > 40) reveal() }}>{revealed ? <>{doneToday && <Confetti />}<StreakSummary /></> : <><div className="game-flame"><StreakFlame /></div><h1 className="text-center text-3xl font-black">{L('Deine kleine Flamme.', 'Ngọn lửa nhỏ của bạn.')}</h1><p className="text-center">{L('Nach oben wischen oder tippen, um deinen Streak zu sehen.', 'Vuốt lên hoặc chạm để xem chuỗi ngày.')}</p></>}</main><footer className="game-footer">{revealed ? <Link className="game-primary block text-center" to="/">{L('Weiter', 'Tiếp tục')}</Link> : <button className="game-primary w-full" onClick={reveal}>{L('Streak ansehen', 'Xem chuỗi ngày')}</button>}</footer></div>
+  return <div className="game-onboarding"><Link to="/" className="flow-back"><ArrowLeft />{L('Heute', 'Hôm nay')}</Link><main className="flex flex-1 flex-col justify-center gap-5 py-6"><StreakSummary /><p className="flow-note text-center">{L('Eine Pause kann den Streak unterbrechen. Dein Programmfortschritt und deine Geschichte bleiben erhalten.', 'Nghỉ một ngày có thể ngắt chuỗi. Tiến trình chương trình và câu chuyện vẫn được giữ.')}</p></main><Link className="game-primary text-center" to="/">{L('Zur heutigen Minute', 'Về phút tập hôm nay')}</Link></div>
 }
