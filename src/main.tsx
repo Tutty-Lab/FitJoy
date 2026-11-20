@@ -1,3 +1,4 @@
+import { playGameSound } from './lib/gameAudio'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
@@ -9,6 +10,11 @@ import './dark.css'
 import { applyTheme } from './lib/theme'
 import { apiEnabled } from './lib/api'
 import { pullCatalog, pullUser } from './services/remote'
+
+// Soft tap sound on the main game buttons, map stops and tab icons (respects the sound setting).
+document.addEventListener('click', e => {
+  if ((e.target as Element | null)?.closest?.('.game-primary, .game-secondary, .adventure-node, nav a')) playGameSound('tap')
+}, { capture: true })
 
 async function boot() {
   // Refresh the local cache from the API before any screen reads it (workouts and progress

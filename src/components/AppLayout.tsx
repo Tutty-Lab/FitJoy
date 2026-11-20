@@ -5,7 +5,6 @@ import { L } from '../lib/i18n'
 
 const tabs: { to: string; label: string; icon: CartoonNavKind }[] = [
   { to: '/', label: L('Reise', 'Hành trình'), icon: 'journey' },
-  { to: '/story', label: L('Inselbuch', 'Nhật ký'), icon: 'journal' },
   { to: '/profile', label: L('Profil', 'Hồ sơ'), icon: 'profile' },
 ]
 

@@ -58,6 +58,9 @@ export default function WorkoutDetail() {
     }
   }, [running, stage])
   useEffect(() => {
+    if (running && (stage === 'practice' || stage === 'bonus') && remaining > 0 && remaining <= 3 && (loadProfile()?.chime ?? true)) playGameSound('tap')
+  }, [remaining]) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
     if (stage === 'practice' && remaining === 0) {
       setRunning(false)
       setNewDiscovery(!wasCompleted.current)
@@ -112,10 +115,8 @@ export default function WorkoutDetail() {
 
     {stage === 'instructions' && <>
       <VideoPlayer key={`${day}:instr`} ref={player} src={video} poster={poster} />
-      <h2 className="text-xl font-black">{baseText.title}</h2>
       <ol className="list-decimal space-y-2 rounded-[28px] bg-white p-6 pl-10 border-2 border-mint shadow-[0_4px_0_#cfe7e5] text-[15px] leading-6">{baseText.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
       <Affirmation />
-      <p className="flow-note">{L('Pausierst du das Video, hält auch der Zähler an. Bei Unwohlsein pausieren und hinsetzen.', 'Tạm dừng video thì đồng hồ cũng dừng. Nếu khó chịu, hãy tạm dừng và ngồi xuống.')}</p>
       <button type="button" className={primary} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>
     </>}
 

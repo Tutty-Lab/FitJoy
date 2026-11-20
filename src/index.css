@@ -254,6 +254,9 @@ body {
 .game-week>div{display:flex;align-items:center;flex-direction:column;gap:10px;font-weight:800;color:#64748b}
 .game-week>div>span:last-child{border-radius:50%;width:34px;height:34px;display:grid;place-items:center;background:#eef2f2}
 .game-week .active{background:#ff9b27!important;color:white}
+.game-week .is-today{color:#13707e}
+.game-week .is-today>span:last-child{box-shadow:0 0 0 3px #13707e}
+.game-week .is-future{opacity:.4}
 .streak-night{background:#142d3d;color:white}
 .streak-night .game-flame{color:#6b8191}
 .streak-night .game-flame svg{filter:drop-shadow(0 8px 0 #3b5264)}

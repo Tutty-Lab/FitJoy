@@ -3,7 +3,6 @@ import { lazy, Suspense, useEffect } from 'react'
 import { Navigate, Outlet, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
 import AppLayout from './components/AppLayout'
 import Home from './pages/Home'
-import Story from './pages/Story'
 import Onboarding from './pages/Onboarding'
 import Streak from './pages/Streak'
 import Login from './pages/auth/Login'
@@ -79,7 +78,7 @@ export default function App() {
           <Route path="/workouts" element={<Navigate to="/" replace />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/calendar" element={<Navigate to="/" replace />} />
-          <Route path="/story" element={<Story />} />
+          <Route path="/story" element={<Navigate to="/" replace />} />
           <Route path="/reminders" element={<Reminders />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
