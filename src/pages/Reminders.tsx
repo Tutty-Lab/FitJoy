@@ -32,7 +32,6 @@ export default function Reminders() {
 
   return (
     <div className="stagger flex flex-col gap-5 px-4 pt-2 pb-6">
-      <Link to="/profile" className="flow-back">{L('Zurück zum Profil', 'Về hồ sơ')}</Link>
       <h1 className="text-xl font-black">{L('Erinnerungen', 'Nhắc tập')}</h1>
       <p className="flow-note">{L('Diese Erinnerungen funktionieren, solange die App geöffnet ist. Eine Zustellung bei geschlossener App ist noch nicht eingerichtet.', 'Lời nhắc hiện hoạt động khi ứng dụng đang mở. Gửi lời nhắc lúc đóng ứng dụng chưa được thiết lập.')}</p>
       <div className="flex gap-4 overflow-hidden rounded-[28px] border-2 border-[#ffd9c2] bg-[#ffece1] p-4 shadow-[0_4px_0_#ffd9c2]">

@@ -1,7 +1,7 @@
 import LanguagePicker from '../components/LanguagePicker'
 import { useCompleted } from '../lib/progress'
 import { useState, type ReactNode } from 'react'
-import { ArrowLeft, LogOut } from 'lucide-react'
+import { LogOut } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Switch } from '../components/shared'
 import { loadProfile, saveProfile } from '../lib/profile'
@@ -78,22 +78,6 @@ export default function Profile() {
 
   return (
     <div className="stagger flex flex-col gap-6 px-4 pt-2 pb-6">
-      <Link to="/" className="flow-back"><ArrowLeft />{L('Zur Karte', 'Về hành trình')}</Link>
-      <section className="relative overflow-hidden rounded-[28px] bg-white p-6 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
-        <div className="absolute -top-12 -right-12 size-44 rounded-full bg-[rgba(255,227,211,0.3)] blur-[40px]" />
-        <div className="absolute bottom-0 -left-8 size-36 rounded-full bg-[rgba(255,236,225,0.4)] blur-[24px]" />
-        <div className="relative flex flex-col items-center">
-          <div className="relative mb-4">
-            <div className="size-24 rounded-full bg-[#f3f6f5] p-1 shadow-[0_10px_15px_-3px_rgba(19,112,126,0.2)]">
-              <img src={avatar} alt="" className="size-full rounded-full object-cover" />
-            </div>
-            <span className="absolute -right-1 -bottom-1 flex size-8 items-center justify-center rounded-full bg-[#13707e] shadow-[0_4px_6px_-1px_rgba(19,112,126,0.4)]">
-              <img src={iStar} alt="" style={{ width: 15, height: 14.25 }} />
-            </span>
-          </div>
-          <h2 className="pb-1 text-2xl leading-8 font-bold tracking-[-0.6px]">{p?.name || L('Schön, dass du da bist', 'Bạn của Vestibu')}</h2>
-        </div>
-      </section>
 
       <div className="flex flex-col gap-4">
         <Link to="/onboarding" className="game-secondary">{L('Einführung noch einmal ansehen', 'Xem lại phần giới thiệu')}</Link>

@@ -23,5 +23,5 @@ export function StreakSummary() {
 }
 
 export default function Streak() {
-  return <div className="game-onboarding"><Link to="/" className="flow-back"><ArrowLeft />{L('Heute', 'Hôm nay')}</Link><main className="flex flex-1 flex-col justify-center gap-5 py-6"><StreakSummary /></main><Link className="game-primary text-center" to="/">{L('Zur heutigen Minute', 'Về phút tập hôm nay')}</Link></div>
+  return <div className="game-onboarding"><Link to="/" aria-label={L('Zurück', 'Quay lại')} className="flow-back"><ArrowLeft /></Link><main className="flex flex-1 flex-col justify-center gap-5 py-6"><StreakSummary /></main><Link className="game-primary text-center" to="/">{L('Zur heutigen Minute', 'Về phút tập hôm nay')}</Link></div>
 }
