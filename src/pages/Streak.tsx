@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { StreakFlame } from '../components/GameEffects'
-import Vestibu from '../components/Vestibu'
 import { Link, useSearchParams } from 'react-router-dom'
 import { ArrowLeft, Check } from 'lucide-react'
 import { useCompleted } from '../lib/progress'
@@ -33,7 +32,6 @@ export function StreakSummary({ up = false, from = 0 }: { up?: boolean; from?: n
       const active = dates.includes(key) && !(up && isToday && !lit)
       return <div key={i} className={`${isToday ? 'is-today' : ''} ${future ? 'is-future' : ''}`}><span>{date.toLocaleDateString(locale, { weekday: 'narrow' })}</span><span className={active ? 'active' : ''}>{active && <Check size={18} />}</span></div>
     })}</div>
-    {up && lit && <Vestibu mood="celebrate" className="mx-auto w-28" />}
   </>
 }
 
