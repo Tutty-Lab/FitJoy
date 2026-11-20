@@ -11,6 +11,7 @@ import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, loca
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { loadProfile, saveProfile } from '../../lib/profile'
 import { episodeFor, regionFor } from '../../data/story'
+import { dialogFor, type Who } from '../../data/storyDialog'
 import { Flame, Gem } from 'lucide-react'
 import poster from '../../assets/home/vestibu-welcome.png'
 import { L, lang } from '../../lib/i18n'
@@ -132,6 +133,7 @@ export default function WorkoutDetail() {
   )
   const back = () => {
     if (stage === 'bonus' || stage === 'practice') { player.current?.pause(); setRunning(false); setExitOpen(true); return }
+    if (stage === 'instructions' && intro_ > 0) { setIntro(intro_ - 1); return }
     navigate(returnTo, { replace: true })
   }
   const done = sessionsDone(day)
@@ -147,7 +149,8 @@ export default function WorkoutDetail() {
     : session === 2 ? L(`Schön, dass du wieder da bist! „${episode.reward.de}“ wartet noch auf uns.`, `Bạn quay lại rồi! “${episode.reward.vi}” vẫn đang chờ mình.`)
     : L('Letzte Runde für heute! Danach erfährst du, wie die Geschichte heute endet.', 'Lượt cuối hôm nay! Tập xong bạn sẽ biết câu chuyện hôm nay kết thúc thế nào.')
   const sentences = (t: string) => t.match(/[^.!?…]+[.!?…]+[“”"]?/g)?.map(x => x.trim()).filter(Boolean) ?? [t]
-  const chat: { text: string; me?: boolean }[] = session === 1
+  const scene = dialogFor(day, session)
+  const chat: { text: string; me?: boolean; who?: Who }[] = scene ? scene.pre.map(x => ({ text: x[lang], me: x.who === 'me', who: x.who })) : session === 1
     ? [{ text: content.begruessung }, ...sentences(episode.before[lang]).map(text => ({ text })), { text: L('Los geht’s!', 'Đi thôi!'), me: true }, { text: L('Super! Erst kurz die Übung, dann legen wir los.', 'Tuyệt! Xem nhanh cách tập rồi mình bắt đầu nhé.') }]
     : session === 2
       ? [{ text: L('Da bist du ja wieder!', 'A, bạn quay lại rồi!') }, { text: L(`Weißt du noch? Heute geht es um „${episode.reward.de}“.`, `Nhớ không? Hôm nay là chuyện về “${episode.reward.vi}”.`) }, { text: L('Ich bin bereit für Runde zwei.', 'Mình sẵn sàng cho lượt hai.'), me: true }, { text: L('Dann weiter! Nach dieser Runde geht unsere Geschichte weiter.', 'Vậy tiếp nào! Tập xong lượt này, câu chuyện sẽ đi tiếp.') }]
@@ -172,7 +175,7 @@ export default function WorkoutDetail() {
           <span className="story-scene-title">{episode.reward[lang]}</span>
         </div>
         <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite">
-          {chat.slice(0, said).map((m, i) => <p key={i} className={`chat-line ${m.me ? 'me' : ''}`}>{m.text}</p>)}
+          {chat.slice(0, said).map((m, i) => <p key={i} className={`chat-line ${m.me ? 'me' : ''} ${m.who === 'p' ? 'pip' : ''}`}>{m.who === 'p' && <img src="/map/seagull.webp" alt="Pip" className="chat-pip" />}{m.text}</p>)}
         </div></div>
       </>}
       {intro_ === 1 && <>
