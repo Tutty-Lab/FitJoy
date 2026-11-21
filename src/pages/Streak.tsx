@@ -50,6 +50,7 @@ function StreakSheet() {
   const navigate = useNavigate()
   const { streak, doneToday } = useCompleted()
   const [closing, setClosing] = useState(false)
+  useEffect(() => { const h = document.documentElement, o = h.style.overflow; h.style.overflow = 'hidden'; return () => { h.style.overflow = o } }, [])
   const [month, setMonth] = useState(() => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), 1) })
   let dates: string[] = []
   try { dates = JSON.parse(localStorage.getItem('fitjoy.activeDates') ?? '[]') } catch { /* empty history */ }

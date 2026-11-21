@@ -26,7 +26,7 @@ const AdminApp = lazy(() => import('./admin/AdminApp'))
 
 function StreakRoute() {
   const up = new URLSearchParams(useLocation().search).get('up') === '1'
-  return up ? <Streak /> : <><div aria-hidden className="pointer-events-none"><Home /></div><Streak /></>
+  return up ? <Streak /> : <><div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden"><Home /></div><Streak /></>
 }
 
 function CheckRoute() {
