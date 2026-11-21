@@ -177,7 +177,7 @@ export default function WorkoutDetail() {
           <span className="story-scene-title">{episode.reward[lang]}</span>
         </div>
         <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
-          {chat.slice(0, said).map((m, i) => <p key={i} className={`chat-line ${m.me ? 'me' : ''} ${m.who === 'p' ? 'pip' : ''}`}>{m.who === 'p' && <img src="/map/seagull.webp" alt="Pip" className="chat-pip" />}{m.text}</p>)}
+          {chat.map((m, i) => <p key={i} style={{ animationDelay: `${i * 0.35}s` }} className={`chat-line ${m.me ? 'me' : ''} ${m.who === 'p' ? 'pip' : ''}`}>{m.who === 'p' && <img src="/map/seagull.webp" alt="Pip" className="chat-pip" />}{m.text}</p>)}
         </div></div>
       </>}
       {intro_ === 1 && <>
@@ -189,7 +189,7 @@ export default function WorkoutDetail() {
         <Affirmation big />
       </>}
       {intro_ < 2
-        ? <button type="button" className={`${primary} intro-cta`} onClick={() => intro_ === 0 && said < chat.length ? setSaid(said + 1) : setIntro(intro_ + 1)}>{intro_ === 0 && said < chat.length && chat[said].me ? chat[said].text : L('Weiter', 'Tiếp tục')}</button>
+        ? <button type="button" className={`${primary} intro-cta`} onClick={() => setIntro(intro_ + 1)}>{L('Weiter', 'Tiếp tục')}</button>
         : <button type="button" className={`${primary} intro-cta`} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>}
     </section>}
 

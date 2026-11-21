@@ -129,8 +129,8 @@ export const forestDialog: Record<number, SessionScene[]> = {
       l('me', 'Fragen wir ihn.', 'Mình hỏi chú ấy.'),
     ], post: { de: 'Der Igel heißt Bruno. „Ilse hat mir das Rezept geschenkt. Vor dem Sturm kam sie jede Woche.“', vi: 'Chú nhím tên Bruno. “Ilse tặng tôi công thức này. Trước cơn bão, tuần nào bà cũng ghé.”' } },
     { pre: [
-      l('v', 'Bruno sagt, wir dürfen einen Keks – wenn wir das Mehl vom hohen Regal holen.', 'Bruno bảo được ăn một cái bánh – nếu lấy giúp chú bao bột trên kệ cao.'),
-      l('me', 'Auf Zehenspitzen!', 'Kiễng chân nào!'),
+      l('v', 'Bruno sagt, wir dürfen einen Keks – wenn wir das Mehl vom Regal holen. Eine Hand am Regal, dann strecken.', 'Bruno bảo được ăn một cái bánh – nếu lấy giúp chú bao bột trên kệ. Một tay vịn kệ, rồi mới với.'),
+      l('me', 'Erst festhalten, dann strecken.', 'Vịn trước, rồi mới với.'),
     ], post: { de: 'Pip bekommt endlich seinen Keks. Und hinter dem Mehl: das achtunddreißigste Stück.', vi: 'Pip cuối cùng cũng có bánh quy. Và sau bao bột: mảnh thứ ba mươi tám.' } },
   ],
   39: [
@@ -220,8 +220,8 @@ export const forestDialog: Record<number, SessionScene[]> = {
       l('me', 'Schwanken kennen wir.', 'Chao đảo thì mình quen rồi.'),
     ], post: { de: 'Die ersten Bretter knarren. Vestibu hält sich am Seil fest.', vi: 'Những tấm ván đầu kêu cót két. Vestibu bám chặt dây.' } },
     { pre: [
-      l('v', 'Jetzt ohne festhalten. Nur mit meinem Gleichgewicht.', 'Giờ không bám nữa. Chỉ dựa vào thăng bằng của mình.'),
-      l('p', 'Du bist verrückt. Und mutig. Beides.', 'Cậu điên thật. Và dũng cảm. Cả hai.'),
+      l('v', 'Eine Hand bleibt immer am Seil. So bin ich sicher.', 'Một tay luôn vịn dây. Thế là an toàn.'),
+      l('p', 'Klug und mutig. Beides.', 'Khôn ngoan và dũng cảm. Cả hai.'),
       l('me', 'Ich glaube an dich!', 'Mình tin bạn!'),
     ], post: { de: 'In der Mitte bleibt Vestibu stehen. Die Brücke schwingt – und er schwingt einfach mit.', vi: 'Giữa cầu, Vestibu dừng lại. Cây cầu đung đưa – và cậu đung đưa theo nó.' } },
     { pre: [
@@ -319,8 +319,8 @@ export const forestDialog: Record<number, SessionScene[]> = {
     { pre: [
       l('v', 'Der Reiher will uns etwas zeigen. Von oben.', 'Chú diệc muốn cho bọn mình xem một thứ. Từ trên cao.'),
       l('p', 'Fliegen? Endlich! Ich zeige euch, wie es geht.', 'Bay hả? Cuối cùng! Để tớ chỉ cho.'),
-      l('me', 'Wir klettern auf den höchsten Baum.', 'Mình leo lên cây cao nhất.'),
-    ], post: { de: 'Von der Baumkrone sieht man die ganze Insel. Und ganz am Ende: den Leuchtturm.', vi: 'Từ ngọn cây nhìn thấy cả hòn đảo. Và tận cùng: ngọn hải đăng.' } },
+      l('me', 'Wir gehen auf den Aussichtshügel.', 'Mình lên ngọn đồi ngắm cảnh.'),
+    ], post: { de: 'Vom Hügel sieht man die ganze Insel. Und ganz am Ende: den Leuchtturm.', vi: 'Từ trên đồi nhìn thấy cả hòn đảo. Và tận cùng: ngọn hải đăng.' } },
     { pre: [
       l('v', 'Noch zehn Tage durch den Wald. Dann sind wir da.', 'Còn mười ngày xuyên rừng. Rồi mình sẽ tới.'),
       l('me', 'Zehn Tage schaffen wir.', 'Mười ngày thì mình làm được.'),
@@ -403,7 +403,7 @@ export const forestDialog: Record<number, SessionScene[]> = {
       l('me', 'Jeder Stein einzeln.', 'Từng hòn một.'),
     ], post: { de: 'Vestibu prüft jeden Stein, bevor er belastet. Langsam, aber ohne einen Rutscher.', vi: 'Vestibu thử từng hòn trước khi dồn sức. Chậm, nhưng không trượt lần nào.' } },
     { pre: [
-      l('v', 'Oben auf dem Hang kann ich ganz kurz auf einem Bein stehen und alles sehen.', 'Trên đỉnh dốc, mình có thể đứng một chân một lát và ngắm toàn cảnh.'),
+      l('v', 'Oben auf dem Hang bleibe ich sicher stehen und schaue mich um.', 'Trên đỉnh dốc, mình đứng thật vững rồi ngắm toàn cảnh.'),
       l('me', 'Zeig mal!', 'Cho mình xem với!'),
     ], post: { de: 'Unter einem flachen Stein: das fünfundfünfzigste Stück. Und in der Ferne: der Leuchtturm, schon groß.', vi: 'Dưới một hòn đá dẹt: mảnh thứ năm mươi lăm. Và đằng xa: ngọn hải đăng, đã to rõ.' } },
   ],

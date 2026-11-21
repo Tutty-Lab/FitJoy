@@ -125,8 +125,8 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
       l('me', 'Nicht zu stark!', 'Đừng mạnh quá!'),
     ], post: { de: 'Wusel pustet einmal zu kräftig. Eine Staubwolke. Alle husten und lachen.', vi: 'Xoáy Nhỏ thổi mạnh quá một lần. Một đám bụi bay mù. Ai cũng ho rồi phá lên cười.' } },
     { pre: [
-      l('v', 'Die oberen Spiegel erreiche ich nur auf Zehenspitzen.', 'Những tấm gương trên cao mình chỉ với tới khi kiễng chân.'),
-      l('me', 'Langsam hoch, langsam runter.', 'Từ từ lên, từ từ xuống.'),
+      l('v', 'Die oberen Spiegel putze ich mit Fennas langem Pinsel – eine Hand am Geländer.', 'Những tấm gương trên cao mình lau bằng chổi dài của Fenna – một tay vịn lan can.'),
+      l('me', 'Festhalten, dann putzen.', 'Vịn chắc rồi mới lau.'),
     ], post: { de: 'Spiegel für Spiegel glänzt wieder. Die Abendsonne bricht sich in tausend Farben.', vi: 'Từng tấm gương sáng bóng trở lại. Nắng chiều vỡ thành ngàn sắc màu.' } },
     { pre: [
       l('v', 'Der letzte Spiegel ist ganz unten. Ich gehe tief in die Knie.', 'Tấm gương cuối ở tít dưới thấp. Mình khuỵu gối thật sâu.'),
@@ -170,7 +170,7 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
       l('me', 'Pip, bitte.', 'Pip, làm ơn.'),
     ], post: { de: 'Mit Ilse zusammen heben alle die Linse an. Breitbeinig, gerader Rücken.', vi: 'Cùng với Ilse, cả nhóm nhấc thấu kính lên. Chân rộng, lưng thẳng.' } },
     { pre: [
-      l('v', 'Ein kleines Stück höher. Ich stehe auf einer Stufe und strecke mich.', 'Cao thêm chút nữa. Mình đứng trên một bậc và vươn người.'),
+      l('v', 'Ein kleines Stück höher. Alle heben zusammen, niemand steht allein.', 'Cao thêm chút nữa. Mọi người cùng nâng, không ai làm một mình.'),
       l('me', 'Fast!', 'Sắp được rồi!'),
     ], post: { de: 'Klick. Die Linse sitzt.', vi: 'Tách. Thấu kính đã vào chỗ.' } },
     { pre: [
@@ -440,7 +440,7 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
       l('v', 'Ilse will dir etwas zeigen. Ganz oben, über der Lampe.', 'Ilse muốn cho bạn xem một thứ. Tít trên cao, phía trên ngọn đèn.'),
       l('p', 'Es gibt noch ein „über der Lampe“?', 'Còn có “phía trên ngọn đèn” nữa à?'),
       l('me', 'Zeig es mir.', 'Cho mình xem.'),
-    ], post: { de: 'Eine schmale Leiter führt zur Wetterfahne auf der Spitze.', vi: 'Một chiếc thang hẹp dẫn lên chong chóng gió trên đỉnh.' } },
+    ], post: { de: 'Eine kleine Tür führt hinaus auf die Aussichtsplattform – mit hohem Geländer.', vi: 'Một cánh cửa nhỏ dẫn ra đài ngắm cảnh – có lan can cao.' } },
     { pre: [
       l('v', 'Hier oben steht man ganz allein mit dem Himmel. Ilse hat das jeden Tag gemacht.', 'Trên này chỉ có mình với bầu trời. Ilse ngày nào cũng làm vậy.'),
       l('p', 'Ich halte den Atem an. Möwen tun das nie.', 'Tớ nín thở. Hải âu không bao giờ làm vậy.'),

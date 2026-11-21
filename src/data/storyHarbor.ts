@@ -116,7 +116,7 @@ export const harborDialog: Record<number, SessionScene[]> = {
       l('me', 'Ohne den Fisch, bitte.', 'Bỏ phần cá ra nhé.'),
     ], post: { de: 'Alle wiegen sich im Takt. Niemand fällt. Das hätte vor zwei Wochen niemand geglaubt.', vi: 'Mọi người đung đưa theo nhịp. Không ai ngã. Hai tuần trước chẳng ai tin nổi.' } },
     { pre: [
-      l('v', 'Das letzte Lampion hängt schief. Ich richte es auf Zehenspitzen.', 'Chiếc đèn lồng cuối còn treo lệch. Mình kiễng chân chỉnh lại.'),
+      l('v', 'Das letzte Lampion hängt schief. Ich richte es – eine Hand fest an der Mauer.', 'Chiếc đèn lồng cuối còn treo lệch. Mình chỉnh lại – một tay vịn chắc vào tường.'),
       l('me', 'Vorsichtig!', 'Cẩn thận nhé!'),
     ], post: { de: 'Im letzten Lampion klappert das vierzehnte Stück. Ilses Licht im Nebel blinkt zweimal: Glückwunsch.', vi: 'Trong chiếc đèn lồng cuối có mảnh thứ mười bốn. Ánh đèn của Ilse nháy hai lần: chúc mừng.' } },
   ],
@@ -246,8 +246,8 @@ export const harborDialog: Record<number, SessionScene[]> = {
       l('me', 'Wir bauen dir ein neues Nest.', 'Bọn mình làm cho cậu tổ mới.'),
     ], post: { de: 'Ganz oben auf dem Hafenkran sammeln sie Zweige, Seil und Federn.', vi: 'Trên đỉnh cần cẩu bến cảng, cả nhóm gom cành cây, dây thừng và lông vũ.' } },
     { pre: [
-      l('v', 'Das Nest muss oben gebaut werden. Ich steige ganz ruhig die Leiter hoch.', 'Tổ phải làm trên cao. Mình leo thang thật bình tĩnh.'),
-      l('me', 'Ich halte die Leiter.', 'Mình giữ thang.'),
+      l('v', 'Das Nest kommt nach oben. Pip fliegt, ich reiche ihm die Zweige – sicher vom Boden aus.', 'Tổ đặt trên cao. Pip bay lên, mình đứng vững dưới đất đưa cành cho cậu ấy.'),
+      l('me', 'Ich reiche mit.', 'Mình đưa cùng.'),
     ], post: { de: 'Pips neues Nest ist fertig. Er legt sein liebstes Glitzerding hinein: das zweiundzwanzigste Stück. „Leihweise“, sagt er.', vi: 'Tổ mới của Pip xong rồi. Nó đặt món đồ lấp lánh yêu thích nhất vào: mảnh thứ hai mươi hai. “Cho mượn thôi đấy”, nó nói.' } },
   ],
   23: [
