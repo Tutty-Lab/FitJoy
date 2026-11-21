@@ -525,3 +525,5 @@ body {
 .streak-cal .day.r::after{left:50%;right:0}
 .streak-cal .day.today i{box-shadow:0 0 0 3px #0b4a54}
 @media (prefers-reduced-motion:reduce){.streak-backdrop,.streak-sheet{animation:none!important}}
+
+.streak-up-video{width:min(72vw,300px);aspect-ratio:1;background:#fff;border-radius:24px;animation:route-enter .4s ease-out backwards}
