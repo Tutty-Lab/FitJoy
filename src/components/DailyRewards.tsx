@@ -16,7 +16,8 @@ const addGems = (n: number) => saveProfile({ xp: (loadProfile()?.xp ?? 0) + n })
 const sound = (k: 'tap' | 'success' | 'streak') => { if (loadProfile()?.chime ?? true) playGameSound(k) }
 const PRIZES = [5, 20, 10, 50, 5, 15, 10, 30]
 // Segment colours [light centre, dark edge] for a soft 3D shade.
-const COLORS = [['#ffe9a3', '#f5b82e'], ['#b8f0e0', '#36b79a'], ['#ffd3c2', '#f2785a'], ['#d6c9ff', '#7c5ce0'], ['#ffe9a3', '#f5b82e'], ['#b8f0e0', '#36b79a'], ['#ffd3c2', '#f2785a'], ['#c9e8ff', '#3b8fe0']]
+// Cartoon segment colours: [fill, number colour].
+const COLORS = [['#ff7a59', '#fff7d1'], ['#4cc9a7', '#fff7d1'], ['#ffd23f', '#ff7a59'], ['#5aa9ff', '#fff7d1'], ['#ff7a59', '#fff7d1'], ['#4cc9a7', '#fff7d1'], ['#ffd23f', '#ff7a59'], ['#a17cf5', '#fff7d1']]
 // TEMP: test mode: unlimited chest opens and spins, no diamonds credited, nothing saved.
 const TEST = true
 
@@ -99,52 +100,45 @@ function Wheel({ onWin }: { onWin: () => void }) {
       setWon(PRIZES[i]); setSpinning(false); sound('success'); onWin()
     }, 4200)
   }
-  const R = 100
+  const R = 102
   const label = won !== null ? L(`+${won} Diamanten!`, `+${won} kim cương!`) : used ? L('Morgen wieder', 'Mai quay tiếp') : TEST ? 'Test' : L('1 Dreh gratis', '1 lượt miễn phí')
   return <section className="reward-card flex-col">
     <div className="flex w-full items-center justify-between">
       <h3 className="text-lg font-black">{L('Glücksrad', 'Vòng quay may mắn')}</h3>
       <span className="text-base font-bold text-slate-600">{label}</span>
     </div>
-    <div className="wheel-wrap">
+    <div className="wheel-wrap cartoon">
       <svg className="wheel-base" viewBox="0 0 260 260" aria-hidden="true">
-        <defs>
-          <linearGradient id="rimG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#4fd0d6" /><stop offset=".45" stopColor="#13707e" /><stop offset="1" stopColor="#083a42" /></linearGradient>
-          <linearGradient id="rimIn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#083a42" /><stop offset="1" stopColor="#2aa3b3" /></linearGradient>
-        </defs>
-        <ellipse cx="130" cy="254" rx="90" ry="6" fill="#0b4a54" opacity=".18" />
-        <circle cx="130" cy="130" r="125" fill="url(#rimG)" />
-        <path d="M30 95 A106 106 0 0 1 230 95" fill="none" stroke="#a8f0f2" strokeWidth="3" strokeLinecap="round" opacity=".55" />
-        <circle cx="130" cy="130" r="107" fill="url(#rimIn)" />
+        <ellipse cx="130" cy="252" rx="80" ry="7" fill="#0b4a54" opacity=".18" />
+        <circle cx="130" cy="132" r="122" fill="#2b1d0e" />
+        <circle cx="130" cy="128" r="122" fill="#ffb627" stroke="#2b1d0e" strokeWidth="5" />
+        <path d="M40 80 A104 104 0 0 1 150 26" fill="none" stroke="#ffe08a" strokeWidth="7" strokeLinecap="round" />
+        <circle cx="130" cy="128" r="104" fill="#2b1d0e" />
       </svg>
-      <svg className="wheel" viewBox="-104 -104 208 208" style={{ transform: `rotate(${angle}deg)`, transition: spinning ? 'transform 4s cubic-bezier(.12,.8,.18,1)' : 'none' }} aria-hidden="true">
-        <defs>{COLORS.map(([a, b], i) => <radialGradient key={i} id={`seg${i}`} cx="0" cy="0" r={R} gradientUnits="userSpaceOnUse"><stop offset=".15" stopColor={a} /><stop offset="1" stopColor={b} /></radialGradient>)}</defs>
+      <svg className="wheel" viewBox="-104 -104 208 208" style={{ transform: `rotate(${angle}deg)`, transition: spinning ? 'transform 4s cubic-bezier(.2,.9,.25,1.04)' : 'none' }} aria-hidden="true">
         {PRIZES.map((p, i) => {
           const a0 = (i * 45 - 90) * Math.PI / 180, a1 = ((i + 1) * 45 - 90) * Math.PI / 180
           return <g key={i}>
-            <path d={`M0 0 L${R * Math.cos(a0)} ${R * Math.sin(a0)} A${R} ${R} 0 0 1 ${R * Math.cos(a1)} ${R * Math.sin(a1)} Z`} fill={`url(#seg${i})`} stroke="#fff" strokeWidth="2.5" strokeLinejoin="round" />
-            <g transform={`rotate(${i * 45 + 22.5}) translate(0 -68)`}>
-              <text textAnchor="middle" y="4" fontSize="24" fontWeight="900" fill="#fff" stroke="#0b4a54" strokeWidth="4" paintOrder="stroke" strokeLinejoin="round">{p}</text>
-              <g transform="translate(0 16)"><path d="M-7 0h14l4 5-11 11-11-11z" fill="#5fd3ff" stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" /><path d="M-7 0l4 5h6l4-5" fill="none" stroke="#fff" strokeWidth="1" opacity=".8" /></g>
+            <path d={`M0 0 L${R * Math.cos(a0)} ${R * Math.sin(a0)} A${R} ${R} 0 0 1 ${R * Math.cos(a1)} ${R * Math.sin(a1)} Z`} fill={COLORS[i][0]} stroke="#2b1d0e" strokeWidth="4" strokeLinejoin="round" />
+            <path d={`M${0.82 * R * Math.cos(a0 + 0.08)} ${0.82 * R * Math.sin(a0 + 0.08)} A${0.82 * R} ${0.82 * R} 0 0 1 ${0.82 * R * Math.cos(a1 - 0.08)} ${0.82 * R * Math.sin(a1 - 0.08)}`} fill="none" stroke="#fff" strokeWidth="5" strokeLinecap="round" opacity=".55" />
+            <g transform={`rotate(${i * 45 + 22.5}) translate(0 -60)`}>
+              <text textAnchor="middle" y="9" fontSize="27" fontWeight="900" fill={COLORS[i][1]} stroke="#2b1d0e" strokeWidth="5" paintOrder="stroke" strokeLinejoin="round">{p}</text>
             </g>
           </g>
         })}
       </svg>
       <svg className="wheel-top" viewBox="0 0 260 260" aria-hidden="true">
-        <defs><radialGradient id="gloss" cx=".35" cy=".22" r=".75"><stop offset="0" stopColor="#fff" stopOpacity=".5" /><stop offset=".45" stopColor="#fff" stopOpacity=".06" /><stop offset="1" stopColor="#fff" stopOpacity="0" /></radialGradient></defs>
-        <circle cx="130" cy="130" r="100" fill="url(#gloss)" />
-        <circle cx="130" cy="130" r="101" fill="none" stroke="#fff" strokeWidth="4" />
-        {Array.from({ length: 16 }, (_, i) => {
-          const a = (i * 22.5 - 90) * Math.PI / 180, x = 130 + 116 * Math.cos(a), y = 130 + 116 * Math.sin(a)
-          return <g key={i} className={`bulb ${spinning ? 'on' : ''} ${i % 2 ? 'odd' : ''}`}><circle cx={x} cy={y} r="7.5" fill="#fff3b0" opacity=".35" /><circle cx={x} cy={y} r="4.5" fill="#fffbe6" /></g>
+        {Array.from({ length: 12 }, (_, i) => {
+          const a = (i * 30 - 90) * Math.PI / 180, x = 130 + 113 * Math.cos(a), y = 128 + 113 * Math.sin(a)
+          return <circle key={i} className={`bulb ${spinning ? 'on' : ''} ${i % 2 ? 'odd' : ''}`} cx={x} cy={y} r="6.5" fill="#fff7d1" stroke="#2b1d0e" strokeWidth="3" />
         })}
       </svg>
-      <svg className="wheel-pin" viewBox="0 0 44 54" width="44" height="54" aria-hidden="true">
-        <defs><linearGradient id="pinG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#ff8a7a" /><stop offset="1" stopColor="#d62f2f" /></linearGradient></defs>
-        <path d="M22 52 L5 18 A17 17 0 1 1 39 18 Z" fill="url(#pinG)" stroke="#fff" strokeWidth="3.5" strokeLinejoin="round" />
-        <circle cx="22" cy="17" r="6.5" fill="#fff" /><circle cx="22" cy="17" r="3" fill="#d62f2f" />
+      <svg className="wheel-pin" viewBox="0 0 48 58" width="48" height="58" aria-hidden="true">
+        <path d="M24 54 L7 20 A18 18 0 1 1 41 20 Z" fill="#ff5a5f" stroke="#2b1d0e" strokeWidth="4.5" strokeLinejoin="round" />
+        <path d="M14 14 A11 11 0 0 1 26 7" fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round" opacity=".8" />
+        <circle cx="24" cy="19" r="6" fill="#fff7d1" stroke="#2b1d0e" strokeWidth="3" />
       </svg>
-      <button type="button" className="wheel-hub" onClick={spin} disabled={locked}>{spinning ? '…' : L('Drehen', 'Quay')}</button>
+      <button type="button" className="wheel-hub" onClick={spin} disabled={locked}>{spinning ? '…' : L('Los!', 'Quay')}</button>
     </div>
   </section>
 }
