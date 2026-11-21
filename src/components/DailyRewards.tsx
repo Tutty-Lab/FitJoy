@@ -63,12 +63,14 @@ function MiniWheel() {
   </svg>
 }
 
-// 7-day reward ladder: one step per training day, chests on days 2, 4 and 7.
 type Step = { kind: 'gems' | 'chest'; n: number; tier?: 'silver' | 'gold' | 'big' }
-const LADDER: Step[] = [
-  { kind: 'gems', n: 10 }, { kind: 'chest', n: 25, tier: 'silver' }, { kind: 'gems', n: 20 }, { kind: 'chest', n: 35, tier: 'gold' },
-  { kind: 'gems', n: 25 }, { kind: 'gems', n: 30 }, { kind: 'chest', n: 60, tier: 'big' },
-]
+// One reward per programme day (90): diamonds grow slowly, a chest every 7th day, a big chest at 30, 60 and 90.
+const LADDER: Step[] = Array.from({ length: 90 }, (_, i) => {
+  const d = i + 1, base = 10 + Math.floor(i / 10) * 5
+  if (d % 30 === 0) return { kind: 'chest', n: 100 + d, tier: 'big' }
+  if (d % 7 === 0) return { kind: 'chest', n: base * 2, tier: d % 14 === 0 ? 'gold' : 'silver' }
+  return { kind: 'gems', n: base }
+})
 
 function GemPile({ n }: { n: number }) {
   const count = n >= 30 ? 5 : n >= 20 ? 4 : 3
@@ -82,7 +84,7 @@ function GemPile({ n }: { n: number }) {
 function Ladder({ doneToday, onWin }: { doneToday: boolean; onWin: () => void }) {
   const today = dayKey(new Date())
   const c = read()
-  const claimedCount = (c.ladder ?? 0) % LADDER.length
+  const claimedCount = Math.min(c.ladder ?? 0, LADDER.length)
   const canClaim = TEST || (doneToday && c.chest !== today)
   const [opening, setOpening] = useState<Step | null>(null)
   const [, bump] = useState(0)
@@ -91,12 +93,11 @@ function Ladder({ doneToday, onWin }: { doneToday: boolean; onWin: () => void })
     finish(step)
   }
   const finish = (step: Step) => {
-    const next = { ...read(), ladder: (read().ladder ?? 0) + 1 }
+    const next = { ...read(), ladder: TEST ? ((read().ladder ?? 0) + 1) % LADDER.length : (read().ladder ?? 0) + 1 }
     if (!TEST) { next.chest = today; addGems(step.n) }
     write(next); sound('success'); bump(n => n + 1); onWin()
   }
   if (opening) return <ChestOpen prize={opening.n} onDone={() => { finish(opening); setOpening(null) }} />
-  const streak = claimedCount
   return <section className="ladder">
     <div className="ladder-hero">
       <img src="/rewards/chest-open.webp" alt="" draggable={false} />
@@ -104,11 +105,11 @@ function Ladder({ doneToday, onWin }: { doneToday: boolean; onWin: () => void })
     <ol className="ladder-list">
       {LADDER.map((step, i) => {
         const done = i < claimedCount, current = i === claimedCount
-        return <li key={i} className={`ladder-step ${done ? 'done' : ''} ${current ? 'current' : ''}`}>
+        return <li key={i} ref={current ? (el => el?.scrollIntoView({ block: 'center' })) : undefined} className={`ladder-step ${done ? 'done' : ''} ${current ? 'current' : ''}`}>
           <span className="ladder-node">{done ? <Check size={18} strokeWidth={3.4} /> : <b>{i + 1}</b>}</span>
           <span className="ladder-icon">{step.kind === 'gems' ? <GemPile n={step.n} /> : <img src={done ? '/rewards/chest-open.webp' : '/rewards/chest-closed.webp'} alt="" className={`tier-${step.tier}`} draggable={false} />}</span>
           <span className="ladder-amount"><Gem size={20} />{step.n}</span>
-          {current && (canClaim
+          {current && claimedCount < LADDER.length && (canClaim
             ? <button type="button" className="ladder-claim" onClick={() => claim(step)} aria-label={L('Abholen', 'Nhận')}><Gift size={22} /></button>
             : <span className="ladder-wait" aria-label={L('Nach dem Training', 'Sau buổi tập')}><Lock size={20} /></span>)}
         </li>
