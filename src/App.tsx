@@ -24,6 +24,11 @@ import { useReminderScheduler } from './lib/reminders'
 
 const AdminApp = lazy(() => import('./admin/AdminApp'))
 
+function StreakRoute() {
+  const up = new URLSearchParams(useLocation().search).get('up') === '1'
+  return up ? <Streak /> : <><div aria-hidden className="pointer-events-none"><Home /></div><Streak /></>
+}
+
 function CheckRoute() {
   const {phase}=useParams()
   return <BalanceCheck key={phase}/>
@@ -59,7 +64,7 @@ export default function App() {
   return (
     <>
     <Splash />
-    <div key={pathname === '/' ? 'home' : 'page'} className="route-enter">
+    <div key={pathname === '/' || pathname === '/streak' ? 'home' : 'page'} className="route-enter">
     <Routes>
       <Route path="/admin/*" element={<Suspense fallback={null}><AdminApp /></Suspense>} />
       <Route path="/login" element={<Login />} />
@@ -68,7 +73,7 @@ export default function App() {
       <Route path="/privacy" element={<Privacy />} />
       <Route element={<RequireAuth />}>
         <Route path="/onboarding" element={<Onboarding />} />
-        <Route path="/streak" element={<Streak />} />
+        <Route path="/streak" element={<StreakRoute />} />
         <Route path="/activate" element={<Activate />} />
         <Route path="/check/:phase" element={<CheckRoute />} />
       </Route>
