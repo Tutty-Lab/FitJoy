@@ -46,9 +46,9 @@ export default function DailyRewards() {
       </div>
     </div>}
     {open === 'wheel' && <div className="day-sheet-backdrop" onClick={close}>
-      <div className={`day-sheet reward-sheet ${open === 'chest' ? 'ladder-sheet' : ''}`} role="dialog" aria-label={open === 'chest' ? L('Schatztruhe', 'Rương báu') : L('Glücksrad', 'Vòng quay may mắn')} onClick={e => e.stopPropagation()}>
+      <div className="day-sheet reward-sheet" role="dialog" aria-label={L('Glücksrad', 'Vòng quay may mắn')} onClick={e => e.stopPropagation()}>
         <button type="button" aria-label={L('Schließen', 'Đóng')} onClick={close} className="reward-close"><X size={26} strokeWidth={2.8} /></button>
-        {open === 'chest' ? <Ladder doneToday={doneToday} onWin={() => bump(n => n + 1)} /> : <Wheel onWin={() => bump(n => n + 1)} />}
+        <Wheel onWin={() => bump(n => n + 1)} />
       </div>
     </div>}
   </>
@@ -100,7 +100,6 @@ function Ladder({ doneToday, onWin }: { doneToday: boolean; onWin: () => void })
   return <section className="ladder">
     <div className="ladder-hero">
       <img src="/rewards/chest-open.webp" alt="" draggable={false} />
-      <span className="ladder-days" aria-label={L(`${streak} von 7 Tagen`, `${streak}/7 ngày`)}>{Array.from({ length: 7 }, (_, i) => <i key={i} className={i < streak ? 'on' : ''} />)}</span>
     </div>
     <ol className="ladder-list">
       {LADDER.map((step, i) => {
