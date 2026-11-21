@@ -25,7 +25,6 @@ export default function DaySheet({ day, onClose }: { day: number; onClose: () =>
       <div className="day-sheet-grip" />
       <header className="flex items-start gap-3">
         <div className="flex-1">
-          <p className="text-sm font-bold text-brand-deep">{L(`Tag ${day}`, `Ngày ${day}`)} · {done}/{SESSIONS_PER_DAY}</p>
           <h2 className="text-2xl font-black leading-8">{episode.title[lang]}</h2>
         </div>
         <button type="button" aria-label={L('Schließen', 'Đóng')} onClick={close} className="grid size-11 place-items-center rounded-full text-slate-500"><X size={26} strokeWidth={2.6} /></button>
@@ -38,7 +37,6 @@ export default function DaySheet({ day, onClose }: { day: number; onClose: () =>
               <span className="day-session-dot">{isDone ? <Check size={20} strokeWidth={3} /> : isNext ? <Play size={18} fill="currentColor" /> : <Lock size={18} />}</span>
               <span className="flex-1 text-left">
                 <b className="block text-lg">{L(`Mal ${k}`, `Lượt ${k}`)}</b>
-                <span className="text-sm text-slate-600">{isDone ? L('Geschafft – Geschichte lesen', 'Đã tập – đọc lại truyện') : isNext ? L('Jetzt starten', 'Bắt đầu ngay') : L(`Öffnet nach Mal ${k - 1}`, `Mở sau lượt ${k - 1}`)}</span>
               </span>
             </button>
             {isDone && open === k && <div className="day-session-story">
