@@ -525,3 +525,24 @@ body {
 .streak-cal .day.r::after{left:50%;right:0}
 .streak-cal .day.today i{box-shadow:0 0 0 3px #0b4a54}
 @media (prefers-reduced-motion:reduce){.streak-backdrop,.streak-sheet{animation:none!important}}
+
+/* Day sheet on the map: story + three sessions */
+.day-sheet-backdrop{position:fixed;inset:0;z-index:60;display:flex;align-items:flex-end;justify-content:center;background:rgba(11,74,84,.4);animation:sb-fade .25s ease-out both}
+.day-sheet-backdrop.closing{animation:sb-fade-out .26s ease-in both}
+@keyframes sb-fade{from{background:rgba(11,74,84,0)}}
+@keyframes sb-fade-out{to{background:rgba(11,74,84,0)}}
+.day-sheet{width:100%;max-width:440px;max-height:86dvh;overflow-y:auto;overscroll-behavior:contain;background:#fff;border-radius:28px 28px 0 0;padding:8px 18px calc(env(safe-area-inset-bottom) + 18px);animation:sheet-up .34s cubic-bezier(.2,.9,.3,1) both}
+.day-sheet-backdrop.closing .day-sheet{animation:sheet-down .26s ease-in both}
+.day-sheet-grip{width:44px;height:5px;border-radius:9px;background:#d5e3e3;margin:4px auto 10px}
+.day-session{border:2px solid #e2ecec;border-radius:20px;overflow:hidden}
+.day-session.is-next{border-color:#13707e;background:#f0f9f8}
+.day-session-row{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;min-height:64px}
+.day-session-row:disabled{opacity:.55}
+.day-session-dot{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;flex-shrink:0;background:#e2ecec;color:#64748b}
+.is-done .day-session-dot{background:#32b49a;color:#fff}
+.is-next .day-session-dot{background:#13707e;color:#fff}
+.day-session-story{padding:4px 14px 14px;display:flex;flex-direction:column;gap:6px;font-size:16px;line-height:1.5}
+.day-session-story p{background:#f4f8f8;border-radius:14px;padding:8px 12px;max-width:92%}
+.day-session-story p.me{align-self:flex-end;background:#13707e;color:#fff}
+.day-session-story p.post{background:#fff6e5;font-style:italic;max-width:100%}
+@media (prefers-reduced-motion:reduce){.day-sheet,.day-sheet-backdrop{animation:none!important}}
