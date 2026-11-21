@@ -23,9 +23,7 @@ export function StreakSummary({ up = false, from = 0 }: { up?: boolean; from?: n
   const shown = up && !lit ? from : streak
   const flameOn = up ? lit : doneToday
   return <>
-    {up
-      ? <video className="streak-up-video mx-auto" src="/vestibu/streak.mp4" poster="/vestibu/streak.jpg" autoPlay muted playsInline preload="auto" disablePictureInPicture aria-label="Vestibu" />
-      : <div className={`game-flame mx-auto ${flameOn ? 'lit' : ''}`}><StreakFlame lit={flameOn} /></div>}
+    <div className={`game-flame mx-auto ${flameOn ? 'lit' : ''} ${up && lit ? 'streak-ignite' : ''}`}><StreakFlame lit={flameOn} /></div>
     <h1 key={shown} className={`text-center text-6xl font-black ${flameOn ? 'text-orange-500' : 'text-slate-400'} ${up && lit ? 'streak-bump' : ''}`}>{shown}</h1>
     <p className="text-center text-xl font-black">{L('Tage in Folge', 'ngày liên tiếp')}</p>
     <div className="game-week">{Array.from({ length: 7 }, (_, i) => {
