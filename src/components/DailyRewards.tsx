@@ -39,7 +39,13 @@ export default function DailyRewards() {
         <MiniWheel />
       </button>
     </div>
-    {open && <div className="day-sheet-backdrop" onClick={close}>
+    {open === 'chest' && <div className="streak-backdrop">
+      <div className="streak-sheet ladder-page" role="dialog" aria-label={L('Tagesbelohnung', 'Thưởng hằng ngày')}>
+        <button type="button" aria-label={L('Schließen', 'Đóng')} onClick={close} className="ladder-x"><X size={30} strokeWidth={2.8} /></button>
+        <Ladder doneToday={doneToday} onWin={() => bump(n => n + 1)} />
+      </div>
+    </div>}
+    {open === 'wheel' && <div className="day-sheet-backdrop" onClick={close}>
       <div className={`day-sheet reward-sheet ${open === 'chest' ? 'ladder-sheet' : ''}`} role="dialog" aria-label={open === 'chest' ? L('Schatztruhe', 'Rương báu') : L('Glücksrad', 'Vòng quay may mắn')} onClick={e => e.stopPropagation()}>
         <button type="button" aria-label={L('Schließen', 'Đóng')} onClick={close} className="reward-close"><X size={26} strokeWidth={2.8} /></button>
         {open === 'chest' ? <Ladder doneToday={doneToday} onWin={() => bump(n => n + 1)} /> : <Wheel onWin={() => bump(n => n + 1)} />}

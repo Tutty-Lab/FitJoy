@@ -645,3 +645,8 @@ body {
 .ladder-claim{display:grid;place-items:center;width:60px;height:48px;border-radius:16px;background:#ffd23f;color:#0b4a54;border:3px solid #2b1d0e;box-shadow:0 4px 0 #2b1d0e;animation:gift-wiggle 2.4s ease-in-out infinite}
 .ladder-claim:active{transform:translateY(3px);box-shadow:0 1px 0 #2b1d0e}
 .ladder-wait{display:grid;place-items:center;width:60px;height:48px;color:#94a3b8}
+
+.ladder-page{background:#fff}
+.ladder-page .ladder-hero{border-radius:0;padding-top:calc(env(safe-area-inset-top) + 56px)}
+.ladder-x{position:absolute;left:12px;top:calc(env(safe-area-inset-top) + 10px);z-index:5;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;color:#fff}
+.ladder-page .ladder-list{padding-bottom:calc(env(safe-area-inset-bottom) + 24px)}
