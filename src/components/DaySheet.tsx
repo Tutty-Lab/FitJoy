@@ -25,6 +25,7 @@ export default function DaySheet({ day, onClose }: { day: number; onClose: () =>
       <div className="day-sheet-grip" />
       <header className="flex items-start gap-3">
         <div className="flex-1">
+          <p className="text-sm font-bold text-brand-deep">{L(`Tag ${day}`, `Ngày ${day}`)}</p>
           <h2 className="text-2xl font-black leading-8">{episode.title[lang]}</h2>
         </div>
         <button type="button" aria-label={L('Schließen', 'Đóng')} onClick={close} className="grid size-11 place-items-center rounded-full text-slate-500"><X size={26} strokeWidth={2.6} /></button>
