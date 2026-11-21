@@ -2,6 +2,7 @@ import { syncWidget, widgetLaunchRoute } from './lib/widget'
 import { lazy, Suspense, useEffect } from 'react'
 import { Navigate, Outlet, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
 import AppLayout from './components/AppLayout'
+import Splash from './components/Splash'
 import Home from './pages/Home'
 import Onboarding from './pages/Onboarding'
 import Streak from './pages/Streak'
@@ -56,6 +57,9 @@ export default function App() {
   }, [pathname])
 
   return (
+    <>
+    <Splash />
+    <div key={pathname === '/' ? 'home' : 'page'} className="route-enter">
     <Routes>
       <Route path="/admin/*" element={<Suspense fallback={null}><AdminApp /></Suspense>} />
       <Route path="/login" element={<Login />} />
@@ -86,5 +90,7 @@ export default function App() {
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </div>
+    </>
   )
 }

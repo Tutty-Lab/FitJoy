@@ -1,4 +1,3 @@
-import LanguagePicker from '../../components/LanguagePicker'
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthTabs from './AuthTabs'
@@ -66,7 +65,6 @@ export default function SignUp() {
 
   return (
     <div className="stagger mx-auto min-h-dvh max-w-[440px] bg-white px-4 pt-[calc(env(safe-area-inset-top)+64px)] pb-8">
-      <LanguagePicker />
       <section className="relative mt-2 flex flex-col gap-2 overflow-hidden rounded-[28px] bg-white p-6 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <div className="absolute -right-6 -bottom-6 size-32 rounded-full bg-[rgba(255,227,211,0.3)] blur-[40px]" />
         <div className="absolute -top-6 -left-6 size-28 rounded-full bg-[rgba(255,236,225,0.4)] blur-[24px]" />
