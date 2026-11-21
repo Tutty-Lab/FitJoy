@@ -50,7 +50,7 @@ function StreakSheet() {
   const navigate = useNavigate()
   const { streak, doneToday } = useCompleted()
   const [closing, setClosing] = useState(false)
-  useEffect(() => { const h = document.documentElement, o = h.style.overflow; h.style.overflow = 'hidden'; return () => { h.style.overflow = o } }, [])
+  useEffect(() => { const els = [document.documentElement, document.body], o = els.map(e => e.style.overflow); els.forEach(e => { e.style.overflow = 'hidden'; e.style.overscrollBehavior = 'none' }); return () => els.forEach((e, i) => { e.style.overflow = o[i]; e.style.overscrollBehavior = '' }) }, [])
   const [month, setMonth] = useState(() => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), 1) })
   let dates: string[] = []
   try { dates = JSON.parse(localStorage.getItem('fitjoy.activeDates') ?? '[]') } catch { /* empty history */ }
