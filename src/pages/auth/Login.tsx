@@ -38,7 +38,6 @@ export default function Login() {
         <div className="absolute -bottom-6 -left-6 size-32 rounded-full bg-[#ffece1] opacity-30 blur-[24px]" />
         <div className="relative flex items-center gap-2">
           <div className="flex min-w-0 flex-1 flex-col items-start gap-1 pt-1 pr-2">
-            <span className="rounded-full bg-[rgba(238,122,63,0.3)] px-2 py-0.5 text-xs leading-4 font-bold tracking-[0.48px] text-[#0b4a54]">Der Gleichgewichts-Code</span>
             <h1 className="pt-0.5 text-2xl leading-8 font-bold tracking-[-0.6px]">{L('Willkommen zurück!', 'Chào mừng bạn quay lại!')}</h1>
           </div>
           <div className="float relative size-24 shrink-0 overflow-hidden rounded-2xl bg-white p-1.5 shadow-md">

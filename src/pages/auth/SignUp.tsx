@@ -70,9 +70,6 @@ export default function SignUp() {
         <div className="absolute -top-6 -left-6 size-28 rounded-full bg-[rgba(255,236,225,0.4)] blur-[24px]" />
         <div className="relative flex items-start justify-between">
           <div className="max-w-[210px]">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#ffe3d3] px-2.5 py-1 text-xs leading-4 font-bold tracking-[0.48px] text-[#0b4a54]">
-              <img src={icLeaf} alt="" style={{ width: 11.362, height: 11.35 }} />Der Gleichgewichts-Code
-            </span>
             <h1 className="pt-1 text-2xl leading-8 font-bold tracking-[-0.6px]">{L('Erstelle dein Konto!', 'Tạo tài khoản của bạn!')}</h1>
           </div>
           <div className="relative flex size-24 shrink-0 items-center justify-center">
