@@ -26,13 +26,11 @@ export const storyDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Der Boden hört kurz auf zu schwanken. Im Nebel blinkt etwas Helles am Steg …', vi: 'Mặt đất ngừng chao trong chốc lát. Trong sương, có gì đó lấp lánh ở cầu tàu …' } },
     { pre: [
       l('v', 'Da vorne am Steg – siehst du das Glitzern?', 'Đằng kia, ở cầu tàu – bạn thấy ánh lấp lánh không?'),
-      l('p', 'Kraah! Meins! Glitzerding gefunden!', 'Quác! Của tớ! Tớ tìm thấy đồ lấp lánh rồi!'),
       l('v', 'Oh nein, eine Möwe! Das ist das erste Stück vom Stein!', 'Ôi không, một con hải âu! Đó là mảnh đá đầu tiên!'),
       l('me', 'Schnell hinterher!', 'Đuổi theo mau!'),
       l('v', 'Langsam, langsam. Auf wackeligem Boden rennt man nicht. Erst sicher stehen – dann folgen wir ihr.', 'Từ từ thôi. Trên mặt đất chòng chành thì không chạy được. Đứng vững trước đã – rồi mình theo nó.'),
     ], post: { de: 'Die Möwe landet auf der alten Laterne und lässt das Stück nicht los. „Tauschen?“, krächzt sie.', vi: 'Con hải âu đậu lên chiếc đèn cũ, không chịu nhả mảnh đá. “Đổi không?”, nó kêu.' } },
     { pre: [
-      l('p', 'Ich bin Pip. Ich tausche Glitzer nur gegen Licht.', 'Tớ là Pip. Tớ chỉ đổi đồ lấp lánh lấy ánh sáng thôi.'),
       l('v', 'Licht? Die Hafenlaterne ist aus, seit der Sturm kam.', 'Ánh sáng à? Đèn bến cảng tắt từ khi bão tới rồi.'),
       l('me', 'Dann zünden wir sie an!', 'Vậy mình thắp nó lên!'),
       l('v', 'Genau. Mit ruhigen Händen schaffe ich das. Eine letzte Minute für heute!', 'Đúng vậy. Tay vững thì mình làm được. Một phút cuối cho hôm nay nhé!'),
@@ -47,13 +45,10 @@ export const storyDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Vestibu gräbt und gräbt. Da! Eine rostige Kette schaut aus dem Sand.', vi: 'Vestibu đào mãi. Kia rồi! Một sợi xích gỉ lộ ra khỏi cát.' } },
     { pre: [
       l('v', 'Der Anker ist schwer. Wenn ich wackle, falle ich mit ihm um.', 'Cái neo nặng quá. Nếu mình chao, mình sẽ ngã cùng nó mất.'),
-      l('p', 'Tipp vom Profi: ein Bein fest, Blick nach vorn. So stehe ich auf Masten!', 'Mẹo của dân chuyên: một chân chắc, mắt nhìn thẳng. Tớ đứng trên cột buồm kiểu vậy đấy!'),
       l('me', 'Das probieren wir.', 'Mình thử xem.'),
     ], post: { de: 'Mit einem Ruck ist der Anker frei. Das Boot dreht sich langsam zurück zum Steg.', vi: 'Giật một cái, chiếc neo bật ra. Con thuyền từ từ quay về cầu tàu.' } },
     { pre: [
       l('v', 'Fast geschafft. Nur noch den Anker ins Boot heben.', 'Sắp xong rồi. Chỉ còn nhấc neo lên thuyền.'),
-      l('p', 'Und dann? Dann gibt’s Fisch?', 'Rồi sao nữa? Có cá ăn không?'),
-      l('me', 'Erst der Anker, Pip!', 'Neo trước đã, Pip!'),
     ], post: { de: 'Das Boot liegt fest. Unter der Sitzbank klebt ein zweites Steinstück – und eine Kritzelei: eine Brücke, die im Nebel endet.', vi: 'Thuyền đã neo chắc. Dưới ghế ngồi dính mảnh đá thứ hai – kèm một nét vẽ: cây cầu biến mất trong sương.' } },
   ],
   3: [
@@ -64,8 +59,6 @@ export const storyDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Das erste Brett ist geborgen. Es trägt ein eingeritztes Muschelzeichen – wie die Postkarte.', vi: 'Tấm ván đầu tiên đã được vớt. Trên đó khắc dấu vỏ sò – giống hệt tấm bưu thiếp.' } },
     { pre: [
       l('v', 'Noch zwei Bretter. Wer hat wohl dieses Zeichen hineingeritzt?', 'Còn hai tấm nữa. Ai đã khắc dấu này nhỉ?'),
-      l('p', 'Ich weiß es. Aber ich sag’s nicht. Erst Fisch.', 'Tớ biết đấy. Nhưng tớ không nói đâu. Cho cá trước.'),
-      l('me', 'Pip, du bist unmöglich.', 'Pip, cậu thật hết nói.'),
     ], post: { de: 'Pip zwinkert: „Der Leuchtturm weiß es auch.“ Dann fliegt er davon.', vi: 'Pip nháy mắt: “Ngọn hải đăng cũng biết đấy.” Rồi nó bay mất.' } },
     { pre: [
       l('v', 'Das letzte Brett für heute. Dann können wir bis zur Nebelgrenze laufen.', 'Tấm ván cuối cho hôm nay. Rồi mình đi được tới mép sương.'),
@@ -97,9 +90,7 @@ export const storyDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Vestibu schreibt: „Wir haben deine Karte gefunden. Wir helfen der Insel. Wer bist du?“', vi: 'Vestibu viết: “Bọn mình đã thấy tấm thiệp của bạn. Bọn mình đang giúp hòn đảo. Bạn là ai?”' } },
     { pre: [
       l('v', 'Jetzt brauchen wir jemanden, der die Karte zustellt.', 'Giờ cần ai đó mang thiệp đi.'),
-      l('p', 'Postmöwe Pip, zu Diensten! … Gegen Bezahlung.', 'Hải âu đưa thư Pip xin phục vụ! … Có tính phí đấy.'),
-      l('me', 'Ein Fisch?', 'Một con cá nhé?'),
-      l('p', 'Zwei.', 'Hai con.'),
+      l('me', 'Pip schafft das!', 'Pip làm được mà!'),
     ], post: { de: 'Pip fliegt los, die Karte im Schnabel – direkt in den Nebel hinein.', vi: 'Pip cất cánh, ngậm tấm thiệp – bay thẳng vào làn sương.' } },
     { pre: [
       l('v', 'Hoffentlich kommt Pip zurück. Bleiben wir so lange ruhig und stark.', 'Mong Pip quay lại. Trong lúc chờ, mình cứ bình tĩnh và vững vàng nhé.'),

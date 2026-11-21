@@ -8,14 +8,11 @@ export const harborDialog: Record<number, SessionScene[]> = {
   8: [
     { pre: [
       l('v', 'Ilse … Pip, kennst du eine Ilse?', 'Ilse … Pip, cậu có biết ai tên Ilse không?'),
-      l('p', 'Die Leuchtturmwärterin! Sie hat mir mal einen Keks gegeben. Vor drei Jahren.', 'Bà giữ hải đăng! Bà từng cho tớ một cái bánh quy. Ba năm trước.'),
       l('me', 'Dann gehen wir zu ihr!', 'Vậy mình tới chỗ bà ấy!'),
       l('v', 'Der Leuchtturm ist weit. Erst muss ich lernen, sicher zu gehen – nicht nur zu stehen.', 'Hải đăng xa lắm. Mình phải học đi cho vững trước – không chỉ đứng thôi.'),
     ], post: { de: 'Auf der Rückseite von Ilses Brief entdeckt Vestibu eine Karte – mit einem roten Kreuz mitten im Hafen.', vi: 'Mặt sau lá thư của Ilse là một tấm bản đồ – có dấu gạch đỏ ngay giữa bến cảng.' } },
     { pre: [
       l('v', 'Das Kreuz ist beim alten Fischmarkt.', 'Dấu gạch nằm ở chợ cá cũ.'),
-      l('p', 'Fischmarkt! Endlich redet jemand vernünftig.', 'Chợ cá! Cuối cùng cũng có người nói chuyện hợp lý.'),
-      l('me', 'Pip, es geht um den Stein.', 'Pip, là chuyện hòn đá mà.'),
     ], post: { de: 'Der Markt ist leer, die Stände umgekippt. Unter einer Kiste schimmert es.', vi: 'Chợ vắng tanh, các sạp đổ nghiêng. Dưới một cái thùng có ánh lấp lánh.' } },
     { pre: [
       l('v', 'Die Kiste ist schwer. Ich hebe sie langsam an – ganz aus der Mitte.', 'Thùng nặng lắm. Mình nhấc từ từ – giữ thăng bằng từ giữa người.'),
@@ -41,7 +38,6 @@ export const harborDialog: Record<number, SessionScene[]> = {
   10: [
     { pre: [
       l('v', 'Zehn Tage! Und schau mal, die Fischer kommen zurück.', 'Mười ngày rồi! Nhìn kìa, các ngư dân đã quay lại.'),
-      l('p', 'Fischer heißt Fisch heißt glücklicher Pip.', 'Ngư dân nghĩa là có cá, nghĩa là Pip vui.'),
       l('me', 'Was brauchen sie?', 'Họ cần gì?'),
       l('v', 'Ihre Netze sind zerrissen. Flicken braucht ruhige Hände.', 'Lưới của họ rách hết. Vá lưới cần đôi tay vững.'),
     ], post: { de: 'Masche für Masche wird das erste Netz wieder ganz.', vi: 'Từng mắt lưới một, tấm lưới đầu tiên đã lành lại.' } },
@@ -112,8 +108,7 @@ export const harborDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Im Hafen wird gefeiert. Jemand hängt Lampions auf.', vi: 'Bến cảng mở tiệc. Có người treo đèn lồng lên.' } },
     { pre: [
       l('v', 'Bei einem Fest wird getanzt. Tanzen heißt: das Gewicht verlagern.', 'Có tiệc là có nhảy. Nhảy nghĩa là chuyển trọng tâm.'),
-      l('p', 'Möwentanz! Links, rechts, Fisch.', 'Điệu nhảy hải âu! Trái, phải, cá.'),
-      l('me', 'Ohne den Fisch, bitte.', 'Bỏ phần cá ra nhé.'),
+      l('me', 'Ich wiege mich mit.', 'Mình đung đưa cùng.'),
     ], post: { de: 'Alle wiegen sich im Takt. Niemand fällt. Das hätte vor zwei Wochen niemand geglaubt.', vi: 'Mọi người đung đưa theo nhịp. Không ai ngã. Hai tuần trước chẳng ai tin nổi.' } },
     { pre: [
       l('v', 'Das letzte Lampion hängt schief. Ich richte es – eine Hand fest an der Mauer.', 'Chiếc đèn lồng cuối còn treo lệch. Mình chỉnh lại – một tay vịn chắc vào tường.'),
@@ -144,7 +139,6 @@ export const harborDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Die blaue Feder leuchtet. An den Wänden: Muschelzeichen, Hunderte davon.', vi: 'Chiếc lông xanh sáng lên. Trên vách hang: những dấu vỏ sò, hàng trăm cái.' } },
     { pre: [
       l('v', 'Hier hat Ilse früher gewartet, wenn Sturm war. Hier liegt ihre Decke.', 'Ngày xưa Ilse trú bão ở đây. Đây là tấm chăn của bà.'),
-      l('p', 'Und ihre Kekse? … Keine Kekse. Traurige Höhle.', 'Còn bánh quy? … Không có bánh. Cái hang buồn ghê.'),
       l('me', 'Es gibt etwas anderes.', 'Có thứ khác kìa.'),
     ], post: { de: 'In einer Nische steht eine kleine Holzkiste mit einem Schloss in Muschelform.', vi: 'Trong một hốc tường có chiếc hộp gỗ nhỏ, ổ khóa hình vỏ sò.' } },
     { pre: [
@@ -203,14 +197,11 @@ export const harborDialog: Record<number, SessionScene[]> = {
   20: [
     { pre: [
       l('v', 'Nach dem Gewitter ist alles klar. Ich kann bis zum Wald sehen!', 'Sau cơn dông mọi thứ trong vắt. Mình nhìn được tới tận khu rừng!'),
-      l('p', 'Der Wald. Da gehen Möwen nicht hin. Zu viele Bäume. Zu wenig Fisch.', 'Khu rừng. Hải âu không vào đó đâu. Quá nhiều cây. Quá ít cá.'),
       l('me', 'Liegt der Leuchtturm hinter dem Wald?', 'Hải đăng nằm sau khu rừng à?'),
       l('v', 'Ja. Der einzige Weg führt hindurch.', 'Đúng. Con đường duy nhất đi xuyên qua nó.'),
     ], post: { de: 'Vestibu zeichnet den Weg auf Ilses Karte nach. Noch zehn Tage bis zum Waldrand.', vi: 'Vestibu vẽ lại đường đi lên bản đồ của Ilse. Còn mười ngày nữa là tới bìa rừng.' } },
     { pre: [
       l('v', 'Für den Wald brauche ich Ausdauer. Heute üben wir besonders ruhig.', 'Vào rừng cần sức bền. Hôm nay mình tập thật đều đặn.'),
-      l('p', 'Ich übe mit. Flügel ausgestreckt. Sieht elegant aus, oder?', 'Tớ tập cùng. Dang cánh ra. Trông thanh lịch nhỉ?'),
-      l('me', 'Sehr elegant, Pip.', 'Rất thanh lịch, Pip.'),
     ], post: { de: 'Pip hält die Pose stolz eine ganze Minute. Dann kippt er um. Alle lachen – Pip am lautesten.', vi: 'Pip tự hào giữ dáng cả một phút. Rồi ngã lăn ra. Ai cũng cười – Pip cười to nhất.' } },
     { pre: [
       l('v', 'Zwanzig Tage. Ich bin stolz auf dich.', 'Hai mươi ngày. Mình tự hào về bạn.'),
@@ -220,7 +211,6 @@ export const harborDialog: Record<number, SessionScene[]> = {
   21: [
     { pre: [
       l('v', 'Ein Wanderstab mit Muschelgriff. Ilse denkt an alles.', 'Gậy đi đường có tay cầm vỏ sò. Ilse chu đáo thật.'),
-      l('p', 'Ich will auch einen. Einen kleinen. Mit Fischgriff.', 'Tớ cũng muốn một cây. Nhỏ thôi. Tay cầm hình cá.'),
       l('me', 'Wir schnitzen dir einen.', 'Bọn mình khắc cho cậu một cây.'),
     ], post: { de: 'Aus Treibholz entsteht ein winziger Stab. Pip trägt ihn wie eine Krone.', vi: 'Từ gỗ trôi dạt thành một cây gậy tí hon. Pip đeo nó như vương miện.' } },
     { pre: [
@@ -237,7 +227,6 @@ export const harborDialog: Record<number, SessionScene[]> = {
     { pre: [
       l('p', 'Heute bin ich der Lehrer. Lektion eins: auf einem Bein stehen. Wie eine Möwe.', 'Hôm nay tớ làm thầy. Bài một: đứng một chân. Như hải âu.'),
       l('v', 'Und Lektion zwei?', 'Còn bài hai?'),
-      l('p', 'Fisch. Immer Fisch.', 'Cá. Lúc nào cũng là cá.'),
       l('me', 'Bleiben wir bei Lektion eins.', 'Mình học bài một thôi.'),
     ], post: { de: 'Pip ist ein strenger Lehrer. Aber ein guter.', vi: 'Pip là ông thầy khó tính. Nhưng dạy giỏi.' } },
     { pre: [
@@ -253,8 +242,6 @@ export const harborDialog: Record<number, SessionScene[]> = {
   23: [
     { pre: [
       l('v', 'Der Hafen hat ein Problem: die Brücke zur Werft ist eingestürzt.', 'Bến cảng gặp chuyện: cây cầu tới xưởng đóng thuyền sập rồi.'),
-      l('p', 'Ohne Werft keine Boote. Ohne Boote keine Fischer. Ohne Fischer …', 'Không có xưởng thì không có thuyền. Không có thuyền thì không có ngư dân. Không có ngư dân thì …'),
-      l('me', '… kein Fisch. Wir wissen es, Pip.', '… không có cá. Biết rồi, Pip.'),
     ], post: { de: 'Ein einziger Balken liegt noch über dem Wasser. Schmal wie ein Ast.', vi: 'Chỉ còn một thanh xà vắt ngang mặt nước. Hẹp như một cành cây.' } },
     { pre: [
       l('v', 'Über den Balken bringe ich ein Seil zur anderen Seite. Arme seitlich, Blick nach vorn.', 'Mình đi qua thanh xà để mang dây sang bờ bên kia. Dang tay, nhìn thẳng.'),
@@ -269,7 +256,6 @@ export const harborDialog: Record<number, SessionScene[]> = {
   24: [
     { pre: [
       l('v', 'Der Bootsbauer hat etwas gesagt: „Ilse wartet nicht nur auf den Stein. Sie wartet auf jemanden.“', 'Ông thợ thuyền nói: “Ilse không chỉ chờ hòn đá. Bà đang chờ một người.”'),
-      l('p', 'Auf mich? Wegen dem Keks?', 'Chờ tớ à? Vì cái bánh quy?'),
       l('me', 'Auf wen denn?', 'Vậy là chờ ai?'),
     ], post: { de: 'Der Bootsbauer lächelt nur und zeigt auf dich.', vi: 'Ông thợ thuyền chỉ mỉm cười và chỉ tay về phía bạn.' } },
     { pre: [
@@ -290,8 +276,6 @@ export const harborDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Auf der Liste stehen: Laternen, Glocke, Leuchtboje, Fahnen, Steg. Fünf Dinge, fünf Tage.', vi: 'Trong danh sách có: đèn, chuông, phao đèn, cờ, cầu tàu. Năm việc, năm ngày.' } },
     { pre: [
       l('v', 'Heute die Laternen. Alle zwölf entlang der Mole.', 'Hôm nay là đèn. Cả mười hai chiếc dọc đê chắn sóng.'),
-      l('p', 'Ich zähle. Eins, zwei, viele.', 'Tớ đếm. Một, hai, nhiều.'),
-      l('me', 'Zwölf, Pip.', 'Mười hai, Pip.'),
     ], post: { de: 'Laterne um Laterne geht an. Die Mole sieht aus wie eine Perlenkette.', vi: 'Từng chiếc đèn bật sáng. Đê chắn sóng trông như một chuỗi ngọc.' } },
     { pre: [
       l('v', 'Die letzte Laterne steht ganz vorn an der Spitze, wo der Wind am stärksten ist.', 'Chiếc đèn cuối ở tít đầu đê, nơi gió mạnh nhất.'),
@@ -301,7 +285,6 @@ export const harborDialog: Record<number, SessionScene[]> = {
   26: [
     { pre: [
       l('v', 'Heute die Hafenglocke. Sie hängt seit dem Sturm stumm.', 'Hôm nay là chuông bến cảng. Từ sau bão nó im lặng.'),
-      l('p', 'Endlich Lärm! Ich mag Lärm.', 'Cuối cùng cũng có tiếng ồn! Tớ thích ồn.'),
       l('me', 'Läuten wir sie!', 'Mình rung chuông thôi!'),
     ], post: { de: 'Das Seil ist gerissen. Die Glocke hängt hoch im Turm.', vi: 'Dây kéo đã đứt. Chiếc chuông treo cao trên tháp.' } },
     { pre: [
@@ -338,7 +321,6 @@ export const harborDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Pip ist so stolz, dass er die erste Fahne verkehrt herum aufhängt.', vi: 'Pip tự hào tới mức treo ngược lá cờ đầu tiên.' } },
     { pre: [
       l('v', 'Jeder Mast hat eine Fahne in einer Farbe. Zusammen ergeben sie ein Wort.', 'Mỗi cột có một lá cờ một màu. Gộp lại sẽ thành một chữ.'),
-      l('p', 'Ein Wort? Hoffentlich „Fisch“.', 'Một chữ à? Mong là chữ “Cá”.'),
       l('me', 'Wir finden es heraus.', 'Mình sẽ biết thôi.'),
     ], post: { de: 'Die Fahnen buchstabieren in alter Seemannssprache: „DANKE“.', vi: 'Các lá cờ ghép thành chữ bằng tín hiệu thủy thủ xưa: “CẢM ƠN”.' } },
     { pre: [
@@ -365,13 +347,10 @@ export const harborDialog: Record<number, SessionScene[]> = {
   30: [
     { pre: [
       l('v', 'Dreißig Tage. Der Hafen leuchtet. Heute brechen wir auf.', 'Ba mươi ngày. Bến cảng rực sáng. Hôm nay mình lên đường.'),
-      l('p', 'Ich … komme mit. Auch wenn im Wald kein Fisch ist.', 'Tớ … đi cùng. Dù trong rừng không có cá.'),
-      l('me', 'Wirklich, Pip?', 'Thật hả Pip?'),
       l('p', 'Ein Schwarm bleibt zusammen.', 'Đã là một đàn thì phải ở bên nhau.'),
     ], post: { de: 'Die Fischer packen Proviant. Pip packt heimlich drei Fische dazu.', vi: 'Ngư dân chuẩn bị lương thực. Pip lén nhét thêm ba con cá.' } },
     { pre: [
       l('v', 'Der ganze Hafen steht am Weg und winkt.', 'Cả bến cảng đứng dọc đường vẫy tay.'),
-      l('p', 'Nicht weinen. Möwen weinen nicht. Das ist Meerwasser.', 'Đừng khóc. Hải âu không khóc. Đây là nước biển thôi.'),
       l('me', 'Wir kommen wieder!', 'Bọn mình sẽ quay lại!'),
     ], post: { de: 'Die Glocke läutet zum Abschied. Wusel weht als warme Brise voraus.', vi: 'Chuông ngân tiễn biệt. Xoáy Nhỏ thổi thành làn gió ấm dẫn đường.' } },
     { pre: [

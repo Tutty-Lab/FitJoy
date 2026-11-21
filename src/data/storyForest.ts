@@ -29,7 +29,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Der Reiher neigt den Kopf. Als die Feder an ihrem Platz ist, wird sein Nebel heller.', vi: 'Chú diệc cúi đầu. Khi chiếc lông về đúng chỗ, làn sương quanh nó sáng lên.' } },
     { pre: [
       l('v', 'Der Reiher steht auf einem Bein. Stundenlang, sagen die Bäume.', 'Chú diệc đứng một chân. Hàng giờ liền, cây cối bảo vậy.'),
-      l('p', 'Angeber.', 'Khoe khoang.'),
       l('me', 'Wir machen es ihm nach.', 'Mình bắt chước nó.'),
     ], post: { de: 'Der Reiher nickt anerkennend. Dann zeigt er mit dem Schnabel tiefer in den Wald.', vi: 'Chú diệc gật đầu khen ngợi. Rồi dùng mỏ chỉ sâu vào trong rừng.' } },
     { pre: [
@@ -61,7 +60,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Die Spuren führen zu einem hohlen Baum. Darin: ein Lager voller glänzender Dinge.', vi: 'Dấu chân dẫn tới một cây rỗng ruột. Bên trong: một kho đầy đồ lấp lánh.' } },
     { pre: [
       l('v', 'Hier liegen Löffel, Knöpfe … und drei Steinstücke!', 'Ở đây có thìa, cúc áo … và ba mảnh đá!'),
-      l('p', 'Jemand sammelt Glitzer. Ich mag diese Person.', 'Có người sưu tầm đồ lấp lánh. Tớ thích người này.'),
       l('me', 'Wir nehmen nichts, ohne zu fragen.', 'Mình không lấy gì khi chưa hỏi.'),
     ], post: { de: 'Hinter dem Baum funkeln zwei Augen. Eine Füchsin, ganz still.', vi: 'Sau gốc cây lóe lên hai con mắt. Một cô cáo, đứng im phăng phắc.' } },
     { pre: [
@@ -88,7 +86,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
   36: [
     { pre: [
       l('v', 'Fenna sagt, der Wald hat fünf Lichtungen. Eine für jeden Sinn.', 'Fenna bảo khu rừng có năm khoảng trống. Mỗi cái cho một giác quan.'),
-      l('p', 'Fünf? Ich habe nur einen Sinn. Hunger.', 'Năm à? Tớ chỉ có một giác quan. Đói.'),
       l('me', 'Wir fangen mit dem Hören an.', 'Mình bắt đầu với thính giác.'),
     ], post: { de: 'Die Lichtung des Hörens ist voller Glockenblumen. Sie klingen, wenn der Wind sie streift.', vi: 'Khoảng trống của thính giác đầy hoa chuông. Chúng reo khi gió lướt qua.' } },
     { pre: [
@@ -97,8 +94,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Ganz links, die kleinste Blume. In ihrem Kelch klemmt etwas Hartes.', vi: 'Tít bên trái, bông hoa nhỏ nhất. Trong đài hoa có thứ gì cứng bị kẹt.' } },
     { pre: [
       l('v', 'Vorsichtig herausholen. Die Blume darf nicht knicken.', 'Lấy ra thật nhẹ. Không được làm gãy hoa.'),
-      l('p', 'Ich bin ganz leise. Seht ihr? Kein Pieps. … Pieps.', 'Tớ im lặng lắm. Thấy không? Không một tiếng. … Chíp.'),
-      l('me', 'Psst, Pip!', 'Suỵt, Pip!'),
     ], post: { de: 'Das sechsunddreißigste Stück. Jetzt klingen alle Blumen gemeinsam – eine Melodie, die nach Hafen klingt.', vi: 'Mảnh thứ ba mươi sáu. Giờ cả cánh đồng hoa cùng reo – một giai điệu nghe như bến cảng.' } },
   ],
   37: [
@@ -119,7 +114,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
   ],
   38: [
     { pre: [
-      l('p', 'Riechen kann ich! Ich rieche … Fisch. Nein. Doch. Nein.', 'Ngửi thì tớ giỏi! Tớ ngửi thấy … cá. Không. Có. Không.'),
       l('v', 'Hier riecht es nach Kiefern, Pilzen und … Zimt?', 'Ở đây có mùi thông, nấm và … quế?'),
       l('me', 'Zimt im Wald?', 'Quế trong rừng à?'),
     ], post: { de: 'Der Zimtduft kommt aus einer Höhle zwischen Wurzeln. Drinnen brennt ein kleines Feuer.', vi: 'Mùi quế bay ra từ một cái hang giữa đám rễ. Bên trong có ngọn lửa nhỏ.' } },
@@ -157,8 +151,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Brombeersträucher, so weit man sieht. Die reifsten hängen ganz oben.', vi: 'Bụi mâm xôi trải dài tít tắp. Quả chín nhất treo trên cao.' } },
     { pre: [
       l('v', 'Pflücken auf einem Bein – und dabei nicht in die Dornen fallen.', 'Hái quả trên một chân – mà không ngã vào gai.'),
-      l('p', 'Eine für mich, eine für den Korb, eine für mich …', 'Một quả cho tớ, một quả vào giỏ, một quả cho tớ …'),
-      l('me', 'Pip!', 'Pip!'),
     ], post: { de: 'Der Korb ist voll. Pips Schnabel ist lila.', vi: 'Giỏ đã đầy. Mỏ Pip tím ngắt.' } },
     { pre: [
       l('v', 'Bruno backt daraus einen Kuchen für alle. Zur Feier von vierzig Tagen.', 'Bruno sẽ nướng bánh cho mọi người. Mừng bốn mươi ngày.'),
@@ -168,7 +160,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
   41: [
     { pre: [
       l('v', 'Nach dem Fest ist es seltsam still. Fenna ist besorgt.', 'Sau bữa tiệc mọi thứ im ắng lạ thường. Fenna lo lắng.'),
-      l('p', 'Was ist los? Hab ich zu viel Kuchen gegessen?', 'Chuyện gì vậy? Tớ ăn nhiều bánh quá à?'),
       l('me', 'Fenna, was ist?', 'Fenna, sao vậy?'),
     ], post: { de: 'Fenna erzählt: Im Herzen des Waldes heult nachts ein Wind. Seit dem Sturm. Er kommt nicht heraus.', vi: 'Fenna kể: Ở trái tim khu rừng, đêm nào cũng có tiếng gió hú. Từ sau cơn bão. Nó không thoát ra được.' } },
     { pre: [
@@ -205,7 +196,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Fenna und ihre Kleinen legen sich um das Lager. Es ist warm.', vi: 'Fenna và các con nằm quanh chỗ ngủ. Ấm áp lắm.' } },
     { pre: [
       l('v', 'Bevor wir schlafen, dehnen wir uns. Ganz langsam, ohne Eile.', 'Trước khi ngủ, mình giãn cơ. Thật chậm, không vội.'),
-      l('p', 'Möwen dehnen sich nicht. Möwen sind von Natur aus perfekt.', 'Hải âu không cần giãn cơ. Hải âu hoàn hảo bẩm sinh.'),
       l('me', 'Versuch es trotzdem.', 'Cứ thử đi.'),
     ], post: { de: 'Pip versucht es. Er gibt zu: Es tut gut.', vi: 'Pip thử. Nó thừa nhận: dễ chịu thật.' } },
     { pre: [
@@ -232,8 +222,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
   45: [
     { pre: [
       l('v', 'Halbzeit! Fünfundvierzig Tage. Wir sind die Hälfte des Weges gegangen.', 'Nửa chặng đường! Bốn mươi lăm ngày. Mình đã đi được một nửa.'),
-      l('p', 'Halbzeit heißt Pause. Pause heißt Snack.', 'Nửa chặng nghĩa là nghỉ. Nghỉ nghĩa là ăn vặt.'),
-      l('me', 'Kurze Pause, Pip.', 'Nghỉ chút thôi, Pip.'),
     ], post: { de: 'Ein Brief kommt mit dem Wind. Ilse schreibt: „Ich sehe euer Licht schon im Wald. Ihr seid nah.“', vi: 'Một lá thư bay tới theo gió. Ilse viết: “Ta đã thấy ánh sáng của các con trong rừng. Các con gần tới rồi.”' } },
     { pre: [
       l('v', 'Ilse sieht uns! Die Stücke leuchten jetzt zusammen so hell.', 'Ilse thấy bọn mình! Các mảnh đá giờ cùng sáng rực.'),
@@ -329,13 +317,9 @@ export const forestDialog: Record<number, SessionScene[]> = {
   51: [
     { pre: [
       l('v', 'Bruno hat uns Proviant gepackt. Und ein Rezept für Ilse.', 'Bruno gói lương thực cho bọn mình. Và một công thức cho Ilse.'),
-      l('p', 'Ist es ein Fischkeks-Rezept?', 'Có phải công thức bánh quy cá không?'),
-      l('me', 'Bestimmt nicht, Pip.', 'Chắc chắn không, Pip.'),
     ], post: { de: 'Der Weg führt bergab. Steile Hänge voller Laub.', vi: 'Đường đi dốc xuống. Sườn dốc phủ đầy lá.' } },
     { pre: [
       l('v', 'Bergab ist schwerer als bergauf. Kleine Schritte, Gewicht nach hinten.', 'Xuống dốc khó hơn lên dốc. Bước nhỏ, dồn trọng tâm ra sau.'),
-      l('p', 'Ich rutsche einfach. Wiiieee!', 'Tớ cứ thế trượt. Uiiii!'),
-      l('me', 'Pip, vorsichtig!', 'Pip, cẩn thận!'),
     ], post: { de: 'Pip landet in einem Laubhaufen. Ihm geht es gut. Er will noch mal.', vi: 'Pip đáp vào một đống lá. Nó không sao. Còn đòi trượt lần nữa.' } },
     { pre: [
       l('v', 'Unten im Tal fließt ein Fluss. Daneben glitzert es.', 'Dưới thung lũng có con sông. Bên cạnh có ánh lấp lánh.'),
@@ -410,7 +394,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
   56: [
     { pre: [
       l('v', 'Fenna und Bruno sind uns nachgekommen. Sie wollen sich verabschieden.', 'Fenna và Bruno đuổi theo bọn mình. Họ muốn chào tạm biệt.'),
-      l('p', 'Schon wieder Abschied. Mein Meerwasser läuft.', 'Lại chia tay. Nước biển của tớ lại chảy.'),
       l('me', 'Wir besuchen euch wieder.', 'Bọn mình sẽ quay lại thăm.'),
     ], post: { de: 'Bruno schenkt eine Dose Kekse. Fenna schenkt einen Fuchsschwanz-Pinsel – für Ilses Lampe.', vi: 'Bruno tặng một hộp bánh quy. Fenna tặng một cây chổi lông đuôi cáo – để lau đèn của Ilse.' } },
     { pre: [
@@ -431,7 +414,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Auf der offenen Wiese weht ein frischer Seewind.', vi: 'Trên đồng cỏ trống, gió biển thổi mát rượi.' } },
     { pre: [
       l('v', 'Wusel spielt mit dem Gras. Er macht Wellen wie im Meer.', 'Xoáy Nhỏ nghịch cỏ. Nó tạo sóng như ngoài biển.'),
-      l('p', 'Angeber. Aber hübsch.', 'Khoe khoang. Nhưng đẹp.'),
       l('me', 'Wir laufen durch die Wellen.', 'Mình đi xuyên qua những con sóng.'),
     ], post: { de: 'Durch das wogende Gras zu gehen ist wie Tanzen.', vi: 'Đi qua cỏ dập dềnh như đang khiêu vũ.' } },
     { pre: [
@@ -447,7 +429,6 @@ export const forestDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Alle liegen im Gras und schauen in die Wolken.', vi: 'Mọi người nằm trên cỏ ngắm mây.' } },
     { pre: [
       l('v', 'Ruhige Übungen sind auch Übungen. Heute ganz sanft.', 'Bài tập nhẹ nhàng cũng là bài tập. Hôm nay thật nhẹ nhàng.'),
-      l('p', 'Sanft kann ich. Sanft ist mein zweiter Vorname.', 'Nhẹ nhàng thì tớ làm được. Nhẹ nhàng là tên đệm của tớ.'),
       l('me', 'Sanft und sicher.', 'Nhẹ nhàng và vững vàng.'),
     ], post: { de: 'Eine Wolke sieht aus wie Vestibu. Eine andere wie ein Fisch. Pip ist zufrieden.', vi: 'Một đám mây trông giống Vestibu. Đám khác giống con cá. Pip mãn nguyện.' } },
     { pre: [

@@ -8,12 +8,10 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
   61: [
     { pre: [
       l('v', 'Sie sind Ilse. Vom Foto.', 'Bà là Ilse. Trong tấm ảnh.'),
-      l('p', '(leise) Hallo. Ich bin Pip. Der mit dem Keks.', '(khẽ) Chào bà. Cháu là Pip. Con hải âu được cho bánh quy.'),
       l('me', 'Wir bringen den Stein.', 'Bọn cháu mang hòn đá tới.'),
     ], post: { de: 'Ilse umarmt Vestibu lange. „Du bist so groß geworden. Und du“ – sie schaut dich an – „du hast meine Karte bekommen.“', vi: 'Ilse ôm Vestibu thật lâu. “Con lớn quá rồi. Còn con” – bà nhìn bạn – “con đã nhận được tấm thiệp của ta.”' } },
     { pre: [
       l('v', 'Ilse, warum haben Sie die Karte leer geschickt?', 'Bà Ilse, sao bà gửi tấm thiệp trắng?'),
-      l('p', 'Und warum nicht mit Kekse dran?', 'Mà sao không kèm bánh quy?'),
       l('me', 'Was sollte darauf stehen?', 'Đáng lẽ phải viết gì trên đó?'),
     ], post: { de: 'Ilse lacht: „Eine leere Karte fragt: Wer kommt? Nur wer sich traut, schreibt seinen Namen darauf.“', vi: 'Ilse cười: “Tấm thiệp trắng là câu hỏi: Ai sẽ tới? Chỉ người dám bước đi mới viết tên mình lên đó.”' } },
     { pre: [
@@ -24,7 +22,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
   62: [
     { pre: [
       l('v', 'Bevor wir hochsteigen, will Ilse uns etwas beibringen.', 'Trước khi leo lên, Ilse muốn dạy bọn mình một điều.'),
-      l('p', 'Bitte Kekse backen. Bitte Kekse backen.', 'Làm ơn là nướng bánh. Làm ơn là nướng bánh.'),
       l('me', 'Was denn, Ilse?', 'Là gì vậy bà?'),
     ], post: { de: 'Ilse zeigt eine alte Übung: auf einem Bein stehen und dabei das Meer anschauen. „So habe ich es vierzig Jahre gemacht.“', vi: 'Ilse chỉ một bài tập xưa: đứng một chân và nhìn ra biển. “Ta đã làm thế suốt bốn mươi năm.”' } },
     { pre: [
@@ -46,7 +43,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Ilse streichelt Pips Kopf. „Und du hast es den ganzen Weg zurück begleitet. Das zählt mehr.“', vi: 'Ilse xoa đầu Pip. “Và cháu đã cùng nó đi suốt chặng đường về. Điều đó quý hơn.”' } },
     { pre: [
       l('v', 'Pip ist so erleichtert, dass er einen Freudentanz macht.', 'Pip nhẹ nhõm tới mức nhảy điệu mừng vui.'),
-      l('p', 'Links, rechts, Fisch! Links, rechts, Fisch!', 'Trái, phải, cá! Trái, phải, cá!'),
       l('me', 'Wir tanzen mit!', 'Mình nhảy cùng!'),
     ], post: { de: 'Sogar Ilse macht mit. Sie wackelt kein bisschen.', vi: 'Cả Ilse cũng nhảy theo. Bà không chao chút nào.' } },
     { pre: [
@@ -78,7 +74,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Ilse schickt Bretter mit einem Seilzug nach oben.', vi: 'Ilse dùng ròng rọc gửi ván lên.' } },
     { pre: [
       l('v', 'Jedes Brett muss ich auf einer Stufe stehend einsetzen. Ganz ruhig.', 'Mỗi tấm ván mình phải lắp khi đứng trên một bậc. Thật bình tĩnh.'),
-      l('p', 'Ich reiche dir die Nägel. Einen nach dem anderen. Wie ein Profi.', 'Tớ đưa đinh cho cậu. Từng cái một. Như dân chuyên.'),
       l('me', 'Gutes Team.', 'Đội hay đấy.'),
     ], post: { de: 'Drei neue Stufen. Sie halten.', vi: 'Ba bậc mới. Chúng chắc chắn.' } },
     { pre: [
@@ -105,12 +100,10 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
   67: [
     { pre: [
       l('v', 'Die letzten Stufen sind die steilsten. Fast wie eine Leiter.', 'Những bậc cuối dốc nhất. Gần như cái thang.'),
-      l('p', 'Ich bin schon oben! Ich warte! Sehr bequem hier.', 'Tớ lên trên rồi! Tớ đợi! Ở đây thoải mái lắm.'),
-      l('me', 'Angeber!', 'Đồ khoe khoang!'),
+      l('me', 'Hand, Fuß, ganz ruhig.', 'Tay, chân, thật bình tĩnh.'),
     ], post: { de: 'Hand, Fuß, Hand, Fuß. Vestibu klettert ruhig und gleichmäßig.', vi: 'Tay, chân, tay, chân. Vestibu leo đều đặn và bình tĩnh.' } },
     { pre: [
       l('v', 'Dreihundertdreiunddreißig! Wir sind oben!', 'Ba trăm ba mươi ba! Bọn mình lên tới đỉnh rồi!'),
-      l('p', 'Willkommen in meinem Wohnzimmer.', 'Chào mừng tới phòng khách của tớ.'),
       l('me', 'Was für eine Aussicht!', 'Cảnh đẹp quá!'),
     ], post: { de: 'Die ganze Insel liegt unter euch. Und mitten im Raum: die große, dunkle Lampe.', vi: 'Cả hòn đảo nằm dưới chân. Và giữa phòng: ngọn đèn lớn, tối om.' } },
     { pre: [
@@ -166,8 +159,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
   71: [
     { pre: [
       l('v', 'Die Linse muss zurück in die Lampe. Sie ist sehr schwer.', 'Thấu kính phải lắp lại vào đèn. Nó nặng lắm.'),
-      l('p', 'Ich gebe Anweisungen. Links. Nein, rechts. Nein, links.', 'Tớ chỉ huy. Trái. Không, phải. Không, trái.'),
-      l('me', 'Pip, bitte.', 'Pip, làm ơn.'),
     ], post: { de: 'Mit Ilse zusammen heben alle die Linse an. Breitbeinig, gerader Rücken.', vi: 'Cùng với Ilse, cả nhóm nhấc thấu kính lên. Chân rộng, lưng thẳng.' } },
     { pre: [
       l('v', 'Ein kleines Stück höher. Alle heben zusammen, niemand steht allein.', 'Cao thêm chút nữa. Mọi người cùng nâng, không ai làm một mình.'),
@@ -202,7 +193,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Am Fuß des Turms wirft Vestibu Seile zu den Booten.', vi: 'Dưới chân tháp, Vestibu ném dây cho các thuyền.' } },
     { pre: [
       l('v', 'Die Felsen sind nass. Ich stehe breit und ziehe.', 'Đá ướt hết. Mình đứng rộng chân và kéo.'),
-      l('p', 'Die Fischer winken! Und sie haben Fisch dabei!', 'Ngư dân vẫy tay! Và họ mang cá theo!'),
       l('me', 'Zieh, Vestibu!', 'Kéo đi, Vestibu!'),
     ], post: { de: 'Ein Boot nach dem anderen liegt sicher am Felsen.', vi: 'Từng chiếc thuyền cập vào đá an toàn.' } },
     { pre: [
@@ -218,8 +208,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Vestibu geht voran. Langsam, Stufe für Stufe. Die Kinder machen es nach.', vi: 'Vestibu đi đầu. Chậm rãi, từng bậc một. Lũ trẻ bắt chước theo.' } },
     { pre: [
       l('v', 'Jetzt bin ich der Lehrer. Wie Pip im Hafen.', 'Giờ mình làm thầy. Như Pip ở bến cảng.'),
-      l('p', 'Lektion zwei: Fisch.', 'Bài hai: cá.'),
-      l('me', 'Lektion eins reicht, Pip.', 'Bài một là đủ rồi, Pip.'),
     ], post: { de: 'Oben angekommen stehen alle Kinder auf einem Bein und schauen aufs Meer – wie Ilse.', vi: 'Lên tới đỉnh, lũ trẻ đều đứng một chân nhìn ra biển – như Ilse.' } },
     { pre: [
       l('v', 'Die Kinder haben ein Geschenk.', 'Lũ trẻ có quà.'),
@@ -234,7 +222,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Vestibu geht über den glitschigen Damm. Diesmal ganz ohne Angst.', vi: 'Vestibu đi qua con đê trơn. Lần này chẳng chút sợ hãi.' } },
     { pre: [
       l('v', 'Bruno trägt einen riesigen Korb. Er wackelt.', 'Bruno mang một cái giỏ khổng lồ. Chú chao đảo.'),
-      l('p', 'Was ist drin? Kekse? Bitte Kekse.', 'Trong đó là gì? Bánh quy? Làm ơn là bánh quy.'),
       l('me', 'Ich nehme den Korb.', 'Để mình mang giỏ.'),
     ], post: { de: 'Natürlich Kekse. Und Fennas Kinder hüpfen sicher über die Steine.', vi: 'Đương nhiên là bánh quy. Và lũ cáo con nhảy qua những hòn đá thật vững.' } },
     { pre: [
@@ -245,7 +232,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
   76: [
     { pre: [
       l('v', 'Der Leuchtturm ist voller Gäste. Es ist laut und fröhlich.', 'Hải đăng chật kín khách. Ồn ào và vui vẻ.'),
-      l('p', 'Endlich Lärm! Ich liebe es.', 'Cuối cùng cũng ồn! Tớ thích lắm.'),
       l('me', 'Wie ein Fest.', 'Như một bữa tiệc.'),
     ], post: { de: 'Doch am Abend wird Ilse still. Sie schaut lange aufs Meer.', vi: 'Nhưng tối đến, Ilse lặng đi. Bà nhìn ra biển rất lâu.' } },
     { pre: [
@@ -266,7 +252,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Ilse erklärt: Ein Leuchtturm hält Stürme nicht auf. Aber er zeigt allen, wo das Ufer ist.', vi: 'Ilse giải thích: Hải đăng không ngăn được bão. Nhưng nó cho mọi người biết bờ ở đâu.' } },
     { pre: [
       l('v', 'Die Boote im Hafen müssen das Licht sehen. Sonst finden sie nicht heim.', 'Thuyền ở bến phải thấy được đèn. Không thì không tìm được đường về.'),
-      l('p', 'Meine Fischer!', 'Ngư dân của tớ!'),
       l('me', 'Wir schaffen das.', 'Mình làm được.'),
     ], post: { de: 'Die Gäste kehren auf ihre Boote zurück, um den Hafen zu sichern.', vi: 'Khách khứa quay về thuyền để giữ an toàn cho bến cảng.' } },
     { pre: [
@@ -277,13 +262,10 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
   78: [
     { pre: [
       l('v', 'Ilse sagt: Der Stein muss in der richtigen Reihenfolge zusammengesetzt werden.', 'Ilse bảo: Hòn đá phải ghép đúng thứ tự.'),
-      l('p', 'Ein Puzzle! Ich liebe Puzzles. Ich habe noch nie eins gelöst.', 'Ghép hình! Tớ mê ghép hình. Tớ chưa ghép xong cái nào bao giờ.'),
       l('me', 'Wir fangen mit dem ersten an.', 'Bắt đầu từ mảnh đầu tiên.'),
     ], post: { de: 'Pip legt das erste Stück auf den Sockel. Das, das er einst genommen hatte. Es passt genau.', vi: 'Pip đặt mảnh đầu tiên lên bệ. Chính mảnh nó từng lấy. Vừa khít.' } },
     { pre: [
       l('v', 'Jedes Stück erinnert an einen Tag. Das hier – der Anker.', 'Mỗi mảnh gợi nhớ một ngày. Mảnh này – cái neo.'),
-      l('p', 'Und das – die Laterne. Und das – der Keks! Nein, das ist ein Keks.', 'Còn mảnh này – cái đèn lồng. Và cái này – bánh quy! À không, đây đúng là bánh quy.'),
-      l('me', 'Pip!', 'Pip!'),
     ], post: { de: 'Der Stein wächst. Er summt lauter mit jedem Stück.', vi: 'Hòn đá lớn dần. Nó ngân to hơn theo từng mảnh.' } },
     { pre: [
       l('v', 'Bei jedem Stück muss ich ganz ruhig stehen, sonst rutscht es ab.', 'Mỗi mảnh mình phải đứng thật yên, không là trượt mất.'),
@@ -421,14 +403,10 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
   87: [
     { pre: [
       l('v', 'Nach dem Sturm ist alles ruhig. Noch drei Tage.', 'Sau bão mọi thứ yên bình. Còn ba ngày nữa.'),
-      l('p', 'Drei Tage, drei Stücke. Dann Licht. Dann Fest. Dann Fisch.', 'Ba ngày, ba mảnh. Rồi đèn sáng. Rồi tiệc. Rồi cá.'),
-      l('me', 'In dieser Reihenfolge?', 'Đúng thứ tự đó hả?'),
     ], post: { de: 'Ilse schreibt Einladungen für den neunzigsten Tag. An alle auf der Insel.', vi: 'Ilse viết thiệp mời cho ngày thứ chín mươi. Gửi mọi người trên đảo.' } },
     { pre: [
       l('v', 'Pip, du bist die Post. Diesmal ist es eine große Aufgabe.', 'Pip, cậu là bưu tá. Lần này là nhiệm vụ lớn đấy.'),
-      l('p', 'Postmöwe Pip, zu Diensten! Diesmal ohne Bezahlung.', 'Hải âu đưa thư Pip xin phục vụ! Lần này miễn phí.'),
-      l('me', 'Wirklich?', 'Thật á?'),
-      l('p', 'Na gut. Ein Fisch.', 'Thôi được. Một con cá.'),
+      l('me', 'Danke, Pip!', 'Cảm ơn Pip!'),
     ], post: { de: 'Pip fliegt los, den Schnabel voller Karten.', vi: 'Pip cất cánh, mỏ ngậm đầy thiệp.' } },
     { pre: [
       l('v', 'Die Einladungen sehen aus wie deine erste Karte. Mit dem Muschelzeichen.', 'Những tấm thiệp trông giống tấm đầu tiên của bạn. Có dấu vỏ sò.'),
@@ -443,7 +421,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Eine kleine Tür führt hinaus auf die Aussichtsplattform – mit hohem Geländer.', vi: 'Một cánh cửa nhỏ dẫn ra đài ngắm cảnh – có lan can cao.' } },
     { pre: [
       l('v', 'Hier oben steht man ganz allein mit dem Himmel. Ilse hat das jeden Tag gemacht.', 'Trên này chỉ có mình với bầu trời. Ilse ngày nào cũng làm vậy.'),
-      l('p', 'Ich halte den Atem an. Möwen tun das nie.', 'Tớ nín thở. Hải âu không bao giờ làm vậy.'),
       l('me', 'Ich stehe hier. Ruhig.', 'Mình đứng đây. Bình thản.'),
     ], post: { de: 'Von hier sieht man alles: Hafen, Wald, Meer. Jeder Ort eine Erinnerung.', vi: 'Từ đây thấy tất cả: bến cảng, khu rừng, biển. Mỗi nơi một kỷ niệm.' } },
     { pre: [
@@ -454,13 +431,10 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
   89: [
     { pre: [
       l('v', 'Die Gäste kommen! Boote vom Hafen, Tiere aus dem Wald.', 'Khách tới rồi! Thuyền từ bến cảng, muông thú từ khu rừng.'),
-      l('p', 'Fenna! Bruno! Der Reiher! Die Fischer! Die Kinder!', 'Fenna! Bruno! Chú diệc! Ngư dân! Lũ trẻ!'),
       l('me', 'Alle sind da!', 'Mọi người đều tới!'),
     ], post: { de: 'Der Leuchtturm ist voller Freunde. Jeder hat einen Teil der Reise begleitet.', vi: 'Hải đăng đầy ắp bạn bè. Ai cũng đã đồng hành một phần chặng đường.' } },
     { pre: [
       l('v', 'Bruno hat einen riesigen Kuchen gebacken. In Form des Leuchtturms.', 'Bruno nướng một chiếc bánh khổng lồ. Hình ngọn hải đăng.'),
-      l('p', 'Ich esse die Spitze. Das ist mein Platz.', 'Tớ ăn phần đỉnh. Chỗ đó là của tớ.'),
-      l('me', 'Erst morgen, Pip.', 'Để mai, Pip.'),
     ], post: { de: 'Alle üben gemeinsam ein letztes Mal vor dem großen Tag. Ein ganzer Leuchtturm voller Einbeiniger.', vi: 'Mọi người cùng tập lần cuối trước ngày trọng đại. Cả tòa hải đăng toàn người đứng một chân.' } },
     { pre: [
       l('v', 'Morgen ist der neunzigste Tag. Wie fühlst du dich?', 'Mai là ngày thứ chín mươi. Bạn thấy sao?'),
@@ -470,7 +444,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
   90: [
     { pre: [
       l('v', 'Neunzig Tage. Erinnerst du dich an den ersten?', 'Chín mươi ngày. Bạn còn nhớ ngày đầu tiên không?'),
-      l('p', 'Ich hab ein Glitzerding geklaut. Ich erinnere mich sehr gut.', 'Tớ chôm một món lấp lánh. Tớ nhớ rất rõ.'),
       l('me', 'Und ich konnte kaum stehen.', 'Còn mình thì đứng còn không vững.'),
       l('v', 'Und jetzt hältst du das letzte Stück.', 'Còn giờ bạn đang cầm mảnh cuối cùng.'),
     ], post: { de: 'Alle versammeln sich oben an der Lampe. Es wird ganz still.', vi: 'Mọi người tụ lại trên đỉnh, quanh ngọn đèn. Tất cả lặng im.' } },
@@ -481,7 +454,6 @@ export const lighthouseDialog: Record<number, SessionScene[]> = {
     ], post: { de: 'Das Stück in deiner Hand wird warm. Ein zartes Licht beginnt zu leuchten.', vi: 'Mảnh đá trong tay bạn ấm dần. Một ánh sáng dịu bắt đầu le lói.' } },
     { pre: [
       l('v', 'Jetzt. Leg es auf den Stein.', 'Ngay bây giờ. Đặt nó lên hòn đá.'),
-      l('p', 'Ich weine. Und es ist KEIN Meerwasser.', 'Tớ khóc. Và lần này KHÔNG phải nước biển.'),
       l('me', 'Für die Insel.', 'Vì hòn đảo.'),
     ], post: { de: 'Der Stein ist ganz. Die Lampe leuchtet, hell über das ganze Meer. Die Insel steht still – und jeder auf ihr steht sicher. Ilse legt dir eine Karte in die Hand. Darauf steht dein Name, und darunter: „Leuchtturmwärter.“', vi: 'Hòn đá đã liền lại. Ngọn đèn bừng sáng khắp mặt biển. Hòn đảo đứng yên – và ai trên đảo cũng đứng vững. Ilse đặt vào tay bạn một tấm thiệp. Trên đó ghi tên bạn, và bên dưới: “Người giữ hải đăng.”' } },
   ],
