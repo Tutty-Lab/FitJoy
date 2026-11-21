@@ -170,7 +170,7 @@ export default function WorkoutDetail() {
       <span className="flex items-center gap-1 font-black text-orange-500"><Flame size={20} fill="currentColor" />{streak}</span>
     </header>
 
-    {stage === 'instructions' && <section key={intro_} className="intro-flow flex min-h-[calc(100dvh-76px)] flex-col gap-4">
+    {stage === 'instructions' && <section key={intro_} className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
       {intro_ === 0 && <>
         <div className="story-scene" style={{ backgroundImage: `url(${day <= 3 ? `/story/d${day}s${session}.webp` : `/map/${regionFor(day).id}.webp`})` }}>
           <span className="story-scene-title">{episode.reward[lang]}</span>
