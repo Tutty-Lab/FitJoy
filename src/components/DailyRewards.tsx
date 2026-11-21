@@ -65,19 +65,20 @@ function Chest({ doneToday, onWin }: { doneToday: boolean; onWin: () => void }) 
   const ready = (TEST || doneToday) && !claimed && won === null
   const tap = () => {
     if (TEST && won !== null) { setWon(null); setTaps(0); return }
-    if (!ready) return
-    if (taps < 2) { setTaps(taps + 1); sound('tap'); return }
-    const n = 10 + Math.floor(Math.random() * 4) * 5
-    if (!TEST) { write({ ...read(), chest: today }); addGems(n) }
-    setWon(n); sound('success'); onWin()
+    if (!ready || taps) return
+    // One tap: the chest shakes, then pops open.
+    setTaps(1); sound('tap')
+    setTimeout(() => {
+      const n = 10 + Math.floor(Math.random() * 4) * 5
+      if (!TEST) { write({ ...read(), chest: today }); addGems(n) }
+      setWon(n); setTaps(0); sound('success'); onWin()
+    }, 700)
   }
   return <section className="reward-stage">
-    <button type="button" key={`${taps}-${won}`} className={`chest big ${won !== null ? 'open' : ''} ${taps ? `shake-${taps}` : ''}`} onClick={tap} disabled={!ready && !(TEST && won !== null)} aria-label={won !== null ? L(`${won} Diamanten`, `${won} kim cương`) : L('Truhe öffnen', 'Mở rương')}>
+    <button type="button" key={String(won)} className={`chest big ${won !== null ? 'open' : ''} ${taps ? 'opening' : ''} ${ready && !taps ? 'idle' : ''}`} onClick={tap} disabled={!ready && !(TEST && won !== null)} aria-label={won !== null ? L(`${won} Diamanten`, `${won} kim cương`) : L('Truhe öffnen', 'Mở rương')}>
       <img src={won !== null ? '/rewards/chest-open.webp' : '/rewards/chest-closed.webp'} alt="" className="chest-img" draggable={false} />
     </button>
-    {won !== null ? <span className="reward-pop big"><Gem size={30} />+{won}</span>
-      : ready ? <div className="tap-dots" aria-hidden="true">{[0, 1, 2].map(k => <i key={k} className={k < taps ? 'on' : ''} />)}</div>
-        : <div className="tap-dots locked" aria-hidden="true"><Lock size={22} /></div>}
+    <span className={`reward-pop big ${won === null && ready ? 'ghost' : ''} ${won === null && !ready ? 'locked' : ''}`}>{won === null && !ready ? <Lock size={28} /> : <><Gem size={30} />+{won ?? 0}</>}</span>
   </section>
 }
 
@@ -109,7 +110,7 @@ function Wheel({ onWin }: { onWin: () => void }) {
         <path d="M40 80 A104 104 0 0 1 150 26" fill="none" stroke="#ffe08a" strokeWidth="7" strokeLinecap="round" />
         <circle cx="130" cy="128" r="104" fill="#2b1d0e" />
       </svg>
-      <svg className="wheel" viewBox="-104 -104 208 208" style={{ transform: `rotate(${angle}deg)`, transition: spinning ? 'transform 4s cubic-bezier(.2,.9,.25,1.04)' : 'none' }} aria-hidden="true">
+      <div className="wheel-clip"><svg className="wheel" viewBox="-104 -104 208 208" style={{ transform: `rotate(${angle}deg)`, transition: spinning ? 'transform 4s cubic-bezier(.2,.9,.25,1.04)' : 'none' }} aria-hidden="true">
         {PRIZES.map((p, i) => {
           const a0 = (i * 45 - 90) * Math.PI / 180, a1 = ((i + 1) * 45 - 90) * Math.PI / 180
           return <g key={i}>
@@ -120,7 +121,7 @@ function Wheel({ onWin }: { onWin: () => void }) {
             </g>
           </g>
         })}
-      </svg>
+      </svg></div>
       <svg className="wheel-top" viewBox="0 0 260 260" aria-hidden="true">
         {Array.from({ length: 12 }, (_, i) => {
           const a = (i * 30 - 90) * Math.PI / 180, x = 130 + 113 * Math.cos(a), y = 128 + 113 * Math.sin(a)
