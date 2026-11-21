@@ -26,7 +26,7 @@ const AdminApp = lazy(() => import('./admin/AdminApp'))
 
 function StreakRoute() {
   const up = new URLSearchParams(useLocation().search).get('up') === '1'
-  return up ? <Streak /> : <><div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden"><Home /></div><Streak /></>
+  return up ? <Streak /> : <Navigate to="/?streak=1" replace />
 }
 
 function CheckRoute() {
@@ -47,9 +47,9 @@ export default function App() {
   const { pathname } = useLocation()
   const navigate = useNavigate()
   useEffect(() => {
-    const openStreak = () => navigate('/streak')
+    const openStreak = () => navigate('/?streak=1')
     window.addEventListener('fitjoy:streak', openStreak)
-    widgetLaunchRoute().then(route => { if (route === '/streak') navigate(route) })
+    widgetLaunchRoute().then(route => { if (route === '/streak') navigate('/?streak=1') })
     let dates: string[] = []
     try { dates = JSON.parse(localStorage.getItem('fitjoy.activeDates') ?? '[]') } catch { /* empty */ }
     syncWidget(dates, Boolean(loadProfile()?.username || loadProfile()?.email))
@@ -64,7 +64,7 @@ export default function App() {
   return (
     <>
     <Splash />
-    <div key={pathname === '/' || pathname === '/streak' ? 'home' : 'page'} className="route-enter">
+    <div key={pathname === '/' ? 'home' : 'page'} className="route-enter">
     <Routes>
       <Route path="/admin/*" element={<Suspense fallback={null}><AdminApp /></Suspense>} />
       <Route path="/login" element={<Login />} />

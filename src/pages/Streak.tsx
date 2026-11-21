@@ -46,7 +46,7 @@ function bestStreak(dates: string[]) {
 }
 
 // Calendar sheet that slides up from the bottom.
-function StreakSheet() {
+export function StreakSheet() {
   const navigate = useNavigate()
   const { streak, doneToday } = useCompleted()
   const [closing, setClosing] = useState(false)
