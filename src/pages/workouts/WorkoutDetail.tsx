@@ -196,6 +196,7 @@ export default function WorkoutDetail() {
     {stage === 'practice' && <>
       <Talk text={cheer} mood="encourage" />
       <div role="timer" aria-label={L('Verbleibende Zeit', 'Thời gian còn lại')} className="text-center text-6xl font-black tabular-nums text-brand-deep">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
+      {/* TEMP: test skip */}<button type="button" className="self-center text-sm font-bold text-gray-500 underline" onClick={() => { remainingMs.current = 0; setRemaining(0) }}>{L('Überspringen (Test)', 'Bỏ qua (test)')}</button>
       <VideoPlayer key={`${day}:practice`} ref={player} src={video} poster={poster} autoPlay loop onPlaybackChange={setRunning} />
       <Affirmation big />
       <button type="button" className={primary} onClick={togglePlayback}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
@@ -211,6 +212,7 @@ export default function WorkoutDetail() {
     {stage === 'bonus' && bonus && <>
       <Talk text={cheer} mood="encourage" />
       <div role="timer" aria-label={L('Verbleibende Zeit', 'Thời gian còn lại')} className="text-center text-6xl font-black tabular-nums text-rust">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
+      {/* TEMP: test skip */}<button type="button" className="self-center text-sm font-bold text-gray-500 underline" onClick={() => { remainingMs.current = 0; setRemaining(0) }}>{L('Überspringen (Test)', 'Bỏ qua (test)')}</button>
       <VideoPlayer key={`${day}:bonus`} ref={player} src={video} poster={poster} autoPlay loop onPlaybackChange={setRunning} />
       <section className="flex flex-col gap-3 rounded-[28px] bg-white p-5 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
         <p className="text-xs font-bold tracking-wide text-rust uppercase">Bonus · {categoryLabel(bonus.kategorie)}</p>
