@@ -1,0 +1,545 @@
+{
+ "intro": "Wie oft verlagerst du dein Gewicht, wechselst den Blick oder weichst jemandem aus, ohne darüber nachzudenken? Vestibu, dein Begleiter aus dem Innenohr, nimmt sich vor, solchen ganz gewöhnlichen Momenten nachzugehen. Er hält nach deiner Bonusübung auf Zetteln fest, was du tust und was dir dabei hilft. Mit jedem Fund kommt ihr der Frage näher, was diese Momente gemeinsam haben.",
+ "days": [
+  {
+   "day": 1,
+   "phase": "Ankommen und bemerken",
+   "story": "Als du in der Küche darauf wartest, dass das Wasser kocht, verlagerst du dein Gewicht von einem Fuß auf den anderen. Für dich ist das eine beiläufige Bewegung, für Vestibu der erste Fund. Vestibu schreibt auf einen Zettel, was du gerade getan hast: „Gewicht verlagert, ohne darüber nachzudenken.“ Darunter setzt er die Frage, mit der die Suche beginnt: „Woher wusstest du, was zu tun war?“",
+   "affirmation": "Ich kann mir einen Moment Zeit nehmen."
+  },
+  {
+   "day": 2,
+   "phase": "Ankommen und bemerken",
+   "story": "Du sitzt am Küchentisch und stützt das Gesicht kurz in die Hände. Der Druck deiner Hände auf den Wangen ist deutlich zu spüren. Er ergänzt den ersten Zettel um „Druck spüren“ und überlegt, ob unter deinen Füßen etwas Ähnliches passiert ist.",
+   "affirmation": "Ich kann mir eine kleine Pause gönnen."
+  },
+  {
+   "day": 3,
+   "phase": "Ankommen und bemerken",
+   "story": "Hinter dir klickt der Wasserkocher, und du drehst den Kopf zum Geräusch. Als du wieder nach vorn schaust, findest du ohne Suchen die Zeile auf deinem Einkaufszettel wieder. Vestibu legt einen zweiten Zettel an, diesmal mit dem Wort „Blick“, und merkt, dass der erste Zettel schon Gesellschaft braucht.",
+   "affirmation": "Ich kann kurz schauen, was meine Aufmerksamkeit braucht."
+  },
+  {
+   "day": 4,
+   "phase": "Ankommen und bemerken",
+   "story": "Du klemmst das Telefon zwischen Ohr und Schulter, um einen Stift zu suchen. Als das Gespräch vorbei ist, legst du das Telefon ab und bemerkst, wie deine Schulter sinkt. Er schreibt „erst danach bemerkt“ neben den Eintrag über die Füße, denn auch gestern war der Hinweis schon da, bevor du ihn beachtet hast.",
+   "affirmation": "Ich kann Anspannung bemerken und etwas nachlassen."
+  },
+  {
+   "day": 5,
+   "phase": "Ankommen und bemerken",
+   "story": "Du legst beim Sitzen die Hände auf deine Oberschenkel und merkst erst jetzt, wie weit vorn du auf dem Stuhl sitzt. Vestibu hat das bisher für eine Frage der Möbel gehalten. Vestibu legt den Zettel über den Druck deiner Hände neben den über deine Füße und fragt sich, ob man so auch im Sitzen merkt, wo man gerade ist.",
+   "affirmation": "Ich kann spüren, wie ich gerade sitze."
+  },
+  {
+   "day": 6,
+   "phase": "Ankommen und bemerken",
+   "story": "Du hörst an der Wohnungstür ein Rascheln und erwartest den Postboten. Hinter der Tür liegt bloß ein Werbezettel, den der Luftzug bewegt hat. „Gehört“ schreibt Vestibu auf den nächsten Zettel und lässt darunter Platz für das, was du an der Tür tatsächlich gefunden hast.",
+   "affirmation": "Ich kann einen kleinen Augenblick mit jemandem teilen."
+  },
+  {
+   "day": 7,
+   "phase": "Ankommen und bemerken",
+   "story": "Du lehnst dich zurück und bemerkst die Lehne erst, als dein Rücken sie berührt. Vestibu hält das für einen ziemlich leisen Auftritt. Vestibu ergänzt auf dem Zettel vom Sitzen „Lehne“ und unterstreicht, dass du den Kontakt spüren konntest, ohne dich umzudrehen.",
+   "affirmation": "Ich kann mir Unterstützung zugestehen, wenn ich sie brauche."
+  },
+  {
+   "day": 8,
+   "phase": "Ankommen und bemerken",
+   "story": "Du greifst in der Jackentasche nach dem Schlüssel und ziehst ihn zwischen zwei Münzen hervor. Der Blick hätte gern mitgeraten, hatte aber von dort oben keine Sicht. Beim Schlüssel fällt Vestibu auf, dass die Finger ihm schon die zweite Beobachtung liefern, bei der der Blick abwesend war.",
+   "affirmation": "Ich kann mir Zeit nehmen, etwas in Ruhe zu ertasten."
+  },
+  {
+   "day": 9,
+   "phase": "Ankommen und bemerken",
+   "story": "Du legst den Schlüssel rechts neben das Spülbecken und öffnest links eine Schublade. Als du dich umdrehst, ist das Spülbecken plötzlich auf deiner linken Seite. Er dreht den Zettel mit „rechts“ und „links“ um und präzisiert: Entscheidend ist, von wo aus du schaust.",
+   "affirmation": "Ich kann erst wahrnehmen und dann entscheiden."
+  },
+  {
+   "day": 10,
+   "phase": "Ankommen und bemerken",
+   "story": "Du schreibst „Milch“ auf einen Einkaufszettel, bevor dir noch etwas einfällt. Als du den Stift ablegst, bemerkst du den Abdruck, den er am Finger hinterlassen hat. Den Einkaufszettel nimmst du mit, und Vestibu übernimmt die Idee, auf seinen Notizen fortan festzuhalten, was du in dem jeweiligen Moment überhaupt gebraucht hast.",
+   "affirmation": "Ich kann aufschreiben, was ich im Kopf behalte."
+  },
+  {
+   "day": 11,
+   "phase": "Ankommen und bemerken",
+   "story": "Am offenen Fenster hörst du ein Rattern, eine Stimme und Wasser im Fallrohr. Erst beim Hinausschauen erkennst du, dass das Rattern von den Rollen eines Koffers kommt. Vestibu ergänzt beim Zettel über das Rascheln: Ein Geräusch verrät manchmal schon die Richtung, auch wenn noch offen ist, was es verursacht hat.",
+   "affirmation": "Ich kann zuhören, auch wenn ich mich erst irre."
+  },
+  {
+   "day": 12,
+   "phase": "Ankommen und bemerken",
+   "story": "Du hebst den Blick vom Einkaufszettel und siehst ein Fenster auf der anderen Straßenseite. Dein Blick folgt kurz jemandem auf dem Gehweg und kehrt zum Fenster zurück. Damit bekommt der Blickzettel einen konkreten Eintrag: Der Fensterrahmen ist ein fester Punkt, auch wenn dein Blick gerade weiterwandert.",
+   "affirmation": "Ich kann meinen Blick von Nah zu Fern wechseln."
+  },
+  {
+   "day": 13,
+   "phase": "Ankommen und bemerken",
+   "story": "Du ziehst zu Hause die Schuhe aus und merkst, an welcher Stelle der Teppich beginnt. Die Fußsohlen melden sich zum ersten Mal ausdrücklich zu Wort. Vestibu legt den Teppichzettel zum Schlüssel, weil an beiden Stellen schon die Berührung verrät, was sich unter dir oder in deiner Hand befindet.",
+   "affirmation": "Ich kann den Boden unter meinen Füßen wahrnehmen."
+  },
+  {
+   "day": 14,
+   "phase": "Ankommen und bemerken",
+   "story": "Du hältst ein Glas mit einer Hand und drehst mit der anderen am Deckel. Das Glas bleibt stehen, obwohl deine Hände in verschiedene Richtungen arbeiten. Er legt die beiden Handspuren nebeneinander und beginnt zu ahnen, dass ein einzelner Mitspieler selten die ganze Geschichte kennt.",
+   "affirmation": "Ich kann mich über einen kleinen Handgriff freuen."
+  },
+  {
+   "day": 15,
+   "phase": "Ankommen und bemerken",
+   "story": "Du gießt Wasser ein und siehst, wie es nach dem Abstellen noch ein wenig hin und her schwappt. Vestibu beobachtet, dass auch dein Stand kleine Bewegungen enthält, selbst wenn du an derselben Stelle bleibst. Der Zettel vom ersten Tag bekommt einen Nachtrag: Du kannst dein Gewicht ein wenig verlagern und trotzdem auf derselben Stelle bleiben.",
+   "affirmation": "Ich kann kleine Bewegungen in Ruhe wahrnehmen."
+  },
+  {
+   "day": 16,
+   "phase": "Ankommen und bemerken",
+   "story": "Du hörst eine Anfrage am Telefon und bist schon beim Ja, bevor du den Kalender geöffnet hast. Als du um einen Moment Bedenkzeit bittest, bemerkst du, wie hoch du die Schultern gezogen hast. Vestibu notiert „Eile“ neben „erst danach bemerkt“ und fragt sich, was dir bei der nächsten Pause auffällt.",
+   "affirmation": "Ich kann um einen Moment Bedenkzeit bitten."
+  },
+  {
+   "day": 17,
+   "phase": "Ankommen und bemerken",
+   "story": "Du drehst eine Tasse am Henkel herum, damit jemand sie bequem greifen kann. Der Henkel steht danach anders, deine Füße stehen noch genauso wie vorher. Die Frage vom ersten Zettel wird genauer: „Was bewegt sich, und woran merkst du, was an seinem Platz bleibt?“",
+   "affirmation": "Ich kann eine vertraute Bewegung neu bemerken."
+  },
+  {
+   "day": 18,
+   "phase": "Ankommen und bemerken",
+   "story": "Im Hausflur läuft ein Staubsauger, während neben dir jemand telefoniert. Als du die Wohnungstür hinter dir schließt, bemerkst du den Stoff am Unterarm deutlicher. Vestibu fasst beide Beobachtungen unter „Was war eben noch im Hintergrund?“ zusammen und lässt den Zettel beim Telefon liegen.",
+   "affirmation": "Ich kann mir einen ruhigeren Ort suchen."
+  },
+  {
+   "day": 19,
+   "phase": "Ankommen und bemerken",
+   "story": "Du stellst ein Glas ab und hörst den kleinen Ton, bis er verklungen ist. Vestibu wartet ebenfalls, was für ihn eine ungewohnte Form der Mitarbeit ist. Beim Verklingen des Tons fällt ihm auf, dass ein Hinweis auch verschwinden kann. Er behält für später die Frage, woran du dich dann orientierst.",
+   "affirmation": "Ich kann einem kleinen Moment Aufmerksamkeit schenken."
+  },
+  {
+   "day": 20,
+   "phase": "Ankommen und bemerken",
+   "story": "Vor dem Küchenschrank findest du eine Stellung, in der du bequem an zwei Fächer kommst. Deine Füße haben ihren Platz längst gefunden, als Vestibu noch überlegt, wie er ihn beschreiben soll. Neben den ersten Zettel legt Vestibu jetzt eine Gegenfrage: „Kannst du deinen Stand auch bewusst verändern, wenn du merkst, dass er gerade nicht passt?“",
+   "affirmation": "Ich kann meinen Stand so wählen, wie er passt."
+  },
+  {
+   "day": 21,
+   "phase": "Ankommen und bemerken",
+   "story": "Du summst beim Abtrocknen und bemerkst die leise Schwingung im Gesicht. Vestibu hält kurz inne, bevor er den nächsten Fund aufschreibt. Vestibu legt die Notiz übers Summen neben die über den Koffer und hält fest, dass du manche Dinge gleichzeitig hörst und am eigenen Körper spürst.",
+   "affirmation": "Ich kann mir einen angenehmen Augenblick erlauben."
+  },
+  {
+   "day": 22,
+   "phase": "Ankommen und bemerken",
+   "story": "Du schaust vom Fenster aus auf einen Baum, während unten ein Fahrrad vorbeifährt. Der Baum bleibt an seinem Platz, und Vestibu sieht, warum der Blick solche festen Anhaltspunkte schätzt. Damit hat Vestibu sein erstes Paar: Die Fußsohlen melden, was unter dir ist, und der Blick findet, was vor dir an seinem Platz bleibt.",
+   "affirmation": "Ich kann bemerken, was mir gerade Halt gibt."
+  },
+  {
+   "day": 23,
+   "phase": "Ankommen und bemerken",
+   "story": "Du setzt dich nach dem Heimkommen und streichst eine Falte aus dem Hosenbein. Erst dabei bemerkst du, wie lange du schon auf den Beinen warst. Auf dem Zettel über Eile ergänzt er, wie verschieden sich derselbe Heimweg anfühlen kann, je nachdem, wann du dir einen Moment zum Sitzen nimmst.",
+   "affirmation": "Ich kann mir einen Augenblick zum Ausruhen nehmen."
+  },
+  {
+   "day": 24,
+   "phase": "Ankommen und bemerken",
+   "story": "Du wärmst dir die Hände an einem Becher, während auf dem Telefon eine Nachricht aufleuchtet. Du siehst kurz hin und lässt das Telefon liegen. Vestibu lässt offen, ob die Wärme der Tasse ihn dem Rätsel näherbringt. Interessanter findet er, dass du selbst entschieden hast, wo deine Aufmerksamkeit gerade bleibt.",
+   "affirmation": "Ich kann kurz bei dem bleiben, was ich wahrnehme."
+  },
+  {
+   "day": 25,
+   "phase": "Ankommen und bemerken",
+   "story": "Du wartest auf einen Rückruf und hältst die Hände fest ineinander. Erst als du sie auf den Tisch legst, fällt dir der Druck an den Fingern auf. Das ist für ihn der zweite Fall, in dem dir nach dem Warten etwas auffällt, das vorher leicht unterging.",
+   "affirmation": "Ich kann eins nach dem anderen angehen."
+  },
+  {
+   "day": 26,
+   "phase": "Ankommen und bemerken",
+   "story": "Du spülst Obst ab und schüttelst ein paar Wassertropfen von den Händen. Die Schultern kommen diesmal kaum mit, und Vestibu bemerkt, wie klein die Bewegung sein darf. Vestibu probiert eine neue Ordnung und legt alle Zettel zusammen, auf denen sich ein Körperteil bewegt, während der Rest weitgehend ruhig bleibt.",
+   "affirmation": "Ich kann eine Haltung finden, die mir guttut."
+  },
+  {
+   "day": 27,
+   "phase": "Ankommen und bemerken",
+   "story": "Du bekommst eine Schüssel gereicht und merkst an den Fingerspitzen, wann ihr Gewicht ganz bei dir angekommen ist. Vestibu erkennt darin etwas, das sich auf seinem Zettel bisher schlecht unterbringen ließ: Hilfe hat manchmal einen genauen Zeitpunkt. Vestibu hängt den Zettel vom Glas dazu, denn auch hier spüren die Hände den Moment, in dem sich das Gewicht verändert.",
+   "affirmation": "Ich kann Unterstützung annehmen, wenn sie mir hilft."
+  },
+  {
+   "day": 28,
+   "phase": "Ankommen und bemerken",
+   "story": "Du beugst dich etwas vor, um eine Krume vom Tisch zu wischen, und richtest dich wieder auf. Die Fußsohlen melden, dass der Druck dabei von vorn wieder weiter zurück wandert. Unter den ersten Eintrag von der Küche zeichnet er jetzt Pfeile für zwei Richtungen: seitwärts und vor und zurück.",
+   "affirmation": "Ich kann meinen Platz so einrichten, dass er passt."
+  },
+  {
+   "day": 29,
+   "phase": "Ankommen und bemerken",
+   "story": "Du machst in der Küche einen Schritt zur Seite, damit sich eine Schublade öffnen lässt. Vestibu hatte sich die Spur als gerade Linie vorgestellt. Vestibu legt den Zettel vom Seitenschritt obenauf, denn zum ersten Mal zeigt die Spur ihm, wozu das Ausweichen im Alltag gut ist.",
+   "affirmation": "Ich kann mir den Platz nehmen, den ich brauche."
+  },
+  {
+   "day": 30,
+   "phase": "Ankommen und bemerken",
+   "story": "Du ziehst deine Jacke aus und bemerkst, wie weit die Ellenbogen dabei nach hinten gehen. Vestibu legt die Notizen nebeneinander und fragt sich, welche seiner Beobachtungen auch außerhalb der Wohnung gelten. Vestibu fasst die Zettel zu Hause zusammen und steckt drei für morgen ein: den vom Stand, den vom Blick und den vom Ausweichen.",
+   "affirmation": "Ich kann eine vertraute Bewegung aufmerksam ausprobieren."
+  },
+  {
+   "day": 31,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du ziehst an der Haustür die Schuhe an und bemerkst, wie sich eine Fußspitze zum Schuh dreht. Vestibu fragt die Fußsohlen, ob sie alles über die Stellung der Füße wissen. Im Flur schlägt Vestibu den Zettel vom ersten Tag auf und hört sich an, was neben den Fußsohlen auch die Beine zum Anziehen zu sagen haben.",
+   "affirmation": "Ich kann mit dem beginnen, was heute möglich ist."
+  },
+  {
+   "day": 32,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du stellst die Füße weiter auseinander, um im Flur Platz für eine Tasche zu schaffen. Als du sie wieder enger stellst, merkst du, dass sich dein Stand anders anfühlt. Die beiden Beispiele vom Flur wandern zusammen, und Vestibu nimmt die Frage nach dem passenden Stand mit nach draußen.",
+   "affirmation": "Ich kann eine Bewegung beenden, wenn sie nicht passt."
+  },
+  {
+   "day": 33,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Auf dem Gehweg gehst du einmal um eine Pfütze herum und setzt den nächsten Fuß wieder kürzer auf. Vestibu merkt, wie schnell du die Schrittlänge wechselst. Vestibu hält den Zettel vom Seitenschritt an die Skizze der Pfütze und erkennt denselben Entschluss: Du änderst deinen Weg, weil etwas im Weg ist.",
+   "affirmation": "Ich kann die Länge meiner Schritte selbst wählen."
+  },
+  {
+   "day": 34,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du sitzt an der Haltestelle und rückst die Knie ein wenig zur Seite, als sich jemand neben dich setzt. Deine Füße behalten ihren Platz. Auf der Bank wird aus dem Eintrag vom Sitzen ein Gegenbeispiel zur Pfütze: Manchmal reicht es, Platz zu machen, ohne einen Schritt zu tun.",
+   "affirmation": "Ich kann mich einer Sache nach der anderen widmen."
+  },
+  {
+   "day": 35,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du hältst eine Papiertüte mit beiden Händen, damit der Boden beim Tragen nicht nachgibt. Die Hände melden jeweils von ihrer Seite, wie viel Druck nötig ist. Die Aufgabe der Hände erinnert Vestibu an das Glas in der Küche, doch diesmal hält keine Hand still, während die andere arbeitet.",
+   "affirmation": "Ich kann ausprobieren, welcher Druck sich gut anfühlt."
+  },
+  {
+   "day": 36,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du stehst von einer Bank auf und merkst, wie sich der Druck unter deinen Füßen verändert. Die Beine bekommen Gesellschaft vom Rücken, der sich mit nach vorn bewegt. Vestibu bittet Beine und Rücken, ihre Meldungen in der Reihenfolge abzugeben, in der sie dir beim Aufstehen geholfen haben.",
+   "affirmation": "Ich kann mir beim Aufstehen mein Tempo lassen."
+  },
+  {
+   "day": 37,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du gehst in einem weiten Bogen um ein abgestelltes Fahrrad. Der Blick entdeckt den freien Weg und ist überzeugt, damit sei die Sache erledigt. Beim Fahrrad scheint der Blick allein zu wissen, wo es langgeht. Vestibu merkt sich diese Behauptung für die nächste Kurve.",
+   "affirmation": "Ich kann meinen Weg ändern, wenn es besser passt."
+  },
+  {
+   "day": 38,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du setzt die Einkaufstasche auf den Boden und bemerkst, dass du dich anders aufrichtest, sobald das Gewicht weg ist. Vestibu lässt den Rücken erzählen, wie sich der Unterschied anfühlt. Auf dem Zettel von der Bank ergänzt er den Unterschied zwischen dem Aufrichten mit und ohne zusätzliches Gewicht.",
+   "affirmation": "Ich kann absetzen, was gerade zu viel wird."
+  },
+  {
+   "day": 39,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du holst eine Jacke aus dem Flur und merkst, wie frei deine Arme ohne die Einkaufstasche schwingen. Wenn der eine Arm nach vorn geht, bewegt sich die andere Schulter zurück. Vestibu legt den Zettel der Tasche neben den mit den Schultern und hält fest, was nach dem Absetzen wieder leichter mitschwingen kann.",
+   "affirmation": "Ich kann selbst entscheiden, was heute für mich zählt."
+  },
+  {
+   "day": 40,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du hältst nach dem Heimkommen kurz eine Hand auf den Brustkorb. Unter der Hand ist eine kleine Bewegung zu spüren, obwohl du schon stillstehst. „Ruhig kann sich bewegen“, liest Vestibu auf dem Küchenzettel. Jetzt kann er dazu zwei Beispiele nennen: deinen Stand und die Bewegung unter deiner Hand.",
+   "affirmation": "Ich kann eine Bewegung kleiner und einfacher machen."
+  },
+  {
+   "day": 41,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du verschränkst am Tisch die Hände und bemerkst, welcher Daumen oben landet. Beim Wechsel fühlt sich dieselbe Geste plötzlich ungewohnt an. Neben den Schlüssel zeichnet Vestibu zwei verschränkte Hände und schreibt dazu, dass Vertrautheit offenbar auch eine Frage der Reihenfolge ist.",
+   "affirmation": "Ich kann mir freundlich begegnen, wenn etwas ungewohnt ist."
+  },
+  {
+   "day": 42,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du gehst vom Flur in die Küche und bemerkst beim nächsten Schritt, wie der Fuß vom ersten Kontakt bis zum Abheben sein Gewicht weitergibt. Die Fußsohlen hätten gern, dass dieser Vorgang im Protokoll etwas mehr Platz bekommt. Die Fußsohlen widersprechen nun der Behauptung vom Fahrrad: Der Blick sieht den Weg, doch den Kontakt beim Auftreten melden sie.",
+   "affirmation": "Ich kann den Wechsel unter meinen Füßen bemerken."
+  },
+  {
+   "day": 43,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du schiebst einen Teller zur Seite, während die andere Hand ein Glas festhält. Das Glas bleibt an seinem Platz. Vestibu zieht die Notiz vom Schraubglas hervor und erkennt dieselbe Arbeitsteilung: Eine Hand hält etwas fest, während die andere sich bewegt.",
+   "affirmation": "Ich kann kurz innehalten und bei einer Sache bleiben."
+  },
+  {
+   "day": 44,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du hörst vom Flur aus ein Klirren und schaust in Richtung Küche. Dort siehst du den Löffel, der vom Tellerrand gerutscht ist. Für Vestibu ist der Löffel das Gegenstück zum Rascheln an der Tür, weil das Geräusch diesmal tatsächlich zu dem passt, was du findest.",
+   "affirmation": "Ich kann erst hören und dann genauer hinschauen."
+  },
+  {
+   "day": 45,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du rückst an deinem Arbeitsplatz den Stuhl heran und stellst die Füße wieder unter den Tisch. Vestibu erkennt denselben Wechsel wie beim Aufstehen von der Bank, diesmal in kleinerer Ausführung. Dass du am Arbeitsplatz denselben Kontakt zu Stuhl und Boden wiederfindest, bestärkt Vestibu darin, seine Funde nach Situationen und Hinweisen zu ordnen.",
+   "affirmation": "Ich kann meinen Stand in Ruhe erkunden."
+  },
+  {
+   "day": 46,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Auf dem Weg zur Tür setzt du einen Fuß bewusst auf und bemerkst den Unterschied zum Schritt davor. Das Telefon am anderen Ende des Flurs kann diesen einen Schritt lang warten. Vestibu findet am Zettel über Eile einen freien Rand und notiert, dass du denselben Schritt je nach Aufmerksamkeit unterschiedlich deutlich wahrnimmst.",
+   "affirmation": "Ich kann einem einzelnen Schritt Aufmerksamkeit geben."
+  },
+  {
+   "day": 47,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du drehst dich im Flur ein wenig um, um die Jacke vom Haken zu holen. Erst dabei fällt dir auf, wie viel die Füße bei so einer kleinen Drehung mitmachen. Er heftet die Drehung an den Zettel über den Stand im Flur und beobachtet, wie verschieden die Füße bei einer kleinen Wendung mitarbeiten.",
+   "affirmation": "Ich kann warten lassen, was gerade warten kann."
+  },
+  {
+   "day": 48,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du rollst am Tisch einen Stift zwischen beiden Händen wieder in die richtige Richtung. Eine Hand gibt nach, die andere übernimmt, und wenig später wechseln sie die Rollen. Die beiden Hände liefern ihm den nächsten Eintrag zur Zusammenarbeit: Wer eben geführt hat, kann im nächsten Moment nachgeben.",
+   "affirmation": "Ich kann mir Zeit lassen, wenn etwas schwerfällt."
+  },
+  {
+   "day": 49,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du greifst hinter dich an die Stuhllehne, obwohl du sie gerade nicht siehst. Die Hand findet die Stelle, und Vestibu hört aus Arm und Schulter Meldungen über den Weg dorthin. Vestibu holt den Fahrrad-Zettel heraus. Zum ersten Mal streicht er den Satz durch, der Blick wisse immer allein, wo es langgeht.",
+   "affirmation": "Ich kann mich an einem festen Punkt orientieren."
+  },
+  {
+   "day": 50,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du gehst im Hausflur langsamer, weil hinter einer Tür noch jemand spricht. Auf einmal bemerkst du, wie sich ein Schritt an den anderen anschließt. Er ergänzt beim Pfützen-Zettel, dass sich beim langsameren Gehen vor allem die Zeit verändert, in der du jeden Kontakt bemerken kannst.",
+   "affirmation": "Ich kann wählen, wie schnell ich heute gehe."
+  },
+  {
+   "day": 51,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du drehst dich in der Küche langsam zur Tür und siehst nacheinander die Arbeitsplatte, die Stuhllehne und den Türrahmen. Am Türrahmen bleibt dein Blick kurz hängen. Vestibu erinnert sich an den festen Fensterrahmen und versteht, warum du nach der Drehung an vertrauten Stellen so schnell wieder einen Bezug findest.",
+   "affirmation": "Ich kann etwas Neues in Ruhe ausprobieren."
+  },
+  {
+   "day": 52,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du reichst beim Abräumen einen Teller von einer Hand in die andere. Für einen kurzen Moment tragen ihn beide Hände. Unter „gemeinsam“ hält Vestibu fest, dass beide Hände beim Weiterreichen einen Augenblick lang dieselbe Aufgabe haben.",
+   "affirmation": "Ich kann einem Übergang einen Moment Zeit geben."
+  },
+  {
+   "day": 53,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du greifst mit einer Hand ans Regal und hältst mit der anderen die Einkaufsliste tiefer vor dir. Beide Hände sind gleichzeitig beschäftigt, obwohl sie auf verschiedenen Höhen arbeiten. Der Zettel vom Weiterreichen bekommt Gesellschaft, denn hier erfüllen beide Hände zur selben Zeit verschiedene Aufgaben.",
+   "affirmation": "Ich kann wahrnehmen, was mir gerade gelingt."
+  },
+  {
+   "day": 54,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du änderst beim Gehen die Richtung, als jemand aus einer Tür tritt. Erst nach dem Schritt fällt dir auf, dass du einen kleinen Ausweichweg gewählt hast. Vestibu vergleicht den Ausweichschritt mit der Kurve um das Fahrrad und entdeckt dieselbe Lösung auf weniger Platz.",
+   "affirmation": "Ich kann bemerken, was mir Sicherheit gibt."
+  },
+  {
+   "day": 55,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du sitzt auf einem Stuhl und rückst ein Stück zur Mitte zurück. Vestibu muss dafür weder die Füße noch den Flur befragen, denn die Sitzfläche liefert schon eine brauchbare Meldung. Der Zettel von der Haltestelle kommt dazu: Im Sitzen kann dir die Sitzfläche Auskunft geben, auch wenn der Blick gerade bei etwas anderem ist.",
+   "affirmation": "Ich kann mir auch mitten am Tag eine Pause nehmen."
+  },
+  {
+   "day": 56,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Beim Gespräch am Tisch drehst du den Oberkörper etwas zur anderen Stimme. Das Becken bleibt weitgehend zum Tisch ausgerichtet, und du kannst trotzdem bequem zuhören. Vestibu legt den Zettel vom Tisch neben den vom Seitenschritt, weil du in beiden Fällen nur so viel bewegst, wie die Situation verlangt.",
+   "affirmation": "Ich kann mich in meinem eigenen Tempo bewegen."
+  },
+  {
+   "day": 57,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du legst die Hände auf die Tischplatte und nimmst wahr, wie fest sie ist. Vestibu stellt fest, dass auch die Hände Auskunft darüber geben, wo dein Körper im Verhältnis zu seiner Umgebung ist. Er ergänzt die Tischplatte auf der Liste der Dinge, die dir über Berührung einen festen Bezug geben.",
+   "affirmation": "Ich kann sagen, wenn mir etwas zu viel ist."
+  },
+  {
+   "day": 58,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du schaust vom Fenster wieder auf deinen Einkaufszettel. Diesmal fällt dir selbst auf, wie schnell du die Zeile wiederfindest. Diesmal benennst du selbst, woran du dich orientiert hast. Vestibu lässt auf seinem nächsten Zettel eine Zeile für deine Beobachtungen frei.",
+   "affirmation": "Ich kann bemerken, wo mein Blick gerade ist."
+  },
+  {
+   "day": 59,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du führst die Hände hinter dem Rücken zusammen und merkst, wann sich die Finger berühren. Vestibu hätte gern von beiden Händen denselben Bericht, bekommt aber einen von links und einen von rechts. Er fragt die Hände und den Blick getrennt, was sie mitbekommen haben, und merkt, wie unterschiedlich ihre Berichte ausfallen.",
+   "affirmation": "Ich kann einen angenehmen Augenblick bewusst genießen."
+  },
+  {
+   "day": 60,
+   "phase": "Spuren im Alltag verbinden",
+   "story": "Du schaust hinter dich, bevor du im Flur Platz machst. Vestibu hält zwei alte Zettel nebeneinander: das Geräusch hinter dir in der Küche und den Schritt zur Seite am Gehweg. Vestibu legt die Zettel auf dem Tisch zusammen und markiert eine Frage für die nächsten Tage: Welche Hinweise fallen dir inzwischen selbst auf?",
+   "affirmation": "Ich kann mir für eine Entscheidung Zeit lassen."
+  },
+  {
+   "day": 61,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du stehst vom Küchentisch auf und bemerkst, wie sich dein Gewicht auf die Füße verlagert. Seit Vestibu dich nach deinen eigenen Beobachtungen gefragt hat, fallen dir solche Wechsel häufiger auf. Du nennst als Erstes den Druck unter den Füßen. Vestibu trägt deinen Fund in die freie Zeile ein und fragt sich, ob morgen noch einer dazukommt.",
+   "affirmation": "Ich kann mir eine Pause nehmen, wenn ich sie brauche."
+  },
+  {
+   "day": 62,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du ziehst beim Telefonieren mit der Hand eine kleine Spirale in die Luft. Dabei merkst du, wie leicht der Anfang ist und wo die Bewegung langsamer wird. Beim Telefonieren fällt dir diesmal selbst auf, wo deine Hand in der Bewegung langsamer wird, und du ergänzt Vestibus Notiz über das Bewegungstempo.",
+   "affirmation": "Ich kann einen Rhythmus wählen, der zu mir passt."
+  },
+  {
+   "day": 63,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du streckst im Flur einen Arm zur Kommode und merkst, dass sich der Druck unter deinen Füßen dabei leicht verändert. Vestibu nimmt die Kommode in seine Sammlung auf, neben Stuhllehne und Tischplatte. Du beschreibst, wie der Druck unter deinen Füßen mit dem Arm mitwandert. Vestibu legt deinen Eintrag neben den aus der Küche und sieht, woran du die Gemeinsamkeit erkannt hast.",
+   "affirmation": "Ich kann eine Bewegung anpassen, wenn sie nicht passt."
+  },
+  {
+   "day": 64,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du setzt am Treppenabsatz einen Fuß auf die nächste Stufe. Dein Blick hatte die Höhe schon vorher erfasst, die Fußsohle meldet den Kontakt erst jetzt. Auf deinem Zettel steht diesmal zuerst die Stufenkante und dann der Fußkontakt. Vestibu möchte morgen darauf achten, wann ein Kontakt wieder aufhört.",
+   "affirmation": "Ich kann mir vor dem nächsten Schritt Zeit lassen."
+  },
+  {
+   "day": 65,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du öffnest die Finger, nachdem du eine Weile den Schlüssel festgehalten hast. Erst jetzt merkst du, dass du noch genauso fest zugepackt hast wie vor der Haustür. Der Schlüssel liefert dir dieses Gegenstück zum Treppenabsatz: An den Fingern merkst du, wann du ihn festhältst und wann du ihn freigibst.",
+   "affirmation": "Ich kann darauf achten, was mir gerade guttut."
+  },
+  {
+   "day": 66,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du siehst dich im Flur um, bevor du einen Schritt zurücktrittst, um die Tür zu öffnen. Während du Platz machst, siehst du die Kante hinter dir schon wieder nicht. Du ergänzt beim Stufenzettel, dass ein Blick nach hinten dir schon vor dem nächsten Schritt einen Hinweis geben kann.",
+   "affirmation": "Ich kann einen kleinen Moment unverplant lassen."
+  },
+  {
+   "day": 67,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du öffnest die Arme, um eine Jacke überzustreifen, und merkst, wie viel Platz du dafür um dich herum brauchst. Vestibu hatte bisher meist den Boden im Auge. Zum Zettel über den Seitenschritt kommt dein Fund von der Jacke dazu. Du brauchst auch dann Platz um dich herum, wenn deine Füße stehen bleiben.",
+   "affirmation": "Ich kann so beginnen, wie ich heute bin."
+  },
+  {
+   "day": 68,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du liest eine Nachricht und schaust dann zur Uhr am anderen Ende des Zimmers. Als dein Blick zurückkehrt, findest du die Zeile wieder. Vestibu heftet deinen Eintrag vom Blickwechsel zur allerersten Notiz über die Drehung in der Küche. Du hast den vertrauten Ablauf diesmal selbst erkannt.",
+   "affirmation": "Ich kann meinen Blick heben und wieder zurückfinden."
+  },
+  {
+   "day": 69,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du zählst beim Einräumen an den Fingern ab, was noch fehlt. Auch ohne hinzuschauen, findest du den nächsten Finger. Auf dem Zettel über den Schlüssel ergänzt du, dass du deine Finger auch beim Abzählen gut auseinanderhalten kannst.",
+   "affirmation": "Ich kann wählen, was heute für mich möglich ist."
+  },
+  {
+   "day": 70,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du gehst zur Küchentür und hältst an, weil du deinen Schlüssel auf der Ablage siehst. Dir fällt auf, wie deine Bewegung ausläuft, bevor du ganz stillstehst. Vestibu legt den Zettel vom langsamen Gang daneben. Jetzt hat er von dir einen Hinweis darauf, wie sich Gehen anfühlt, und einen darauf, wie es endet.",
+   "affirmation": "Ich kann spüren, wie mein Gewicht beim Sitzen aufliegt."
+  },
+  {
+   "day": 71,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du streifst mit der Fußspitze die Kante der ersten Stufe und legst eine Hand ans Geländer. Vestibu sieht, dass der Blick die Kante erfasst und deine Hand zugleich einen festen Kontakt hat. Beim Treppenabsatz sind dir diesmal zwei Dinge klar: wo die Stufe beginnt und wo du bei Bedarf Halt findest.",
+   "affirmation": "Ich kann Halt nutzen, wenn ich ihn brauche."
+  },
+  {
+   "day": 72,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du schaust an der Tür nach rechts und links, bevor du auf den Gehweg trittst. Dir fällt auf, dass du dir dafür genau den Moment genommen hast, den du brauchtest. Inzwischen entscheidest du selbst, wann vor dem nächsten Schritt ein Blick zur Seite sinnvoll ist, und Vestibu findet die Stelle auf dem alten Zettel über Eile wieder.",
+   "affirmation": "Ich kann mir kurz Raum zum Umschauen geben."
+  },
+  {
+   "day": 73,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du streckst einen Arm zur Seite, um eine Tür offen zu halten, und dein Gewicht wandert ein wenig mit. Vestibu erkennt darin das vertraute Pendeln aus der Küche mit einem zusätzlichen Mitspieler. Du erkennst das leichte Verlagern aus der Küche, während Vestibu am Rand notiert, was dein ausgestreckter Arm daran verändert.",
+   "affirmation": "Ich kann mir Ruhe gönnen, wenn ich sie brauche."
+  },
+  {
+   "day": 74,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du schließt eine Nachricht, an der du länger gefeilt hast. Erst beim Aufschauen bemerkst du, wie fest du die Zähne aufeinanderpresst. „Erst danach bemerkt“ steht schon beim Zettel über deine Schulter. Du schreibst den Kiefer dazu und siehst, wie lange dir Anspannung manchmal entgeht.",
+   "affirmation": "Ich kann bemerken, wenn ich den Kiefer anspanne."
+  },
+  {
+   "day": 75,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Auf der Treppe hörst du jemanden deinen Namen sagen und wartest mit der Antwort, bis du oben bist. Dort drehst du dich um und fragst, was gesagt wurde. Vestibu legt den Eintrag über das Gespräch auf der Treppe zum Zettel über Eile. Dir ist aufgefallen, dass du den Moment deiner Antwort selbst wählen kannst.",
+   "affirmation": "Ich kann nachfragen, wenn ich etwas nicht verstanden habe."
+  },
+  {
+   "day": 76,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Dein Blick folgt einer Fliege in einem Bogen am Küchenfenster und kehrt zum Rahmen zurück. Vestibu erkennt die vertraute Abfolge, obwohl sich die Spur diesmal krümmt. Beim Fensterrahmen erkennst du selbst, woran dein Blick nach dem Bogen wieder anknüpft. Vestibu findet denselben Hinweis auf seinem Zettel über den Baum.",
+   "affirmation": "Ich kann etwas Schritt für Schritt angehen."
+  },
+  {
+   "day": 77,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du spürst am Tisch, wo deine Füße aufliegen, und greifst mit einer Hand an den anderen Ellenbogen. Vestibu zeichnet zwei Kontakte ein, die du auf einmal wahrnehmen kannst. Du zeigst Vestibu an deinen beiden Berührungen, dass du Arm und Fuß gleichzeitig wahrnehmen kannst. Er lässt beide Angaben auf demselben Zettel stehen.",
+   "affirmation": "Ich kann den Kontakt zum Boden bewusst wahrnehmen."
+  },
+  {
+   "day": 78,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du greifst mit der ungewohnten Hand zur Tasse, weil die andere schon etwas hält. Der Griff dauert einen Augenblick länger, und du nimmst dir diesen Augenblick. Vestibu sucht den Zettel über die verschränkten Hände heraus. Du erkennst dieselbe kleine Verzögerung, wenn deine ungewohnte Hand zur Tasse greift.",
+   "affirmation": "Ich kann einer ungewohnten Bewegung mehr Zeit geben."
+  },
+  {
+   "day": 79,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du gehst neben einer Fuge entlang und siehst, wie sie dir die Richtung zeigt. Als das Telefon klingelt, lässt du es bis zur Tür klingeln. Die Fuge liefert dir eine Richtung, das Klingeln eine mögliche Ablenkung. Vestibu lässt dich selbst entscheiden, welches davon du gerade brauchst.",
+   "affirmation": "Ich kann entscheiden, wann ich erreichbar bin."
+  },
+  {
+   "day": 80,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du hebst beim Arbeiten den Blick vom Bildschirm und bemerkst, wie nahe du davor sitzt. Du lehnst dich ein Stück zurück und schaust in den Raum. Du findest auch ohne seinen Zettel einen weiter entfernten Punkt, an dem dein Blick einen Moment bleiben kann.",
+   "affirmation": "Ich kann meinen Blick kurz vom Bildschirm lösen."
+  },
+  {
+   "day": 81,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du schiebst mit einem Arm einen Stuhl heran, weil du in der anderen Hand die Tasse hältst. Dabei merkst du, wie sich dein Stand mit der Aufgabe verändert. Vestibu erkennt im Druck unter deinen Füßen dieselbe Verschiebung wie an der Kommode, und diesmal zeigst du sie ihm zuerst.",
+   "affirmation": "Ich kann freundlich bleiben, wenn mir etwas schwerfällt."
+  },
+  {
+   "day": 82,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du sitzt zu Hause und hörst ein Geräusch aus dem Treppenhaus. Diesmal reicht dir die Richtung, und du bleibst bei dem, was du gerade tust. Vestibu schaut auf seinen ersten Zettel über das Rascheln. Damals ging es ihm nur darum, wo das Geräusch herkam, heute entscheidest du, ob es überhaupt wichtig ist.",
+   "affirmation": "Ich kann mir einen Moment für mich nehmen."
+  },
+  {
+   "day": 83,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du räumst nacheinander Tasse, Löffel, Glas und Teller weg. Als die Reihenfolge durcheinandergerät, stellst du das Glas eben zuerst ab. Beim Abräumen ändert sich die Reihenfolge, und du kommst trotzdem zurecht. Vestibu schreibt diese beiden Beobachtungen einmal in dieselbe Zeile.",
+   "affirmation": "Ich bin auf dem Weg und kann dabei üben."
+  },
+  {
+   "day": 84,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du gehst zur Tür, schaust auf den Griff und bemerkst den letzten Schritt davor. Für Vestibu liegen der Blick und die Bewegung inzwischen oft auf demselben Zettel. Du erkennst am letzten Schritt zur Tür einen alten Fund wieder: Der Blick findet den Griff, und die Füße bringen dich hin.",
+   "affirmation": "Ich kann wahrnehmen, wie es mir gerade geht."
+  },
+  {
+   "day": 85,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du greifst nach einem Glas und drehst dich zum Spülbecken. Während die Hand das Glas aufrecht hält, richten sich deine Füße neu aus. Vestibu legt den Zettel mit dem Glas neben den von heute. Du kannst beschreiben, wie deine Hände und Füße bei einer gewöhnlichen Drehung Verschiedenes beitragen.",
+   "affirmation": "Ich kann im Alltag kleine Dinge für mich verändern."
+  },
+  {
+   "day": 86,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du legst auf dem Sofa eine Hand auf die gegenüberliegende Schulter und spürst die Wärme durch den Stoff. Du kannst an dieser Stelle bleiben oder noch ein Stück rücken. Du entscheidest, ob du die Hand dort lässt oder weiterrückst. Vestibu merkt, dass manche Zettel inzwischen schon eine Antwort von dir enthalten.",
+   "affirmation": "Ich kann zwischen Bewegung und Stillhalten wählen."
+  },
+  {
+   "day": 87,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du stehst im Flur und streichst mit der linken Hand einen Fussel vom rechten Knie, das du dafür etwas anhebst. In einem vertrauten Raum entdeckst du plötzlich ein Detail, das du bisher kaum beachtet hast. Du hältst fest, woran du beim Anheben des Knies Kontakt und Stand bemerkt hast. Vestibu legt den Eintrag zu deinem ersten Fund unter den Füßen.",
+   "affirmation": "Ich kann in meinem Alltag auf kleine Signale achten."
+  },
+  {
+   "day": 88,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du setzt im Flur einen Fuß quer über die Teppichkante, um an einem Paket vorbeizukommen. Auf der anderen Seite findest du wieder deinen Stand und weißt sofort, wo du bist. Vestibu legt den Zettel vom Teppich neben den vom Ausweichen vor dem Fahrrad. In beiden Fällen ändert sich dein Weg kurz, und du findest dich trotzdem zurecht.",
+   "affirmation": "Ich kann ernst nehmen, was ich dabei wahrnehme."
+  },
+  {
+   "day": 89,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "Du drehst dich im Sitzen zur Tür und wieder zum Tisch. In dieser kleinen Bewegung erkennst du die Frage vom ersten Tag wieder: Woran merkst du, wie du dich gerade bewegst? Vestibu geht die Anfangsfrage mit dir durch. Weder beim Ausweichen vor dem Fahrrad noch beim Aufstehen von der Bank konnte ein einzelner Mitspieler erklären, wie du dich orientiert hast.",
+   "affirmation": "Ich kann schauen, was mir heute möglich ist."
+  },
+  {
+   "day": 90,
+   "phase": "Regelmäßig tun und weiter entdecken",
+   "story": "In der Küche verlagerst du dein Gewicht wie am ersten Tag, diesmal fällt es dir selbst auf. Vestibu liest seine erste Frage noch einmal und schreibt darunter: „Gleichgewicht – so heißt das Zusammenspiel, mit dem du dich beim Stehen und Bewegen orientierst.“ Du steckst den Zettel ein und bemerkst noch am selben Tag beim Warten an der Kasse, wie vertraut dir dieser kleine Wechsel geworden ist. Der Blick legt einen neuen Zettel dazu: „Warum fühlt es sich am Bahnhof manchmal an, als führest du los, obwohl nur der Zug neben dir fährt?“",
+   "affirmation": "Ich kann im Alltag Momente zum Üben finden."
+  }
+ ]
+}

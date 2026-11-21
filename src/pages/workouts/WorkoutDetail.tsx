@@ -11,7 +11,8 @@ import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, loca
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { loadProfile, saveProfile } from '../../lib/profile'
 import { episodeFor, regionFor } from '../../data/story'
-import { dialogFor, type Who } from '../../data/storyDialog'
+import { type Who } from '../../data/storyDialog'
+import { phaseTitle, storyIntro } from '../../data/storyDays'
 import { Flame, Gem } from 'lucide-react'
 import poster from '../../assets/home/vestibu-welcome.png'
 import { L, lang } from '../../lib/i18n'
@@ -146,17 +147,8 @@ export default function WorkoutDetail() {
   const practising = stage === 'practice' || stage === 'bonus'
   const progress = stage === 'instructions' ? 0.04 + intro_ * 0.03 : practising ? 0.1 + 0.9 * (1 - remaining / PRACTICE_SECONDS) : 1
   const episode = episodeFor(day)
-  // What Vestibu says before each session: the day's story leads into session 1, sessions 2 and 3 pick it up.
-  const intro = session === 1 ? episode.before[lang]
-    : session === 2 ? L(`Schön, dass du wieder da bist! „${episode.reward.de}“ wartet noch auf uns.`, `Bạn quay lại rồi! “${episode.reward.vi}” vẫn đang chờ mình.`)
-    : L('Letzte Runde für heute! Danach erfährst du, wie die Geschichte heute endet.', 'Lượt cuối hôm nay! Tập xong bạn sẽ biết câu chuyện hôm nay kết thúc thế nào.')
-  const sentences = (t: string) => t.match(/[^.!?…]+[.!?…]+[“”"]?/g)?.map(x => x.trim()).filter(Boolean) ?? [t]
-  const scene = dialogFor(day, session)
-  const chat: { text: string; me?: boolean; who?: Who }[] = scene ? scene.pre.map(x => ({ text: x[lang], me: x.who === 'me', who: x.who })) : session === 1
-    ? [{ text: content.begruessung }, ...sentences(episode.before[lang]).map(text => ({ text })), { text: L('Los geht’s!', 'Đi thôi!'), me: true }, { text: L('Super! Erst kurz die Übung, dann legen wir los.', 'Tuyệt! Xem nhanh cách tập rồi mình bắt đầu nhé.') }]
-    : session === 2
-      ? [{ text: L('Da bist du ja wieder!', 'A, bạn quay lại rồi!') }, { text: L(`Weißt du noch? Heute geht es um „${episode.reward.de}“.`, `Nhớ không? Hôm nay là chuyện về “${episode.reward.vi}”.`) }, { text: L('Ich bin bereit für Runde zwei.', 'Mình sẵn sàng cho lượt hai.'), me: true }, { text: L('Dann weiter! Nach dieser Runde geht unsere Geschichte weiter.', 'Vậy tiếp nào! Tập xong lượt này, câu chuyện sẽ đi tiếp.') }]
-      : [{ text: L('Letzte Runde für heute!', 'Lượt cuối hôm nay rồi!') }, { text: L(`„${episode.reward.de}“ ist fast an seinem Platz.`, `“${episode.reward.vi}” sắp về đúng chỗ rồi.`) }, { text: L('Wie endet es?', 'Rồi sẽ kết thúc thế nào?'), me: true }, { text: L('Das erfährst du gleich nach dieser Runde.', 'Tập xong lượt này bạn sẽ biết ngay.') }]
+  const chat: { text: string; me?: boolean; who?: Who }[] = [{ text: content.begruessung }, ...(day === 1 && session === 1 ? [{ text: storyIntro }] : [])]
+
   const cheer = remaining > 40 ? L('Ganz ruhig. Halt dich fest, wenn du magst.', 'Thật thong thả. Cứ vịn nếu bạn muốn nhé.')
     : remaining > 20 ? L('Super, du machst das toll!', 'Tuyệt lắm, cứ thế nhé!')
     : remaining > 5 ? L('Fast geschafft!', 'Sắp xong rồi!')
@@ -173,7 +165,7 @@ export default function WorkoutDetail() {
     {stage === 'instructions' && <section key={intro_} className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
       {intro_ === 0 && <>
         <div className="story-scene" style={{ backgroundImage: `url(${day <= 3 ? `/story/d${day}s${session}.webp` : `/map/${regionFor(day).id}.webp`})` }}>
-          <span className="story-scene-title">{episode.reward[lang]}</span>
+          <span className="story-scene-title">{phaseTitle(day)}</span>
         </div>
         <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
           {chat.map((m, i) => <p key={i} style={{ animationDelay: `${i * 0.35}s` }} className={`chat-line ${m.me ? 'me' : ''} ${m.who === 'p' ? 'pip' : ''}`}>{m.who === 'p' && <img src="/map/seagull.webp" alt="Pip" className="chat-pip" />}{m.text}</p>)}

@@ -617,3 +617,5 @@ body {
 @keyframes chest-idle{0%,70%,100%{transform:none}78%{transform:rotate(-4deg)}86%{transform:rotate(4deg)}94%{transform:rotate(-2deg)}}
 .chest.opening{animation:chest-open-shake .7s ease-in-out}
 @keyframes chest-open-shake{0%{transform:none}20%{transform:rotate(-8deg) scale(1.03)}40%{transform:rotate(8deg) scale(1.06)}60%{transform:rotate(-8deg) scale(1.08)}80%{transform:rotate(6deg) scale(1.1)}100%{transform:scale(1.12)}}
+
+.day-story{margin-top:10px;padding:12px 14px;border-radius:18px;background:#fff6e5;font-size:17px;line-height:1.55}
