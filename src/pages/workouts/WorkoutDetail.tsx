@@ -172,8 +172,7 @@ export default function WorkoutDetail() {
 
     {stage === 'instructions' && <section key={intro_} className="intro-flow flex min-h-[calc(100dvh-76px)] flex-col gap-4">
       {intro_ === 0 && <>
-        <div className="story-scene" style={{ backgroundImage: `url(/map/${regionFor(day).id}.webp)` }}>
-          <span className="story-scene-tag">{L(`Tag ${day} · ${session}. von ${SESSIONS_PER_DAY} Mal`, `Ngày ${day} · lần ${session}/${SESSIONS_PER_DAY}`)}</span>
+        <div className="story-scene" style={{ backgroundImage: `url(${day <= 3 ? `/story/d${day}s${session}.webp` : `/map/${regionFor(day).id}.webp`})` }}>
           <span className="story-scene-title">{episode.reward[lang]}</span>
         </div>
         <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
