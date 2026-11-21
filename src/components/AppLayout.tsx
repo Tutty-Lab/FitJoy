@@ -6,6 +6,8 @@ import { useCompleted } from '../lib/progress'
 import { L } from '../lib/i18n'
 import avatar from '../assets/profile/avatar.png'
 import { StreakSheet } from '../pages/Streak'
+import DiamondsView from './DiamondsView'
+import { useState } from 'react'
 
 // No bottom navigation: a slim header with back arrow (off the map), streak and account icon.
 export default function AppLayout() {
@@ -16,6 +18,7 @@ export default function AppLayout() {
   const training = pathname.startsWith('/workouts/') || pathname.startsWith('/days/')
   const home = pathname === '/'
   const xp = loadProfile()?.xp ?? 0
+  const [gems, setGems] = useState(false)
   return (
     <div className="mx-auto min-h-dvh max-w-[440px] bg-white">
       {!training && (
@@ -30,7 +33,7 @@ export default function AppLayout() {
               <Link to="/?streak=1" aria-label={L(`${streak} Tage in Folge`, `${streak} ngày liên tiếp`)} className={`flex items-center gap-1 px-2 py-1 text-lg font-black ${doneToday ? 'text-orange-500' : 'text-slate-400'}`}>
                 <Flame size={22} fill={doneToday ? 'currentColor' : 'none'} />{streak}
               </Link>
-              <span aria-label={L(`${xp} Punkte`, `${xp} điểm`)} className="flex items-center gap-1 px-1 text-lg font-black text-sky-500"><Gem size={20} />{xp}</span>
+              <button type="button" onClick={() => setGems(true)} aria-label={L(`${xp} Diamanten`, `${xp} kim cương`)} className="flex items-center gap-1 px-1 text-lg font-black text-sky-500"><Gem size={20} />{xp}</button>
               <Link to="/profile" aria-label={L('Profil', 'Hồ sơ')} className="rounded-full">
                 <img src={avatar} alt="" className="size-9 rounded-full object-cover ring-2 ring-mint" />
               </Link>
@@ -43,6 +46,7 @@ export default function AppLayout() {
         <Outlet />
       </main>
       {streakOpen && <StreakSheet />}
+      {gems && <DiamondsView onClose={() => setGems(false)} />}
     </div>
   )
 }

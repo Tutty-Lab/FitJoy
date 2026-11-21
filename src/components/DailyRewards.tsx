@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Check, Gem, Gift, Lock, X } from 'lucide-react'
 import { loadProfile, saveProfile } from '../lib/profile'
@@ -30,6 +30,11 @@ export default function DailyRewards() {
   const chestWaiting = TEST || (doneToday && c.chest !== t), wheelWaiting = TEST || c.wheel !== t
   const close = () => { setOpen(null); navigate('/', { replace: true }) }
   const show = (k: 'chest' | 'wheel') => { sound('tap'); setOpen(k) }
+  useEffect(() => {
+    const on = (e: Event) => setOpen((e as CustomEvent<'chest' | 'wheel'>).detail)
+    window.addEventListener('fitjoy:rewards', on)
+    return () => window.removeEventListener('fitjoy:rewards', on)
+  }, [])
   return <>
     <div className="rewards-dock">
       <button type="button" className={`rewards-fab ${chestWaiting ? 'has-gift' : ''}`} aria-label={L('Schatztruhe', 'Rương báu')} onClick={() => show('chest')}>
