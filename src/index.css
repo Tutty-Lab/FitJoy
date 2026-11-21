@@ -619,3 +619,29 @@ body {
 @keyframes chest-open-shake{0%{transform:none}20%{transform:rotate(-8deg) scale(1.03)}40%{transform:rotate(8deg) scale(1.06)}60%{transform:rotate(-8deg) scale(1.08)}80%{transform:rotate(6deg) scale(1.1)}100%{transform:scale(1.12)}}
 
 .day-story{margin-top:10px;padding:12px 14px;border-radius:18px;background:#fff6e5;font-size:17px;line-height:1.55}
+
+/* 7-day reward ladder */
+.ladder-sheet{padding:0 0 calc(env(safe-area-inset-bottom) + 12px);overflow-x:hidden}
+.ladder-sheet .reward-close{color:#fff}
+.ladder-hero{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px 16px 16px;background:radial-gradient(circle at 50% 70%,#2aa3b3,#13707e 60%,#0b4a54);border-radius:28px 28px 0 0}
+.ladder-hero img{width:180px;height:180px;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(0,0,0,.3))}
+.ladder-days{display:flex;gap:6px}
+.ladder-days i{width:26px;height:8px;border-radius:9px;background:rgba(255,255,255,.3)}
+.ladder-days i.on{background:#ffd23f}
+.ladder-list{position:relative;display:flex;flex-direction:column;padding:14px 18px 4px}
+.ladder-step{position:relative;display:flex;align-items:center;gap:14px;min-height:74px}
+.ladder-step::before{content:'';position:absolute;left:17px;top:-37px;height:74px;width:6px;background:#e2ecec;z-index:0}
+.ladder-step:first-child::before{display:none}
+.ladder-step.done::before,.ladder-step.current::before{background:#32b49a}
+.ladder-node{position:relative;z-index:1;display:grid;place-items:center;width:40px;height:40px;flex-shrink:0;border-radius:50%;background:#e2ecec;color:#64748b;font-weight:900;border:3px solid #fff;box-shadow:0 0 0 2px #e2ecec}
+.ladder-step.done .ladder-node{background:#32b49a;color:#fff;box-shadow:0 0 0 2px #32b49a}
+.ladder-step.current .ladder-node{background:#ffd23f;color:#0b4a54;box-shadow:0 0 0 3px #f5b82e}
+.ladder-icon{display:grid;place-items:center;width:64px;height:56px;flex-shrink:0}
+.ladder-icon img{width:60px;height:60px;object-fit:contain}
+.ladder-icon img.tier-silver{filter:saturate(.35) brightness(1.08)}
+.ladder-icon img.tier-big{width:68px;height:68px}
+.ladder-step.done .ladder-icon,.ladder-step.done .ladder-amount{opacity:.5}
+.ladder-amount{flex:1;display:flex;align-items:center;gap:5px;font-size:22px;font-weight:900;color:#0ea5e9}
+.ladder-claim{display:grid;place-items:center;width:60px;height:48px;border-radius:16px;background:#ffd23f;color:#0b4a54;border:3px solid #2b1d0e;box-shadow:0 4px 0 #2b1d0e;animation:gift-wiggle 2.4s ease-in-out infinite}
+.ladder-claim:active{transform:translateY(3px);box-shadow:0 1px 0 #2b1d0e}
+.ladder-wait{display:grid;place-items:center;width:60px;height:48px;color:#94a3b8}

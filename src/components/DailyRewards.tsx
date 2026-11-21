@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Gem, Lock, X } from 'lucide-react'
+import { Check, Gem, Gift, Lock, X } from 'lucide-react'
 import { loadProfile, saveProfile } from '../lib/profile'
 import { useCompleted } from '../lib/progress'
 import { dayKey } from '../lib/game'
@@ -9,7 +9,7 @@ import { L } from '../lib/i18n'
 
 // Daily mini games: a chest (after today's first minute) and one free spin of the wheel. Prizes are diamonds only.
 const KEY = 'fitjoy.rewards'
-type Claimed = { chest?: string; wheel?: string }
+type Claimed = { chest?: string; wheel?: string; ladder?: number }
 const read = (): Claimed => { try { return JSON.parse(localStorage.getItem(KEY) ?? '{}') } catch { return {} } }
 const write = (c: Claimed) => { try { localStorage.setItem(KEY, JSON.stringify(c)) } catch { /* private mode */ } }
 const addGems = (n: number) => saveProfile({ xp: (loadProfile()?.xp ?? 0) + n })
@@ -40,9 +40,9 @@ export default function DailyRewards() {
       </button>
     </div>
     {open && <div className="day-sheet-backdrop" onClick={close}>
-      <div className="day-sheet reward-sheet" role="dialog" aria-label={open === 'chest' ? L('Schatztruhe', 'Rương báu') : L('Glücksrad', 'Vòng quay may mắn')} onClick={e => e.stopPropagation()}>
+      <div className={`day-sheet reward-sheet ${open === 'chest' ? 'ladder-sheet' : ''}`} role="dialog" aria-label={open === 'chest' ? L('Schatztruhe', 'Rương báu') : L('Glücksrad', 'Vòng quay may mắn')} onClick={e => e.stopPropagation()}>
         <button type="button" aria-label={L('Schließen', 'Đóng')} onClick={close} className="reward-close"><X size={26} strokeWidth={2.8} /></button>
-        {open === 'chest' ? <Chest doneToday={doneToday} onWin={() => bump(n => n + 1)} /> : <Wheel onWin={() => bump(n => n + 1)} />}
+        {open === 'chest' ? <Ladder doneToday={doneToday} onWin={() => bump(n => n + 1)} /> : <Wheel onWin={() => bump(n => n + 1)} />}
       </div>
     </div>}
   </>
@@ -57,28 +57,74 @@ function MiniWheel() {
   </svg>
 }
 
-function Chest({ doneToday, onWin }: { doneToday: boolean; onWin: () => void }) {
+// 7-day reward ladder: one step per training day, chests on days 2, 4 and 7.
+type Step = { kind: 'gems' | 'chest'; n: number; tier?: 'silver' | 'gold' | 'big' }
+const LADDER: Step[] = [
+  { kind: 'gems', n: 10 }, { kind: 'chest', n: 25, tier: 'silver' }, { kind: 'gems', n: 20 }, { kind: 'chest', n: 35, tier: 'gold' },
+  { kind: 'gems', n: 25 }, { kind: 'gems', n: 30 }, { kind: 'chest', n: 60, tier: 'big' },
+]
+
+function GemPile({ n }: { n: number }) {
+  const count = n >= 30 ? 5 : n >= 20 ? 4 : 3
+  const spots = [[0, 6], [-13, 10], [13, 10], [-7, -4], [7, -4]].slice(0, count)
+  return <svg viewBox="-30 -24 60 48" width="60" height="48" aria-hidden="true">
+    <ellipse cy="20" rx="24" ry="4" fill="#0b4a54" opacity=".18" />
+    {spots.map(([x, y], i) => <g key={i} transform={`translate(${x} ${y})`}><path d="M-9 -4h18l4 5-13 13-13-13z" fill="#5fd3ff" stroke="#0b4a54" strokeWidth="2.2" strokeLinejoin="round" /><path d="M-9 -4l4 5h10l4-5M-5 1l5 12 5-12" fill="none" stroke="#fff" strokeWidth="1.3" opacity=".75" /></g>)}
+  </svg>
+}
+
+function Ladder({ doneToday, onWin }: { doneToday: boolean; onWin: () => void }) {
   const today = dayKey(new Date())
-  const [taps, setTaps] = useState(0)
-  const [won, setWon] = useState<number | null>(null)
-  const claimed = !TEST && read().chest === today && won === null
-  const ready = (TEST || doneToday) && !claimed && won === null
+  const c = read()
+  const claimedCount = (c.ladder ?? 0) % LADDER.length
+  const canClaim = TEST || (doneToday && c.chest !== today)
+  const [opening, setOpening] = useState<Step | null>(null)
+  const [, bump] = useState(0)
+  const claim = (step: Step) => {
+    if (step.kind === 'chest') { sound('tap'); setOpening(step); return }
+    finish(step)
+  }
+  const finish = (step: Step) => {
+    const next = { ...read(), ladder: (read().ladder ?? 0) + 1 }
+    if (!TEST) { next.chest = today; addGems(step.n) }
+    write(next); sound('success'); bump(n => n + 1); onWin()
+  }
+  if (opening) return <ChestOpen prize={opening.n} onDone={() => { finish(opening); setOpening(null) }} />
+  const streak = claimedCount
+  return <section className="ladder">
+    <div className="ladder-hero">
+      <img src="/rewards/chest-open.webp" alt="" draggable={false} />
+      <span className="ladder-days" aria-label={L(`${streak} von 7 Tagen`, `${streak}/7 ngày`)}>{Array.from({ length: 7 }, (_, i) => <i key={i} className={i < streak ? 'on' : ''} />)}</span>
+    </div>
+    <ol className="ladder-list">
+      {LADDER.map((step, i) => {
+        const done = i < claimedCount, current = i === claimedCount
+        return <li key={i} className={`ladder-step ${done ? 'done' : ''} ${current ? 'current' : ''}`}>
+          <span className="ladder-node">{done ? <Check size={18} strokeWidth={3.4} /> : <b>{i + 1}</b>}</span>
+          <span className="ladder-icon">{step.kind === 'gems' ? <GemPile n={step.n} /> : <img src={done ? '/rewards/chest-open.webp' : '/rewards/chest-closed.webp'} alt="" className={`tier-${step.tier}`} draggable={false} />}</span>
+          <span className="ladder-amount"><Gem size={20} />{step.n}</span>
+          {current && (canClaim
+            ? <button type="button" className="ladder-claim" onClick={() => claim(step)} aria-label={L('Abholen', 'Nhận')}><Gift size={22} /></button>
+            : <span className="ladder-wait" aria-label={L('Nach dem Training', 'Sau buổi tập')}><Lock size={20} /></span>)}
+        </li>
+      })}
+    </ol>
+  </section>
+}
+
+function ChestOpen({ prize, onDone }: { prize: number; onDone: () => void }) {
+  const [stage, setStage] = useState<'idle' | 'opening' | 'open'>('idle')
   const tap = () => {
-    if (TEST && won !== null) { setWon(null); setTaps(0); return }
-    if (!ready || taps) return
-    // One tap: the chest shakes, then pops open.
-    setTaps(1); sound('tap')
-    setTimeout(() => {
-      const n = 10 + Math.floor(Math.random() * 4) * 5
-      if (!TEST) { write({ ...read(), chest: today }); addGems(n) }
-      setWon(n); setTaps(0); sound('success'); onWin()
-    }, 700)
+    if (stage === 'open') { onDone(); return }
+    if (stage !== 'idle') return
+    setStage('opening'); sound('tap')
+    setTimeout(() => { setStage('open'); sound('success') }, 700)
   }
   return <section className="reward-stage">
-    <button type="button" key={String(won)} className={`chest big ${won !== null ? 'open' : ''} ${taps ? 'opening' : ''} ${ready && !taps ? 'idle' : ''}`} onClick={tap} disabled={!ready && !(TEST && won !== null)} aria-label={won !== null ? L(`${won} Diamanten`, `${won} kim cương`) : L('Truhe öffnen', 'Mở rương')}>
-      <img src={won !== null ? '/rewards/chest-open.webp' : '/rewards/chest-closed.webp'} alt="" className="chest-img" draggable={false} />
+    <button type="button" key={stage === 'open' ? 'o' : 'c'} className={`chest big ${stage === 'open' ? 'open' : ''} ${stage === 'opening' ? 'opening' : ''} ${stage === 'idle' ? 'idle' : ''}`} onClick={tap} aria-label={stage === 'open' ? L('Weiter', 'Tiếp tục') : L('Truhe öffnen', 'Mở rương')}>
+      <img src={stage === 'open' ? '/rewards/chest-open.webp' : '/rewards/chest-closed.webp'} alt="" className="chest-img" draggable={false} />
     </button>
-    <span className={`reward-pop big ${won === null && ready ? 'ghost' : ''} ${won === null && !ready ? 'locked' : ''}`}>{won === null && !ready ? <Lock size={28} /> : <><Gem size={30} />+{won ?? 0}</>}</span>
+    <span className={`reward-pop big ${stage === 'open' ? '' : 'ghost'}`}><Gem size={30} />+{prize}</span>
   </section>
 }
 
