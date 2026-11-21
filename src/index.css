@@ -566,8 +566,10 @@ body {
 .reward-pop{position:absolute;right:16px;top:12px;display:flex;align-items:center;gap:4px;font-weight:900;font-size:20px;color:#0ea5e9;animation:pop-up 1.4s ease-out both}
 @keyframes pop-up{0%{opacity:0;transform:translateY(16px) scale(.6)}30%{opacity:1;transform:translateY(-6px) scale(1.15)}100%{opacity:1;transform:none}}
 .wheel-wrap{position:relative;width:260px;height:260px;margin:14px auto 6px;contain:paint}
-.wheel-rim{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 6px 10px rgba(11,74,84,.25))}
-.wheel{position:absolute;left:20px;top:20px;width:220px;height:220px;will-change:transform}
+.wheel-rim{position:absolute;inset:0;z-index:1;width:100%;height:100%;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(11,74,84,.25))}
+.wheel-rim.on{animation:rim-glow .5s ease-in-out infinite alternate}
+@keyframes rim-glow{to{filter:drop-shadow(0 6px 10px rgba(11,74,84,.25)) brightness(1.25)}}
+.wheel{position:absolute;left:31px;top:31px;width:198px;height:198px;will-change:transform}
 .bulb.on{animation:bulb 0.5s steps(1) infinite}
 @keyframes bulb{50%{fill:#ffb020}}
 .wheel-pin{position:absolute;left:50%;top:-14px;z-index:3;margin-left:-20px;filter:drop-shadow(0 3px 2px rgba(0,0,0,.25))}
@@ -578,3 +580,6 @@ body {
 @keyframes gems-up{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
 .day-sheet{overflow-x:hidden;scrollbar-gutter:stable}
 @media (prefers-reduced-motion:reduce){.rewards-fab,.chest,.wheel{animation:none!important;transition:none!important}}
+
+.chest-img{display:block;width:132px;height:132px;object-fit:contain;filter:drop-shadow(0 6px 6px rgba(11,74,84,.2))}
+.chest.open .chest-img{animation:splash-pop .5s cubic-bezier(.2,1.4,.4,1) both}

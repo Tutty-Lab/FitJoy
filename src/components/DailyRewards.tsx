@@ -61,29 +61,7 @@ function Chest({ doneToday, onWin }: { doneToday: boolean; onWin: () => void }) 
   }
   return <section className="reward-card">
     <button type="button" className={`chest ${won !== null ? 'open' : ''} ${taps ? `shake-${taps}` : ''}`} onClick={tap} disabled={!ready} aria-label={L('Truhe öffnen', 'Mở rương')}>
-      <svg viewBox="0 0 140 120" width="132" height="114" aria-hidden="true">
-        <defs>
-          <linearGradient id="cw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8692e" /><stop offset="1" stop-color="#7c3f16" /></linearGradient>
-          <linearGradient id="cl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d98a45" /><stop offset="1" stop-color="#9a5221" /></linearGradient>
-          <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2a8" /><stop offset=".5" stop-color="#f5c542" /><stop offset="1" stop-color="#c48a12" /></linearGradient>
-          <radialGradient id="cglow"><stop offset="0" stop-color="#fffbe0" /><stop offset=".5" stop-color="#ffe27a" stop-opacity=".8" /><stop offset="1" stop-color="#ffe27a" stop-opacity="0" /></radialGradient>
-        </defs>
-        <ellipse cx="70" cy="112" rx="50" ry="6" fill="#0b4a54" opacity=".15" />
-        {won !== null && <circle className="chest-glow" cx="70" cy="52" r="46" fill="url(#cglow)" />}
-        <rect x="20" y="56" width="100" height="52" rx="8" fill="url(#cw)" stroke="#4a2409" strokeWidth="3" />
-        <path d="M28 66h84M28 82h84M28 98h84" stroke="#5e2f10" strokeWidth="2" opacity=".35" />
-        <rect x="20" y="56" width="14" height="52" fill="url(#cg)" stroke="#7a560a" strokeWidth="2" />
-        <rect x="106" y="56" width="14" height="52" fill="url(#cg)" stroke="#7a560a" strokeWidth="2" />
-        {won !== null && <g className="chest-gems"><path d="M70 30l10 11-10 14-10-14z" fill="#5fd3ff" stroke="#fff" strokeWidth="2" /><path d="M50 42l7 8-7 10-7-10z" fill="#a78bfa" stroke="#fff" strokeWidth="2" /><path d="M90 42l7 8-7 10-7-10z" fill="#34d399" stroke="#fff" strokeWidth="2" /></g>}
-        <g className="chest-lid">
-          <path d="M20 58 V40 Q20 18 70 18 Q120 18 120 40 V58 Z" fill="url(#cl)" stroke="#4a2409" strokeWidth="3" />
-          <path d="M30 26 Q70 14 110 26" stroke="#f3b27a" strokeWidth="3" fill="none" opacity=".6" strokeLinecap="round" />
-          <path d="M20 40 Q20 18 34 20 V58 H20Z" fill="url(#cg)" stroke="#7a560a" strokeWidth="2" />
-          <path d="M120 40 Q120 18 106 20 V58 H120Z" fill="url(#cg)" stroke="#7a560a" strokeWidth="2" />
-        </g>
-        <rect x="58" y="50" width="24" height="26" rx="5" fill="url(#cg)" stroke="#7a560a" strokeWidth="2.5" />
-        <circle cx="70" cy="61" r="4" fill="#5e3a06" /><rect x="68.5" y="62" width="3" height="8" rx="1.5" fill="#5e3a06" />
-      </svg>
+      <img src={won !== null ? '/rewards/chest-open.webp' : '/rewards/chest-closed.webp'} alt="" width="132" height="132" className="chest-img" draggable={false} />
     </button>
     <div className="flex-1">
       <h3 className="text-lg font-black">{L('Schatztruhe', 'Rương báu')}</h3>
@@ -115,11 +93,7 @@ function Wheel({ onWin }: { onWin: () => void }) {
     </div>
     <div className="wheel-wrap">
       <svg className="wheel-pin" viewBox="0 0 40 48" width="40" height="48" aria-hidden="true"><path d="M20 46 L4 14 A16 16 0 1 1 36 14 Z" fill="#ef4444" stroke="#fff" strokeWidth="3" strokeLinejoin="round" /><circle cx="20" cy="15" r="6" fill="#fff" /></svg>
-      <svg className="wheel-rim" viewBox="0 0 260 260" aria-hidden="true">
-        <circle cx="130" cy="130" r="126" fill="#0b4a54" />
-        <circle cx="130" cy="130" r="118" fill="#13707e" />
-        {Array.from({ length: 16 }, (_, i) => { const a = (i * 22.5 - 90) * Math.PI / 180; return <circle key={i} className={`bulb ${spinning ? 'on' : ''}`} style={{ animationDelay: `${(i % 2) * .25}s` }} cx={130 + 122 * Math.cos(a)} cy={130 + 122 * Math.sin(a)} r="4.5" fill="#fff4c2" /> })}
-      </svg>
+
       <svg className="wheel" viewBox="-110 -110 220 220" style={{ transform: `rotate(${angle}deg)`, transition: spinning ? 'transform 3.5s cubic-bezier(.15,.85,.25,1)' : 'none' }} aria-hidden="true">
         {PRIZES.map((p, i) => {
           const a0 = (i * 45 - 90) * Math.PI / 180, a1 = ((i + 1) * 45 - 90) * Math.PI / 180, R = 106
@@ -133,6 +107,7 @@ function Wheel({ onWin }: { onWin: () => void }) {
         })}
         <circle r="106" fill="none" stroke="#fff" strokeWidth="4" />
       </svg>
+      <img src="/rewards/wheel-rim.webp" alt="" className={`wheel-rim ${spinning ? 'on' : ''}`} draggable={false} />
       <button type="button" className="wheel-hub" onClick={spin} disabled={spinning || used || won !== null}>{spinning ? '…' : L('Drehen', 'Quay')}</button>
     </div>
   </section>
