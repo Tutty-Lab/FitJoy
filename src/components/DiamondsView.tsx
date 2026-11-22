@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ChevronRight, Dumbbell, Gem, Plus, X } from 'lucide-react'
+import { Dumbbell, Gem, X } from 'lucide-react'
 import { loadProfile, saveProfile } from '../lib/profile'
 import { playGameSound } from '../lib/gameAudio'
 import { useCompleted } from '../lib/progress'
@@ -45,8 +45,8 @@ export default function DiamondsView({ onClose }: { onClose: () => void }) {
   const reward = (kind: 'chest' | 'wheel') => close(() => { navigate('/', { replace: true }); setTimeout(() => window.dispatchEvent(new CustomEvent('fitjoy:rewards', { detail: kind })), 50) })
   const ways = [
     { key: 'train', icon: <span className="earn-ico train"><Dumbbell size={30} /></span>, amount: '+10', label: L('Eine Minute üben', 'Tập một phút'), done: doneToday, go: () => close(() => navigate(`/workouts/${current}`)) },
-    { key: 'chest', icon: <img src="/rewards/chest-closed.webp" alt="" className="earn-img" />, amount: '+10…190', label: L('Tagesbelohnung', 'Thưởng hằng ngày'), go: () => reward('chest') },
-    { key: 'wheel', icon: <span className="earn-ico wheel"><svg viewBox="-24 -24 48 48" width="40" height="40" aria-hidden="true"><circle r="21" fill="#ffb627" stroke="#2b1d0e" strokeWidth="3" />{['#ff7a59', '#4cc9a7', '#ffd23f', '#5aa9ff', '#ff7a59', '#4cc9a7', '#ffd23f', '#a17cf5'].map((c, i) => { const a0 = (i * 45 - 90) * Math.PI / 180, a1 = ((i + 1) * 45 - 90) * Math.PI / 180, r = 15; return <path key={i} d={`M0 0 L${r * Math.cos(a0)} ${r * Math.sin(a0)} A${r} ${r} 0 0 1 ${r * Math.cos(a1)} ${r * Math.sin(a1)} Z`} fill={c} stroke="#2b1d0e" strokeWidth="1.5" /> })}<circle r="5" fill="#ffb627" stroke="#2b1d0e" strokeWidth="2" /></svg></span>, amount: '+5…50', label: L('Glücksrad', 'Vòng quay'), go: () => reward('wheel') },
+    { key: 'chest', icon: <img src="/rewards/chest-closed.webp" alt="" className="earn-img" />, amount: '+10', label: L('Tagesbelohnung', 'Thưởng hằng ngày'), go: () => reward('chest') },
+    { key: 'wheel', icon: <span className="earn-ico spin"><svg viewBox="-24 -24 48 48" width="40" height="40" aria-hidden="true"><circle r="21" fill="#ffb627" stroke="#2b1d0e" strokeWidth="3" />{['#ff7a59', '#4cc9a7', '#ffd23f', '#5aa9ff', '#ff7a59', '#4cc9a7', '#ffd23f', '#a17cf5'].map((c, i) => { const a0 = (i * 45 - 90) * Math.PI / 180, a1 = ((i + 1) * 45 - 90) * Math.PI / 180, r = 15; return <path key={i} d={`M0 0 L${r * Math.cos(a0)} ${r * Math.sin(a0)} A${r} ${r} 0 0 1 ${r * Math.cos(a1)} ${r * Math.sin(a1)} Z`} fill={c} stroke="#2b1d0e" strokeWidth="1.5" /> })}<circle r="5" fill="#ffb627" stroke="#2b1d0e" strokeWidth="2" /></svg></span>, amount: '+50', label: L('Glücksrad', 'Vòng quay'), go: () => reward('wheel') },
   ]
   return <div className={`streak-backdrop ${closing ? 'closing' : ''}`}>
     <div className="streak-sheet gems-page" role="dialog" aria-label={L('Diamanten', 'Kim cương')}>
@@ -55,13 +55,11 @@ export default function DiamondsView({ onClose }: { onClose: () => void }) {
         <div className="gems-float"><BigGem /></div>
         <p className="gems-total">{xp}</p>
       </section>
-      <ul className="earn-list">
+      <ul className="earn-grid">
         {ways.map(w => <li key={w.key}>
-          <button type="button" className={`earn-row ${w.done ? 'done' : ''}`} onClick={w.go}>
+          <button type="button" className={`earn-tile ${w.done ? 'done' : ''}`} onClick={w.go} aria-label={w.label}>
             {w.icon}
-            <span className="flex-1 text-left"><b className="block text-lg">{w.label}</b></span>
-            <span className="earn-amount"><Plus size={16} strokeWidth={3.4} />{w.amount.replace('+', '')}</span>
-            <ChevronRight className="text-slate-400" />
+            <span className="earn-amount">{w.amount}</span>
           </button>
         </li>)}
       </ul>
@@ -69,7 +67,7 @@ export default function DiamondsView({ onClose }: { onClose: () => void }) {
         <h2 className="shop-title">{L('Shop', 'Cửa hàng')}</h2>
         <div className="shop-item">
           <div className="shop-art"><FreezeIcon />{freezes > 0 && <span className="shop-owned">×{freezes}</span>}</div>
-          <div className="flex-1"><b className="block text-lg">{L('Serienschutz', 'Phao giữ chuỗi')}</b><span className="text-sm text-slate-600">{L('Schützt deine Serie, wenn du einen Tag verpasst.', 'Giữ chuỗi ngày tập khi bạn lỡ nghỉ 1 ngày.')}</span></div>
+          <div className="flex-1"><b className="block text-lg">{L('Serienschutz', 'Phao giữ chuỗi')}</b></div>
           <button type="button" className="shop-buy" disabled={!canBuy} onClick={buy} aria-label={L(`Für ${FREEZE_PRICE} Diamanten kaufen`, `Mua với ${FREEZE_PRICE} kim cương`)}><Gem size={18} />{FREEZE_PRICE}</button>
         </div>
       </section>
