@@ -707,3 +707,10 @@ body {
 
 .streak-sheet.ladder-page,.streak-sheet.gems-page{scrollbar-width:none}
 .streak-sheet.ladder-page::-webkit-scrollbar,.streak-sheet.gems-page::-webkit-scrollbar{display:none}
+
+/* Ladder: hero stays fixed, only the gift list scrolls */
+.streak-sheet.ladder-page{overflow:hidden;display:flex;flex-direction:column}
+.ladder-page .ladder{display:flex;flex-direction:column;flex:1;min-height:0}
+.ladder-page .ladder-hero{flex-shrink:0}
+.ladder-page .ladder-list{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+.ladder-page .ladder-list::-webkit-scrollbar{display:none}
