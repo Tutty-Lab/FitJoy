@@ -687,3 +687,5 @@ body {
 .earn-tile.done{opacity:.5}
 .earn-ico.spin{background:#fff3d1}
 .earn-tile .earn-amount{font-size:20px}
+
+.rewards-dock .rewards-fab{border:0;background:#fff;box-shadow:0 4px 12px rgba(11,74,84,.25)}
