@@ -6,6 +6,9 @@ export type Profile = {
   gameOnboarded?: boolean
   streakGoal?: number
   xp?: number
+  /** Streak freezes bought in the shop, and the days they covered. */
+  freezes?: number
+  frozenDates?: string[]
   introSeen?: boolean
   /** ISO time the user asked to be reminded about the first self-test. */
   checkReminderAt?: string

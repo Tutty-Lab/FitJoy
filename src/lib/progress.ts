@@ -58,10 +58,21 @@ export function sessionsDone(day: number) {
   return (loadProfile()?.lessonCompletions ?? []).filter(k => k.startsWith(`${day}:`)).length
 }
 
+// A streak freeze covers yesterday automatically when it was missed but the day before was trained.
+export function applyFreeze(dates: string[]) {
+  const p = loadProfile()
+  if (!p?.freezes) return
+  const d = new Date(), y = new Date(d), yy = new Date(d)
+  y.setDate(d.getDate() - 1); yy.setDate(d.getDate() - 2)
+  const covered = new Set([...dates, ...(p.frozenDates ?? [])])
+  if (!covered.has(dayKey(y)) && covered.has(dayKey(yy))) saveProfile({ freezes: p.freezes - 1, frozenDates: [...(p.frozenDates ?? []), dayKey(y)] })
+}
+
 export function useCompleted() {
   useEffect(() => {
     let last = today()
-    const refresh = () => { if (today() !== last) { last = today(); notify() } }
+    applyFreeze(cache.dates)
+    const refresh = () => { if (today() !== last) { last = today(); applyFreeze(cache.dates); notify() } }
     const interval = window.setInterval(refresh, 30000)
     window.addEventListener('focus', refresh)
     document.addEventListener('visibilitychange', refresh)
@@ -90,7 +101,7 @@ export function useCompleted() {
     waitingForTomorrow: waiting,
     finished: completed.length >= PROGRAM_DAYS,
     statusOf,
-    streak: streakOf(dates),
+    streak: streakOf([...dates, ...(loadProfile()?.frozenDates ?? [])]),
     doneToday: dates.includes(today()),
   }
 }

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ChevronRight, Dumbbell, Plus, X } from 'lucide-react'
-import { loadProfile } from '../lib/profile'
+import { ChevronRight, Dumbbell, Gem, Plus, X } from 'lucide-react'
+import { loadProfile, saveProfile } from '../lib/profile'
+import { playGameSound } from '../lib/gameAudio'
 import { useCompleted } from '../lib/progress'
 import { L } from '../lib/i18n'
 
@@ -16,11 +17,29 @@ export function BigGem({ size = 120 }: { size?: number }) {
   </svg>
 }
 
+const FREEZE_PRICE = 50, FREEZE_MAX = 2
+
+function FreezeIcon() {
+  return <svg viewBox="0 0 60 70" width="54" height="62" aria-hidden="true">
+    <ellipse cx="30" cy="66" rx="18" ry="3" fill="#0b4a54" opacity=".18" />
+    <path d="M30 3C34 17 50 23 52 40C54 57 43 66 30 66C17 66 7 57 8 42C9 32 15 25 19 21C19 29 23 33 27 30C31 25 26 15 30 3Z" fill="#7fdcff" stroke="#0b4a54" strokeWidth="3.5" strokeLinejoin="round" />
+    <path d="M30 36v22M21 41l18 12M39 41L21 53" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" />
+  </svg>
+}
+
 export default function DiamondsView({ onClose }: { onClose: () => void }) {
   const navigate = useNavigate()
   const { current, doneToday } = useCompleted()
   const [closing, setClosing] = useState(false)
-  const xp = loadProfile()?.xp ?? 0
+  const [, bump] = useState(0)
+  const profile = loadProfile(), xp = profile?.xp ?? 0, freezes = profile?.freezes ?? 0
+  const canBuy = xp >= FREEZE_PRICE && freezes < FREEZE_MAX
+  const buy = () => {
+    if (!canBuy) return
+    saveProfile({ xp: xp - FREEZE_PRICE, freezes: freezes + 1 })
+    if (profile?.chime ?? true) playGameSound('success')
+    bump(n => n + 1)
+  }
   useEffect(() => { const h = document.documentElement, o = h.style.overflow; h.style.overflow = 'hidden'; return () => { h.style.overflow = o } }, [])
   const close = (then?: () => void) => { setClosing(true); setTimeout(() => { onClose(); then?.() }, 260) }
   const reward = (kind: 'chest' | 'wheel') => close(() => { navigate('/', { replace: true }); setTimeout(() => window.dispatchEvent(new CustomEvent('fitjoy:rewards', { detail: kind })), 50) })
@@ -46,6 +65,14 @@ export default function DiamondsView({ onClose }: { onClose: () => void }) {
           </button>
         </li>)}
       </ul>
+      <section className="shop">
+        <h2 className="shop-title">{L('Shop', 'Cửa hàng')}</h2>
+        <div className="shop-item">
+          <div className="shop-art"><FreezeIcon />{freezes > 0 && <span className="shop-owned">×{freezes}</span>}</div>
+          <div className="flex-1"><b className="block text-lg">{L('Serienschutz', 'Phao giữ chuỗi')}</b><span className="text-sm text-slate-600">{L('Schützt deine Serie, wenn du einen Tag verpasst.', 'Giữ chuỗi ngày tập khi bạn lỡ nghỉ 1 ngày.')}</span></div>
+          <button type="button" className="shop-buy" disabled={!canBuy} onClick={buy} aria-label={L(`Für ${FREEZE_PRICE} Diamanten kaufen`, `Mua với ${FREEZE_PRICE} kim cương`)}><Gem size={18} />{FREEZE_PRICE}</button>
+        </div>
+      </section>
     </div>
   </div>
 }
