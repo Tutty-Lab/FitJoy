@@ -111,7 +111,7 @@ function Ladder({ doneToday, onWin }: { doneToday: boolean; onWin: () => void })
     <ol className="ladder-list">
       {LADDER.map((step, i) => {
         const done = i < claimedCount, current = i === claimedCount
-        return <li key={i} ref={current ? (el => el?.scrollIntoView({ block: 'center' })) : undefined} className={`ladder-step ${done ? 'done' : ''} ${current ? 'current' : ''}`}>
+        return <li key={i} ref={current ? (el => { const list = el?.parentElement; if (el && list) list.scrollTop = el.offsetTop - list.clientHeight / 2 + el.clientHeight / 2 }) : undefined} className={`ladder-step ${done ? 'done' : ''} ${current ? 'current' : ''}`}>
           <span className="ladder-node">{done ? <Check size={18} strokeWidth={3.4} /> : <b>{i + 1}</b>}</span>
           <span className="ladder-icon">{step.kind === 'gems' ? <GemPile n={step.n} /> : <img src={done ? '/rewards/chest-open.webp' : '/rewards/chest-closed.webp'} alt="" className={`tier-${step.tier}`} draggable={false} />}</span>
           <span className="ladder-amount"><IcoGem size={22} />{step.n}</span>
