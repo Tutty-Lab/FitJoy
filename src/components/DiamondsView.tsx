@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Dumbbell, Gem, X } from 'lucide-react'
+import { X } from 'lucide-react'
+import { IcoGem, IcoTrain } from './CartoonIcons'
 import { loadProfile, saveProfile } from '../lib/profile'
 import { playGameSound } from '../lib/gameAudio'
 import { useCompleted } from '../lib/progress'
@@ -44,7 +45,7 @@ export default function DiamondsView({ onClose }: { onClose: () => void }) {
   const close = (then?: () => void) => { setClosing(true); setTimeout(() => { onClose(); then?.() }, 260) }
   const reward = (kind: 'chest' | 'wheel') => close(() => { navigate('/', { replace: true }); setTimeout(() => window.dispatchEvent(new CustomEvent('fitjoy:rewards', { detail: kind })), 50) })
   const ways = [
-    { key: 'train', icon: <span className="earn-ico train"><Dumbbell size={30} /></span>, amount: '+10', label: L('Eine Minute üben', 'Tập một phút'), done: doneToday, go: () => close(() => navigate(`/workouts/${current}`)) },
+    { key: 'train', icon: <span className="earn-ico train"><IcoTrain /></span>, amount: '+10', label: L('Eine Minute üben', 'Tập một phút'), done: doneToday, go: () => close(() => navigate(`/workouts/${current}`)) },
     { key: 'chest', icon: <img src="/rewards/chest-closed.webp" alt="" className="earn-img" />, amount: '+10', label: L('Tagesbelohnung', 'Thưởng hằng ngày'), go: () => reward('chest') },
     { key: 'wheel', icon: <span className="earn-ico spin"><svg viewBox="-24 -24 48 48" width="40" height="40" aria-hidden="true"><circle r="21" fill="#ffb627" stroke="#2b1d0e" strokeWidth="3" />{['#ff7a59', '#4cc9a7', '#ffd23f', '#5aa9ff', '#ff7a59', '#4cc9a7', '#ffd23f', '#a17cf5'].map((c, i) => { const a0 = (i * 45 - 90) * Math.PI / 180, a1 = ((i + 1) * 45 - 90) * Math.PI / 180, r = 15; return <path key={i} d={`M0 0 L${r * Math.cos(a0)} ${r * Math.sin(a0)} A${r} ${r} 0 0 1 ${r * Math.cos(a1)} ${r * Math.sin(a1)} Z`} fill={c} stroke="#2b1d0e" strokeWidth="1.5" /> })}<circle r="5" fill="#ffb627" stroke="#2b1d0e" strokeWidth="2" /></svg></span>, amount: '+50', label: L('Glücksrad', 'Vòng quay'), go: () => reward('wheel') },
   ]
@@ -68,7 +69,7 @@ export default function DiamondsView({ onClose }: { onClose: () => void }) {
         <div className="shop-item">
           <div className="shop-art"><FreezeIcon />{freezes > 0 && <span className="shop-owned">×{freezes}</span>}</div>
           <div className="flex-1"><b className="block text-lg">{L('Serienschutz', 'Phao giữ chuỗi')}</b></div>
-          <button type="button" className="shop-buy" disabled={!canBuy} onClick={buy} aria-label={L(`Für ${FREEZE_PRICE} Diamanten kaufen`, `Mua với ${FREEZE_PRICE} kim cương`)}><Gem size={18} />{FREEZE_PRICE}</button>
+          <button type="button" className="shop-buy" disabled={!canBuy} onClick={buy} aria-label={L(`Für ${FREEZE_PRICE} Diamanten kaufen`, `Mua với ${FREEZE_PRICE} kim cương`)}><IcoGem size={20} />{FREEZE_PRICE}</button>
         </div>
       </section>
     </div>

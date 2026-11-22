@@ -1,3 +1,4 @@
+import { dayStory } from './storyDays'
 // Der Gleichgewichts-Code: 90-day plan. Texts come from Michaela's Excel via
 // vestibu-inhalte.json (regenerate with scripts/import-vestibu.py, no code changes needed).
 import content from './vestibu-inhalte.json'
@@ -75,7 +76,7 @@ export function bonusFor(day: number): BonusExercise | undefined {
 }
 
 // Until the customer delivers per-day affirmations, show a default so there is always a sentence to speak.
-export const affirmationFor = (day: number) => dayContent(day).affirmation || L('Ich stehe sicher. Mein Gleichgewicht wird jeden Tag stärker.', 'Tôi đứng vững. Sự thăng bằng của tôi mỗi ngày một mạnh hơn.')
+export const affirmationFor = (day: number) => (lang === 'de' && dayStory(day)?.affirmation) || dayContent(day).affirmation || L('Ich stehe sicher. Mein Gleichgewicht wird jeden Tag stärker.', 'Tôi đứng vững. Sự thăng bằng của tôi mỗi ngày một mạnh hơn.')
 
 // ---- User-facing, language-aware views (admin keeps working on the German originals above) ----
 type ViDay = { begruessung: string; bonusImpuls: string; phase: string }

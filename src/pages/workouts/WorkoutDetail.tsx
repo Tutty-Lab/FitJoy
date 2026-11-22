@@ -62,6 +62,7 @@ export default function WorkoutDetail() {
   const video = baseVideo()
   const bonus = localBonusFor(day)
   const [stage, setStage] = useState<Stage>('instructions')
+  const [skipBonus, setSkipBonus] = useState(false)
   const [remaining, setRemaining] = useState(PRACTICE_SECONDS)
   const [running, setRunning] = useState(false)
   const [exitOpen, setExitOpen] = useState(false)
@@ -72,7 +73,7 @@ export default function WorkoutDetail() {
   // Leaving a session always goes straight back to the map.
   const returnTo = '/'
 
-  useEffect(() => { setIntro(0); setSaid(1); setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false); setExitOpen(false); setNewDiscovery(false); wasCompleted.current=completed.includes(day) }, [day, session])
+  useEffect(() => { setIntro(0); setSaid(1); setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false); setExitOpen(false); setNewDiscovery(false); setSkipBonus(false); wasCompleted.current=completed.includes(day) }, [day, session])
   useEffect(() => {
     const pause=()=>{ if(document.hidden){player.current?.pause();setRunning(false)} }
     document.addEventListener('visibilitychange',pause)
@@ -193,11 +194,17 @@ export default function WorkoutDetail() {
       <button type="button" className={primary} onClick={togglePlayback}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
     </>}
 
-    {stage === 'done' && <Done xp={xp} streak={streak} earned={earned} title={L('Gut gemacht!', 'Làm tốt lắm!')}>
+    {stage === 'done' && bonus && !skipBonus && <Done xp={xp} streak={streak} earned={earned} title={L('Gut gemacht!', 'Làm tốt lắm!')}>
+      <Talk text={L('Lust auf deine Bonus-Minute?', 'Tập thêm một phút bonus nhé?')} mood="encourage" />
+      <button type="button" className={primary} onClick={() => start('bonus')}>{L('Freiwillige Bonusübung', 'Bài tập thêm')} · +{XP_BONUS}</button>
+      <button type="button" className={secondary} onClick={() => setSkipBonus(true)}>{L('Heute nicht', 'Hôm nay thôi')}</button>
+    </Done>}
+
+    {((stage === 'done' && (!bonus || skipBonus)) || stage === 'bonusDone') && <Done xp={xp} streak={streak} earned={earned} title={stage === 'bonusDone' ? L('Bonus geschafft!', 'Xong bonus!') : L('Gut gemacht!', 'Làm tốt lắm!')}>
       <StoryBeat day={day} session={session} />
+      <Affirmation />
       {streakUp ? <Link className={primary} to={`/streak?up=1&next=${encodeURIComponent(nextRoute)}`} replace>{L('Weiter', 'Tiếp tục')}</Link> : <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>}
       <button type="button" className={secondary} onClick={() => start('practice')}>{L('Nochmal üben', 'Tập lại')}</button>
-      {bonus && <button type="button" className={secondary} onClick={() => start('bonus')}>{L(`Bonus · +${XP_BONUS} Punkte`, `Bonus · +${XP_BONUS} điểm`)}</button>}
     </Done>}
 
     {stage === 'bonus' && bonus && <>
@@ -214,10 +221,6 @@ export default function WorkoutDetail() {
       <button type="button" className={primary} onClick={togglePlayback}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
     </>}
 
-    {stage === 'bonusDone' && <Done xp={xp} streak={streak} earned={earned} title={L('Bonus geschafft!', 'Xong bonus!')}>
-      <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>
-      <button type="button" className={secondary} onClick={() => start('bonus')}>{L('Nochmal üben', 'Tập lại')}</button>
-    </Done>}
     {exitOpen && <ExitMinuteDialog stay={()=>setExitOpen(false)} leave={()=>navigate(returnTo,{replace:true})}/>}
   </div>
 }

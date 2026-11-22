@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Check, Gem, Gift, Lock, X } from 'lucide-react'
+import { Check, Lock, X } from 'lucide-react'
+import { IcoGem, IcoGift, IcoLock } from './CartoonIcons'
 import { loadProfile, saveProfile } from '../lib/profile'
 import { useCompleted } from '../lib/progress'
 import { dayKey } from '../lib/game'
@@ -17,7 +18,7 @@ const sound = (k: 'tap' | 'success' | 'streak') => { if (loadProfile()?.chime ??
 const PRIZES = [5, 20, 10, 50, 5, 15, 10, 30]
 // Segment colours [light centre, dark edge] for a soft 3D shade.
 // Cartoon segment colours: [fill, number colour].
-const COLORS = [['#ff7a59', '#fff7d1'], ['#4cc9a7', '#fff7d1'], ['#ffd23f', '#ff7a59'], ['#5aa9ff', '#fff7d1'], ['#ff7a59', '#fff7d1'], ['#4cc9a7', '#fff7d1'], ['#ffd23f', '#ff7a59'], ['#a17cf5', '#fff7d1']]
+const COLORS = [['#ff7a59', '#fff'], ['#32b49a', '#fff'], ['#f5b82e', '#fff'], ['#3b9cf0', '#fff'], ['#ff7a59', '#fff'], ['#32b49a', '#fff'], ['#f5b82e', '#fff'], ['#8b6ef0', '#fff']]
 // TEMP: test mode: unlimited chest opens and spins, no diamonds credited, nothing saved.
 const TEST = true
 
@@ -113,10 +114,10 @@ function Ladder({ doneToday, onWin }: { doneToday: boolean; onWin: () => void })
         return <li key={i} ref={current ? (el => el?.scrollIntoView({ block: 'center' })) : undefined} className={`ladder-step ${done ? 'done' : ''} ${current ? 'current' : ''}`}>
           <span className="ladder-node">{done ? <Check size={18} strokeWidth={3.4} /> : <b>{i + 1}</b>}</span>
           <span className="ladder-icon">{step.kind === 'gems' ? <GemPile n={step.n} /> : <img src={done ? '/rewards/chest-open.webp' : '/rewards/chest-closed.webp'} alt="" className={`tier-${step.tier}`} draggable={false} />}</span>
-          <span className="ladder-amount"><Gem size={20} />{step.n}</span>
+          <span className="ladder-amount"><IcoGem size={22} />{step.n}</span>
           {current && claimedCount < LADDER.length && (canClaim
-            ? <button type="button" className="ladder-claim" onClick={() => claim(step)} aria-label={L('Abholen', 'Nhận')}><Gift size={22} /></button>
-            : <span className="ladder-wait" aria-label={L('Nach dem Training', 'Sau buổi tập')}><Lock size={20} /></span>)}
+            ? <button type="button" className="ladder-claim" onClick={() => claim(step)} aria-label={L('Abholen', 'Nhận')}><IcoGift /></button>
+            : <span className="ladder-wait" aria-label={L('Nach dem Training', 'Sau buổi tập')}><IcoLock /></span>)}
         </li>
       })}
     </ol>
@@ -135,7 +136,7 @@ function ChestOpen({ prize, onDone }: { prize: number; onDone: () => void }) {
     <button type="button" key={stage === 'open' ? 'o' : 'c'} className={`chest big ${stage === 'open' ? 'open' : ''} ${stage === 'opening' ? 'opening' : ''} ${stage === 'idle' ? 'idle' : ''}`} onClick={tap} aria-label={stage === 'open' ? L('Weiter', 'Tiếp tục') : L('Truhe öffnen', 'Mở rương')}>
       <img src={stage === 'open' ? '/rewards/chest-open.webp' : '/rewards/chest-closed.webp'} alt="" className="chest-img" draggable={false} />
     </button>
-    <span className={`reward-pop big ${stage === 'open' ? '' : 'ghost'}`}><Gem size={30} />+{prize}</span>
+    <span className={`reward-pop big ${stage === 'open' ? '' : 'ghost'}`}><IcoGem size={32} />+{prize}</span>
   </section>
 }
 
@@ -159,39 +160,45 @@ function Wheel({ onWin }: { onWin: () => void }) {
   }
   const R = 102
   return <section className="reward-stage">
-    <div className="wheel-wrap cartoon">
+    <div className="wheel-wrap soft">
       <svg className="wheel-base" viewBox="0 0 260 260" aria-hidden="true">
-        <ellipse cx="130" cy="252" rx="80" ry="7" fill="#0b4a54" opacity=".18" />
-        <circle cx="130" cy="132" r="122" fill="#2b1d0e" />
-        <circle cx="130" cy="128" r="122" fill="#ffb627" stroke="#2b1d0e" strokeWidth="5" />
-        <path d="M40 80 A104 104 0 0 1 150 26" fill="none" stroke="#ffe08a" strokeWidth="7" strokeLinecap="round" />
-        <circle cx="130" cy="128" r="104" fill="#2b1d0e" />
+        <defs>
+          <linearGradient id="rimGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#ffe27a" /><stop offset=".55" stopColor="#ffc21a" /><stop offset="1" stopColor="#e89a00" /></linearGradient>
+        </defs>
+        <ellipse cx="130" cy="252" rx="86" ry="6" fill="#0b4a54" opacity=".15" />
+        <circle cx="130" cy="132" r="120" fill="#e0a000" />
+        <circle cx="130" cy="128" r="120" fill="url(#rimGold)" />
+        <path d="M44 76 A102 102 0 0 1 150 28" fill="none" stroke="#fff6c8" strokeWidth="6" strokeLinecap="round" opacity=".8" />
+        <circle cx="130" cy="128" r="103" fill="#fff" />
       </svg>
       <div className="wheel-clip"><svg className="wheel" viewBox="-104 -104 208 208" style={{ transform: `rotate(${angle}deg)`, transition: spinning ? 'transform 4s cubic-bezier(.2,.9,.25,1.04)' : 'none' }} aria-hidden="true">
         {PRIZES.map((p, i) => {
           const a0 = (i * 45 - 90) * Math.PI / 180, a1 = ((i + 1) * 45 - 90) * Math.PI / 180
           return <g key={i}>
-            <path d={`M0 0 L${R * Math.cos(a0)} ${R * Math.sin(a0)} A${R} ${R} 0 0 1 ${R * Math.cos(a1)} ${R * Math.sin(a1)} Z`} fill={COLORS[i][0]} stroke="#2b1d0e" strokeWidth="4" strokeLinejoin="round" />
-            <path d={`M${0.82 * R * Math.cos(a0 + 0.08)} ${0.82 * R * Math.sin(a0 + 0.08)} A${0.82 * R} ${0.82 * R} 0 0 1 ${0.82 * R * Math.cos(a1 - 0.08)} ${0.82 * R * Math.sin(a1 - 0.08)}`} fill="none" stroke="#fff" strokeWidth="5" strokeLinecap="round" opacity=".55" />
-            <g transform={`rotate(${i * 45 + 22.5}) translate(0 -60)`}>
-              <text textAnchor="middle" y="9" fontSize="27" fontWeight="900" fill={COLORS[i][1]} stroke="#2b1d0e" strokeWidth="5" paintOrder="stroke" strokeLinejoin="round">{p}</text>
+            <path d={`M0 0 L${R * Math.cos(a0)} ${R * Math.sin(a0)} A${R} ${R} 0 0 1 ${R * Math.cos(a1)} ${R * Math.sin(a1)} Z`} fill={COLORS[i][0]} stroke="#fff" strokeWidth="3" strokeLinejoin="round" />
+            <g transform={`rotate(${i * 45 + 22.5}) translate(0 -64)`}>
+              <text textAnchor="middle" y="9" fontSize="26" fontWeight="900" fill="#fff">{p}</text>
             </g>
           </g>
         })}
+        <circle r="100" fill="none" stroke="#fff" strokeWidth="4" />
       </svg></div>
       <svg className="wheel-top" viewBox="0 0 260 260" aria-hidden="true">
+        <defs><radialGradient id="wGloss" cx=".35" cy=".2" r=".7"><stop offset="0" stopColor="#fff" stopOpacity=".35" /><stop offset=".6" stopColor="#fff" stopOpacity="0" /></radialGradient></defs>
+        <circle cx="130" cy="128" r="100" fill="url(#wGloss)" />
         {Array.from({ length: 12 }, (_, i) => {
-          const a = (i * 30 - 90) * Math.PI / 180, x = 130 + 113 * Math.cos(a), y = 128 + 113 * Math.sin(a)
-          return <circle key={i} className={`bulb ${spinning ? 'on' : ''} ${i % 2 ? 'odd' : ''}`} cx={x} cy={y} r="6.5" fill="#fff7d1" stroke="#2b1d0e" strokeWidth="3" />
+          const a = (i * 30 - 90) * Math.PI / 180, x = 130 + 112 * Math.cos(a), y = 128 + 112 * Math.sin(a)
+          return <circle key={i} className={`bulb ${spinning ? 'on' : ''} ${i % 2 ? 'odd' : ''}`} cx={x} cy={y} r="5.5" fill="#fffbe6" />
         })}
       </svg>
-      <svg className="wheel-pin" viewBox="0 0 48 58" width="48" height="58" aria-hidden="true">
-        <path d="M24 54 L7 20 A18 18 0 1 1 41 20 Z" fill="#ff5a5f" stroke="#2b1d0e" strokeWidth="4.5" strokeLinejoin="round" />
-        <path d="M14 14 A11 11 0 0 1 26 7" fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round" opacity=".8" />
-        <circle cx="24" cy="19" r="6" fill="#fff7d1" stroke="#2b1d0e" strokeWidth="3" />
+      <svg className="wheel-pin" viewBox="0 0 44 54" width="44" height="54" aria-hidden="true">
+        <defs><linearGradient id="pinSoft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#ff8a7a" /><stop offset="1" stopColor="#ef4444" /></linearGradient></defs>
+        <path d="M22 52 L6 19 A16.5 16.5 0 1 1 38 19 Z" fill="url(#pinSoft)" />
+        <path d="M12 13 A10 10 0 0 1 23 6" fill="none" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" opacity=".75" />
+        <circle cx="22" cy="18" r="5.5" fill="#fff" />
       </svg>
       <button type="button" className="wheel-hub" onClick={spin} disabled={locked}>{spinning ? '…' : L('Los!', 'Quay')}</button>
     </div>
-    <span className={`reward-pop big ${won !== null ? '' : 'ghost'}`}><Gem size={30} />+{won ?? 0}</span>
+    <span className={`reward-pop big ${won !== null ? '' : 'ghost'}`}><IcoGem size={32} />+{won ?? 0}</span>
   </section>
 }

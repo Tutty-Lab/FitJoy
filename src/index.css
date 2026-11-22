@@ -689,3 +689,18 @@ body {
 .earn-tile .earn-amount{font-size:20px}
 
 .rewards-dock .rewards-fab{border:0;background:#fff;box-shadow:0 4px 12px rgba(11,74,84,.25)}
+
+.earn-ico.train{background:#e2f6f1}
+.ico-inline{display:inline-block;flex-shrink:0}
+
+/* Soft wheel (cartoon-ui skill: no dark outlines) */
+.wheel-wrap.soft{contain:none}
+.wheel-wrap.soft .wheel-clip{left:28px;top:26px;width:204px;height:204px}
+.wheel-wrap.soft .wheel-clip .wheel{position:static;width:100%;height:100%}
+.wheel-wrap.soft .wheel-pin{top:-2px;margin-left:-22px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.2))}
+.wheel-wrap.soft .wheel-hub{top:calc(50% - 2px);width:76px;height:76px;margin:-38px 0 0 -38px;border:0;background:linear-gradient(#2aa3b3,#13707e);color:#fff;font-size:18px;box-shadow:0 4px 0 #0b4a54,0 6px 14px rgba(11,74,84,.3),inset 0 0 0 4px rgba(255,255,255,.9)}
+.wheel-wrap.soft .wheel-hub:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #0b4a54,inset 0 0 0 4px rgba(255,255,255,.9)}
+.wheel-wrap.soft .wheel-hub:disabled{background:linear-gradient(#cbd5e1,#94a3b8);box-shadow:0 4px 0 #64748b,inset 0 0 0 4px rgba(255,255,255,.9)}
+.wheel-wrap.soft .bulb.on{animation:bulb-soft .4s steps(1) infinite}
+@keyframes bulb-soft{50%{fill:#ff8a7a}}
+.reward-sheet:not(.ladder-sheet) .reward-stage{min-height:0;padding:36px 0 8px}
