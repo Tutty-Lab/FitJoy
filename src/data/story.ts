@@ -6,9 +6,9 @@ import { storyEnd } from './storyEnd'
 export type Copy = { de: string; vi: string }
 export type Region = { id: 'harbor' | 'forest' | 'lighthouse'; start: number; end: number; name: Copy; mission: Copy }
 export const regions: Region[] = [
-  { id:'harbor', start:1, end:30, name:{de:'Der leise Hafen',vi:'Bến cảng bình yên'}, mission:{de:'Wir bringen Licht in den Hafen. Ein kleiner Schritt nach dem anderen.',vi:'Mình cùng thắp sáng bến cảng, từng bước nhỏ một.'} },
-  { id:'forest', start:31, end:60, name:{de:'Der Wald der Sinne',vi:'Khu rừng giác quan'}, mission:{de:'Wir entdecken die Wege des Waldes – aufmerksam und ohne Eile.',vi:'Mình khám phá lối đi trong rừng, chú tâm và không vội vã.'} },
-  { id:'lighthouse', start:61, end:90, name:{de:'Das Licht am Horizont',vi:'Ngọn hải đăng chân trời'}, mission:{de:'Wir verbinden die Insel mit ihrem Leuchtturm. In deinem Tempo.',vi:'Mình nối hòn đảo với hải đăng. Theo nhịp của bạn.'} },
+  { id:'harbor', start:1, end:30, name:{de:'Zuhause',vi:'Ở nhà'}, mission:{de:'Wir sammeln kleine Momente im Alltag – ganz ohne Eile.',vi:'Mình góp nhặt những khoảnh khắc nhỏ hằng ngày, không vội vã.'} },
+  { id:'forest', start:31, end:60, name:{de:'Im Viertel',vi:'Trong khu phố'}, mission:{de:'Wir gehen vor die Tür und entdecken die Wege draußen.',vi:'Mình ra ngoài và khám phá những lối đi quanh phố.'} },
+  { id:'lighthouse', start:61, end:90, name:{de:'Im Park',vi:'Công viên'}, mission:{de:'Wir bringen alles zusammen – in deinem Tempo.',vi:'Mình kết nối mọi điều đã học, theo nhịp của bạn.'} },
 ]
 export type Episode = { day: number; title: Copy; before: Copy; after: Copy; reward: Copy }
 export const firstWeek: Episode[] = [

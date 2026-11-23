@@ -20,18 +20,12 @@ function bindParallax() {
 
 export default function PaintedLife({ region, flip }: { region: Region['id']; flip: boolean }) {
   useEffect(bindParallax, [])
-  const water = region !== 'forest'
+  // Home/neighborhood/park: gentle flower sparkles, drifting leaves and parallax clouds. No water, boat or gulls.
   return (
     <div className="painted-life" aria-hidden="true" style={flip ? { transform: 'scaleX(-1)' } : undefined}>
-      {water && sparkles.map(([x, y], i) => <span key={`s${i}`} className="pl-sparkle" style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${i * 0.7}s` }} />)}
-      {water && <img src="/map/boat.webp" alt="" className="pl-boat" style={{ top: region === 'harbor' ? '30%' : '44%' }} />}
-      {!water && fireflies.map(([x, y], i) => <span key={`f${i}`} className="pl-firefly" style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${i * 0.9}s` }} />)}
-      {!water && leaves.map((x, i) => <span key={`l${i}`} className="pl-leaf" style={{ left: `${x}%`, animationDelay: `${i * 4.5}s` }} />)}
-      {water && <>
-        <img src="/map/seagull.webp" alt="" className="pl-gull" style={{ top: '18%', animationDelay: '-4s' }} />
-        <img src="/map/seagull.webp" alt="" className="pl-gull pl-gull-b" style={{ top: '62%', animationDelay: '-15s' }} />
-      </>}
-      {region === 'lighthouse' && <span className="pl-beam" />}
+      {sparkles.map(([x, y], i) => <span key={`s${i}`} className="pl-sparkle" style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${i * 0.7}s` }} />)}
+      {fireflies.slice(0, 5).map(([x, y], i) => <span key={`f${i}`} className="pl-firefly" style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${i * 0.9}s` }} />)}
+      {leaves.map((x, i) => <span key={`l${i}`} className="pl-leaf" style={{ left: `${x}%`, animationDelay: `${i * 4.5}s` }} />)}
       <span className="pl-parallax" style={{ top: '10%' }}><img src="/map/cloud.webp" alt="" className="pl-cloud" style={{ animationDelay: '-8s' }} /></span>
       <span className="pl-parallax pl-parallax-b" style={{ top: '55%' }}><img src="/map/cloud.webp" alt="" className="pl-cloud pl-cloud-b" style={{ animationDelay: '-30s' }} /></span>
     </div>
