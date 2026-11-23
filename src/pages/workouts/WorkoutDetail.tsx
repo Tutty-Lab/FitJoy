@@ -99,8 +99,10 @@ export default function WorkoutDetail() {
       // First session today raises the streak: celebrate it on the streak screen next.
       if (!doneToday) { try { sessionStorage.setItem('fitjoy.streakUp', String(streak)) } catch { /* private mode */ } setStreakUp(true) }
       completeLesson(day, session)
-      saveProfile({ xp: (loadProfile()?.xp ?? 0) + XP_SESSION })
-      setEarned(XP_SESSION)
+      // Diamond booster from the shop doubles this session's reward.
+      const boost = loadProfile()?.boost ?? 0, gain = boost > 0 ? XP_SESSION * 2 : XP_SESSION
+      saveProfile({ xp: (loadProfile()?.xp ?? 0) + gain, ...(boost > 0 ? { boost: boost - 1 } : {}) })
+      setEarned(gain)
       if (loadProfile()?.chime ?? true) playGameSound('success')
       setStage('done')
     }

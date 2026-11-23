@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { X } from 'lucide-react'
+import { Check, X } from 'lucide-react'
 import { IcoGem, IcoTrain } from './CartoonIcons'
 import { loadProfile, saveProfile } from '../lib/profile'
 import { playGameSound } from '../lib/gameAudio'
 import { useCompleted } from '../lib/progress'
 import { L } from '../lib/i18n'
+const sound = (k: 'tap' | 'success' | 'streak') => { if (loadProfile()?.chime ?? true) playGameSound(k) }
 
 // Full-screen diamonds view: balance plus the ways to earn more, each one tappable.
 export function BigGem({ size = 120 }: { size?: number }) {
@@ -33,13 +34,25 @@ export default function DiamondsView({ onClose }: { onClose: () => void }) {
   const { current, doneToday } = useCompleted()
   const [closing, setClosing] = useState(false)
   const [, bump] = useState(0)
-  const profile = loadProfile(), xp = profile?.xp ?? 0, freezes = profile?.freezes ?? 0
-  const canBuy = xp >= FREEZE_PRICE && freezes < FREEZE_MAX
-  const buy = () => {
-    if (!canBuy) return
-    saveProfile({ xp: xp - FREEZE_PRICE, freezes: freezes + 1 })
+  const profile = loadProfile(), xp = profile?.xp ?? 0, freezes = profile?.freezes ?? 0, boost = profile?.boost ?? 0
+  const [confirm, setConfirm] = useState<ShopItem | null>(null)
+  const [bought, setBought] = useState('')
+  const items: ShopItem[] = [
+    { key: 'freeze', price: 50, icon: <FreezeIcon />, owned: freezes, max: FREEZE_MAX,
+      name: L('Serienschutz', 'Phao giữ chuỗi'), note: L('Hält deine Serie, wenn du einen Tag verpasst.', 'Giữ chuỗi khi bạn lỡ nghỉ 1 ngày.'),
+      apply: () => saveProfile({ freezes: freezes + 1 }) },
+    { key: 'freeze3', price: 120, icon: <FreezeIcon />, badge: '×3',
+      name: L('Serienschutz-Paket', 'Gói 3 phao'), note: L('Drei auf einmal, günstiger.', 'Mua 3 phao, rẻ hơn.'), disabled: freezes >= FREEZE_MAX,
+      apply: () => saveProfile({ freezes: Math.min(FREEZE_MAX, freezes + 3) }) },
+    { key: 'boost', price: 40, icon: <BoostIcon />, owned: boost,
+      name: L('Doppel-Diamanten', 'Nhân đôi kim cương'), note: L('Die nächste Minute bringt doppelt so viele Diamanten.', 'Buổi tập tới được gấp đôi kim cương.'),
+      apply: () => saveProfile({ boost: boost + 1 }) },
+  ]
+  const doBuy = (it: ShopItem) => {
+    if (xp < it.price) return
+    saveProfile({ xp: xp - it.price }); it.apply()
     if (profile?.chime ?? true) playGameSound('success')
-    bump(n => n + 1)
+    setConfirm(null); setBought(it.key); setTimeout(() => setBought(''), 1600); bump(n => n + 1)
   }
   useEffect(() => { const h = document.documentElement, o = h.style.overflow; h.style.overflow = 'hidden'; return () => { h.style.overflow = o } }, [])
   const close = (then?: () => void) => { setClosing(true); setTimeout(() => { onClose(); then?.() }, 260) }
@@ -66,12 +79,40 @@ export default function DiamondsView({ onClose }: { onClose: () => void }) {
       </ul>
       <section className="shop">
         <h2 className="shop-title">{L('Shop', 'Cửa hàng')}</h2>
-        <div className="shop-item">
-          <div className="shop-art"><FreezeIcon />{freezes > 0 && <span className="shop-owned">×{freezes}</span>}</div>
-          <div className="flex-1"><b className="block text-lg">{L('Serienschutz', 'Phao giữ chuỗi')}</b></div>
-          <button type="button" className="shop-buy" disabled={!canBuy} onClick={buy} aria-label={L(`Für ${FREEZE_PRICE} Diamanten kaufen`, `Mua với ${FREEZE_PRICE} kim cương`)}><IcoGem size={20} />{FREEZE_PRICE}</button>
-        </div>
+        {items.map(it => {
+          const full = it.max !== undefined && (it.owned ?? 0) >= it.max
+          return <div key={it.key} className={`shop-item ${bought === it.key ? 'bought' : ''}`}>
+            <div className="shop-art">{it.icon}{it.badge && <span className="shop-badge">{it.badge}</span>}{!!it.owned && !it.badge && <span className="shop-owned">×{it.owned}</span>}</div>
+            <div className="flex-1"><b className="block text-lg leading-5">{it.name}</b><span className="text-sm text-slate-600">{it.note}</span></div>
+            <button type="button" className="shop-buy" disabled={xp < it.price || full || it.disabled} onClick={() => { sound('tap'); setConfirm(it) }} aria-label={L(`Für ${it.price} Diamanten kaufen`, `Mua với ${it.price} kim cương`)}>
+              {bought === it.key ? <Check size={22} strokeWidth={3} /> : full ? <Check size={20} strokeWidth={3} /> : <><IcoGem size={18} />{it.price}</>}
+            </button>
+          </div>
+        })}
       </section>
     </div>
+    {confirm && <div className="confirm-backdrop" onClick={() => setConfirm(null)}>
+      <div className="confirm-box" role="dialog" aria-label={confirm.name} onClick={e => e.stopPropagation()}>
+        <div className="confirm-art">{confirm.icon}</div>
+        <b className="text-xl">{confirm.name}</b>
+        <p className="text-base text-slate-600">{confirm.note}</p>
+        <p className="confirm-price"><IcoGem size={24} />{confirm.price}</p>
+        <div className="confirm-actions">
+          <button type="button" className="confirm-no" onClick={() => setConfirm(null)}>{L('Abbrechen', 'Huỷ')}</button>
+          <button type="button" className="confirm-yes" disabled={xp < confirm.price} onClick={() => doBuy(confirm)}>{L('Kaufen', 'Mua')}</button>
+        </div>
+      </div>
+    </div>}
   </div>
+}
+
+type ShopItem = { key: string; price: number; icon: ReactNode; name: string; note: string; owned?: number; max?: number; badge?: string; disabled?: boolean; apply: () => void }
+
+function BoostIcon() {
+  return <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+    <ellipse cx="24" cy="43" rx="12" ry="2.5" fill="#0b4a54" opacity=".18" />
+    <path d="M24 3c7 5 11 12 11 20a11 11 0 0 1-22 0c0-5 2-9 4-12 0 4 2 6 4 5 2-3 0-8 3-13z" fill="#ffb627" stroke="#e0a000" strokeWidth="2" strokeLinejoin="round" />
+    <path d="M24 16c3 3 5 7 5 10a5 5 0 0 1-10 0c0-3 2-6 5-10z" fill="#ff7a59" />
+    <path d="M20 38h8l-2 7h-4z" fill="#5fd3ff" stroke="#0ea5e9" strokeWidth="1.5" strokeLinejoin="round" />
+  </svg>
 }

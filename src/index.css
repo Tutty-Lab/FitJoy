@@ -714,3 +714,32 @@ body {
 .ladder-page .ladder-hero{flex-shrink:0}
 .ladder-page .ladder-list{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
 .ladder-page .ladder-list::-webkit-scrollbar{display:none}
+
+/* Lucky wheel: centered on a blurred backdrop, not a bottom sheet */
+.wheel-overlay{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(11,74,84,.4);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);animation:sb-fade .3s ease-out both}
+.wheel-stage-center{position:relative;width:100%;max-width:360px;display:flex;flex-direction:column;align-items:center;animation:wheel-pop .4s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes wheel-pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+.wheel-close{position:absolute;right:-4px;top:-48px;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.2);color:#fff}
+.wheel-overlay .reward-stage{min-height:0;padding:0}
+@media (prefers-reduced-motion:reduce){.wheel-overlay,.wheel-stage-center{animation:none!important}}
+
+/* Shop: multiple items + buy confirm */
+.shop{display:flex;flex-direction:column;gap:12px}
+.shop-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:22px;background:#f4f8f8;box-shadow:0 4px 0 #dde8e8;transition:transform .2s}
+.shop-item.bought{animation:pop-up .5s ease-out}
+.shop-art{position:relative;display:grid;place-items:center;width:58px;height:58px;border-radius:16px;background:#e8f8ff;flex-shrink:0}
+.shop-badge,.shop-owned{position:absolute;right:-5px;bottom:-5px;padding:1px 7px;border-radius:999px;background:#13707e;color:#fff;font-weight:900;font-size:13px}
+.shop-badge{background:#ff7a59}
+.shop-buy{display:flex;align-items:center;gap:4px;min-width:74px;height:46px;justify-content:center;border:0;border-radius:15px;background:linear-gradient(#5fd3ff,#0ea5e9);color:#fff;font-weight:900;font-size:17px;box-shadow:0 4px 0 #0577ad;flex-shrink:0}
+.shop-buy:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #0577ad}
+.shop-buy:disabled{background:#cbd5e1;box-shadow:0 4px 0 #94a3b8}
+.confirm-backdrop{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(11,74,84,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:sb-fade .25s ease-out both}
+.confirm-box{width:100%;max-width:320px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:24px 20px;border-radius:28px;background:#fff;box-shadow:0 12px 30px rgba(11,74,84,.3);animation:wheel-pop .35s cubic-bezier(.2,1.3,.4,1) both}
+.confirm-art{display:grid;place-items:center;width:84px;height:84px;border-radius:22px;background:#e8f8ff;margin-bottom:4px}
+.confirm-price{display:flex;align-items:center;gap:5px;font-size:26px;font-weight:900;color:#0ea5e9}
+.confirm-actions{display:flex;gap:10px;width:100%;margin-top:10px}
+.confirm-no,.confirm-yes{flex:1;height:52px;border:0;border-radius:16px;font-weight:900;font-size:17px}
+.confirm-no{background:#eef2f2;color:#475569;box-shadow:0 4px 0 #d5e0e0}
+.confirm-yes{background:linear-gradient(#5fd3ff,#0ea5e9);color:#fff;box-shadow:0 4px 0 #0577ad}
+.confirm-no:active,.confirm-yes:active:not(:disabled){transform:translateY(3px)}
+.confirm-yes:disabled{background:#cbd5e1;box-shadow:0 4px 0 #94a3b8}

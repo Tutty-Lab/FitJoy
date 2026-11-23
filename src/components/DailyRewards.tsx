@@ -51,9 +51,9 @@ export default function DailyRewards() {
         <Ladder doneToday={doneToday} onWin={() => bump(n => n + 1)} />
       </div>
     </div>}
-    {open === 'wheel' && <div className="day-sheet-backdrop" onClick={close}>
-      <div className="day-sheet reward-sheet" role="dialog" aria-label={L('Glücksrad', 'Vòng quay may mắn')} onClick={e => e.stopPropagation()}>
-        <button type="button" aria-label={L('Schließen', 'Đóng')} onClick={close} className="reward-close"><X size={26} strokeWidth={2.8} /></button>
+    {open === 'wheel' && <div className="wheel-overlay" onClick={close}>
+      <div className="wheel-stage-center" role="dialog" aria-label={L('Glücksrad', 'Vòng quay may mắn')} onClick={e => e.stopPropagation()}>
+        <button type="button" aria-label={L('Schließen', 'Đóng')} onClick={close} className="wheel-close"><X size={28} strokeWidth={2.8} /></button>
         <Wheel onWin={() => bump(n => n + 1)} />
       </div>
     </div>}
