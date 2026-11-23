@@ -743,3 +743,7 @@ body {
 .confirm-yes{background:linear-gradient(#5fd3ff,#0ea5e9);color:#fff;box-shadow:0 4px 0 #0577ad}
 .confirm-no:active,.confirm-yes:active:not(:disabled){transform:translateY(3px)}
 .confirm-yes:disabled{background:#cbd5e1;box-shadow:0 4px 0 #94a3b8}
+
+/* Smart tutorial: compact reminder for experienced users */
+.reminder-card{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:24px;background:#f0f9f8;border:0;box-shadow:0 4px 0 #d7ecea}
+.reminder-toggle{align-self:flex-start;background:none;border:0;padding:4px 0;color:#13707e;font-weight:800;font-size:15px;text-decoration:underline}

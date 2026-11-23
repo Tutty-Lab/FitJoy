@@ -63,6 +63,9 @@ export default function WorkoutDetail() {
   const bonus = localBonusFor(day)
   const [stage, setStage] = useState<Stage>('instructions')
   const [skipBonus, setSkipBonus] = useState(false)
+  const [showSteps, setShowSteps] = useState(false)
+  // Smart tutorial: full step-by-step for the first ~3 days, a compact reminder with an optional expander afterwards.
+  const guided = (loadProfile()?.lessonCompletions ?? []).length < 9
   const [remaining, setRemaining] = useState(PRACTICE_SECONDS)
   const [running, setRunning] = useState(false)
   const [exitOpen, setExitOpen] = useState(false)
@@ -174,15 +177,20 @@ export default function WorkoutDetail() {
           {chat.map((m, i) => <p key={i} style={{ animationDelay: `${i * 0.35}s` }} className={`chat-line ${m.me ? 'me' : ''} ${m.who === 'p' ? 'pip' : ''}`}>{m.who === 'p' && <img src="/map/seagull.webp" alt="Pip" className="chat-pip" />}{m.text}</p>)}
         </div></div>
       </>}
-      {intro_ === 1 && <>
+      {intro_ === 0 && !guided && <div className="reminder-card">
+        <div className="flex items-center gap-3"><Vestibu mood="encourage" className="w-12 shrink-0" /><div><b className="block text-lg">{baseText.title}</b><span className="text-[15px] text-slate-600">{baseText.steps[0]}</span></div></div>
+        <button type="button" className="reminder-toggle" aria-expanded={showSteps} onClick={() => setShowSteps(v => !v)}>{showSteps ? L('Anleitung ausblenden', 'Ẩn hướng dẫn') : L('Ganze Anleitung ansehen', 'Xem đầy đủ hướng dẫn')}</button>
+        {showSteps && <ol className="mt-1 flex flex-col gap-2">{baseText.steps.map((s, i) => <li key={i} className="duo-step"><b>{i + 1}</b><span>{s}</span></li>)}</ol>}
+      </div>}
+      {intro_ === 1 && guided && <>
         <h2 className="text-2xl font-black">{L('So geht die Übung', 'Cách tập')}</h2>
         <ol className="flex flex-col gap-2">{baseText.steps.map((s, i) => <li key={i} className="duo-step"><b>{i + 1}</b><span>{s}</span></li>)}</ol>
       </>}
-      {intro_ === 2 && <>
+      {intro_ === 2 && guided && <>
         <Talk text={L('Sprich diesen Satz laut, während du die Position hältst.', 'Hãy đọc to câu này khi giữ tư thế nhé.')} mood="encourage" />
         <Affirmation big />
       </>}
-      {intro_ < 2
+      {guided && intro_ < 2
         ? <button type="button" className={`${primary} intro-cta`} onClick={() => setIntro(intro_ + 1)}>{L('Weiter', 'Tiếp tục')}</button>
         : <button type="button" className={`${primary} intro-cta`} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>}
     </section>}
