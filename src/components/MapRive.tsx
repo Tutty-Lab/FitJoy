@@ -1,35 +1,32 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
-import type { Region } from '../data/story'
 
-// Rive overlay layer for the adventure map (Duolingo-style animated objects).
+// Rive overlay layer for the adventure map.
 //
-// HOW TO ADD AN OBJECT
-// 1. Drop a .riv file into  public/rive/  (e.g. public/rive/harbor-cat.riv).
-// 2. Add an entry below. x/y are percent positions on the map (same frame as the
-//    hotspots); w/h are pixels. Set stateMachine to the file's state machine so it
-//    animates and reacts to taps; many Rive files react to pointer on their own.
+// Only on-theme, transparent (no background) objects belong here – a gentle app
+// for older adults, so no random mascots/logos/vehicles. Free official Rive repos
+// barely have anything that fits, so for now this is just a small bird companion;
+// proper themed objects (a steaming kettle, a cat by the fire, ducks on the pond)
+// need to be authored in the Rive editor and dropped into public/rive/.
 //
-// The map stacks every chapter, so each object only mounts a Rive canvas while it
-// is scrolled into view (IntersectionObserver) and the runtime chunk only loads
-// when a region actually has objects — keeping it light on older devices.
+// Objects are keyed by chapter so nothing is ever repeated on the same screen.
+// Each only mounts its Rive canvas while scrolled into view (IntersectionObserver).
 export type RiveObj = {
-  region: Region['id']
+  chapter: number
   x: number; y: number; w: number; h: number
   src: string
   stateMachine?: string
   trigger?: string
 }
 
+const S = (chapter: number, x: number, y: number, w: number, src: string, stateMachine?: string): RiveObj =>
+  ({ chapter, x, y, w, h: w, src: `/rive/${src}.riv`, stateMachine })
+
 export const RIVE_OBJECTS: RiveObj[] = [
-  { region: 'harbor', x: 78, y: 30, w: 104, h: 104, src: '/rive/birb.riv', stateMachine: 'birb' },
-  { region: 'harbor', x: 74, y: 72, w: 72, h: 72, src: '/rive/little_machine.riv', stateMachine: 'State Machine 1' },
-  { region: 'forest', x: 80, y: 46, w: 104, h: 104, src: '/rive/birb.riv', stateMachine: 'birb' },
-  { region: 'lighthouse', x: 72, y: 40, w: 104, h: 104, src: '/rive/birb.riv', stateMachine: 'birb' },
+  S(0, 82, 22, 100, 'birb', 'birb'),
 ]
 
 const RiveObject = lazy(() => import('./RiveObject'))
 
-// Renders the heavy Rive canvas only while the object is near the viewport.
 function RiveGate({ obj, flip }: { obj: RiveObj; flip: boolean }) {
   const ref = useRef<HTMLDivElement>(null)
   const [near, setNear] = useState(false)
@@ -48,8 +45,8 @@ function RiveGate({ obj, flip }: { obj: RiveObj; flip: boolean }) {
   )
 }
 
-export default function MapRive({ region, flip }: { region: Region['id']; flip: boolean }) {
-  const objs = RIVE_OBJECTS.filter(o => o.region === region)
+export default function MapRive({ chapter, flip }: { chapter: number; flip: boolean }) {
+  const objs = RIVE_OBJECTS.filter(o => o.chapter === chapter)
   if (!objs.length) return null
   return (
     <div className="map-rive-layer">
