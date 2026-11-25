@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { useRive, useStateMachineInput } from '@rive-app/react-canvas'
 import type { RiveObj } from './MapRive'
 
-// One Rive animation placed over the map. Tapping fires its state-machine trigger
-// (if the .riv defines one). If the file is missing or fails to load, nothing shows.
-export default function RiveObject({ obj, flip }: { obj: RiveObj; flip: boolean }) {
+// One Rive animation that fills its (already positioned) gate box. Rive attaches
+// its own pointer listeners, so hover/press interactions in the file just work;
+// if the file also exposes a named trigger, tapping fires it too. A missing or
+// broken file renders nothing.
+export default function RiveObject({ obj }: { obj: RiveObj }) {
   const [ok, setOk] = useState(true)
   const sm = obj.stateMachine
   const { rive, RiveComponent } = useRive({
@@ -15,15 +17,10 @@ export default function RiveObject({ obj, flip }: { obj: RiveObj; flip: boolean 
   })
   const input = useStateMachineInput(rive, sm, obj.trigger)
   if (!ok) return null
-  const left = flip ? 100 - obj.x : obj.x
   return (
-    <div
-      className="map-rive"
-      style={{ left: `${left}%`, top: `${obj.y}%`, width: obj.w, height: obj.h, transform: `translate(-50%,-50%)${flip ? ' scaleX(-1)' : ''}` }}
-      onClick={() => input?.fire()}
-      role={obj.trigger ? 'button' : undefined}
-    >
-      <RiveComponent />
-    </div>
+    <RiveComponent
+      style={{ width: '100%', height: '100%' }}
+      onClick={obj.trigger ? () => input?.fire() : undefined}
+    />
   )
 }

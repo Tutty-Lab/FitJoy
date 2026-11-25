@@ -99,7 +99,8 @@
 .pl-bob{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#ffe49a 60%,transparent 72%);box-shadow:0 0 10px 3px #ffe49a66;animation:pl-bob-glint 3.4s ease-in-out infinite}
 @keyframes pl-bob-glint{0%,100%{transform:translateY(0) scale(.9);opacity:.5}50%{transform:translateY(-7px) scale(1.1);opacity:1}}
 .map-rive-layer{position:absolute;inset:0;pointer-events:none;z-index:2}
-.map-rive{position:absolute;pointer-events:auto;cursor:pointer}
+.map-rive{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;filter:drop-shadow(0 4px 6px rgba(0,0,0,.28))}
+.map-rive canvas{display:block;width:100%;height:100%}
 .adventure-node.now{animation:pl-bounce 1.8s ease-in-out infinite}
 @keyframes pl-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @media(prefers-reduced-motion:reduce){.painted-life{display:none}.adventure-node.now{animation:none}}
