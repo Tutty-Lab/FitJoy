@@ -15,8 +15,7 @@ export default function MapJoin({from,to}:{from:Region['id'];to:Region['id']}) {
       <linearGradient id={`${id}-fade`} x2="0" y2="1"><stop stopColor="white" stopOpacity="0"/><stop offset=".22" stopColor="white"/><stop offset=".65" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient>
       <mask id={`${id}-mask`}><rect width="400" height="385" fill={`url(#${id}-fade)`}/></mask>
     </defs>
-    <path d={path} stroke="#e9bf77" strokeWidth="40" fill="none"/>
-    <path d={path} stroke="#ffdf9c" strokeWidth="32" fill="none"/>
-    <path d={path} stroke="#fff0bd" strokeWidth="3" strokeDasharray="2 14" strokeLinecap="round" fill="none"/>
+    <path d={path} stroke="#5a4634" strokeWidth="7" strokeDasharray="0.5 20" strokeLinecap="round" opacity=".28" fill="none" transform="translate(0 2)"/>
+    <path d={path} stroke="#fff6e4" strokeWidth="5" strokeDasharray="0.5 20" strokeLinecap="round" opacity=".9" fill="none"/>
   </svg>
 }

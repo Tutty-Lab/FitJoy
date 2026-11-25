@@ -20,7 +20,9 @@ export default function AdventureMap({chapter,current,statusOf,onPick,region,res
     <div className="adventure-water">
       {painted ? <svg viewBox="0 0 400 1200" className="adventure-scenery" aria-hidden="true">
         <image href={`/map/${region.id}.webp`} x="0" y="0" width="400" height="1200" preserveAspectRatio="xMidYMid slice" transform={chapter%2 ? 'translate(400 0) scale(-1 1)' : undefined} />
-        {/* No road: the scene speaks for itself; stops sit directly on it. */}
+        {/* No road band – just a faint dotted trail linking the day stops. */}
+        <path d={road} fill="none" stroke="#5a4634" strokeWidth="7" strokeDasharray="0.5 20" strokeLinecap="round" opacity=".28" transform="translate(0 2)" />
+        <path d={road} fill="none" stroke="#fff6e4" strokeWidth="5" strokeDasharray="0.5 20" strokeLinecap="round" opacity=".9" />
       </svg> : <svg viewBox="0 0 400 1200" className="adventure-scenery" aria-hidden="true">
         {region.id !== 'harbor' ? <RegionScenery region={region.id} restored={restored} /> : <>
         <rect width="400" height="1200" fill="#a4e4e9" />
