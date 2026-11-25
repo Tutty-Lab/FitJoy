@@ -88,6 +88,18 @@
 .pl-cloud{position:relative;display:block;width:42%;opacity:.55;animation:pl-drift 55s linear infinite}
 .pl-cloud-b{width:32%;opacity:.45;animation-duration:75s}
 @keyframes pl-drift{from{left:-45%}to{left:110%}}
+/* Scene-anchored living accents */
+.pl-steam{width:14px;height:42px;transform:translate(-50%,-100%)}
+.pl-steam i{position:absolute;bottom:0;left:50%;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle,#ffffffcc,#ffffff00 70%);opacity:0;animation:pl-steam-rise 3.6s ease-in infinite}
+.pl-steam i:nth-child(2){left:36%;animation-delay:1.2s}
+.pl-steam i:nth-child(3){left:64%;animation-delay:2.4s}
+@keyframes pl-steam-rise{0%{opacity:0;transform:translate(-50%,0) scale(.5)}22%{opacity:.5}100%{opacity:0;transform:translate(-50%,-38px) scale(1.6)}}
+.pl-dust{width:5px;height:5px;border-radius:50%;background:#fff3c8;box-shadow:0 0 6px 2px #ffeeb055;opacity:0;animation:pl-dust-float 7.5s ease-in-out infinite}
+@keyframes pl-dust-float{0%,100%{opacity:0;transform:translate(0,0)}20%{opacity:.8}50%{opacity:.5;transform:translate(11px,-15px)}80%{opacity:.3;transform:translate(-6px,-27px)}}
+.pl-bob{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#ffe49a 60%,transparent 72%);box-shadow:0 0 10px 3px #ffe49a66;animation:pl-bob-glint 3.4s ease-in-out infinite}
+@keyframes pl-bob-glint{0%,100%{transform:translateY(0) scale(.9);opacity:.5}50%{transform:translateY(-7px) scale(1.1);opacity:1}}
+.map-rive-layer{position:absolute;inset:0;pointer-events:none;z-index:2}
+.map-rive{position:absolute;pointer-events:auto;cursor:pointer}
 .adventure-node.now{animation:pl-bounce 1.8s ease-in-out infinite}
 @keyframes pl-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @media(prefers-reduced-motion:reduce){.painted-life{display:none}.adventure-node.now{animation:none}}

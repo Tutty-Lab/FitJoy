@@ -1,5 +1,6 @@
 import PaintedLife from './PaintedLife'
 import MapHotspots from './MapHotspots'
+import MapRive from './MapRive'
 import { sessionsDone } from '../lib/progress'
 import MapLife, { useMapMotion } from './MapLife'
 import RegionScenery, { adventurePoints } from './RegionScenery'
@@ -52,6 +53,7 @@ export default function AdventureMap({chapter,current,statusOf,onPick,region,res
         </>}
       </svg>}
       {painted ? <PaintedLife region={region.id} flip={chapter%2===1}/> : <MapLife region={region.id}/>}
+      {painted && <MapRive region={region.id} flip={chapter%2===1} />}
       {painted && <MapHotspots region={region.id} flip={chapter%2===1} />}
       {points.map(([x,y],i)=>{
         const day=chapter*10+i+1,status=statusOf(day),now=day===current,mins=sessionsDone(day),partial=status==='completed'&&mins>0&&mins<3
