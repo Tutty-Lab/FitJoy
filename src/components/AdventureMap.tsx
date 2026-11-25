@@ -15,14 +15,13 @@ const land = 'M45 158Q51 102 122 127Q144 82 207 107Q244 58 305 113Q371 115 369 1
 export default function AdventureMap({chapter,current,statusOf,onPick,region,restored}:{chapter:number;current:number;statusOf:(day:number)=>string;onPick:(day:number,status:string)=>void;region:Region;restored:number}) {
   const motionRef=useMapMotion()
   const road=points.reduce((path,[x,y],i)=>i===0?`M${x} ${y}`:`${path} C${points[i-1][0]} ${y-47} ${x} ${points[i-1][1]+47} ${x} ${y}`,'')
-  return <section ref={motionRef} data-moving="false" className={`adventure-map adventure-${region.id}`} aria-label={L('Dein Inselweg', 'Hành trình trên đảo')}>
+  return <section ref={motionRef} data-moving="false" className={`adventure-map detail adventure-${region.id}`} aria-label={L('Dein Inselweg', 'Hành trình trên đảo')}>
     <div className="adventure-water">
       {painted ? <svg viewBox="0 0 400 1200" className="adventure-scenery" aria-hidden="true">
         <image href={`/map/${region.id}.webp`} x="0" y="0" width="400" height="1200" preserveAspectRatio="xMidYMid slice" transform={chapter%2 ? 'translate(400 0) scale(-1 1)' : undefined} />
-        <path d={road} fill="none" stroke="#00000022" strokeWidth="48" strokeLinecap="round" transform="translate(0 6)" />
-        <path d={road} fill="none" stroke="#e9bf77" strokeWidth="40" strokeLinecap="round" />
-        <path d={road} fill="none" stroke="#ffdf9c" strokeWidth="32" strokeLinecap="round" />
-        <path d={road} fill="none" stroke="#fff0bd" strokeWidth="3" strokeDasharray="2 14" strokeLinecap="round" />
+        {/* Style B: faint haloed dotted trail instead of a thick road, so scene details stay visible. */}
+        <path d={road} fill="none" stroke="#0b1e2e55" strokeWidth="11" strokeDasharray="0.1 20" strokeLinecap="round" />
+        <path d={road} fill="none" stroke="#fffdf3" strokeWidth="6" strokeDasharray="0.1 20" strokeLinecap="round" />
       </svg> : <svg viewBox="0 0 400 1200" className="adventure-scenery" aria-hidden="true">
         {region.id !== 'harbor' ? <RegionScenery region={region.id} restored={restored} /> : <>
         <rect width="400" height="1200" fill="#a4e4e9" />
