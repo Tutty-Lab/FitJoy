@@ -147,7 +147,7 @@ export default function MapHotspots({ region, flip }: { region: Region['id']; fl
   const [open, setOpen] = useState<number | null>(null)
   const spots = HOTSPOTS[region] ?? []
   const tap = (i: number) => {
-    if (loadProfile()?.chime ?? true) playGameSound('tap')
+    if (loadProfile()?.chime ?? true) playGameSound('sparkle')
     setOpen(i)
   }
   const active = open != null ? spots[open] : null
