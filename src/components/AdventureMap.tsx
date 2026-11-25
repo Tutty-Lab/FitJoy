@@ -1,4 +1,5 @@
 import PaintedLife from './PaintedLife'
+import MapHotspots from './MapHotspots'
 import { sessionsDone } from '../lib/progress'
 import MapLife, { useMapMotion } from './MapLife'
 import RegionScenery, { adventurePoints } from './RegionScenery'
@@ -19,9 +20,7 @@ export default function AdventureMap({chapter,current,statusOf,onPick,region,res
     <div className="adventure-water">
       {painted ? <svg viewBox="0 0 400 1200" className="adventure-scenery" aria-hidden="true">
         <image href={`/map/${region.id}.webp`} x="0" y="0" width="400" height="1200" preserveAspectRatio="xMidYMid slice" transform={chapter%2 ? 'translate(400 0) scale(-1 1)' : undefined} />
-        {/* Style B: faint haloed dotted trail instead of a thick road, so scene details stay visible. */}
-        <path d={road} fill="none" stroke="#0b1e2e55" strokeWidth="11" strokeDasharray="0.1 20" strokeLinecap="round" />
-        <path d={road} fill="none" stroke="#fffdf3" strokeWidth="6" strokeDasharray="0.1 20" strokeLinecap="round" />
+        {/* No road: the scene speaks for itself; stops sit directly on it. */}
       </svg> : <svg viewBox="0 0 400 1200" className="adventure-scenery" aria-hidden="true">
         {region.id !== 'harbor' ? <RegionScenery region={region.id} restored={restored} /> : <>
         <rect width="400" height="1200" fill="#a4e4e9" />
@@ -51,6 +50,7 @@ export default function AdventureMap({chapter,current,statusOf,onPick,region,res
         </>}
       </svg>}
       {painted ? <PaintedLife region={region.id} flip={chapter%2===1}/> : <MapLife region={region.id}/>}
+      {painted && <MapHotspots region={region.id} flip={chapter%2===1} />}
       {points.map(([x,y],i)=>{
         const day=chapter*10+i+1,status=statusOf(day),now=day===current,mins=sessionsDone(day),partial=status==='completed'&&mins>0&&mins<3
         return <div className={`adventure-stop ${now?'is-current':''}`} key={day} style={{left:`${x/width*100}%`,top:`${y/1200*100}%`}}>
