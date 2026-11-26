@@ -13,7 +13,7 @@ import { loadProfile, saveProfile } from '../../lib/profile'
 import { episodeFor, regionFor } from '../../data/story'
 import { type Who } from '../../data/storyDialog'
 import { phaseTitle, storyIntro } from '../../data/storyDays'
-import { Flame, Gem } from 'lucide-react'
+import { Flame, Gem, ChevronDown } from 'lucide-react'
 import poster from '../../assets/home/vestibu-welcome.png'
 import { L, lang } from '../../lib/i18n'
 import { clayPrimary, claySecondary } from '../../components/clay'
@@ -178,9 +178,14 @@ export default function WorkoutDetail() {
         </div></div>
       </>}
       {intro_ === 0 && !guided && <div className="reminder-card">
-        <div className="flex items-center gap-3"><Vestibu mood="encourage" className="w-12 shrink-0" /><div><b className="block text-lg">{baseText.title}</b><span className="text-[15px] text-slate-600">{baseText.steps[0]}</span></div></div>
-        <button type="button" className="reminder-toggle" aria-expanded={showSteps} onClick={() => setShowSteps(v => !v)}>{showSteps ? L('Anleitung ausblenden', 'Ẩn hướng dẫn') : L('Ganze Anleitung ansehen', 'Xem đầy đủ hướng dẫn')}</button>
-        {showSteps && <ol className="mt-1 flex flex-col gap-2">{baseText.steps.map((s, i) => <li key={i} className="duo-step"><b>{i + 1}</b><span>{s}</span></li>)}</ol>}
+        <span className="reminder-eyebrow">{L('Deine Übung', 'Bài tập')}</span>
+        <b className="reminder-title">{baseText.title}</b>
+        {!showSteps && <p className="reminder-lead">{baseText.steps[0]}</p>}
+        <button type="button" className="reminder-toggle" aria-expanded={showSteps} onClick={() => setShowSteps(v => !v)}>
+          <span>{showSteps ? L('Anleitung ausblenden', 'Ẩn hướng dẫn') : L('Ganze Anleitung ansehen', 'Xem đầy đủ hướng dẫn')}</span>
+          <ChevronDown size={18} className={`reminder-chev ${showSteps ? 'open' : ''}`} />
+        </button>
+        {showSteps && <ol className="reminder-steps">{baseText.steps.map((s, i) => <li key={i} className="duo-step"><b>{i + 1}</b><span>{s}</span></li>)}</ol>}
       </div>}
       {intro_ === 1 && guided && <>
         <h2 className="text-2xl font-black">{L('So geht die Übung', 'Cách tập')}</h2>
