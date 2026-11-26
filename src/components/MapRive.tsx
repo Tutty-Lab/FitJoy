@@ -22,7 +22,7 @@ const S = (chapter: number, x: number, y: number, w: number, src: string, stateM
   ({ chapter, x, y, w, h: w, src: `/rive/${src}.riv`, stateMachine })
 
 export const RIVE_OBJECTS: RiveObj[] = [
-  S(0, 82, 22, 100, 'birb', 'birb'),
+  // Cleared – themed transparent PNG objects (ElevenLabs/Seedream) drive the map now.
 ]
 
 const RiveObject = lazy(() => import('./RiveObject'))

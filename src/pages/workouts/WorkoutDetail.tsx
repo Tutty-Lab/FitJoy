@@ -23,6 +23,8 @@ type Stage = 'instructions' | 'practice' | 'done' | 'bonus' | 'bonusDone'
 // 05a instructions → 05b 60-second practice → 05c congratulations + bonus question → 06 bonus.
 const XP_SESSION = 10
 const XP_BONUS = 5
+// Highest day that already has a dedicated scene at /story/day{n}.webp; later days fall back to a map crop until their scene is generated.
+const STORY_SCENES = 20
 
 function Talk({ text, mood }: { text: string; mood: 'wave' | 'encourage' | 'celebrate' }) {
   return <div className="flex items-end gap-3"><Vestibu mood={mood} className="w-24 shrink-0" /><p className="game-speech flex-1 font-bold leading-6">{text}</p></div>
@@ -170,7 +172,7 @@ export default function WorkoutDetail() {
 
     {stage === 'instructions' && <section key={intro_} className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
       {intro_ === 0 && <>
-        <div className="story-scene" style={{ backgroundImage: `url(${day <= 3 ? `/story/day${day}.webp` : `/map/${regionFor(day).id}.webp`})` }}>
+        <div className="story-scene" style={{ backgroundImage: `url(${day <= STORY_SCENES ? `/story/day${day}.webp` : `/map/${regionFor(day).id}.webp`})` }}>
           <span className="story-scene-title">{phaseTitle(day)}</span>
         </div>
         <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
