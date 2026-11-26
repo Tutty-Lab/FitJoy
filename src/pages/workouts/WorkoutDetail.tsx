@@ -24,7 +24,7 @@ type Stage = 'instructions' | 'practice' | 'done' | 'bonus' | 'bonusDone'
 const XP_SESSION = 10
 const XP_BONUS = 5
 // Highest day that already has a dedicated scene at /story/day{n}.webp; later days fall back to a map crop until their scene is generated.
-const STORY_SCENES = 30
+const STORY_SCENES = 40
 
 function Talk({ text, mood }: { text: string; mood: 'wave' | 'encourage' | 'celebrate' }) {
   return <div className="flex items-end gap-3"><Vestibu mood={mood} className="w-24 shrink-0" /><p className="game-speech flex-1 font-bold leading-6">{text}</p></div>
