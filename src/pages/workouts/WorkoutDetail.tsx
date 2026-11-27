@@ -1,3 +1,4 @@
+import SessionCoach, { coachCopy } from '../../components/SessionCoach'
 import BackArrow from '../../components/BackArrow'
 import ExitMinuteDialog from '../../components/ExitMinuteDialog'
 import { StoryBeat } from '../../components/StoryReward'
@@ -18,7 +19,7 @@ import poster from '../../assets/home/vestibu-welcome.png'
 import { L, lang } from '../../lib/i18n'
 import { clayPrimary, claySecondary } from '../../components/clay'
 
-type Stage = 'instructions' | 'practice' | 'done' | 'bonus' | 'bonusDone'
+type Stage = 'instructions' | 'practice' | 'done' | 'bonusOffer' | 'story' | 'bonus' | 'bonusDone'
 
 // 05a instructions → 05b 60-second practice → 05c congratulations + bonus question → 06 bonus.
 const XP_SESSION = 10
@@ -172,14 +173,16 @@ export default function WorkoutDetail() {
 
     {stage === 'instructions' && <section key={intro_} className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
       {intro_ === 0 && <>
+        <SessionCoach session={session} moment="ready" compact />
         <div className="story-scene" style={{ backgroundImage: `url(${day <= STORY_SCENES ? `/story/day${day}.webp` : `/map/${regionFor(day).id}.webp`})` }}>
           <span className="story-scene-title">{phaseTitle(day)}</span>
         </div>
-        <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
+        <div className="flex items-start gap-2"><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
           {chat.map((m, i) => <p key={i} style={{ animationDelay: `${i * 0.35}s` }} className={`chat-line ${m.me ? 'me' : ''} ${m.who === 'p' ? 'pip' : ''}`}>{m.who === 'p' && <img src="/map/seagull.webp" alt="Pip" className="chat-pip" />}{m.text}</p>)}
         </div></div>
       </>}
-      {intro_ === 0 && !guided && <div className="reminder-card">
+      {intro_ === 1 && !guided && <div className="reminder-card">
+        <SessionCoach session={session} moment="guide" />
         <span className="reminder-eyebrow">{L('Deine Übung', 'Bài tập')}</span>
         <b className="reminder-title">{baseText.title}</b>
         {!showSteps && <p className="reminder-lead">{baseText.steps[0]}</p>}
@@ -190,6 +193,7 @@ export default function WorkoutDetail() {
         {showSteps && <ol className="reminder-steps">{baseText.steps.map((s, i) => <li key={i} className="duo-step"><b>{i + 1}</b><span>{s}</span></li>)}</ol>}
       </div>}
       {intro_ === 1 && guided && <>
+        <SessionCoach session={session} moment="guide" />
         <h2 className="text-2xl font-black">{L('So geht die Übung', 'Cách tập')}</h2>
         <ol className="flex flex-col gap-2">{baseText.steps.map((s, i) => <li key={i} className="duo-step"><b>{i + 1}</b><span>{s}</span></li>)}</ol>
       </>}
@@ -197,13 +201,13 @@ export default function WorkoutDetail() {
         <Talk text={L('Sprich diesen Satz laut, während du die Position hältst.', 'Hãy đọc to câu này khi giữ tư thế nhé.')} mood="encourage" />
         <Affirmation big />
       </>}
-      {guided && intro_ < 2
+      {intro_ < (guided ? 2 : 1)
         ? <button type="button" className={`${primary} intro-cta`} onClick={() => setIntro(intro_ + 1)}>{L('Weiter', 'Tiếp tục')}</button>
         : <button type="button" className={`${primary} intro-cta`} onClick={() => start('practice')}>{L('Übung starten', 'Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden', 'giây')}</button>}
     </section>}
 
     {stage === 'practice' && <>
-      <Talk text={cheer} mood="encourage" />
+      <SessionCoach session={session} moment={running?'practice':'pause'} text={running?cheer:coachCopy(session,'pause')} compact />
       <div role="timer" aria-label={L('Verbleibende Zeit', 'Thời gian còn lại')} className="text-center text-6xl font-black tabular-nums text-brand-deep">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
       {/* TEMP: test skip */}<button type="button" className="self-center text-sm font-bold text-gray-500 underline" onClick={() => { remainingMs.current = 0; setRemaining(0) }}>{L('Überspringen (Test)', 'Bỏ qua (test)')}</button>
       <VideoPlayer key={`${day}:practice`} ref={player} src={video} poster={poster} autoPlay loop onPlaybackChange={setRunning} />
@@ -211,21 +215,29 @@ export default function WorkoutDetail() {
       <button type="button" className={primary} onClick={togglePlayback}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
     </>}
 
-    {stage === 'done' && bonus && !skipBonus && <Done xp={xp} streak={streak} earned={earned} title={L('Gut gemacht!', 'Làm tốt lắm!')}>
-      <Talk text={L('Lust auf deine Bonus-Minute?', 'Tập thêm một phút bonus nhé?')} mood="encourage" />
-      <button type="button" className={primary} onClick={() => start('bonus')}>{L('Freiwillige Bonusübung', 'Bài tập thêm')} · +{XP_BONUS}</button>
-      <button type="button" className={secondary} onClick={() => setSkipBonus(true)}>{L('Heute nicht', 'Hôm nay thôi')}</button>
-    </Done>}
+    {(stage === 'done' || stage === 'bonusDone') && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4 text-center">
+      <Confetti />
+      <SessionCoach session={session} moment="done" text={stage==='bonusDone'?L('Deine freiwillige Minute ist geschafft. Gut gemacht!','Xong phút tùy chọn rồi. Giỏi lắm!'):undefined}/>
+      <h2 className="text-3xl font-black text-brand-deep">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
+      <p className="font-bold">+{earned} {L('Punkte','điểm')} · {L('Gesamt','Tổng')} {xp}</p>
+      <button className={`${primary} intro-cta`} onClick={()=>setStage(stage==='done'&&bonus?'bonusOffer':'story')}>{L('Weiter','Tiếp tục')}</button>
+    </section>}
 
-    {((stage === 'done' && (!bonus || skipBonus)) || stage === 'bonusDone') && <Done xp={xp} streak={streak} earned={earned} title={stage === 'bonusDone' ? L('Bonus geschafft!', 'Xong bonus!') : L('Gut gemacht!', 'Làm tốt lắm!')}>
-      <StoryBeat day={day} session={session} />
-      <Affirmation />
-      {streakUp ? <Link className={primary} to={`/streak?up=1&next=${encodeURIComponent(nextRoute)}`} replace>{L('Weiter', 'Tiếp tục')}</Link> : <Link className={primary} to={nextRoute} replace>{nextLabel}</Link>}
-      <button type="button" className={secondary} onClick={() => start('practice')}>{L('Nochmal üben', 'Tập lại')}</button>
-    </Done>}
+    {stage === 'bonusOffer' && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
+      <SessionCoach session={session} moment="bonus"/>
+      <h2 className="text-2xl font-black">{L('Eine freiwillige Bonus-Minute','Một phút bonus tùy chọn')}</h2>
+      <p>{bonus?.titel}</p>
+      <button className={`${primary} intro-cta`} onClick={()=>start('bonus')}>{L('Bonus starten','Bắt đầu bonus')} · +{XP_BONUS}</button>
+      <button className={secondary} onClick={()=>setStage('story')}>{L('Heute nicht','Hôm nay thôi')}</button>
+    </section>}
+
+    {stage === 'story' && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
+      <StoryBeat day={day} session={session}/>
+      {streakUp?<Link className={`${primary} intro-cta`} to={`/streak?up=1&next=${encodeURIComponent(nextRoute)}`} replace>{L('Weiter','Tiếp tục')}</Link>:<Link className={`${primary} intro-cta`} to={nextRoute} replace>{nextLabel}</Link>}
+    </section>}
 
     {stage === 'bonus' && bonus && <>
-      <Talk text={cheer} mood="encourage" />
+      <SessionCoach session={session} moment={running?'practice':'pause'} text={running?cheer:coachCopy(session,'pause')} compact />
       <div role="timer" aria-label={L('Verbleibende Zeit', 'Thời gian còn lại')} className="text-center text-6xl font-black tabular-nums text-rust">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
       {/* TEMP: test skip */}<button type="button" className="self-center text-sm font-bold text-gray-500 underline" onClick={() => { remainingMs.current = 0; setRemaining(0) }}>{L('Überspringen (Test)', 'Bỏ qua (test)')}</button>
       <VideoPlayer key={`${day}:bonus`} ref={player} src={video} poster={poster} autoPlay loop onPlaybackChange={setRunning} />

@@ -1,3 +1,4 @@
+import SessionCoach from './SessionCoach'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Check, Lock, Play, RotateCcw, X } from 'lucide-react'
@@ -34,14 +35,15 @@ export default function DaySheet({ day, onClose }: { day: number; onClose: () =>
         {Array.from({ length: SESSIONS_PER_DAY }, (_, i) => {
           const k = i + 1, isDone = k <= done, isNext = !isDone && k === next
           return <li key={k} className={`day-session ${isDone ? 'is-done' : isNext ? 'is-next' : 'is-locked'}`}>
-            <button type="button" className="day-session-row" disabled={!isDone && !isNext} onClick={() => isDone ? setOpen(open === k ? null : k) : go(k)}>
+            <button type="button" className="day-session-row" disabled={!isDone && !isNext} onClick={() => setOpen(open === k ? null : k)}>
               <span className="day-session-dot">{isDone ? <Check size={20} strokeWidth={3} /> : isNext ? <Play size={18} fill="currentColor" /> : <Lock size={18} />}</span>
               <span className="flex-1 text-left">
                 <b className="block text-lg">{L(`Mal ${k}`, `Lượt ${k}`)}</b>
               </span>
             </button>
-            {isDone && open === k && <div className="day-session-story">
-              <button type="button" className="game-secondary mt-2 inline-flex items-center gap-2" onClick={() => go(k)}><RotateCcw size={18} />{L('Nochmal üben', 'Tập lại lượt này')}</button>
+            {open === k && <div className="day-session-story">
+              <SessionCoach session={k} moment={isDone?'done':'ready'} compact />
+              <button type="button" className="game-secondary mt-2 inline-flex items-center gap-2" onClick={() => go(k)}><RotateCcw size={18} />{isDone?L('Nochmal üben', 'Tập lại lượt này'):L('Diese Runde starten','Bắt đầu lượt này')}</button>
             </div>}
           </li>
         })}
