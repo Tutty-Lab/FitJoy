@@ -108,6 +108,8 @@ export default function WorkoutDetail() {
       saveProfile({ xp: (loadProfile()?.xp ?? 0) + gain, ...(boost > 0 ? { boost: boost - 1 } : {}) })
       setEarned(gain)
       if (loadProfile()?.chime ?? true) playGameSound('success')
+      // Reward moment: the wheel pops up once the user is back on the map after finishing.
+      try { sessionStorage.setItem('fitjoy.spin', '1') } catch { /* private mode */ }
       setStage('done')
     }
     if (stage === 'bonus' && remaining === 0) {

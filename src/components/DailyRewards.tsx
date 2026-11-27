@@ -28,21 +28,20 @@ export default function DailyRewards() {
   const [open, setOpen] = useState<'chest' | 'wheel' | null>(null)
   const [, bump] = useState(0)
   const c = read(), t = dayKey(new Date())
-  const chestWaiting = TEST || (doneToday && c.chest !== t), wheelWaiting = TEST || c.wheel !== t
+  const chestWaiting = TEST || (doneToday && c.chest !== t)
   const close = () => { setOpen(null); navigate('/', { replace: true }) }
   const show = (k: 'chest' | 'wheel') => { sound('tap'); setOpen(k) }
   useEffect(() => {
     const on = (e: Event) => setOpen((e as CustomEvent<'chest' | 'wheel'>).detail)
     window.addEventListener('fitjoy:rewards', on)
+    // The wheel is no longer a free-standing button; it appears as the reward right after a finished session.
+    try { if (sessionStorage.getItem('fitjoy.spin')) { sessionStorage.removeItem('fitjoy.spin'); setOpen('wheel') } } catch { /* private mode */ }
     return () => window.removeEventListener('fitjoy:rewards', on)
   }, [])
   return <>
     <div className="rewards-dock">
       <button type="button" className={`rewards-fab ${chestWaiting ? 'has-gift' : ''}`} aria-label={L('Schatztruhe', 'Rương báu')} onClick={() => show('chest')}>
         <img src="/rewards/chest-closed.webp" alt="" draggable={false} />
-      </button>
-      <button type="button" className={`rewards-fab ${wheelWaiting ? 'has-gift' : ''}`} aria-label={L('Glücksrad', 'Vòng quay may mắn')} onClick={() => show('wheel')}>
-        <MiniWheel />
       </button>
     </div>
     {open === 'chest' && <div className="streak-backdrop">
@@ -58,15 +57,6 @@ export default function DailyRewards() {
       </div>
     </div>}
   </>
-}
-
-function MiniWheel() {
-  return <svg viewBox="-24 -24 48 48" width="44" height="44" aria-hidden="true">
-    <circle r="22" fill="#ffb627" stroke="#2b1d0e" strokeWidth="3" />
-    {COLORS.map((col, i) => { const a0 = (i * 45 - 90) * Math.PI / 180, a1 = ((i + 1) * 45 - 90) * Math.PI / 180, r = 16; return <path key={i} d={`M0 0 L${r * Math.cos(a0)} ${r * Math.sin(a0)} A${r} ${r} 0 0 1 ${r * Math.cos(a1)} ${r * Math.sin(a1)} Z`} fill={col[0]} stroke="#2b1d0e" strokeWidth="1.5" /> })}
-    <circle r="5" fill="#ffb627" stroke="#2b1d0e" strokeWidth="2" />
-    <path d="M0 -25 l-5 -8 h10z" fill="#ff5a5f" stroke="#2b1d0e" strokeWidth="2" strokeLinejoin="round" />
-  </svg>
 }
 
 type Step = { kind: 'gems' | 'chest'; n: number; tier?: 'silver' | 'gold' | 'big' }
