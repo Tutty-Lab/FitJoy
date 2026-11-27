@@ -34,8 +34,6 @@ export default function DailyRewards() {
   useEffect(() => {
     const on = (e: Event) => setOpen((e as CustomEvent<'chest' | 'wheel'>).detail)
     window.addEventListener('fitjoy:rewards', on)
-    // The wheel is no longer a free-standing button; it appears as the reward right after a finished session.
-    try { if (sessionStorage.getItem('fitjoy.spin')) { sessionStorage.removeItem('fitjoy.spin'); setOpen('wheel') } } catch { /* private mode */ }
     return () => window.removeEventListener('fitjoy:rewards', on)
   }, [])
   return <>
@@ -130,7 +128,7 @@ function ChestOpen({ prize, onDone }: { prize: number; onDone: () => void }) {
   </section>
 }
 
-function Wheel({ onWin }: { onWin: () => void }) {
+export function Wheel({ onWin }: { onWin: () => void }) {
   const today = dayKey(new Date())
   const [angle, setAngle] = useState(0)
   const [spinning, setSpinning] = useState(false)
