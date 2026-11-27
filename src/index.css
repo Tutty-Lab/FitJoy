@@ -470,7 +470,12 @@ body {
 .story-scene:after{content:'';position:absolute;inset:0;background:linear-gradient(to top,#0b4a54aa,transparent 55%)}
 .story-scene-tag{position:absolute;top:12px;left:12px;z-index:1;background:#fff;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:900;color:#13707e}
 .story-scene-hero{position:absolute;right:10px;bottom:6px;width:110px;z-index:1;mix-blend-mode:multiply}
-.story-scene-title{position:absolute;left:14px;bottom:14px;right:120px;z-index:1;color:#fff;font-size:20px;font-weight:900;line-height:1.2;text-shadow:0 2px 6px #0006}
+.story-scene-title{position:absolute;left:14px;bottom:14px;right:14px;z-index:1;color:#fff;font-size:22px;font-weight:900;line-height:1.2;text-shadow:0 2px 6px #0006}
+/* Centered praise/cheer bubble (no side tail) for the finish & bonus screens. */
+.game-speech.cheer{background:linear-gradient(#ecfbf4,#d6f1e8);border-color:#bfe0dd;border-radius:22px;text-align:center;box-shadow:0 4px 0 #cfe7e5}
+.game-speech.cheer:before{display:none}
+/* Centered-column coach bubble: move the tail to the top so it points up at the mascot. */
+.game-speech.speech-block:before{left:50%;top:-8px;margin-left:-6px;border-left:2px solid #dce7e6;border-bottom:none;border-top:2px solid #dce7e6}
 .duo-step{display:flex;gap:12px;align-items:flex-start;background:#fff;border:2px solid #cfe7e5;border-bottom-width:4px;border-radius:18px;padding:12px 14px;font-size:15px;line-height:1.5}
 .duo-step b{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#e3f2f1;color:#13707e;font-weight:900}
 

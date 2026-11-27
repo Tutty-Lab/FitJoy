@@ -173,16 +173,17 @@ export default function WorkoutDetail() {
 
     {stage === 'instructions' && <section key={intro_} className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
       {intro_ === 0 && <>
-        <SessionCoach session={session} moment="ready" compact />
         <div className="story-scene" style={{ backgroundImage: `url(${day <= STORY_SCENES ? `/story/day${day}.webp` : `/map/${regionFor(day).id}.webp`})` }}>
-          <span className="story-scene-title">{phaseTitle(day)}</span>
+          <span className="story-scene-tag">{phaseTitle(day)}</span>
+          <span className="story-scene-title">{L(episode.title.de, episode.title.vi)}</span>
         </div>
-        <div className="flex items-start gap-2"><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
+        <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
           {chat.map((m, i) => <p key={i} style={{ animationDelay: `${i * 0.35}s` }} className={`chat-line ${m.me ? 'me' : ''} ${m.who === 'p' ? 'pip' : ''}`}>{m.who === 'p' && <img src="/map/seagull.webp" alt="Pip" className="chat-pip" />}{m.text}</p>)}
         </div></div>
       </>}
-      {intro_ === 1 && !guided && <div className="reminder-card">
-        <SessionCoach session={session} moment="guide" />
+      {intro_ === 1 && !guided && <>
+        <SessionCoach session={session} moment="guide" compact />
+        <div className="reminder-card">
         <span className="reminder-eyebrow">{L('Deine Übung', 'Bài tập')}</span>
         <b className="reminder-title">{baseText.title}</b>
         {!showSteps && <p className="reminder-lead">{baseText.steps[0]}</p>}
@@ -191,7 +192,8 @@ export default function WorkoutDetail() {
           <ChevronDown size={18} className={`reminder-chev ${showSteps ? 'open' : ''}`} />
         </button>
         {showSteps && <ol className="reminder-steps">{baseText.steps.map((s, i) => <li key={i} className="duo-step"><b>{i + 1}</b><span>{s}</span></li>)}</ol>}
-      </div>}
+        </div>
+      </>}
       {intro_ === 1 && guided && <>
         <SessionCoach session={session} moment="guide" />
         <h2 className="text-2xl font-black">{L('So geht die Übung', 'Cách tập')}</h2>
@@ -217,14 +219,14 @@ export default function WorkoutDetail() {
 
     {(stage === 'done' || stage === 'bonusDone') && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4 text-center">
       <Confetti />
-      <SessionCoach session={session} moment="done" text={stage==='bonusDone'?L('Deine freiwillige Minute ist geschafft. Gut gemacht!','Xong phút tùy chọn rồi. Giỏi lắm!'):undefined}/>
+      <SessionCoach session={session} moment="done" cheer text={stage==='bonusDone'?L('Deine freiwillige Minute ist geschafft. Gut gemacht!','Xong phút tùy chọn rồi. Giỏi lắm!'):undefined}/>
       <h2 className="text-3xl font-black text-brand-deep">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
       <p className="font-bold">+{earned} {L('Punkte','điểm')} · {L('Gesamt','Tổng')} {xp}</p>
       <button className={`${primary} intro-cta`} onClick={()=>setStage(stage==='done'&&bonus?'bonusOffer':'story')}>{L('Weiter','Tiếp tục')}</button>
     </section>}
 
-    {stage === 'bonusOffer' && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
-      <SessionCoach session={session} moment="bonus"/>
+    {stage === 'bonusOffer' && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col items-center gap-4 text-center">
+      <SessionCoach session={session} moment="bonus" cheer/>
       <h2 className="text-2xl font-black">{L('Eine freiwillige Bonus-Minute','Một phút bonus tùy chọn')}</h2>
       <p>{bonus?.titel}</p>
       <button className={`${primary} intro-cta`} onClick={()=>start('bonus')}>{L('Bonus starten','Bắt đầu bonus')} · +{XP_BONUS}</button>

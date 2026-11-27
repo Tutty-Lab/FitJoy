@@ -16,11 +16,20 @@ export function coachCopy(session:number,moment:CoachMoment) {
   }
   return lines[moment][n]
 }
-export default function SessionCoach({session,moment,text,compact=false}:{session:number;moment:CoachMoment;text?:string;compact?:boolean}) {
+// Each session uses a different mood for the same moment, so the three daily rounds don't replay the same clip.
+const MOODS: Record<CoachMoment, [Mood, Mood, Mood]> = {
+  ready: ['wave', 'idle', 'wave'],
+  guide: ['think', 'idle', 'think'],
+  practice: ['encourage', 'idle', 'encourage'],
+  pause: ['rest', 'think', 'rest'],
+  done: ['celebrate', 'celebrate', 'celebrate'],
+  bonus: ['encourage', 'idle', 'encourage'],
+}
+export default function SessionCoach({session,moment,text,compact=false,cheer=false}:{session:number;moment:CoachMoment;text?:string;compact?:boolean;cheer?:boolean}) {
   const clip=sessionCoachClips[session]?.[moment]
-  const mood:Mood=moment==='done'?'celebrate':moment==='pause'?'rest':moment==='guide'?'think':moment==='ready'?'wave':'encourage'
+  const mood:Mood=(MOODS[moment]?.[Math.min(2,Math.max(0,session-1))]) ?? 'idle'
   return <div className={`flex ${compact?'items-center':'flex-col items-center'} gap-3`} data-coach-moment={moment} data-coach-session={session}>
     {clip?<video src={clip} autoPlay muted playsInline loop className={compact?'w-16':'w-32'} onError={e=>{e.currentTarget.hidden=true}}/>:<Vestibu mood={mood} className={compact?'w-16 shrink-0':'w-32'}/>}
-    <p className="game-speech font-bold leading-6" role="status">{text??coachCopy(session,moment)}</p>
+    <p className={`game-speech font-bold leading-6 ${cheer?'cheer':''} ${compact?'':'speech-block'}`} role="status">{text??coachCopy(session,moment)}</p>
   </div>
 }
