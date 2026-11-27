@@ -252,9 +252,11 @@ export default function WorkoutDetail() {
 
     {(stage === 'done' || stage === 'bonusDone') && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4 text-center">
       <Confetti />
-      <SessionCoach session={session} moment="done" cheer text={stage==='bonusDone'?L('Deine freiwillige Minute ist geschafft. Gut gemacht!','Xong phút tùy chọn rồi. Giỏi lắm!'):undefined}/>
-      <h2 className="text-3xl font-black text-brand-deep">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
-      <p className="font-bold">+{earned} {L('Punkte','điểm')} · {L('Gesamt','Tổng')} {xp}</p>
+      <div className="flex flex-1 flex-col items-center justify-center gap-4">
+        <SessionCoach session={session} moment="done" cheer text={stage==='bonusDone'?L('Deine freiwillige Minute ist geschafft. Gut gemacht!','Xong phút tùy chọn rồi. Giỏi lắm!'):undefined}/>
+        <h2 className="text-3xl font-black text-brand-deep">{L('Gut gemacht!', 'Làm tốt lắm!')}</h2>
+        <p className="font-bold">+{earned} {L('Punkte','điểm')} · {L('Gesamt','Tổng')} {xp}</p>
+      </div>
       <button className={`${primary} intro-cta`} onClick={()=>setStage(stage==='done'&&bonus?'bonusOffer':'story')}>{L('Weiter','Tiếp tục')}</button>
     </section>}
 

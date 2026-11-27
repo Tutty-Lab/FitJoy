@@ -2,7 +2,7 @@ import SessionCoach from './SessionCoach'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Check, Lock, Play, RotateCcw, X } from 'lucide-react'
-import { dayStory, phaseTitle } from '../data/storyDays'
+import { episodeFor } from '../data/story'
 import { SESSIONS_PER_DAY } from '../data/program'
 import { sessionsDone } from '../lib/progress'
 import { L } from '../lib/i18n'
@@ -12,7 +12,8 @@ export default function DaySheet({ day, onClose }: { day: number; onClose: () =>
   const navigate = useNavigate()
   const [closing, setClosing] = useState(false)
   const [open, setOpen] = useState<number | null>(null)
-  const done = sessionsDone(day), story = dayStory(day)?.story, next = Math.min(SESSIONS_PER_DAY, done + 1)
+  const ep = episodeFor(day)
+  const done = sessionsDone(day), next = Math.min(SESSIONS_PER_DAY, done + 1)
   const close = () => { setClosing(true); setTimeout(onClose, 260) }
   const go = (session: number) => navigate(`/workouts/${day}?session=${session}`)
   useEffect(() => {
@@ -26,11 +27,11 @@ export default function DaySheet({ day, onClose }: { day: number; onClose: () =>
       <header className="flex items-start gap-3">
         <div className="flex-1">
           <p className="text-sm font-bold text-brand-deep">{L(`Tag ${day}`, `Ngày ${day}`)}</p>
-          <h2 className="text-2xl font-black leading-8">{phaseTitle(day)}</h2>
+          <h2 className="text-2xl font-black leading-8">{L(ep.title.de, ep.title.vi)}</h2>
         </div>
         <button type="button" aria-label={L('Schließen', 'Đóng')} onClick={close} className="grid size-11 place-items-center rounded-full text-slate-500"><X size={26} strokeWidth={2.6} /></button>
       </header>
-      {done > 0 && story && <p className="day-story">{story}</p>}
+      <p className="day-story">{L(ep.before.de, ep.before.vi)}</p>
       <ol className="mt-3 flex flex-col gap-2">
         {Array.from({ length: SESSIONS_PER_DAY }, (_, i) => {
           const k = i + 1, isDone = k <= done, isNext = !isDone && k === next
