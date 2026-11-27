@@ -1,5 +1,4 @@
 import SessionCoach, { coachCopy } from '../../components/SessionCoach'
-import { Wheel } from '../../components/DailyRewards'
 import BackArrow from '../../components/BackArrow'
 import ExitMinuteDialog from '../../components/ExitMinuteDialog'
 import { StoryBeat } from '../../components/StoryReward'
@@ -9,7 +8,7 @@ import { playGameSound, unlockGameAudio } from '../../lib/gameAudio'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
-import { affirmationFor, baseText, baseVideo, localBonusFor, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
+import { affirmationFor, baseText, baseVideo, bonusesUpTo, categoryLabel, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY, type BonusExercise } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { loadProfile, saveProfile } from '../../lib/profile'
 import { episodeFor, regionFor } from '../../data/story'
@@ -19,10 +18,11 @@ import poster from '../../assets/home/vestibu-welcome.png'
 import { L, lang } from '../../lib/i18n'
 import { clayPrimary, claySecondary } from '../../components/clay'
 
-type Stage = 'instructions' | 'practice' | 'done' | 'bonusOffer' | 'story' | 'bonus' | 'bonusDone'
+type Stage = 'instructions' | 'practice' | 'done' | 'bonusOffer' | 'story' | 'bonusSpin' | 'bonus' | 'bonusDone'
 
 // 05a instructions → 05b 60-second practice → 05c congratulations + bonus question → 06 bonus.
 const XP_SESSION = 10
+const XP_BONUS = 5
 // Highest day that already has a dedicated scene at /story/day{n}.webp; later days fall back to a map crop until their scene is generated.
 const STORY_SCENES = 90
 
@@ -43,6 +43,35 @@ function Done({ title, xp, streak, earned, children }: { title: string; xp: numb
   </section>
 }
 
+// Spin to draw a random bonus exercise from the days unlocked so far.
+function BonusSpinner({ pool, picked, onPick }: { pool: BonusExercise[]; picked: BonusExercise | null; onPick: (b: BonusExercise) => void }) {
+  const [i, setI] = useState(0)
+  const [spinning, setSpinning] = useState(false)
+  const chime = (k: 'tap' | 'success') => { if (loadProfile()?.chime ?? true) playGameSound(k) }
+  const run = () => {
+    if (spinning || picked || !pool.length) return
+    setSpinning(true); chime('tap')
+    const target = Math.floor(Math.random() * pool.length)
+    const total = pool.length * 3 + target
+    let t = 0
+    const tick = () => {
+      t += 1; setI(t % pool.length)
+      if (t >= total) { setSpinning(false); chime('success'); onPick(pool[target]); return }
+      setTimeout(tick, 70 + Math.pow(t / total, 3) * 280)
+    }
+    setTimeout(tick, 70)
+  }
+  const show = picked ?? pool[i]
+  return <div className="bonus-spinner">
+    <div className={`bonus-card ${picked ? 'landed' : spinning ? 'spin' : ''}`}>
+      <span className="text-xs font-bold tracking-wide text-rust uppercase">{show ? `Bonus · ${categoryLabel(show.kategorie)}` : ''}</span>
+      <b className="text-xl font-black leading-6">{show?.titel ?? '—'}</b>
+      {picked && <p className="text-[15px] leading-6 text-slate-600">{picked.anleitung}</p>}
+    </div>
+    {!picked && <button type="button" className="bonus-spin-btn" onClick={run} disabled={spinning}>{spinning ? '…' : L('Drehen', 'Quay')}</button>}
+  </div>
+}
+
 export default function WorkoutDetail() {
   const day = Number(useParams().day)
   const location = useLocation()
@@ -61,10 +90,12 @@ export default function WorkoutDetail() {
   }, [day, location.search])
   const affirmation = affirmationFor(day)
   const video = baseVideo()
-  const bonus = localBonusFor(day)
+  // Reward wheel draws a bonus exercise from any day up to today.
+  const bonusPool = useMemo(() => bonusesUpTo(day), [day])
+  const bonus = bonusPool.length > 0
+  const [bonusPick, setBonusPick] = useState<BonusExercise | null>(null)
   const [stage, setStage] = useState<Stage>('instructions')
   const [skipBonus, setSkipBonus] = useState(false)
-  const [spun, setSpun] = useState(false)
   const [showSteps, setShowSteps] = useState(false)
   // Smart tutorial: full step-by-step for the first ~3 days, a compact reminder with an optional expander afterwards.
   const guided = (loadProfile()?.lessonCompletions ?? []).length < 9
@@ -78,7 +109,7 @@ export default function WorkoutDetail() {
   // Leaving a session always goes straight back to the map.
   const returnTo = '/'
 
-  useEffect(() => { setIntro(0); setSaid(1); setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false); setExitOpen(false); setNewDiscovery(false); setSkipBonus(false); setSpun(false); wasCompleted.current=completed.includes(day) }, [day, session])
+  useEffect(() => { setIntro(0); setSaid(1); setStage('instructions'); setRemaining(PRACTICE_SECONDS); remainingMs.current = PRACTICE_SECONDS * 1000; setRunning(false); setExitOpen(false); setNewDiscovery(false); setSkipBonus(false); setBonusPick(null); wasCompleted.current=completed.includes(day) }, [day, session])
   useEffect(() => {
     const pause=()=>{ if(document.hidden){player.current?.pause();setRunning(false)} }
     document.addEventListener('visibilitychange',pause)
@@ -111,6 +142,13 @@ export default function WorkoutDetail() {
       if (loadProfile()?.chime ?? true) playGameSound('success')
       setStage('done')
     }
+    if (stage === 'bonus' && remaining === 0) {
+      setRunning(false)
+      saveProfile({ xp: (loadProfile()?.xp ?? 0) + XP_BONUS })
+      setEarned(XP_BONUS)
+      if (loadProfile()?.chime ?? true) playGameSound('success')
+      setStage('bonusDone')
+    }
   }, [remaining, stage, day, session])
 
   if (!Number.isInteger(day) || day < 1 || day > PROGRAM_DAYS || statusOf(day) === 'locked') return <Navigate to="/" replace />
@@ -136,8 +174,8 @@ export default function WorkoutDetail() {
     </blockquote>
   )
   const back = () => {
-    if (stage === 'practice') { player.current?.pause(); setRunning(false); setExitOpen(true); return }
-    if (stage === 'bonus') { setStage('story'); return }
+    if (stage === 'practice' || stage === 'bonus') { player.current?.pause(); setRunning(false); setExitOpen(true); return }
+    if (stage === 'bonusSpin') { setStage('story'); return }
     if (stage === 'instructions' && intro_ > 0) { setIntro(intro_ - 1); return }
     navigate(returnTo, { replace: true })
   }
@@ -221,10 +259,16 @@ export default function WorkoutDetail() {
     </section>}
 
     {stage === 'bonusOffer' && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col items-center gap-4 text-center">
-      <SessionCoach session={session} moment="bonus" cheer text={L('Lust auf eine Extra-Belohnung? Dreh einmal am Glücksrad!','Thưởng thêm nhé? Quay một vòng may mắn nào!')}/>
-      <h2 className="text-2xl font-black">{L('Bonus: Glücksrad','Bonus: Vòng quay thưởng')}</h2>
-      <button className={`${primary} intro-cta`} onClick={()=>setStage('bonus')}>{L('Zum Glücksrad','Quay thưởng')}</button>
+      <SessionCoach session={session} moment="bonus" cheer text={L('Lust auf eine Extra-Übung? Dreh und schau, welche du bekommst!','Thử thêm một bài tập nhé? Quay xem bạn nhận bài nào!')}/>
+      <h2 className="text-2xl font-black">{L('Bonus-Übung','Bài tập bonus')}</h2>
+      <button className={`${primary} intro-cta`} onClick={()=>setStage('bonusSpin')}>{L('Übung erdrehen','Quay ra bài tập')}</button>
       <button className={secondary} onClick={()=>setStage('story')}>{L('Heute nicht','Hôm nay thôi')}</button>
+    </section>}
+
+    {stage === 'bonusSpin' && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col items-center gap-4 text-center">
+      <SessionCoach session={session} moment="bonus" cheer text={bonusPick?L('Diese Bonus-Übung hast du erdreht. Los geht es!','Bạn quay trúng bài này. Bắt đầu nào!'):L('Gleich siehst du, welche Bonus-Übung du bekommst.','Chờ xem bạn nhận bài bonus nào nhé.')}/>
+      <BonusSpinner pool={bonusPool} picked={bonusPick} onPick={setBonusPick}/>
+      {bonusPick && <button type="button" className={`${primary} intro-cta`} onClick={()=>start('bonus')}>{L('Übung starten','Bắt đầu tập')} · {PRACTICE_SECONDS} {L('Sekunden','giây')}</button>}
     </section>}
 
     {stage === 'story' && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
@@ -232,11 +276,19 @@ export default function WorkoutDetail() {
       {streakUp?<Link className={`${primary} intro-cta`} to={`/streak?up=1&next=${encodeURIComponent(nextRoute)}`} replace>{L('Weiter','Tiếp tục')}</Link>:<Link className={`${primary} intro-cta`} to={nextRoute} replace>{nextLabel}</Link>}
     </section>}
 
-    {stage === 'bonus' && <section className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col items-center gap-4 text-center">
-      <SessionCoach session={session} moment="bonus" cheer text={spun?L('Deine Extra-Diamanten sind da. Gut gemacht!','Kim cương thưởng của bạn đây. Giỏi lắm!'):L('Viel Glück! Dreh einmal am Rad.','Chúc may mắn! Quay một vòng nhé.')}/>
-      <Wheel onWin={()=>setSpun(true)} />
-      {spun && <button type="button" className={`${primary} intro-cta`} onClick={()=>setStage('story')}>{L('Weiter','Tiếp tục')}</button>}
-    </section>}
+    {stage === 'bonus' && bonusPick && <>
+      <SessionCoach session={session} moment={running?'practice':'pause'} text={running?cheer:coachCopy(session,'pause')} compact />
+      <div role="timer" aria-label={L('Verbleibende Zeit', 'Thời gian còn lại')} className="text-center text-6xl font-black tabular-nums text-rust">{Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}</div>
+      {/* TEMP: test skip */}<button type="button" className="self-center text-sm font-bold text-gray-500 underline" onClick={() => { remainingMs.current = 0; setRemaining(0) }}>{L('Überspringen (Test)', 'Bỏ qua (test)')}</button>
+      <VideoPlayer key={`${day}:bonus`} ref={player} src={video} poster={poster} autoPlay loop onPlaybackChange={setRunning} />
+      <section className="flex flex-col gap-3 rounded-[28px] bg-white p-5 border-2 border-mint shadow-[0_4px_0_#cfe7e5]">
+        <p className="text-xs font-bold tracking-wide text-rust uppercase">Bonus · {categoryLabel(bonusPick.kategorie)}</p>
+        <h2 className="text-xl font-black">{bonusPick.titel}</h2>
+        <p className="text-[15px] leading-6">{bonusPick.anleitung}</p>
+      </section>
+      <Affirmation big />
+      <button type="button" className={primary} onClick={togglePlayback}>{running ? L('Pause', 'Tạm dừng') : L('Fortsetzen', 'Tiếp tục')}</button>
+    </>}
 
     {exitOpen && <ExitMinuteDialog stay={()=>setExitOpen(false)} leave={()=>navigate(returnTo,{replace:true})}/>}
   </div>

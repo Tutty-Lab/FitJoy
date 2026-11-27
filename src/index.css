@@ -759,3 +759,12 @@ body {
 .reminder-toggle:active{transform:translateY(2px);box-shadow:0 1px 0 #cfe7e5}
 .reminder-chev{transition:transform .2s ease}
 .reminder-chev.open{transform:rotate(180deg)}
+/* Bonus reward: spin a card to draw a previous day's bonus exercise. */
+.bonus-spinner{display:flex;flex-direction:column;align-items:center;gap:18px;width:100%}
+.bonus-card{width:100%;min-height:124px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:20px;border-radius:24px;background:#fff;border:2px solid #cfe7e5;box-shadow:0 4px 0 #cfe7e5;text-align:center;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.bonus-card.spin{animation:bonus-flick .12s steps(1) infinite}
+.bonus-card.landed{border-color:#9ddcc9;box-shadow:0 6px 0 #9ddcc9;transform:scale(1.02)}
+@keyframes bonus-flick{50%{opacity:.55}}
+.bonus-spin-btn{min-width:150px;padding:14px 28px;border:0;border-radius:999px;background:linear-gradient(#ffd24a,#f5b82e);color:#5a3d00;font-weight:900;font-size:17px;box-shadow:0 5px 0 #d99a1c;cursor:pointer}
+.bonus-spin-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #d99a1c}
+.bonus-spin-btn:disabled{opacity:.7;cursor:default}

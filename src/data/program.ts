@@ -88,6 +88,12 @@ export function localBonusFor(day: number): BonusExercise | undefined {
   const b = bonusFor(day)
   return b && lang === 'vi' && viBonus[b.id] ? { ...b, ...viBonus[b.id] } : b
 }
+// Distinct bonus exercises already unlocked by day 1..day — the pool the reward wheel draws from.
+export function bonusesUpTo(day: number): BonusExercise[] {
+  const seen = new Map<string, BonusExercise>()
+  for (let d = 1; d <= clampDay(day); d++) { const b = localBonusFor(d); if (b) seen.set(b.id, b) }
+  return [...seen.values()]
+}
 const categoryVi: Record<BonusCategory, string> = { Gleichgewicht: 'Thăng bằng', Wahrnehmung: 'Cảm nhận', Entspannung: 'Thư giãn', Bewegung: 'Vận động' }
 export const categoryLabel = (c: BonusCategory) => (lang === 'vi' ? categoryVi[c] ?? c : c)
 
