@@ -8,12 +8,11 @@ import { playGameSound, unlockGameAudio } from '../../lib/gameAudio'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
-import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, localDay, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
+import { affirmationFor, baseText, categoryLabel, baseVideo, localBonusFor, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { loadProfile, saveProfile } from '../../lib/profile'
 import { episodeFor, regionFor } from '../../data/story'
 import { type Who } from '../../data/storyDialog'
-import { phaseTitle, storyIntro } from '../../data/storyDays'
 import { Flame, Gem, ChevronDown } from 'lucide-react'
 import poster from '../../assets/home/vestibu-welcome.png'
 import { L, lang } from '../../lib/i18n'
@@ -60,7 +59,6 @@ export default function WorkoutDetail() {
     const requested = Number(new URLSearchParams(location.search).get('session'))
     return Number.isInteger(requested) && requested >= 1 && requested <= SESSIONS_PER_DAY ? requested : Math.min(SESSIONS_PER_DAY, sessionsDone(day) + 1)
   }, [day, location.search])
-  const content = localDay(day)
   const affirmation = affirmationFor(day)
   const video = baseVideo()
   const bonus = localBonusFor(day)
@@ -158,7 +156,8 @@ export default function WorkoutDetail() {
   const introSteps = guided ? 3 : 2
   const progress = stage === 'instructions' ? 0.05 + (intro_ / introSteps) * 0.25 : practising ? 0.3 + 0.7 * (1 - remaining / PRACTICE_SECONDS) : 1
   const episode = episodeFor(day)
-  const chat: { text: string; me?: boolean; who?: Who }[] = [{ text: content.begruessung }, ...(day === 1 && session === 1 ? [{ text: storyIntro }] : [])]
+  // One tidy, per-day story line (translated), so each day reads as its own little story.
+  const chat: { text: string; me?: boolean; who?: Who }[] = [{ text: L(episode.before.de, episode.before.vi) }]
 
   const cheer = remaining > 40 ? L('Ganz ruhig. Halt dich fest, wenn du magst.', 'Thật thong thả. Cứ vịn nếu bạn muốn nhé.')
     : remaining > 20 ? L('Super, du machst das toll!', 'Tuyệt lắm, cứ thế nhé!')
@@ -176,7 +175,6 @@ export default function WorkoutDetail() {
     {stage === 'instructions' && <section key={intro_} className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
       {intro_ === 0 && <>
         <div className="story-scene" style={{ backgroundImage: `url(${day <= STORY_SCENES ? `/story/day${day}.webp` : `/map/${regionFor(day).id}.webp`})` }}>
-          <span className="story-scene-tag">{phaseTitle(day)}</span>
           <span className="story-scene-title">{L(episode.title.de, episode.title.vi)}</span>
         </div>
         <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
