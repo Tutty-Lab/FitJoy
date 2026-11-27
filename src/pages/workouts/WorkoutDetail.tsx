@@ -154,7 +154,9 @@ export default function WorkoutDetail() {
 
   const xp = loadProfile()?.xp ?? 0
   const practising = stage === 'practice' || stage === 'bonus'
-  const progress = stage === 'instructions' ? 0.04 + intro_ * 0.03 : practising ? 0.1 + 0.9 * (1 - remaining / PRACTICE_SECONDS) : 1
+  // Intro steps fill the first quarter of the bar (visibly advancing per "Weiter"), practice fills the rest.
+  const introSteps = guided ? 3 : 2
+  const progress = stage === 'instructions' ? 0.05 + (intro_ / introSteps) * 0.25 : practising ? 0.3 + 0.7 * (1 - remaining / PRACTICE_SECONDS) : 1
   const episode = episodeFor(day)
   const chat: { text: string; me?: boolean; who?: Who }[] = [{ text: content.begruessung }, ...(day === 1 && session === 1 ? [{ text: storyIntro }] : [])]
 
