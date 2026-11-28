@@ -26,7 +26,7 @@ const XP_BONUS = 5
 // Highest day that already has a dedicated scene at /story/day{n}.webp; later days fall back to a map crop until their scene is generated.
 const STORY_SCENES = 90
 // Highest day that also has per-session scenes /story/day{n}_s2.webp & _s3.webp (session 1 reuses day{n}.webp).
-const STORY_SESSION_SCENES = 10
+const STORY_SESSION_SCENES = 20
 
 function Talk({ text, mood }: { text: string; mood: 'wave' | 'encourage' | 'celebrate' }) {
   return <div className="flex items-end gap-3"><Vestibu mood={mood} className="w-24 shrink-0" /><p className="game-speech flex-1 font-bold leading-6">{text}</p></div>
