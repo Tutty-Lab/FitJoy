@@ -11,7 +11,7 @@ import { completeLesson, sessionsDone, useCompleted } from '../../lib/progress'
 import { affirmationFor, baseText, baseVideo, bonusesUpTo, categoryLabel, PRACTICE_SECONDS, PROGRAM_DAYS, SESSIONS_PER_DAY, type BonusExercise } from '../../data/program'
 import { VideoPlayer, type VideoPlayerHandle } from '../../components/VideoPlayer'
 import { loadProfile, saveProfile } from '../../lib/profile'
-import { episodeFor, regionFor } from '../../data/story'
+import { episodeFor, regionFor, storyBeat } from '../../data/story'
 import { type Who } from '../../data/storyDialog'
 import { Flame, Gem, ChevronDown } from 'lucide-react'
 import poster from '../../assets/home/vestibu-welcome.png'
@@ -25,6 +25,8 @@ const XP_SESSION = 10
 const XP_BONUS = 5
 // Highest day that already has a dedicated scene at /story/day{n}.webp; later days fall back to a map crop until their scene is generated.
 const STORY_SCENES = 90
+// Highest day that also has per-session scenes /story/day{n}_s2.webp & _s3.webp (session 1 reuses day{n}.webp).
+const STORY_SESSION_SCENES = 10
 
 function Talk({ text, mood }: { text: string; mood: 'wave' | 'encourage' | 'celebrate' }) {
   return <div className="flex items-end gap-3"><Vestibu mood={mood} className="w-24 shrink-0" /><p className="game-speech flex-1 font-bold leading-6">{text}</p></div>
@@ -189,8 +191,11 @@ export default function WorkoutDetail() {
   const introSteps = guided ? 3 : 2
   const progress = stage === 'instructions' ? 0.05 + (intro_ / introSteps) * 0.25 : practising ? 0.3 + 0.7 * (1 - remaining / PRACTICE_SECONDS) : 1
   const episode = episodeFor(day)
-  // One tidy, per-day story line (translated), so each day reads as its own little story.
-  const chat: { text: string; me?: boolean; who?: Who }[] = [{ text: L(episode.before.de, episode.before.vi) }]
+  // Per-session story beat (before / middle / closing), translated — so each lượt reads as its own moment and matches its scene.
+  const beat = storyBeat(day, session)
+  const chat: { text: string; me?: boolean; who?: Who }[] = [{ text: L(beat.de, beat.vi) }]
+  const sceneUrl = session >= 2 && day <= STORY_SESSION_SCENES ? `/story/day${day}_s${session}.webp`
+    : day <= STORY_SCENES ? `/story/day${day}.webp` : `/map/${regionFor(day).id}.webp`
 
   const cheer = remaining > 40 ? L('Ganz ruhig. Halt dich fest, wenn du magst.', 'Thật thong thả. Cứ vịn nếu bạn muốn nhé.')
     : remaining > 20 ? L('Super, du machst das toll!', 'Tuyệt lắm, cứ thế nhé!')
@@ -207,7 +212,7 @@ export default function WorkoutDetail() {
 
     {stage === 'instructions' && <section key={intro_} className="intro-flow flex min-h-[calc(100dvh-140px)] flex-col gap-4">
       {intro_ === 0 && <>
-        <div className="story-scene" style={{ backgroundImage: `url(${day <= STORY_SCENES ? `/story/day${day}.webp` : `/map/${regionFor(day).id}.webp`})` }}>
+        <div className="story-scene" style={{ backgroundImage: `url(${sceneUrl})` }}>
           <span className="story-scene-title">{L(episode.title.de, episode.title.vi)}</span>
         </div>
         <div className="flex items-start gap-2"><Vestibu mood="wave" className="w-16 shrink-0" /><div className="chat flex-1" aria-live="polite" ref={chatEnd}>
