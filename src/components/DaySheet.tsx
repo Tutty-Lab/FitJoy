@@ -2,7 +2,7 @@ import SessionCoach from './SessionCoach'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Check, Lock, Play, RotateCcw, X } from 'lucide-react'
-import { episodeFor } from '../data/story'
+import { episodeFor, storyBeat } from '../data/story'
 import { SESSIONS_PER_DAY } from '../data/program'
 import { sessionsDone } from '../lib/progress'
 import { L } from '../lib/i18n'
@@ -43,7 +43,7 @@ export default function DaySheet({ day, onClose }: { day: number; onClose: () =>
               </span>
             </button>
             {open === k && <div className="day-session-story">
-              <SessionCoach session={k} moment={isDone?'done':'ready'} compact />
+              <SessionCoach session={k} moment={isDone?'done':'ready'} text={L(storyBeat(day,k).de, storyBeat(day,k).vi)} compact />
               <button type="button" className="game-secondary mt-2 inline-flex items-center gap-2" onClick={() => go(k)}><RotateCcw size={18} />{isDone?L('Nochmal üben', 'Tập lại lượt này'):L('Diese Runde starten','Bắt đầu lượt này')}</button>
             </div>}
           </li>
